@@ -2,537 +2,133 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ProductList</title>
+    <title>view</title>
     <script src="https://kit.fontawesome.com/20962f3e4b.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/product.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            font: normal 12px '고딕';
-        }
-        ul, ol {list-style: none;}
-        a {text-decoration: none; color: #111;}
-        input, textarea {outline: none;}
-
-        #wrapper {
+        #product > .view > article {
             width: 100%;
-        }
-
-        /* font-awesome */
-
-        .fa-shopping-cart::before{content: "\f07a";}
-        .fa, .fas{font-weight: 900;}
-        .fa, .fab, .fad, .fal, .far, .fas {
-            -moz-osx-font-smoothing: grayscale;
-            -webkit-font-smoothing: antialiased;
-            display: inline-block;
-            font-style: normal;
-            font-variant: normal;
-            text-rendering: auto;
-            line-height: 1;
-        }
-        .fa, .far, .fas {
-            font-family: "Font Awesome 5 Free";
-        }
-        .fa {
-            display: inline-block;
-            font: normal normal normal 14px/1 FontAwesome;
-            font-size: inherit;
-            text-rendering: auto;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        /* header */
-
-        header{
-            width: 100%;
-            height: 197px;
-        }
-        header > div {
-            width: 100%;
-            box-sizing: border-box;
-        }
-        /* header top */
-
-        header > .top {
-            height: 35px;
-            border-bottom: 1px solid #e9e9e9;
-        }
-        header > .top > div {
-            width: 1200px;
-            height: 100%;
-            margin: 0 auto;
-            text-align: right;
-        }
-        header > .top > div > a {
-            display: inline-block;
-            height: 100%;
-            line-height: 35px;
-            border-left: 1px solid #e9e9e9;
-            padding: 0 10px;
-            color: #646464;
-        }
-        header > .top > div > a:last-child{border-right: 1px solid #e9e9e9;}
-        header > .top > div > a:hover{
-            color: #333;
-            border-bottom: 1px solid #444;
-        }
-            /* header logo */
-        header > .logo {
-            height: 115px;
-            border-bottom: 1px solid #e9e9e9;
-        }
-        header > .logo > div {
-            position: relative;
-            width: 1200px;
-            height: 100%;
-            margin: 0 auto;
-        }
-        header > .logo > div > a {
-            display: inline-block;
-            margin-top: 30px;
-        }
-        header > .logo > div > form  {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            margin-left: -185px;
-            margin-top: -22px;
-            display: inline-block;
-            width: 370px;
-            height: 45px;
-            
-        }
-        header > .logo > div > form > input {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border: 1px solid #e9e9e9;
-            border-radius: 5px;
-            font-size: 20px;
-            padding-left: 10px;
-            padding-right: 30px;
-            box-sizing: border-box;
-        }
-        header > .logo > div > form > button {
-            position: absolute;
-            right: 6px;
-            top: 10px;
-            background: #fff;
-            border: none;
-            font-size: 20px;
-            color: #333;
-            outline: none;
-        }
-            /* menu */
-        header > .menu {
-            width: 100%;
-            height: 46px;
-            background: #f2f2f2;
-            border-bottom: 1px solid #ddd;
-            box-sizing: border-box;
-        }
-        header > .menu > div {
-            width: 1200px;
-            height: 100%;
-            margin: 0 auto;
-        }
-        header > .menu > div > ul {
-            /*
-            display: inline-block
-                inline처럼 전후 줄바꿈 x
-                block처럼 width와 height, margin, padding  지정가능
-            */
-            display: inline-block;
-            margin-top: 16px;
-        }
-        header > .menu > div > ul > li {
-            float: left;
-        }
-        header > .menu > div > ul > li  > a {
-            border-left: 1px solid #e9e9e9;
-            padding: 0 10px;
-        }
-        header > .menu > div > ul > li > a:last-child {
-            border-left: 1px solid #e9e9e9;
-            border-right: 1px solid #e9e9e9;
-        }
-
-        header > .menu > div > ul:nth-child(1){
-            float: left;
-        }
-        header > .menu > div > ul:nth-child(2){
-            float: right;
-        }
-        
-
-        /* product 공통*/
-        /* 메인 */
-        main {
-            width: 1200px;
             height: auto;
-            margin: 0 auto;
             overflow: hidden;
         }
-            /* aside*/
-        main > aside {
+        #product > .view > article > nav {
+            border-bottom: 1px solid #a4a9b0;
+            padding: 6px 0;
+            margin-bottom: 12px;
+            overflow: hidden;
+        }
+        #product > .view > article > nav > h1 {
             float: left;
-            width: 215px;
-            height: 100%;
-        }
-        main > aside > .category {
-            position: relative;
-            width: 100%;
-            height: 425px;
-            background: #333949;
-        }
-        main > aside > .category > li {
-            width: 100%;
-            height: 40px;
-            line-height: 40px;
-            color: #ccc;
-            font-size: 13px;
-            font-weight: bold;
-            border-bottom: 1px solid #2b313f;
-            box-sizing: border-box;
-        }
-        main > aside > .category > li:first-child {
-            padding: 0 20px;
-            color: #fff;
-            line-height: 40px;
-        }
-        main > aside > .category > li > a {
-            display: block;
-            padding: 0 20px;
-            line-height: 40px;
-            color: #ccc;
-            font-weight: bold;
-            text-decoration: none;
-            font-size: 1em;
-        }
-        main > aside > .category > li > a:hover {
-            background: #2b313f;
-            color: #fff;
-        }
-        main > aside > .category > li > a:hover + ol {
-            display: block;
-        }
-        main > aside > .category ol:hover {
-            display: block;
-        }
-
-        main > aside > .category i {
-            width: 22px;
-            font-size: 16px;
-            margin-right: 12px;
-        }
-
-        main > aside > .category > li i.fa-angle-right {
-            float: right;
-            width: auto;
-            margin-top: 10px;
-            margin-right: 0;
-        }
-
-        main > aside > .category ol {
-            position: absolute;
-            left: 215px;
-            top: 0;
-            display: none;
-            width: 215px;
-            height: 100%;
-            border: 1px solid #787f89;
-            background: #fff;
-            box-sizing: border-box;
-            /* 다른 컨텐츠에 가려지기 방지 z-index */
-            z-index: 10000;
-        }
-
-            main > aside > .category ol > li {
-            width: 100%;
-            height: 24px;
-            padding: 10px;
-            box-sizing: border-box;
-            }
-            main > aside > .category ol > li > a:hover {
-            color: #41ab47;
-            text-decoration: underline;
-            }
-        main > section {
-            float: right;
-            width: 985px;
-            height: auto;
-        }
-            /* section */
-        #product > section {
-            padding: 16px;
-            box-sizing: border-box;
-        }
-        
-        #product > section > nav {
-            width: 100%;
-            height: 36px;
-            margin-bottom: 20px;
-            border-bottom: 1px solid #000;
-            box-sizing: border-box;
-        }
-        #product > section > nav > p {
-            float: right;
-            margin-top: 10px;
-        }
-        #product > section > nav > h1 {
-            display: inline-block;
+            color: #1e2732;
             font-weight: bold;
             font-size: 1.5em;
-            padding: 0 0 7px;
-            line-height: 1em;
         }
-
-        /* 별점 */
-        #product h6.rating {
-            font-size: 11px;
-            background-image: url('./img/rating_star.png');
-            background-repeat: no-repeat;
-            background-position: 36px 0px;
-            background-size: auto 100%;
+        #product > .view > article > nav > p {
+            float: left;
+            color: #777;
+            margin-top: 6px;
+            margin-left: 6px;
         }
-        #product h6.rating.star1 {width: 55px;}
-        #product h6.rating.star2 {width: 70px;}
-        #product h6.rating.star3 {width: 85px;}
-        #product h6.rating.star4 {width: 100px;}
-        #product h6.rating.star5 {width: 120px;}
-
-        #product h5.rating.star1 {background-position: 0 -40px;}
-        #product h5.rating.star2 {background-position: 0 -80px;}
-        #product h5.rating.star3 {background-position: 0 -120px;}
-        #product h5.rating.star4 {background-position: 0 -160px;}
-        #product h5.rating.star5 {background-position: 0 -200px;}
-
-        /* 판매자 */
-        #product .badge {
-            font-size: 0;
-            width: 80px;
-            height: 19px;
-            background-repeat: no-repeat;
+        #product > .view > .info > div {
+            float: left;
+            width: 50%;
+            height: 100%;
+            padding: 10px;
+            box-sizing: border-box;
         }
-
-        #product .badge.power {background-image: url('./img/ico_power_dealer.gif');}
-        #product .badge.great {background-image: url('./img/ico_great_seller.gif');}
-        #product .badge.power.great {
-            background: url('./img/ico_power_dealer.gif') no-repeat, url('../img/ico_great_seller.gif') no-repeat 63px;
-            width: 160px;
+        #product > .view > .info > .image {}
+        #product > .view > .info > .image > img {
+            width: 100%;
         }
-
-        /* 상품리스트 */
-        #product {
-        }
-
-        #product > .list > .sort {
-            margin: 0 0 20px 0;
-            border-top: 2px solid #111;
-            border-bottom: 1px solid #dfdfdf;
+        #product > .view > .info > .summary {}
+        #product > .view > .info > .summary > nav {
+            border-bottom: 1px solid #eaeaea;
+            padding-bottom: 10px;
+            margin-bottom: 12px;
             overflow: hidden;
         }
-        #product > .list > .sort > li {
+        #product > .view > .info > .summary > nav > h1 {
             float: left;
-            position: relative;
-            padding: 15px 0;
-            line-height: 15px;
-        }
-        #product > .list > .sort > li > a {
-            display: block;
-            padding: 0 10px;
-            border-right: 1px solid #ddd;
-        }
-        #product > .list > .sort > li > a.on {font-weight: bold;}
-        #product > .list > table {
-            width: 100%;
-            height: auto;
-            border-collapse: collapse;
-        }
-        #product > .list > table tr {
-            border-bottom: 1px solid #ececec;
-        }
-        #product > .list > table tr > td {  
-            vertical-align: top;
-            padding-top: 20px;
-            padding-left: 16px;
-            box-sizing: border-box;
-        }
-        #product > .list > table tr > td:nth-child(1) {width: 20%; padding: 0;}
-        #product > .list > table tr > td:nth-child(2) {width: 40%;}
-        #product > .list > table tr > td:nth-child(3) {width: 20%;}
-        #product > .list > table tr > td:nth-child(4) {width: 20%;}
-
-        #product > .list > table .thumb {
-            display: block;
-            width: 100%;
-            height: 100%;
-        }
-
-        #product > .list > table .thumb > img {
-            width: 120px;
-        }
-        #product > .list > table .name {
-            font-size: 16px;
+            color: #0231a6;
             font-weight: bold;
-            color: #111;
-            margin-bottom: 6px;
+            font-size: 1.5em;
         }
-        #product > .list > table .desc {
-            font-size: 12px;
-            color: #333;
+        #product > .view > .info > .summary > nav > h2 {
+            float: right;
+            color: #777;
+            margin-top: 8px;
         }
-
-        #product > .list > table .desc:hover {
-            text-decoration: underline;
+        #product > .view > .info > .summary > nav > h3 {
+            font-size: 18px;
+            font-weight: bold;
+            color: #1e2732;
         }
-
-        #product > .list > table .original-price {
-            font-size: 12px;
-            color: #aaa;
-        }
-        #product > .list > table .discount-price {
-            font-size: 16px;
-            text-decoration: none;
-        }
-        #product > .list > table .original-price::after {content: "원";}
-        #product > .list > table .discount-price::after {content: "원";}
-        #product > .list > table .discount {
-            color: #eb000a;
-            font-size: 10px;
-        }
-        #product > .list > table .discount::after {content: "↓";}
-
-        #product > .list > table .free-delivery {
-            display: inline-block;
-            font-size: 0;
-            vertical-align: text-bottom;
-            width: 55px;
-            height: 13px;
-            background: url('./img/ico_free_delivery.gif') no-repeat;
-            margin-top: 4px;
-        }
-
-        #product > .list > table .seller {  
-            font-size: 12px;
-            margin-bottom: 6px;
-        }
-
-        #product > .list > table .rating {
-            margin-top: 12px;
-        }
-
-        /* paging*/
-        
-        #product > .review > .paging {
-            width: 100%;
-            padding: 30px 0;
-            text-align: center;
-        }
-
-        #product > .review > .paging > span > a {
-            color: #777;            
-            font-size: 11px;
+        #product > .view > .info > .summary > nav > p {
+            font-size: 14px;
+            color: #474747;
+            line-height: 36px;
+            /* 글자간격 줄이기 */
             letter-spacing: -1px;
         }
-
-        #product > .review > .paging > span > a:hover {
+        #product > .view > .info > .summary .rating > a {
+            color: #346aff;
             text-decoration: underline;
         }
-
-        #product > .review > .paging > .num > a {
-            display: inline-block;
-            min-width: 14px;
-            margin: 0 2px;
-            padding: 8px 9px;
-            border: 1px solid #c4c4c4;
-            background: url() 0 0 repeat-x;
-            color: #000;
-            font-size: 12px;
-            text-align: center;
+        #product > .view > .info > .summary .original-price > del {
+            font-size: 18px;
+            color: #aaa;
+        }
+        #product > .view > .info > .summary .original-price > span {
+            color: #eb000a;
+            font-size: 16px;
+            margin-left: 6px;
+        }
+        #product > .view > .info > .summary .original-price > span::after {
+            content: "↓";
+        }
+        #product > .view > .info > .summary .original-price > del::after {
+            content: "원";
+        }
+        #product > .view > .info > .summary .discount-price > ins{
+            font-size: 26px;
+            font-weight: bold;
             text-decoration: none;
         }
-        #product > .review > .paging > .num > a:hover {
-            border: 1px solid #454c5f;
-            text-decoration: none;
+        #product > .view > .info > .summary .discount-price > ins::after{
+            content: "원";
         }
-        #product > .review > .paging > .num > a.on {
-            color: #fe434c;
-            font-weight: bold;
+        #product > .view > .info > .summary > nav > .delivery {
+            font-size: 16px;
+            color: #2E8DE5;
         }
+        #product > .view > .info > .summary > nav > .arrival {
+            font-size: 14px;
+            margin-left: 10px;
+        }
+        #product > .view > .info > .summary > nav > .desc {}
+        #product > .view > .info > .summary > nav > .card {}
+        #product > .view > .info > .summary > .origin {}
+        #product > .view > .info > .summary > .banner {}
 
-        /* footer */
+        #product > .count {}
+        #product > .count > .decrease {}
+        #product > .count > .increase {}
 
-        footer {
-            width: 100%;
-            height: 192px;
-            background: #f8f8f8;
-            border-top: 1px solid #e9e9e9;
-            box-sizing: border-box;
-        }
-        footer > ul {
-            width: 1200px;
-            height: 39px;
-            margin: 0 auto;
-            padding: 15px 0;
-            border-bottom: 1px solid #e9e9e9;
-            box-sizing: border-box;
-            text-align: center;
-        }
-        footer > ul > li:first-child {
-            border-left: 1px solid #d7d7d7;
-        }
-        footer > ul > li {
-            display: inline-block;
-            font-weight: bold;
-            border-right: 1px solid #d7d7d7;
-            padding: 0 10px;
-        }
-        footer > div {
-            width: 1200px;
-            height: auto;
-            padding-top: 20px;
-            box-sizing: border-box;
-            margin: 0 auto;
-        }
-        footer p {
-            float: left;
-            height: 100%;
-            font-size: 11px;
-            line-height: 15px;
-            color: #676767;
-        }
-        footer p:nth-of-type(2) {
-            width: 300px;
-            margin-left: 30px;
-            margin-right: 30px;
-        }
-        footer p > strong {
-            display: inline-block;
-            padding: 6px 15px 7px 0;
-            color: #464646;
-            font-size: 12px;
-            font-weight: bold;
-        }
+        #product > .total {}
+        #product > .total > span {}
+        #product > .total > em {}
 
-        /* 상단이동 버튼 */
-        #top {
-            /* 움직임에 따라 이동시키려고 */
-            position: fixed;
-            left: 50%;
-            bottom: 10px;
-            margin-left: 600px;
-            width: 42px;
-            height: 42px;
-            background-image: url(./img/top.png);
-            border: none;
-            font-size: 0;
-            /* 버튼위에 마우스 올리면 포인터모양으로 바뀜 */
-            cursor: pointer;
-        }
+        #product > .button {}
+        #product > .button > .cart {}
+        #product > .button > .order {}
+
+
+
+
+
+
 
 
     </style>
@@ -641,7 +237,7 @@
                     </li>
                 </ul>
             </aside>
-            <section class="list">
+            <section class="view">
                 <!-- 제목, 페이지 네비게이션 -->
                 <nav>
                     <h1>상품보기</h1>
@@ -666,12 +262,13 @@
                             </h5>
                         </nav>
                         <nav>
-                            <li><ins class="discount-price">27,000</ins></li>
-                                    <li>
-                                        <!-- del태그는 텍스트 한가운데 라인을 추가하여 문서에서 삭제된 텍스트 표현-->
-                                        <del class="original-price">30,000</del>
-                                        <span class="discount">10%</span>
-                                    </li>
+                            <div class="original-price">
+                                <del>30,000</del>
+                                <span>10%</span>
+                            </div>
+                            <div class="discount-price">
+                                <ins>27,000</ins>
+                            </div>
                         </nav>
                         <nav>
                             <span class="delivery">무료배송</span>
@@ -806,7 +403,31 @@
                 <article class="review">
                     <li>
                         <div>
-                            <h5 class="rating star4">상품평</h5>
+                            <h5 class="rating star1">상품평</h5>
+                            <span>seo******	2018-07-10</span>
+                        </div>
+                        <h3>상품명1/BLUE/L</h3>
+                        <p>
+                            가격대비 정말 괜찮은 옷이라 생각되네요 핏은 음...제가 입기엔 어깨선이 맞고 루즈핏이라 하기도 좀 힘드네요.
+                            아주 약간 루즈한정도...?그래도 이만한 옷은 없다고 봅니다 깨끗하고 포장도 괜찮고 다음에도 여기서 판매하는
+                            제품들을 구매하고 싶네요 정말 만족하고 후기 남깁니다 많이 파시길 바래요 ~ ~ ~
+                        </p>
+                    </li>
+                    <li>
+                        <div>
+                            <h5 class="rating star2">상품평</h5>
+                            <span>seo******	2018-07-10</span>
+                        </div>
+                        <h3>상품명1/BLUE/L</h3>
+                        <p>
+                            가격대비 정말 괜찮은 옷이라 생각되네요 핏은 음...제가 입기엔 어깨선이 맞고 루즈핏이라 하기도 좀 힘드네요.
+                            아주 약간 루즈한정도...?그래도 이만한 옷은 없다고 봅니다 깨끗하고 포장도 괜찮고 다음에도 여기서 판매하는
+                            제품들을 구매하고 싶네요 정말 만족하고 후기 남깁니다 많이 파시길 바래요 ~ ~ ~
+                        </p>
+                    </li>
+                    <li>
+                        <div>
+                            <h5 class="rating star3">상품평</h5>
                             <span>seo******	2018-07-10</span>
                         </div>
                         <h3>상품명1/BLUE/L</h3>
@@ -830,31 +451,7 @@
                     </li>
                     <li>
                         <div>
-                            <h5 class="rating star4">상품평</h5>
-                            <span>seo******	2018-07-10</span>
-                        </div>
-                        <h3>상품명1/BLUE/L</h3>
-                        <p>
-                            가격대비 정말 괜찮은 옷이라 생각되네요 핏은 음...제가 입기엔 어깨선이 맞고 루즈핏이라 하기도 좀 힘드네요.
-                            아주 약간 루즈한정도...?그래도 이만한 옷은 없다고 봅니다 깨끗하고 포장도 괜찮고 다음에도 여기서 판매하는
-                            제품들을 구매하고 싶네요 정말 만족하고 후기 남깁니다 많이 파시길 바래요 ~ ~ ~
-                        </p>
-                    </li>
-                    <li>
-                        <div>
-                            <h5 class="rating star4">상품평</h5>
-                            <span>seo******	2018-07-10</span>
-                        </div>
-                        <h3>상품명1/BLUE/L</h3>
-                        <p>
-                            가격대비 정말 괜찮은 옷이라 생각되네요 핏은 음...제가 입기엔 어깨선이 맞고 루즈핏이라 하기도 좀 힘드네요.
-                            아주 약간 루즈한정도...?그래도 이만한 옷은 없다고 봅니다 깨끗하고 포장도 괜찮고 다음에도 여기서 판매하는
-                            제품들을 구매하고 싶네요 정말 만족하고 후기 남깁니다 많이 파시길 바래요 ~ ~ ~
-                        </p>
-                    </li>
-                    <li>
-                        <div>
-                            <h5 class="rating star4">상품평</h5>
+                            <h5 class="rating star5">상품평</h5>
                             <span>seo******	2018-07-10</span>
                         </div>
                         <h3>상품명1/BLUE/L</h3>
