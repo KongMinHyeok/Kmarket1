@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ProductList</title>
+    <script src="https://kit.fontawesome.com/20962f3e4b.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font: normal 12px '고딕';
+        }
+        ul, ol {list-style: none;}
+        a {text-decoration: none; color: #111;}
+        input, textarea {outline: none;}
+
+        #wrapper {
+            width: 100%;
+        }
+
+        /* font-awesome */
+
+        .fa-shopping-cart::before{content: "\f07a";}
+        .fa, .fas{font-weight: 900;}
+        .fa, .fab, .fad, .fal, .far, .fas {
+            -moz-osx-font-smoothing: grayscale;
+            -webkit-font-smoothing: antialiased;
+            display: inline-block;
+            font-style: normal;
+            font-variant: normal;
+            text-rendering: auto;
+            line-height: 1;
+        }
+        .fa, .far, .fas {
+            font-family: "Font Awesome 5 Free";
+        }
+        .fa {
+            display: inline-block;
+            font: normal normal normal 14px/1 FontAwesome;
+            font-size: inherit;
+            text-rendering: auto;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* header */
+
+        header{
+            width: 100%;
+            height: 197px;
+        }
+        header > div {
+            width: 100%;
+            box-sizing: border-box;
+        }
+        /* header top */
+
+        header > .top {
+            height: 35px;
+            border-bottom: 1px solid #e9e9e9;
+        }
+        header > .top > div {
+            width: 1200px;
+            height: 100%;
+            margin: 0 auto;
+            text-align: right;
+        }
+        header > .top > div > a {
+            display: inline-block;
+            height: 100%;
+            line-height: 35px;
+            border-left: 1px solid #e9e9e9;
+            padding: 0 10px;
+            color: #646464;
+        }
+        header > .top > div > a:last-child{border-right: 1px solid #e9e9e9;}
+        header > .top > div > a:hover{
+            color: #333;
+            border-bottom: 1px solid #444;
+        }
+            /* header logo */
+        header > .logo {
+            height: 115px;
+            border-bottom: 1px solid #e9e9e9;
+        }
+        header > .logo > div {
+            position: relative;
+            width: 1200px;
+            height: 100%;
+            margin: 0 auto;
+        }
+        header > .logo > div > a {
+            display: inline-block;
+            margin-top: 30px;
+        }
+        header > .logo > div > form  {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -185px;
+            margin-top: -22px;
+            display: inline-block;
+            width: 370px;
+            height: 45px;
+            
+        }
+        header > .logo > div > form > input {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 1px solid #e9e9e9;
+            border-radius: 5px;
+            font-size: 20px;
+            padding-left: 10px;
+            padding-right: 30px;
+            box-sizing: border-box;
+        }
+        header > .logo > div > form > button {
+            position: absolute;
+            right: 6px;
+            top: 10px;
+            background: #fff;
+            border: none;
+            font-size: 20px;
+            color: #333;
+            outline: none;
+        }
+            /* menu */
+        header > .menu {
+            width: 100%;
+            height: 46px;
+            background: #f2f2f2;
+            border-bottom: 1px solid #ddd;
+            box-sizing: border-box;
+        }
+        header > .menu > div {
+            width: 1200px;
+            height: 100%;
+            margin: 0 auto;
+        }
+        header > .menu > div > ul {
+            /*
+            display: inline-block
+                inline처럼 전후 줄바꿈 x
+                block처럼 width와 height, margin, padding  지정가능
+            */
+            display: inline-block;
+            margin-top: 16px;
+        }
+        header > .menu > div > ul > li {
+            float: left;
+        }
+        header > .menu > div > ul > li  > a {
+            border-left: 1px solid #e9e9e9;
+            padding: 0 10px;
+        }
+        header > .menu > div > ul > li > a:last-child {
+            border-left: 1px solid #e9e9e9;
+            border-right: 1px solid #e9e9e9;
+        }
+
+        header > .menu > div > ul:nth-child(1){
+            float: left;
+        }
+        header > .menu > div > ul:nth-child(2){
+            float: right;
+        }
+        
+
+        /* product 공통*/
+        /* 메인 */
+        main {
+            width: 1200px;
+            height: auto;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+            /* aside*/
+        main > aside {
+            float: left;
+            width: 215px;
+            height: 100%;
+        }
+        main > aside > .category {
+            position: relative;
+            width: 100%;
+            height: 425px;
+            background: #333949;
+        }
+        main > aside > .category > li {
+            width: 100%;
+            height: 40px;
+            line-height: 40px;
+            color: #ccc;
+            font-size: 13px;
+            font-weight: bold;
+            border-bottom: 1px solid #2b313f;
+            box-sizing: border-box;
+        }
+        main > aside > .category > li:first-child {
+            padding: 0 20px;
+            color: #fff;
+            line-height: 40px;
+        }
+        main > aside > .category > li > a {
+            display: block;
+            padding: 0 20px;
+            line-height: 40px;
+            color: #ccc;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 1em;
+        }
+        main > aside > .category > li > a:hover {
+            background: #2b313f;
+            color: #fff;
+        }
+        main > aside > .category > li > a:hover + ol {
+            display: block;
+        }
+        main > aside > .category ol:hover {
+            display: block;
+        }
+
+        main > aside > .category i {
+            width: 22px;
+            font-size: 16px;
+            margin-right: 12px;
+        }
+
+        main > aside > .category > li i.fa-angle-right {
+            float: right;
+            width: auto;
+            margin-top: 10px;
+            margin-right: 0;
+        }
+
+        main > aside > .category ol {
+            position: absolute;
+            left: 215px;
+            top: 0;
+            display: none;
+            width: 215px;
+            height: 100%;
+            border: 1px solid #787f89;
+            background: #fff;
+            box-sizing: border-box;
+            /* 다른 컨텐츠에 가려지기 방지 z-index */
+            z-index: 10000;
+        }
+
+            main > aside > .category ol > li {
+            width: 100%;
+            height: 24px;
+            padding: 10px;
+            box-sizing: border-box;
+            }
+            main > aside > .category ol > li > a:hover {
+            color: #41ab47;
+            text-decoration: underline;
+            }
+        main > section {
+            float: right;
+            width: 985px;
+            height: auto;
+        }
+            /* section */
+        #product > section {
+            padding: 16px;
+            box-sizing: border-box;
+        }
+        
+        #product > section > nav {
+            width: 100%;
+            height: 36px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #000;
+            box-sizing: border-box;
+        }
+        #product > section > nav > p {
+            float: right;
+            margin-top: 10px;
+        }
+        #product > section > nav > h1 {
+            display: inline-block;
+            font-weight: bold;
+            font-size: 1.5em;
+            padding: 0 0 7px;
+            line-height: 1em;
+        }
+
+        /* 별점 */
+        #product h6.rating {
+            font-size: 11px;
+            background-image: url('./img/rating_star.png');
+            background-repeat: no-repeat;
+            background-position: 36px 0px;
+            background-size: auto 100%;
+        }
+        #product h6.rating.star1 {width: 55px;}
+        #product h6.rating.star2 {width: 70px;}
+        #product h6.rating.star3 {width: 85px;}
+        #product h6.rating.star4 {width: 100px;}
+        #product h6.rating.star5 {width: 120px;}
+
+        #product h5.rating.star1 {background-position: 0 -40px;}
+        #product h5.rating.star2 {background-position: 0 -80px;}
+        #product h5.rating.star3 {background-position: 0 -120px;}
+        #product h5.rating.star4 {background-position: 0 -160px;}
+        #product h5.rating.star5 {background-position: 0 -200px;}
+
+        /* 판매자 */
+        #product .badge {
+            font-size: 0;
+            width: 80px;
+            height: 19px;
+            background-repeat: no-repeat;
+        }
+
+        #product .badge.power {background-image: url('./img/ico_power_dealer.gif');}
+        #product .badge.great {background-image: url('./img/ico_great_seller.gif');}
+        #product .badge.power.great {
+            background: url('./img/ico_power_dealer.gif') no-repeat, url('../img/ico_great_seller.gif') no-repeat 63px;
+            width: 160px;
+        }
+
+        /* 상품리스트 */
+        #product {
+        }
+
+        #product > .list > .sort {
+            margin: 0 0 20px 0;
+            border-top: 2px solid #111;
+            border-bottom: 1px solid #dfdfdf;
+            overflow: hidden;
+        }
+        #product > .list > .sort > li {
+            float: left;
+            position: relative;
+            padding: 15px 0;
+            line-height: 15px;
+        }
+        #product > .list > .sort > li > a {
+            display: block;
+            padding: 0 10px;
+            border-right: 1px solid #ddd;
+        }
+        #product > .list > .sort > li > a.on {font-weight: bold;}
+        #product > .list > table {
+            width: 100%;
+            height: auto;
+            border-collapse: collapse;
+        }
+        #product > .list > table tr {
+            border-bottom: 1px solid #ececec;
+        }
+        #product > .list > table tr > td {  
+            vertical-align: top;
+            padding-top: 20px;
+            padding-left: 16px;
+            box-sizing: border-box;
+        }
+        #product > .list > table tr > td:nth-child(1) {width: 20%; padding: 0;}
+        #product > .list > table tr > td:nth-child(2) {width: 40%;}
+        #product > .list > table tr > td:nth-child(3) {width: 20%;}
+        #product > .list > table tr > td:nth-child(4) {width: 20%;}
+
+        #product > .list > table .thumb {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        #product > .list > table .thumb > img {
+            width: 120px;
+        }
+        #product > .list > table .name {
+            font-size: 16px;
+            font-weight: bold;
+            color: #111;
+            margin-bottom: 6px;
+        }
+        #product > .list > table .desc {
+            font-size: 12px;
+            color: #333;
+        }
+
+        #product > .list > table .desc:hover {
+            text-decoration: underline;
+        }
+
+        #product > .list > table .original-price {
+            font-size: 12px;
+            color: #aaa;
+        }
+        #product > .list > table .discount-price {
+            font-size: 16px;
+            text-decoration: none;
+        }
+        #product > .list > table .original-price::after {content: "원";}
+        #product > .list > table .discount-price::after {content: "원";}
+        #product > .list > table .discount {
+            color: #eb000a;
+            font-size: 10px;
+        }
+        #product > .list > table .discount::after {content: "↓";}
+
+        #product > .list > table .free-delivery {
+            display: inline-block;
+            font-size: 0;
+            vertical-align: text-bottom;
+            width: 55px;
+            height: 13px;
+            background: url('./img/ico_free_delivery.gif') no-repeat;
+            margin-top: 4px;
+        }
+
+        #product > .list > table .seller {  
+            font-size: 12px;
+            margin-bottom: 6px;
+        }
+
+        #product > .list > table .rating {
+            margin-top: 12px;
+        }
+
+        /* paging*/
+        
+        #product > .review > .paging {
+            width: 100%;
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        #product > .review > .paging > span > a {
+            color: #777;            
+            font-size: 11px;
+            letter-spacing: -1px;
+        }
+
+        #product > .review > .paging > span > a:hover {
+            text-decoration: underline;
+        }
+
+        #product > .review > .paging > .num > a {
+            display: inline-block;
+            min-width: 14px;
+            margin: 0 2px;
+            padding: 8px 9px;
+            border: 1px solid #c4c4c4;
+            background: url() 0 0 repeat-x;
+            color: #000;
+            font-size: 12px;
+            text-align: center;
+            text-decoration: none;
+        }
+        #product > .review > .paging > .num > a:hover {
+            border: 1px solid #454c5f;
+            text-decoration: none;
+        }
+        #product > .review > .paging > .num > a.on {
+            color: #fe434c;
+            font-weight: bold;
+        }
+
+        /* footer */
+
+        footer {
+            width: 100%;
+            height: 192px;
+            background: #f8f8f8;
+            border-top: 1px solid #e9e9e9;
+            box-sizing: border-box;
+        }
+        footer > ul {
+            width: 1200px;
+            height: 39px;
+            margin: 0 auto;
+            padding: 15px 0;
+            border-bottom: 1px solid #e9e9e9;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        footer > ul > li:first-child {
+            border-left: 1px solid #d7d7d7;
+        }
+        footer > ul > li {
+            display: inline-block;
+            font-weight: bold;
+            border-right: 1px solid #d7d7d7;
+            padding: 0 10px;
+        }
+        footer > div {
+            width: 1200px;
+            height: auto;
+            padding-top: 20px;
+            box-sizing: border-box;
+            margin: 0 auto;
+        }
+        footer p {
+            float: left;
+            height: 100%;
+            font-size: 11px;
+            line-height: 15px;
+            color: #676767;
+        }
+        footer p:nth-of-type(2) {
+            width: 300px;
+            margin-left: 30px;
+            margin-right: 30px;
+        }
+        footer p > strong {
+            display: inline-block;
+            padding: 6px 15px 7px 0;
+            color: #464646;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        /* 상단이동 버튼 */
+        #top {
+            /* 움직임에 따라 이동시키려고 */
+            position: fixed;
+            left: 50%;
+            bottom: 10px;
+            margin-left: 600px;
+            width: 42px;
+            height: 42px;
+            background-image: url(./img/top.png);
+            border: none;
+            font-size: 0;
+            /* 버튼위에 마우스 올리면 포인터모양으로 바뀜 */
+            cursor: pointer;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <header>
+            <div class="top">
+                <div>
+                    <a href="#">로그인</a>
+                    <a href="#">회원가입</a>
+                    <a href="#">마이페이지</a>
+                    <a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;장바구니</a>
+                </div>
+            </div>
+            <div class="logo">
+                <div>
+                    <a href="#"><img src="./img/header_logo.png" alt="Kmarket" width="180px" height="49px"></a>
+                    <form action="#">
+                        <input type="text" name="keyword">
+                        <button>
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="menu">
+                <div>
+                    <ul>
+                        <li>
+                            <a href="#">히트상품</a>
+                        </li>
+                        <li>
+                            <a href="#">추천상품</a>
+                        </li>
+                        <li>
+                            <a href="#">최신상품</a>
+                        </li>
+                        <li>
+                            <a href="#">인기상품</a>
+                        </li>
+                        <li>
+                            <a href="#">할인상품</a>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li>
+                            <a href="#">쿠폰존</a>
+                        </li>
+                        <li>
+                            <a href="#">사용후기</a>
+                        </li>
+                        <li>
+                            <a href="#">개인결제</a>
+                        </li>
+                        <li>
+                            <a href="#">고객센터</a>
+                        </li>
+                        <li>
+                            <a href="#">FAQ</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+        <main id="product">
+            <aside>
+                <ul class="category">
+                    <!-- 아이콘들 Font Awesome에서 들고온거라 복붙했음 -->     
+                    <li><i class="fa fa-bars" aria-hidden="true"></i>카테고리</li>
+                    <li>
+                        <a href="#"><i class="fas fa-tshirt"></i>패션·의류·뷰티</a>
+                        <ol>
+                            <li><a href="#">남성의류</a></li>
+                            <li><a href="#">여성의류</a></li>
+                            <li><a href="#">잡화</a></li>
+                            <li><a href="#">뷰티</a></li>
+                        </ol>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fas fa-laptop"></i>가전·디지털</a>
+                        <ol>
+                            <li><a href="#">노트북/PC</a></li>
+                            <li><a href="#">가전</a></li>
+                            <li><a href="#">휴대폰</a></li>
+                            <li><a href="#">기타</a></li>
+                        </ol>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fas fa-utensils"></i>식품·생필품</a>
+                        <ol>
+                            <li><a href="#">신선식품</a></li>
+                            <li><a href="#">가공식품</a></li>
+                            <li><a href="#">건강식품</a></li>
+                            <li><a href="#">생필품</a></li>
+                        </ol>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fas fa-home"></i>홈·문구·취미</a>
+                        <ol>
+                            <li><a href="#">가구/DIY</a></li>
+                            <li><a href="#">침구·커튼</a></li>
+                            <li><a href="#">생활용품</a></li>
+                            <li><a href="#">사무용품</a></li>
+                        </ol>
+                    </li>
+                </ul>
+            </aside>
+            <section class="list">
+                <!-- 제목, 페이지 네비게이션 -->
+                <nav>
+                    <h1>상품보기</h1>
+                    <p>HOME > 패션·의류·뷰티 > 남성의류</p>
+                </nav>
+
+                <!-- 상품 전체 내용 -->
+                <article class="info">
+                    <div class="image">
+                        <img src="./img/460x460.png" alt="예시 이미지">
+                    </div>
+                    <div class="summary">
+                        <nav>
+                            <h1>(주)판매자명</h1>
+                            <h2>상품번호 : 10010118412</h2>
+                        </nav>
+                        <nav>
+                            <h3>상품명</h3>
+                            <p>상품설명 출력</p>
+                            <h5 class="rating star4">
+                                <a href="#">상품평보기</a>
+                            </h5>
+                        </nav>
+                        <nav>
+                            <li><ins class="discount-price">27,000</ins></li>
+                                    <li>
+                                        <!-- del태그는 텍스트 한가운데 라인을 추가하여 문서에서 삭제된 텍스트 표현-->
+                                        <del class="original-price">30,000</del>
+                                        <span class="discount">10%</span>
+                                    </li>
+                        </nav>
+                        <nav>
+                            <span class="delivery">무료배송</span>
+                            <span class="arrival">모레(금) 7/8 도착예정</span>
+                            <span class="desc">본 상품은 국내배송만 가능합니다.</span>
+                        </nav>
+                        <nav>
+                            <span class="card cardfree"><i>아이콘</i>무이자할부</span>&nbsp;&nbsp;
+                            <span class="card cardadd"><i>아이콘</i>카드추가혜택</span>
+                        </nav>
+                        <nav class="origin">
+                            원산지-상세설명 참조
+                        </nav>
+                        <img src="./img/vip_plcc_banner.png" alt="100원만 결제해도 1만원 적립" class="banner">
+                    </div>
+                    <div class="count">
+                        <button class="decrease"></button>
+                        <input type="text" name="num" value="1" readonly>
+                        <button class="increase"></button>
+                    </div>
+                    <div class="total">
+                        <span>35,000</span>
+                        <em>총 상품금액</em>
+                    </div>
+                    <div class="button">
+                        <input type="button" class="cart" value="장바구니">
+                        <input type="button" class="order" value="구매하기">
+                    </div>
+                </article>
+                <!-- 상품정보 사진 -->
+                <article class="detail">
+                    <img src="./img/860x460.png" alt="상품정보 이미지">
+                    <img src="./img/860x460.png" alt="상품정보 이미지">
+                    <img src="./img/860x460.png" alt="상품정보 이미지">
+                </article>
+                <!-- 상품정보 제공 고시내용-->
+                <article class="notice">
+                    <h1>상품 정보 제공 고시</h1>
+                    <p>[전자상거래에 관한 상품정보 제공에 관한 고시] 항목에 의거 등록된 정보입니다.</p>
+                    <table border="0">
+                        <tbody>
+                            <tr>
+                                <td>상품번호</td>
+                                <td>10110125435</td>
+                            </tr>
+                            <tr>
+                                <td>상품상태</td>
+                                <td>새상품</td>
+                            </tr>
+                            <tr>
+                                <td>부가세 면세여부</td>
+                                <td>과세상품</td>
+                            </tr>
+                            <tr>
+                                <td>영수증발행</td>
+                                <td>발행가능 - 신용카드 전표, 온라인 현금영수증</td>
+                            </tr>
+                            <tr>
+                                <td>사업자구분</td>
+                                <td>사업자 판매자</td>
+                            </tr>
+                            <tr>
+                                <td>브랜드</td>
+                                <td>블루포스</td>
+                            </tr>
+                            <tr>
+                                <td>원산지</td>
+                                <td>국내생산</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>제품소재</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>색상</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>치수</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>제조자/수입국</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>제조국</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>취급시 주의사항</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>제조연월</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>품질보증기준</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>A/S 책임자오 전화번호</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>주문후 예상 배송기간</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    구매, 교환, 반품, 배송, 설치 등과 관련하여 추가비용, 제한조건 등의 특이사항이 있는 경우
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="notice">
+                        소비자가 전자상거래등에서 소비자 보호에 관한 법률 제 17조 제1항 또는 제3항에 따라 청약철회를 하고
+                        동법 제 18조 제1항 에 따라 청약철회한 물품을 판매자에게 반환하였음에도 불구 하고 결제 대금의
+                        환급이 3영업일을 넘게 지연된 경우, 소비자 는 전자상거래등에서 소비자보호에 관한 법률 제18조
+                        제2항 및 동법 시행령 제21조 2에 따라 지연일수에 대하여 전상법 시행령으로 정하는 이율을 곱하여
+                        산정한 지연이자(“지연배상금”)를 신청할 수 있습니다. 아울러, 교환∙반품∙보증 및 결제대금의
+                        환급신청은 [나의쇼핑정보]에서 하실 수 있으며, 자세한 문의는 개별 판매자에게 연락하여 주시기 바랍니다.
+                    </p>
+                </article>
+
+                <!-- 상품 리뷰-->
+                <article class="review">
+                    <li>
+                        <div>
+                            <h5 class="rating star4">상품평</h5>
+                            <span>seo******	2018-07-10</span>
+                        </div>
+                        <h3>상품명1/BLUE/L</h3>
+                        <p>
+                            가격대비 정말 괜찮은 옷이라 생각되네요 핏은 음...제가 입기엔 어깨선이 맞고 루즈핏이라 하기도 좀 힘드네요.
+                            아주 약간 루즈한정도...?그래도 이만한 옷은 없다고 봅니다 깨끗하고 포장도 괜찮고 다음에도 여기서 판매하는
+                            제품들을 구매하고 싶네요 정말 만족하고 후기 남깁니다 많이 파시길 바래요 ~ ~ ~
+                        </p>
+                    </li>
+                    <li>
+                        <div>
+                            <h5 class="rating star4">상품평</h5>
+                            <span>seo******	2018-07-10</span>
+                        </div>
+                        <h3>상품명1/BLUE/L</h3>
+                        <p>
+                            가격대비 정말 괜찮은 옷이라 생각되네요 핏은 음...제가 입기엔 어깨선이 맞고 루즈핏이라 하기도 좀 힘드네요.
+                            아주 약간 루즈한정도...?그래도 이만한 옷은 없다고 봅니다 깨끗하고 포장도 괜찮고 다음에도 여기서 판매하는
+                            제품들을 구매하고 싶네요 정말 만족하고 후기 남깁니다 많이 파시길 바래요 ~ ~ ~
+                        </p>
+                    </li>
+                    <li>
+                        <div>
+                            <h5 class="rating star4">상품평</h5>
+                            <span>seo******	2018-07-10</span>
+                        </div>
+                        <h3>상품명1/BLUE/L</h3>
+                        <p>
+                            가격대비 정말 괜찮은 옷이라 생각되네요 핏은 음...제가 입기엔 어깨선이 맞고 루즈핏이라 하기도 좀 힘드네요.
+                            아주 약간 루즈한정도...?그래도 이만한 옷은 없다고 봅니다 깨끗하고 포장도 괜찮고 다음에도 여기서 판매하는
+                            제품들을 구매하고 싶네요 정말 만족하고 후기 남깁니다 많이 파시길 바래요 ~ ~ ~
+                        </p>
+                    </li>
+                    <li>
+                        <div>
+                            <h5 class="rating star4">상품평</h5>
+                            <span>seo******	2018-07-10</span>
+                        </div>
+                        <h3>상품명1/BLUE/L</h3>
+                        <p>
+                            가격대비 정말 괜찮은 옷이라 생각되네요 핏은 음...제가 입기엔 어깨선이 맞고 루즈핏이라 하기도 좀 힘드네요.
+                            아주 약간 루즈한정도...?그래도 이만한 옷은 없다고 봅니다 깨끗하고 포장도 괜찮고 다음에도 여기서 판매하는
+                            제품들을 구매하고 싶네요 정말 만족하고 후기 남깁니다 많이 파시길 바래요 ~ ~ ~
+                        </p>
+                    </li>
+                    <li>
+                        <div>
+                            <h5 class="rating star4">상품평</h5>
+                            <span>seo******	2018-07-10</span>
+                        </div>
+                        <h3>상품명1/BLUE/L</h3>
+                        <p>
+                            가격대비 정말 괜찮은 옷이라 생각되네요 핏은 음...제가 입기엔 어깨선이 맞고 루즈핏이라 하기도 좀 힘드네요.
+                            아주 약간 루즈한정도...?그래도 이만한 옷은 없다고 봅니다 깨끗하고 포장도 괜찮고 다음에도 여기서 판매하는
+                            제품들을 구매하고 싶네요 정말 만족하고 후기 남깁니다 많이 파시길 바래요 ~ ~ ~
+                        </p>
+                    </li>
+                <!-- 상품목록 페이지번호 -->
+              <div class="paging">
+                <span class="prev">
+                  <a href="#"><&nbsp;이전</a>
+                </span>
+                <span class="num">
+                  <a href="#" class="on">1</a>
+                  <a href="#">2</a>
+                  <a href="#">3</a>
+                  <a href="#">4</a>
+                  <a href="#">5</a>
+                  <a href="#">6</a>
+                  <a href="#">7</a>
+                </span>
+                <span class="next">
+                  <a href="#">다음&nbsp;></a>
+                </span>
+              </div>
+                </article>
+            </section>
+        </main>
+        <footer>
+            <ul>
+                <li>
+                    <a href="#">회사소개</a>
+                </li>
+                <li>
+                    <a href="#">서비스이용약관</a>
+                </li>
+                <li>
+                    <a href="#">개인정보처리방침</a>
+                </li>
+                <li>
+                    <a href="#">전자금융거래약관</a>
+                </li>
+            </ul>
+            <div>
+                <p>
+                    <img src="./img/footer_logo.png" alt="로고">                </p>
+                    <p>
+                        <strong>(주)KMARKET</strong><br>
+                        부산시 강남구 테헤란로 152 (역삼동 강남파이낸스센터)<br>
+                        대표이사 : 홍길동<br>
+                        사업자등록번호 : 220-81-83676 사업자정보확인<br>
+                        통신판매업신고 : 강남 10630호 Fax : 02-589-8842
+                      </p>
+                      <p>
+                        <strong>고객센터</strong><br>
+                        Tel : 1234-5678 (평일 09:00~18:00)<br>
+                        스마일클럽/SVIP 전용 : 1522-5700 (365일 09:00~18:00)<br>
+                        경기도 부천시 원미구 부일로 223(상동) 투나빌딩 6층<br>
+                        Fax : 051-123-4567 | Mail : kmarket@kmarket.co.kr<br>
+                      </p>
+            </div>
+        </footer>
+        <!-- 상단이동 버튼 -->
+        <button type="button" id="top">상단이동</button>
+    </div>    
+</body>
+</html>
