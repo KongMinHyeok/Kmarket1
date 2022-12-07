@@ -1,0 +1,94 @@
+/* admin-index */
+main h4{
+    font-size: 15px;
+    font-weight: bold;
+}
+
+#admin-index > article{
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+#admin-index > article > table{
+    width: 100%;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    border-collapse: collapse;
+    border-top: 2px solid #8798a3;
+}
+#admin-index > article > table th{
+    background: #fafafa; 
+}
+#admin-index > article > table tr > th{
+    width: 20%;
+    border: 1px solid #e5e5e5;
+    padding: 6px 6px 6px 12px;
+    color: #111;
+    text-align: center;
+}
+#admin-index > article > table tr > td{
+    width: 20%;
+    border: 1px solid #e5e5e5;
+    padding: 6px 6px 6px 12px;
+    color: #111;
+    text-align: center;
+}
+#admin-index > article > table tr > th > strong{
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    padding-top: 10px;
+}
+#admin-index > article > table tr > th > span{
+    display: block;
+    padding: 16px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #bc2e13;
+}
+#admin-index > article > table tr > td > p{
+    padding: 6px;
+    overflow: hidden;
+}
+#admin-index > article > table tr > td > p > span{font-size: 14px;}
+#admin-index > article > table tr > td > p > span:nth-child(1){float: left;}
+#admin-index > article > table tr > td > p > span:nth-child(2){float: right;}
+
+#admin-index > div{
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+#admin-index > div > div{
+    width: 49%;
+    height: auto;
+}
+#admin-index > div > div:nth-child(1){float: left;}
+#admin-index > div > div:nth-child(2){float: right;}
+#admin-index > div > div > article{
+    width: 100%;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    border: 1px solid #e5e5e5;
+    border-top: 2px solid #8797a3;
+    padding: 16px;
+    box-sizing: border-box;
+}
+#admin-index > div > div > article > p {
+    overflow: hidden;
+}
+#admin-index > div > div > article > p > span{line-height: 26px;}
+#admin-index > div > div > article > p > span:nth-child(1){
+    float: left;
+    display: block;
+    width: 400px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: left;
+    overflow: hidden;
+}
+#admin-index > div > div > article > p > span:nth-child(2){float: right;}
+
+/* admin-list */
+
+/* admin-register */
