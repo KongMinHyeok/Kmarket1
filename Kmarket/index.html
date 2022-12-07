@@ -8,13 +8,12 @@
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/20962f3e4b.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
     <style>
       * {
         margin: 0;
         padding: 0;
-        font: normal 12px "怨좊뵓";
+        font: normal 12px "맑은 고딕";
       }
 
       ul,ol {list-style: none;}
@@ -460,22 +459,7 @@
         height: 425px;
         overflow: hidden;
       }
-      main > section > .slider > .bx-wrapper {
-        -moz-box-shadow: none;
-        -webkit-box-shadow: none;
-        box-shadow: none;
-        border: none;
-        background: #fff;
-      }
 
-      main > section > .hit {
-      }
-      main > section > .recommend {
-      }
-      main > section > .new {
-      }
-      main > section > .discount {
-      }
 
       /* footer(푸터) */
       footer {
@@ -546,96 +530,95 @@
         font-size: 0;
         cursor: pointer;
       }
-      .slider-2 {
-        height:400px;
-        position:relative;
+      /* Slideshow */
+      .slideshow-container {
+        max-width: 1200px;
+        max-height: 750px;
+        position: relative;
+        margin: auto;
+      }
+      .slideshow-container .mySlides img {
+        height: 100%;
       }
 
-      .slider-2 .slides > div {
-        position:absolute;
-        top:0;
-        left:0;
-        width:100%;
-        height:100%;
-        background-position:center;
-        /* 이미지를 최대한 안짤리게 한다. */
-        background-size:cover;
-        /* 배경 반복 금지 */
-        background-repeat:no-repeat;
-        opacity:0;
-        transition: opacity 0.5s;
+      /* Hide the images */
+      .mySlides {
+        display: none;
       }
 
-      .slider-2 .slides > div.active {
-          opacity:1;
+      /* Next & previous 버튼 */
+      .prev,  .next {
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        width: auto;
+        margin-top: -22px;
+        padding: 16px;
+        color: white;
+        font-weight: bold;
+        font-size: 18px;
+        transition: 0.6s ease;
+        border-radius: 0 3px 3px 0;
+        user-select: none;
       }
 
-      .slider-2 .page-nav {
-          position:absolute;
-          width:100%;
-          text-align:center;
-          bottom:0;
-          left:0;
+      /* next 버튼 */
+      .next {
+        right: 0;
+        border-radius: 3px 0 0 3px;
       }
 
-      .slider-2 .page-nav > div {
-          display:inline-block;
-          width:15px;
-          height:15px;
-          background-color:rgba(255,255,255,0.5);
-          border-radius:2px;
-          cursor:pointer;
+      /* 버튼 hover시 검은색 */
+      .prev:hover, .next:hover {
+        background-color: rgba(0,0,0,0.8);
       }
 
-      .slider-2 .page-nav > div.active {
-          background-color:rgba(255,255,255,1);
+
+
+      /* Number text */
+      .numbertext {
+        color: #f2f2f2;
+        font-size: 12px;
+        padding: 8px 12px;
+        position: absolute;
+        top: 0;
       }
 
-      .slider-2>.side-btns>div{
-          position:absolute;
-          top:0;
-          left:0;
-          width:30%;
-          height:100%;
-          cursor:pointer;
-          z-index:10;
-
+      /* 하단부 버튼 */
+      .dot {
+        cursor: pointer;
+        height: 15px;
+        width: 15px;
+        margin: 0 0px;
+        background-color: #ccc;
+        border-radius: 50%;
+        display: inline-block;
+        transition: background-color 0.6s ease;
       }
 
-      .slider-2>.side-btns>div>span:active{
-          transform:translatey(-40%);
-      }
-      .slider-2>.side-btns>div:last-child{
-          left:auto;
-          right:0;
+      .active, .dot:hover {
+        background-color: #717171;
       }
 
-      .slider-2>.side-btns>div>span{
-          position:absolute;
-          top:50%;
-          transform:translatey(-50%);
-          left:inherit;
-          right:inherit;
-          width:70px;
-          height:70px;
-          background-color:rgba(255,255,255,0.4);
-          border-radius:100%;
-          margin:0 10px;
-      }
-      .slider-2>.side-btns>div>span > i{
-          position:absolute;
-          top:50%;
-          left:50%;
-          font-size:3rem;
-          color:rgba(0,0,0,0.4);
-          transform:translateX(-70%) translateY(-50%);
+      /* Fading animation */
+      .fade {
+        -webkit-animation-name: fade;
+        -webkit-animation-duration: 1.5s;
+        animation-name: fade;
+        animation-duration: 1.5s;
       }
 
-      .slider-2>.side-btns>div:last-child>span > i {
-          transform:translateX(-20%) translateY(-50%);
+      @-webkit-keyframes fade {
+        from {opacity: .4}
+        to {opacity: 1}
       }
-    </style>
-    <script>
+
+      @keyframes fade {
+        from {opacity: .4}
+        to {opacity: 1}
+      }
+</style>
+<script>
       
       $(function() {
         // 보이기 | 숨기기
@@ -654,53 +637,61 @@
           return false;
         });
       });
-      
+      $(document).ready(function() {
+  slide();
+});
 
-      $('.slider-2 .page-nav > div').click(function() {
-    
-          var $this = $(this);
-          var $pagenav = $this.parent()
-          var $current = $pagenav.find('.active');
-          
-          $current.removeClass('active');
-          $this.addClass('active');
+var slideIndex = 0; //slide index
 
-          var index = $this.index();
-          var $슬라이더 = $this.closest('.slider-2');
-          
-          $슬라이더.find('.slides > div.active').removeClass('active');
-          $슬라이더.find('.slides > div').eq(index).addClass('active');
-          
-          
-      });
+// HTML 로드가 끝난 후 동작
+window.onload=function(){
+  showSlides(slideIndex);
 
-      $('.slider-2 > .side-btns > div:first-child').click(function() {
-          var $this = $(this);
-          var $slider = $this.closest('.slider-2');
-          
-          var $current = $slider.find('.page-nav > div.active');
-          var $post = $current.prev();
-          
-          if ( $post.length == 0 ) {
-              $post = $slider.find('.page-nav > div:last-child');
-          }
-          
-          $post.click();
-      });
+  // 배너 자동 슬라이드
+  var sec = 3000;
+  setInterval(function(){
+    slideIndex++;
+    showSlides(slideIndex);
 
-      $('.slider-2 > .side-btns > div:last-child').click(function() {
-          var $this = $(this);
-          var $slider = $this.closest('.slider-2');
-          
-          var $current = $slider.find('.page-nav > div.active');
-          var $post = $current.next();
-          
-          if ( $post.length == 0 ) {
-              $post = $slider.find('.page-nav > div:first-child');
-          }
-          
-          $post.click();
-      });
+  }, sec);
+}
+
+
+// Next/prev 버튼 controls
+function moveSlides(n) {
+  slideIndex = slideIndex + n
+  showSlides(slideIndex);
+}
+
+// img controls
+function currentSlide(n) {
+  slideIndex = n;
+  showSlides(slideIndex);
+}
+
+function showSlides(n) {
+
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot");
+  var size = slides.length;
+
+  if ((n+1) > size) {
+    slideIndex = 0; n = 0;
+  }else if (n < 0) {
+    slideIndex = (size-1);
+    n = (size-1);
+  }
+
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+  }
+
+  slides[n].style.display = "block";
+  dots[n].className += " active";
+}
     </script>
   </head>
   <body>
@@ -800,7 +791,7 @@
               <li>
                 <a href="#">
                   <div class="thumb">
-                    <i>1</i><img src="" alt="item1" />
+                    <i>1</i><img src="./img/sample_thumb.jpg" alt="item1" />
                   </div>
                   <h2>상품명</h2>
                   <div class="org_price">
@@ -814,7 +805,7 @@
               <li>
                 <a href="#">
                   <div class="thumb">
-                    <i>2</i><img src="" alt="item1" />
+                    <i>2</i><img src="./img/sample_thumb.jpg" alt="item1" />
                   </div>
                   <article>
                     <h2>상품명</h2>
@@ -831,7 +822,7 @@
               <li>
                 <a href="#">
                   <div class="thumb">
-                    <i>3</i><img src="" alt="item1" />
+                    <i>3</i><img src="./img/sample_thumb.jpg" alt="item1" />
                   </div>
                   <article>
                     <h2>상품명</h2>
@@ -848,7 +839,7 @@
               <li>
                 <a href="#">
                   <div class="thumb">
-                    <i>4</i><img src="" alt="item1" />
+                    <i>4</i><img src="./img/sample_thumb.jpg" alt="item1" />
                   </div>
                   <article>
                     <h2>상품명</h2>
@@ -865,7 +856,7 @@
               <li>
                 <a href="#">
                   <div class="thumb">
-                    <i>5</i><img src="" alt="item1" />
+                    <i>5</i><img src="./img/sample_thumb.jpg" alt="item1" />
                   </div>
                   <article>
                     <h2>상품명</h2>
@@ -885,29 +876,53 @@
         <section>
           <!-- 슬라이더 영역 -->
           <section class="slider">
-            <div class="slider-2">
-    
-            <div class="side-btns">
-               <div><span><i class="fas fa-caret-left"></i></i></span></div>
-               <div><span><i class="fas fa-caret-right"></i></span></div>
-           </div>
-           
-           <div class="slides">
-               <div class="active" style="background-image:url(./img/slider_item1.jpg);"></div>
-               <div style="background-image:url(./img/slider_item2.jpg);"></div>
-               <div style="background-image:url(./img/slider_item3.jpg);"></div>
-               <div style="background-image:url(./img/slider_item4.jpg);"></div>
-               <div style="background-image:url(./img/slider_item5.jpg);"></div>
-           </div>
-           
-           <div class="page-nav">
-               <div class="active"></div>
-               <div></div>
-               <div></div>
-               <div></div>
-               <div></div>
-           </div>
-       </div>
+            <div class="slideshow-container">
+
+              <!-- 메인화면 베너 이미지 및 이미지 number -->
+              <div class="mySlides fade">
+                <div class="numbertext">1 / 5</div>
+                <img src="./img/slider_item1.jpg" style="width:100%">
+                <div class="text">K마켓</div>
+              </div>
+        
+              <div class="mySlides fade">
+                <div class="numbertext">2 / 5</div>
+                <img src="./img/slider_item2.jpg" style="width:100%">
+                <div class="text">K마켓</div>
+              </div>
+        
+              <div class="mySlides fade">
+                <div class="numbertext">3 / 5</div>
+                <img src="./img/slider_item3.jpg" style="width:100%">
+                <div class="text">K마켓</div>
+              </div>
+        
+              <div class="mySlides fade">
+                <div class="numbertext">4 / 5</div>
+                <img src="./img/slider_item4.jpg" style="width:100%">
+                <div class="text">K마켓</div>
+              </div>
+        
+              <div class="mySlides fade">
+                <div class="numbertext">5 / 5</div>
+                <img src="./img/slider_item5.jpg" style="width:100%">
+                <div class="text">K마켓</div>
+              </div>
+        
+              <!-- 다음 이전 버튼 -->
+              <a class="prev" onclick="moveSlides(-1)">&#10094;</a>
+              <a class="next" onclick="moveSlides(1)">&#10095;</a>
+            </div>
+            <br/>
+        
+            <!-- 하단부 버튼 -->
+            <div style="text-align:center">
+              <span class="dot" onclick="currentSlide(0)"></span>
+              <span class="dot" onclick="currentSlide(1)"></span>
+              <span class="dot" onclick="currentSlide(2)"></span>
+              <span class="dot" onclick="currentSlide(3)"></span>
+              <span class="dot" onclick="currentSlide(4)"></span>
+            </div>
           </section>
           <!-- 히트상품 영역 -->
           <section class="hit">
