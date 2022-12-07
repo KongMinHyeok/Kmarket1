@@ -537,14 +537,17 @@ footer p > strong {
 #cs > .notice > .list > article > table tr:hover {
     background-color: #f7f7f7;
 }
+
 #cs > .notice > .list > article > table td {
     padding: 16px;
     border-bottom: 1px solid #ccc;
 }
+
 #cs > .notice > .list > article > table td:last-child {
     text-align: center;
     font-size: 14px;
 }
+
 #cs > .notice > .list > article > table a {
     font-size: 16px;
 }

@@ -460,6 +460,7 @@ footer {
     border-top: 1px solid #e9e9e9;
     box-sizing: border-box;
 }
+
 footer > ul {
     width: 1200px;
     height: 39px;
@@ -469,11 +470,13 @@ footer > ul {
     box-sizing: border-box;
     text-align: center;
 }
+
 footer > ul > li {
     display: inline-block;
     border-right: 1px solid #d7d7d7;
     padding: 0 10px;
 }
+
 footer > ul > li:first-child {
     border-left: 1px solid #d7d7d7;
 }
@@ -530,10 +533,12 @@ footer p > strong {
     height: auto;
     margin-bottom: 26px;
 }
+
 #cs > div > section > article > nav > h1 {
     font-size: 26px;
     font-weight: bold;
 }
+
 #cs > div > section > article > nav > h2 {
     font-size: 20px;
 }

@@ -956,15 +956,18 @@ footer p > strong {
   #cs > .qna > section > aside > ul > li {
     margin-bottom: 16px;
   }
+  
   #cs > .qna > section > aside > ul > li > a {
     font-size: 16px;
     font-weight: bold;
     color: #9e9e9e;
   }
+
   #cs > .qna > section > aside > ul > li > a:hover {
     color: #111;
     text-decoration: underline;
   }
+
   #cs > .qna > section > aside > ul > .on > a {
     color: #111;
     text-decoration: underline;
@@ -980,6 +983,7 @@ footer p > strong {
     border-collapse: collapse;
     border-top: 2px solid #111;
   }
+
   #cs > .qna > .write > article table tr {
     width: 100%;
     height: 26px;
