@@ -3,36 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>케이마켓::관리자</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://kit.fontawesome.com/20962f3e4b.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="./css/common.css">
-    <style>
-        main h4{
-            font-size: 15px;
-            font-weight: bold;
-        }
-
-        #admin-index > article{
-            width: 100%;
-            height: auto;
-            overflow: hidden;
-        }
-        #admin-index > article > table{
-            width: 100%;
-            margin-top: 6px;
-            margin-bottom: 16px;
-            border-collapse: collapse;
-            border-top: 2px solid #8798a3;
-        }
-        #admin-index > article > table th{
-            background: #fafafa; 
-        }
-        #admin-index > article > table tr > th{
-            width: 20%;
-            border: 1px solid #e5e5e5;
-            padding: 6px 6px 6px 12px;
-            color: #111;
-            text-align: center;
-        }
-    </style>
+    <link rel="stylesheet" href="./css/admin.css">
+    <script src="./js/gnb.js"></script>
 </head>
 <body>
     <div id="admin-wrapper">
@@ -50,7 +28,109 @@
             </div>
         </header>
         <main>
-            <aside></aside>
+            <aside>
+                <ul id="gnb">
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-cogs" aria-hidden="true"></i>
+                            환경설정
+                        </a>
+                        <ol>
+                            <li>
+                                <a href="#">기본환경설정</a>
+                            </li>
+                            <li>
+                                <a href="#">배너관리</a>
+                            </li>
+                        </ol>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-store" aria-hidden="true"></i>
+                            상점관리
+                        </a>
+                        <ol>
+                            <li>
+                                <a href="#">판매자현황</a>
+                            </li>
+                            <li>
+                                <a href="#">재고관리</a>
+                            </li>
+                        </ol>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-users" aria-hidden="true"></i>
+                            회원관리
+                        </a>
+                        <ol>
+                            <li>
+                                <a href="#">회원현황</a>
+                            </li>
+                            <li>
+                                <a href="#">포인트관리</a>
+                            </li>
+                            <li>
+                                <a href="#">비회원관리</a>
+                            </li>
+                            <li>
+                                <a href="#">접속자집계</a>
+                            </li>
+                        </ol>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-box-open" aria-hidden="true"></i>
+                            상품관리
+                        </a>
+                        <ol>
+                            <li>
+                                <a href="#">상품현황</a>
+                            </li>
+                            <li>
+                                <a href="#">상품등록</a>
+                            </li>
+                            <li>
+                                <a href="#">재고관리</a>
+                            </li>
+                        </ol>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-credit-card" aria-hidden="true"></i>
+                            주문관리
+                        </a>
+                        <ol>
+                            <li>
+                                <a href="#">주문현황</a>
+                            </li>
+                            <li>
+                                <a href="#">매출현황</a>
+                            </li>
+                            <li>
+                                <a href="#">결제관리</a>
+                            </li>
+                            <li>
+                                <a href="#">배송관리</a>
+                            </li>
+                        </ol>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            게시판관리
+                        </a>
+                        <ol>
+                            <li>
+                                <a href="#">게시판현황</a>
+                            </li>
+                            <li>
+                                <a href="#">고객문의</a>
+                            </li>
+                        </ol>
+                    </li>
+                </ul>
+            </aside>
             <section id="admin-index">
                 <nav>
                     <h3>관리자 메인</h3>
@@ -211,15 +291,82 @@
                     </table>
                 </article>
                 <h4>주문 업무현황</h4>
-                <article></article>
+                <article>
+                    <table>
+                        <tr>
+                            <th>
+                                <strong>입금대기(건)</strong>
+                                <span>100</span>
+                            </th>
+                            <th>
+                                <strong>배송준비(건)</strong>
+                                <span>100</span>
+                            </th>
+                            <th>
+                                <strong>취소요청(건)</strong>
+                                <span>100</span>
+                            </th>
+                            <th>
+                                <strong>교환요청(건)</strong>
+                                <span>100</span>
+                            </th>
+                            <th>
+                                <strong>반품요청(건)</strong>
+                                <span>100</span>
+                            </th>
+                        </tr>
+                    </table>
+                </article>
                 <div>
                     <div>
                         <h4>공지사항</h4>
-                        <article></article>
+                        <article>
+                            <p>
+                                <span>[공지] 케이마켓 판매자님들은 주기적인 비밀번호 변경을 하세요.케이마켓 판매자님들은 주기적인 비밀번호 변경을 하세요.</span>
+                                <span>20-07-08 12:23</span>
+                            </p>
+                            <p>
+                                <span>[공지] 1주년 기념 신규가입 사은품 안내</span>
+                                <span>20-07-08 12:23</span>
+                            </p>
+                            <p>
+                                <span>[공지] 1주년 기념 신규가입 사은품 안내</span>
+                                <span>20-07-08 12:23</span>
+                            </p>
+                            <p>
+                                <span>[공지] 1주년 기념 신규가입 사은품 안내</span>
+                                <span>20-07-08 12:23</span>
+                            </p>
+                            <p>
+                                <span>[공지] 1주년 기념 신규가입 사은품 안내</span>
+                                <span>20-07-08 12:23</span>
+                            </p>
+                        </article>
                     </div>
                     <div>
                         <h4>고객문의</h4>
-                        <article></article>
+                        <article>
+                            <p>
+                                <span>[문의] 상품이 잘못 왔습니다.</span>
+                                <span>20-07-08 12:23</span>
+                            </p>
+                            <p>
+                                <span>[문의] 안녕하세요. 주문자 입니다. 구매한 상품에 문제가 있어서 이렇게 문의글을 남깁니다.</span>
+                                <span>20-07-08 12:23</span>
+                            </p>
+                            <p>
+                                <span>[문의] 상품이 1개 잘못 왔습니다.</span>
+                                <span>20-07-08 12:23</span>
+                            </p>
+                            <p>
+                                <span>[문의] 상품이 1개 잘못 왔습니다.</span>
+                                <span>20-07-08 12:23</span>
+                            </p>
+                            <p>
+                                <span>[문의] 상품이 1개 잘못 왔습니다.</span>
+                                <span>20-07-08 12:23</span>
+                            </p>
+                        </article>
                     </div>
                 </div>
             </section>
