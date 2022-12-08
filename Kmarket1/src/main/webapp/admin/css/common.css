@@ -1,0 +1,199 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    font: 12px 고딕;
+    }
+    div, nav{display: block;}
+    form{
+        display: block;
+        margin-top: 0cm;
+    }
+    ul, ol {list-style: none;}
+    a{
+        text-decoration: none;
+        color: #111;
+    }
+    input, textarea{outline:none}
+
+/* header */
+header{
+    width: 100%;
+    height: 120px;
+    background-image: url(../img/admin_bg_header.jpg);
+}
+header > div{
+    width: 1400px;
+    height: 100%;
+    margin: 0 auto;
+}
+header > div > .logo{
+    float: left;
+    margin-top: 46px;
+}
+header > div > p{
+    float: right;
+    margin-top: 46px;
+    color: #fff;
+}
+header > div > p > span{margin-right: 16px;}
+header > div > p > a{color: #fff;}
+
+/* main */
+main{
+    width: 1400px;
+    height: auto;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+main > section{
+    float: right;
+    width: 1130px;
+    min-height: 600px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+main > section > nav{
+    position: relative;
+    width: 100%;
+    height: 46px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #c0c0c0;
+    box-sizing: border-box;
+}
+main > section > nav > h3{
+    position: absolute;
+    left: 0;
+    bottom: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+main > section > nav > p{
+    position: absolute;
+    right: 0;
+    bottom: 10px;
+}
+main > section > nav > p > strong{
+    font-weight: bold;
+}
+
+main table {
+    width: 100%;
+    border-collapse: collapse;
+}
+main table tr > td {
+    border-top: 1px solid #e6e6e6;
+    border-bottom: 1px solid #e6e6e6;
+    padding: 10px;
+    text-align: left;
+}
+main table tr > td:nth-child(1) {
+    width: 160px;
+    border-top: 1px solid #e6e6e6;
+    border-bottom: 1px solid #e6e6e6;
+    background: #f6f6f6;
+    padding: 10px;
+    text-align: left;
+}
+
+select{
+    width: 150px;
+    padding: 6px;
+    border: 1px solid #959595;
+    font-size: 13px;
+    background-color: #fefefe;
+    colors: #333;
+    box-sizing: border-box;
+}
+input{
+    width: 200px;
+    padding: 6px;
+    border: 1px solid #959595;
+    font-size: 13px;
+    background-color: #fefefe;
+    color: #333;
+    vertical-align: middle;
+    box-sizing: border-box;
+}
+main table span{
+    display: block;
+}
+
+p.ico{
+    width: 100%;
+    height: 58px;
+    margin-top: 20px;
+    border-width: 1px;
+    border-style: solid;
+    padding-left: 50px;
+    line-height: 58px;
+    box-sizing: border-box;
+}
+
+/* footer */
+footer{
+    width: 100%;
+    height: 60px;
+    background: #0d3a46;
+}
+footer > div{
+    width: 1400px;
+    height: 100%;
+    margin: 0 auto;
+}
+footer > div > p{
+    padding-top: 22px;
+    color: #fff;
+    font-weight: bold;
+    box-sizing: border-box;
+}
+
+/* aside */
+main > aside{
+    float: left;
+    width: 270px;
+    height: auto;
+    background: url(../img/admin_bg_aside.jpg);
+    border-left: 1px solid #c0c0c0;
+    box-sizing: border-box;
+}
+#gnb{
+    width: 100%;
+    height: auto;
+}
+#gnb > li{
+    width: 100%;
+    min-height: 66px;
+    border-top: 1px solid #c0c0c0;
+    box-sizing: border-box;
+}
+#gnb > li > a{
+    display: block;
+    width: 100%;
+    height: 66px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #222;
+    line-height: 66px;
+    text-indent: 10px;
+}
+#gnb > li > a > i{
+    margin-right: 5px;
+    font-size: 20px;
+}
+#gnb ol{
+    display: none;
+    width: 100%;
+    height: auto;
+}
+#gnb ol > li{
+    width: 100%;
+    height: 32px;
+}
+#gnb ol > li > a{
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-indent: 52px;
+}
+#gnb > li:last-child{border-bottom: 1px solid #c0c0c0;}
