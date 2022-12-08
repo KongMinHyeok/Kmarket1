@@ -80,16 +80,145 @@ main > aside > .category ol {
     z-index: 10000;
 }
 
-    main > aside > .category ol > li {
-    width: 100%;
-    height: 24px;
-    padding: 10px;
+main > aside > .category ol > li {
+width: 100%;
+height: 24px;
+padding: 10px;
+box-sizing: border-box;
+}
+main > aside > .category ol > li > a:hover {
+color: #41ab47;
+text-decoration: underline;
+}
+
+/* aside index 복붙해옴*/
+main > aside > .best {
+    width: 215px;
+    height: auto;
+    border: 1px solid #dbdbdb;
     box-sizing: border-box;
+    box-shadow: 0 0 5px rgba(55, 55, 5, 0.2);
     }
-    main > aside > .category ol > li > a:hover {
-    color: #41ab47;
+
+    main > aside > .best > h1 {
+    font-size: 14px;
+    font-weight: bold;
+    color: #111;
+    margin: 6px;
+    }
+    main > aside > .best > h1 > i {
+    margin-right: 6px;
+    font-size: 18px;
+    }
+
+    main > aside > .best > ol {
+    width: 100%;
+    }
+    main > aside > .best > ol > li {
+    width: 100%;
+    height: 100%;
+    padding: 0 6px;
+    box-sizing: border-box;
+    margin-bottom: 16px;
+    }
+
+    main > aside > .best > ol > li > a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    }
+
+    main > aside > .best > ol > li > a:hover h2 {
     text-decoration: underline;
     }
+    main > aside > .best > ol > li > a > .thumb {
+    float: left;
+    position: relative;
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    margin: 0 auto;
+    box-sizing: border-box;
+    }
+
+    main > aside > .best > ol > li:first-child > a > .thumb {
+    position: relative;
+    float: none;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    margin: 0 auto;
+    }
+    main > aside > .best > ol > li > a > .thumb > i {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: inline-block;
+    width: 16px;
+    height: 20px;
+    font-size: 14px;
+    padding: 0;
+    color: #ef3e42;
+    border-bottom: 1px solid #ef3e42;
+    font-weight: bold;
+    font-style: italic;
+    text-align: center;
+    line-height: 18px;
+    }
+    main > aside > .best > ol > li:first-child > a > .thumb > i {
+    width: 35px;
+    height: 26px;
+    }
+
+    main > aside > .best > ol > li > a > .thumb > img {
+    width: 100%;
+    }
+
+    main > aside > .best > ol > li > a > article {
+    float: left;
+    width: 148px;
+    padding-left: 6px;
+    box-sizing: border-box;
+    }
+
+    main > aside > .best > ol > li > a h2 {
+    margin-top: 4px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    }
+    main > aside > .best > ol > li > a .org_price {
+    }
+
+    main > aside > .best > ol > li > a .org_price > del {
+    font-size: 10px;
+    color: #aaa;
+    }
+    main > aside > .best > ol > li > a .org_price > span {
+    color: #eb000a;
+    font-size: 10px;
+    }
+    main > aside > .best > ol > li > a .org_price > span::after {
+    content: "↓";
+    }
+
+    main > aside > .best > ol > li > a .dis_price > ins {
+    font-size: 14px;
+    text-decoration: none;
+    }
+
+    main > aside > .best > ol > li > a .dis_price > span {
+    display: inline-block;
+    font-size: 0;
+    vertical-align: text-bottom;
+    width: 55px;
+    height: 13px;
+    background: url("./img/ico_freeshipping.gif") no-repeat;
+    }
+
+
+
 main > section {
     float: right;
     width: 985px;
@@ -1235,3 +1364,168 @@ footer p > strong {
       left: -6px;
   }
 /*---------------------order 끝------------------------*/
+
+/*-------------------complete 시작---------------------*/
+#product > .complete table {
+    width: 100%;  
+    border-collapse: collapse;
+    border-spacing: 0;
+    border-top: 2px solid #000;
+}
+
+#product > .complete table tr {
+    border-bottom: 1px solid #d3d3d3;
+}
+
+#product > .complete > .message > h2 {
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+    color: #555;
+    padding: 10px;
+}
+
+#product > .complete > .message > h2 > i {
+    font-size: 26px;
+}
+#product > .complete > .message > p {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px;
+    text-align: center;
+}
+
+#product > .complete > article{
+    margin-top: 16px;
+}
+#product > .complete > article > h1 {
+    font-weight: bold;
+    font-size: 14px;
+    color: #111;
+    padding: 6px 0;  
+}
+
+#product > .complete > .info > table tr > th {
+    padding: 12px 0;    
+    background: #fff;
+    color: #383838;
+    font-size: 0.95em;
+    text-align: center;
+    letter-spacing: -0.1em;
+}
+#product > .complete > .info > table tr > th:last-child {
+    width: 200px;
+}      
+
+#product > .complete > .info table tr > td {
+    text-align: center;
+}      
+
+#product > .complete > .info table tr > td:last-child {
+    color:#ff006c;
+    font-weight: bold;
+    text-align: right;
+}
+#product > .complete > .info table tr > td > article {
+    overflow: hidden;
+    padding: 6px;
+}
+#product > .complete > .info table tr > td img {
+    float: left;
+    width: 80px;
+}
+#product > .complete > .info table tr > td div {
+    float: left;
+    margin-left: 10px;
+    text-align: left;
+}
+#product > .complete > .info table tr > td div > p {
+    text-align: left;
+    color: #777;
+    margin-top: 4px;
+}
+#product > .complete > .info .total > td > table {border: none;}
+#product > .complete > .info .total > td > table tr {border: none;}
+#product > .complete > .info .total > td > table tr:last-child span {
+    font-weight: bold;
+    color: #ff006c;
+}
+#product > .complete > .info .total > td > table td {
+    text-align: right;        
+    color: #111;
+    background: #f2f2f2;
+    font-weight: normal;
+    border-bottom: none;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+
+#product > .complete > .order > table > tbody > tr > td{
+    box-sizing: border-box;
+    padding: 10px;
+}
+#product > .complete > .order > table > tbody > tr > td:nth-child(1) {
+    width: 160px;
+    background: #F2F2F2;
+}
+#product > .complete > .order > table > tbody > tr > td:nth-child(2) {
+    width: auto;
+}
+#product > .complete > .order > table > tbody > tr > td:nth-child(3) {
+    width: 100px;
+    box-sizing: border-box;
+    text-align: right;
+    vertical-align: top;
+    background: #F2F2F2;
+}
+#product > .complete > .order > table > tbody > tr > td:nth-child(4) {
+    width: 100px;
+    box-sizing: border-box;
+    text-align: right;
+    /* text수직정렬 */
+    vertical-align: top;
+    font-weight: bold;
+    color: #ff006c;
+    background: #F2F2F2;
+}
+#product > .complete > .order > table > tbody > tr > td:nth-child(4) > span {
+    color: #ff006c;
+    font-weight: bold;
+}
+
+#product > .complete > .delivery > table > tbody > tr > td {
+    padding: 10px;
+    box-sizing: border-box;
+}
+#product > .complete > .delivery > table > tbody > tr > td:nth-child(1) {
+    width: 160px;
+    background: #F2F2F2;
+}
+#product > .complete > .delivery > table > tbody > tr > td:nth-child(3) {
+    width: 200px;
+    box-sizing: border-box;
+    text-align: left;
+    background: #F2F2F2;
+}
+
+#product > .complete > .alert {
+    padding: 10px 10px 10px 24px;
+    margin: 16px 0px 0px;
+    background: #f7f7f7;
+    color: #999999;
+}
+#product > .complete > .alert > h1 {
+    margin: 0 0 0 -12px;
+}
+#product > .complete > .alert > ul {
+    list-style: inherit;
+}
+#product > .complete > .alert > ul > li {
+    line-height: 20px;
+}
+#product > .complete > .alert > ul > li > span {
+    position: relative;
+    left: -6px;
+}
+/*-------------------complete 끝--------------*/

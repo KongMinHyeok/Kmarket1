@@ -28,7 +28,9 @@ etc1 INT,
 etc2 INT,
 etc3 VARCHAR(10),
 etc4 VARCHAR(20),
-etc5 VARCHAR(30)
+etc5 VARCHAR(30),
+sessId VARCHAR(20) NOT NULL,
+sessDateLimit VARCHAR(20) NOT NULL
 );
 
 CREATE TABLE km_member_point(
