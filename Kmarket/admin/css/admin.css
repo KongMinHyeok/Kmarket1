@@ -90,5 +90,120 @@ main h4{
 #admin-index > div > div > article > p > span:nth-child(2){float: right;}
 
 /* admin-list */
+#admin-product-register {}
+#admin-product-register input[type=submit] {
+    float: right;
+    width: 100px;
+}
+
+
+
+/* ìƒí’ˆëª©ë¡ : product-list */
+#admin-product-list {}
+#admin-product-list > section > div  {
+    margin-bottom: 10px;
+}
+
+#admin-product-list > section > table  {
+    border-top: 2px solid #8798a3;
+}
+#admin-product-list > section > table  tr > th{
+    padding: 10px 0;
+    background: #f6f6f6;
+}
+#admin-product-list > section > table  tr > td {
+    background: #fff;
+    text-align: center;
+    box-sizing: border-box;
+}
+#admin-product-list > section > table  tr > td:nth-child(1) {width: 20px;}
+#admin-product-list > section > table  tr > td:nth-child(2) {width: 80px;}
+#admin-product-list > section > table  tr > td:nth-child(3) {width: 80px;}
+#admin-product-list > section > table  tr > td:nth-child(4) {width: auto; text-align: left;}
+#admin-product-list > section > table  tr > td:nth-child(5) {width: 80px;}
+#admin-product-list > section > table  tr > td:nth-child(6) {width: 80px;}
+#admin-product-list > section > table  tr > td:nth-child(7) {width: 80px;}
+#admin-product-list > section > table  tr > td:nth-child(8) {width: 80px;}
+#admin-product-list > section > table  tr > td:nth-child(9) {width: 80px;}
+#admin-product-list > section > table  tr > td:nth-child(10) {width: 80px;}
+#admin-product-list > section > table  tr > td:nth-child(11) {width: 100px;}
+
+#admin-product-list > section > table img.thumb {width: 60px;}
+
+#admin-product-list > section input[type=button] {
+    float: left;
+    width: 100px;
+    margin-top: 10px;
+}
+
+#admin-product-list .paging {
+    width: 100%;
+    padding: 30px 0;
+    text-align: center;
+}
+
+#admin-product-list .paging > span > a {
+    color: #777;
+    font-family: "ë‹ì›€", Dotum, Tahoma, sans-serif;
+    font-size: 11px;
+    letter-spacing: -1px;
+}
+  
+#admin-product-list .paging > span > a:hover {
+    text-decoration: underline;
+}
+  
+#admin-product-list .paging > .num > a {
+    display: inline-block;
+    min-width: 14px;
+    margin: 0 2px;
+    padding: 8px 9px;
+    border: 1px solid #c4c4c4;
+    background: url() 0 0 repeat-x;
+    color: #000;
+    font-family: Tahoma;
+    font-size: 12px;
+    text-align: center;
+    text-decoration: none;
+}
+#admin-product-list .paging > .num > a:hover {
+    border: 1px solid #454c5f;
+    text-decoration: none;
+}
+#admin-product-list .paging > .num > a.on {
+    color: #fe434c;
+    font-weight: bold;
+}
+
+input[type=checkbox]{
+    width: auto;
+    margin-right: 6px;
+}
+
+p.info{
+    border-color: #8497bf;
+    background: #a8b2c5 url(../img/admin_ico_info.png) no-repeat scroll 15px 16px;
+}
 
 /* admin-register */
+main > section > article{
+    overflow: hidden;
+}
+main > section > article section{
+    margin-bottom: 16px;
+}
+main h4{
+    font-size: 15px;
+    font-weight: bold;
+}
+main > section > article section > p{
+    background: #eaeaea;
+    padding: 10px;
+    margin: 10px 0;
+    box-sizing: border-box;
+}
+
+p.alert{
+    border-color: #fdd845;
+    background: #fff6bf url(../img/admin_ico_alert.png) no-repeat scroll 15px 16px;
+}
