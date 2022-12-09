@@ -13,4 +13,10 @@ public class SQL {
 	public static final String UPDATE_MEMBER_FOR_SESSION_OUT = "update `km_member` set `sessId`=NULL, `sessDateLimit`=NULL where `uid`=?";
 	
 	// delete
+	
+	
+	
+	
+	// 메인화면
+	public static final String SELECT_CATE1 = "select * from `km_product_cate1` where `c1Name`=?";
 }

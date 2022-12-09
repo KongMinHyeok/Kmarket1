@@ -1,6 +1,8 @@
 package kr.co.kmarket1.service;
 
 import kr.co.kmarket1.dao.MemberDAO;
+import kr.co.kmarket1.dao.ProductDAO;
+import kr.co.kmarket1.vo.Cate1VO;
 import kr.co.kmarket1.vo.MemberVO;
 
 public enum MemberService{
@@ -25,4 +27,11 @@ public enum MemberService{
 		dao.updateMemberForSessionOut(uid);
 	}
 	// delete
+	
+	
+	
+	
+	
+	
+
 }

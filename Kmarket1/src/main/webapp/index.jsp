@@ -1,72 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>케이마켓::대한민국 1등 온라인 쇼핑몰</title>
-    <link rel="shortcut icon" type="image/x-icon" href="/Kmarket/img/favicon.ico">
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://kit.fontawesome.com/20962f3e4b.js" crossorigin="anonymous"></script>
-    <script src="./js/index.js"></script>
-  </head>
-  <body>
-    <div id="wrapper">
-      <header>
-        <div class="top">
-          <div>
-            <a href="/Kmarket1/member/login.jsp">로그인</a>
-            <a href="/Kmarket1/member/join.jsp">회원가입</a>
-            <a href="/Kmarket1/member/login.jsp">마이페이지</a>
-            <a href="/Kmarket1/product/cart.jsp"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;장바구니</a>
-          </div>
-        </div>
-        <div class="logo">
-          <div>
-            <a href="#"><img src="./img/header_logo.png" alt="로고" /></a>
-            <form action="#">
-              <input type="text" name="search" />
-              <button><i class="fa fa-search"></i></button>
-            </form>
-          </div>
-        </div>
-        <div class="menu">
-          <div>
-            <ul>
-              <li><a href="#">히트상품</a></li>
-              <li><a href="#">추천상품</a></li>
-              <li><a href="#">최신상품</a></li>
-              <li><a href="#">인기상품</a></li>
-              <li><a href="#">할인상품</a></li>
-            </ul>
-            <ul>
-              <li><a href="#">공지사항</a></li>
-              <li><a href="#">자주묻는질문</a></li>
-              <li><a href="#">문의하기</a></li>
-              <li><a href="#">고객센터</a></li>
-            </ul>
-          </div>
-        </div>
-      </header>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:include page="./_header.jsp"/>
       <main>
         <!-- 카테고리/베스트 상품 영역 -->
         <aside>
           <!-- 카테고리 -->
           <ul class="category">
             <li><i class="fa fa-bars" aria-hidden="true"></i>카테고리</li>
+            <c:forEach var="cate1" items="${cate1}">
             <li>
               <a href="#">
-                <i class="fas fa-tshirt"></i>패션·의류·뷰티<i class="fas fa-angle-right"></i>
+                <i class="fas fa-tshirt"></i>${cate1.c1Name}<i class="fas fa-angle-right"></i>
               </a>
-              <ol>
-                <li><a href="#">남성의류</a></li>
-                <li><a href="#">여성의류</a></li>
-                <li><a href="#">잡화</a></li>
-                <li><a href="#">뷰티</a></li>
-              </ol>
             </li>
+            </c:forEach>
             <li>
               <a href="#">
                 <i class="fas fa-laptop"></i>가전·디지털<i class="fas fa-angle-right"></i>
@@ -804,32 +751,4 @@
           </section>
         </section>
       </main>
-      <footer>
-        <ul>
-          <li><a href="#">회사소개</a></li>
-          <li><a href="#">서비스이용약관</a></li>
-          <li><a href="#">개인정보처리방침</a></li>
-          <li><a href="#">전자금융거래약관</a></li>
-        </ul>
-        <div>
-          <p><img src="./img/footer_logo.png" alt="로고" /></p>
-          <p>
-            <strong>(주)KMARKET</strong><br />
-            부산시 강남구 테헤란로 152 (역삼동 강남파이낸스센터)<br />
-            대표이사 : 홍길동<br />
-            사업자등록번호 : 220-81-83676 사업자정보확인<br />
-            통신판매업신고 : 강남 10630호 Fax : 02-589-8842
-          </p>
-          <p>
-            <strong>고객센터</strong><br />
-            Tel : 1234-5678 (평일 09:00~18:00)<br />
-            스마일클럽/SVIP 전용 : 1522-5700 (365일 09:00~18:00)<br />
-            경기도 부천시 원미구 부일로 223(상동) 투나빌딩 6층<br />
-            Fax : 051-123-4567 | Mail : kmarket@kmarket.co.kr<br />
-          </p>
-        </div>
-      </footer>
-      <button type="button" id="top">상단이동</button>
-    </div>
-  </body>
-</html>
+<jsp:include page="./_footer.jsp"/>
