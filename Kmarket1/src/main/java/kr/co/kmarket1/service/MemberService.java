@@ -16,6 +16,12 @@ public enum MemberService{
 	public MemberVO selectMemberBySessId(String sessId) {
 		return dao.selectMemberBySessId(sessId);
 	}
+	public String[] selectTerms() {
+		return dao.selectTerms();
+	}
+	public int selectCountUid(String uid) {
+		return dao.selectCountUid(uid);
+	}
 	
 	// update
 	public void updateMemberForSession(String uid, String sessId) {

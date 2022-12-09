@@ -1,11 +1,99 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:include page="/member/_header.jsp"/>
+<script>
+// 정규표현식
+let idReg = /^[a-zA-Z](?=.*[a-zA-Z])(?=.*[0-9]).{4,12}$/g; // 영문, 숫자 조합 4~12자리
+let passReg = /^.*(?=^.{8,12}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/; // 영문, 숫자, 특문 조합 8~12자리
+let nameReg = /^[가-힣]{2,10}$/;
+let emailReg = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+
+// 중복 및 유효성 검증 변수
+let isUidOk = false;
+let isPassOk = false;
+let isNameOk = false;
+let isEmailOk = false;
+
+	$(function(){
+		// 아이디
+		$('input[name=km_uid]').focusout(function(){
+			let uid = $(this).val();
+			
+			// 유효성 확인
+			if(!uid.match(idReg)){
+				$('.msgId').css('color', 'red').text('영문, 숫자로 4~12자까지 설정해 주세요');
+				return;
+			}
+			
+			// 중복 검사
+			$.ajax({
+				url: '/Kmarket1/member/checkUid.do',
+				method: 'GET',
+				data: {"uid":uid},
+				dataType: 'json',
+				success: function(data){
+					if(data.result < 1){
+						isUidOk = true;
+						$('.msgId').css('color', 'black').text('사용 가능한 아이디입니다');
+					}
+				}
+			});
+		});
+		
+		// 비밀번호
+		$('input[name=km_pass2]').focusout(function(){
+			let pass1 = $('input[name=km_pass1]').val();
+			let pass2 = $(this).val();
+			
+			if(pass1 == pass2){
+				// 유효성 검사
+				if(!pass2.match(passReg)){
+					$('.msgPass2').css('color', 'red').text('영문, 숫자, 특수문자를 조합하여 8~12자까지 설정해 주세요');
+					return;
+				}else{
+					isPassOk = true;
+					$('.msgPass2').css('color', 'black').text('사용 가능한 비밀번호입니다');
+				}
+			}else{
+				$('.msgPass2').css('color', 'red').text('비밀번호가 일치하지 않습니다');
+				return;
+			}
+		});
+		
+		// 이름
+		$('input[name=km_name]').focusout(function(){
+			let name = $(this).val();
+			
+			if(!name.match(nameReg)){
+				$('.msgName').css('color', 'red').text('한글 이름만 입력 가능합니다');
+			}else{
+				isNameOk = true;
+				$('.msgName').css('color', 'black').text('사용 가능한 이름입니다');
+			}
+		});
+		
+		// 이메일 유효성 검사
+		$('input[name=km_email]').focusout(function(){
+			let email = $(this).val();
+			
+			if(!email.match(emailReg)){
+				$('.msgEmail').css('color', 'red').text('유효한 이메일 주소가 아닙니다');
+			}else{
+				isEmailOk = true;
+				$('.msgEmail').css('color', 'black').text('사용 가능한 이메일입니다');
+			}
+		});
+		
+		// 이메일 인증
+		
+		// 휴대폰
+	});
+</script>
         <main id="member">
             <div class="register">
                 <nav>
                     <h1>일반 회원가입</h1>
                 </nav>
-                <form action="#" method="post">
+                <form action="/Kmarket1/member/register.do" method="post">
                     <section>
                         <table>
                             <caption>필수 정보입력</caption>
@@ -25,7 +113,7 @@
                                     비밀번호
                                 </th>
                                 <td>
-                                    <input type="password" name="km_pass" placeholder="비밀번호를 입력" required>
+                                    <input type="password" name="km_pass1" placeholder="비밀번호를 입력" required>
                                     <span class="msgPass">영문, 숫자, 특수문자를 조합하여 8~12자까지 설정해 주세요.</span>
                                 </td>
                             </tr>
@@ -35,8 +123,8 @@
                                     비밀번호확인
                                 </th>
                                 <td>
-                                    <input type="password" name="km_pass" placeholder="비밀번호를 확인" required>
-                                    <span class="msgPass">비밀번호 재입력</span>
+                                    <input type="password" name="km_pass2" placeholder="비밀번호를 확인" required>
+                                    <span class="msgPass2">비밀번호 재입력</span>
                                 </td>
                             </tr>
                         </table>
@@ -51,6 +139,7 @@
                                 </th>
                                 <td>
                                     <input type="text" name="km_name" placeholder="이름을 입력" required>
+                                    <span class="msgName"></span>
                                 </td>
                             </tr>
                             <tr>
@@ -64,7 +153,7 @@
                                         남
                                     </label>
                                     <label>
-                                        <input type="radio" name="gender" value="2">
+                                        <input type="radio" name="km_gender" value="2">
                                         여
                                     </label>
                                 </td>
@@ -76,6 +165,7 @@
                                 </th>
                                 <td>
                                     <input type="email" name="km_email" placeholder="이메일 입력" required>
+                                    <span class="msgEmail"></span>
                                 </td>
                             </tr>
                             <tr>
