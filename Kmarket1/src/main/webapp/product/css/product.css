@@ -90,6 +90,135 @@ main > aside > .category ol {
     color: #41ab47;
     text-decoration: underline;
     }
+    
+    /* aside index 복붙해옴 --aside best 시작 --*/
+main > aside > .best {
+    width: 215px;
+    height: auto;
+    border: 1px solid #dbdbdb;
+    box-sizing: border-box;
+    box-shadow: 0 0 5px rgba(55, 55, 5, 0.2);
+    }
+
+    main > aside > .best > h1 {
+    font-size: 14px;
+    font-weight: bold;
+    color: #111;
+    margin: 6px;
+    }
+    main > aside > .best > h1 > i {
+    margin-right: 6px;
+    font-size: 18px;
+    }
+
+    main > aside > .best > ol {
+    width: 100%;
+    }
+    main > aside > .best > ol > li {
+    width: 100%;
+    height: 100%;
+    padding: 0 6px;
+    box-sizing: border-box;
+    margin-bottom: 16px;
+    }
+
+    main > aside > .best > ol > li > a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    }
+
+    main > aside > .best > ol > li > a:hover h2 {
+    text-decoration: underline;
+    }
+    main > aside > .best > ol > li > a > .thumb {
+    float: left;
+    position: relative;
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    margin: 0 auto;
+    box-sizing: border-box;
+    }
+
+    main > aside > .best > ol > li:first-child > a > .thumb {
+    position: relative;
+    float: none;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    margin: 0 auto;
+    }
+    main > aside > .best > ol > li > a > .thumb > i {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: inline-block;
+    width: 16px;
+    height: 20px;
+    font-size: 14px;
+    padding: 0;
+    color: #ef3e42;
+    border-bottom: 1px solid #ef3e42;
+    font-weight: bold;
+    font-style: italic;
+    text-align: center;
+    line-height: 18px;
+    }
+    main > aside > .best > ol > li:first-child > a > .thumb > i {
+    width: 35px;
+    height: 26px;
+    }
+
+    main > aside > .best > ol > li > a > .thumb > img {
+    width: 100%;
+    }
+
+    main > aside > .best > ol > li > a > article {
+    float: left;
+    width: 148px;
+    padding-left: 6px;
+    box-sizing: border-box;
+    }
+
+    main > aside > .best > ol > li > a h2 {
+    margin-top: 4px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    }
+    main > aside > .best > ol > li > a .org_price {
+    }
+
+    main > aside > .best > ol > li > a .org_price > del {
+    font-size: 10px;
+    color: #aaa;
+    }
+    main > aside > .best > ol > li > a .org_price > span {
+    color: #eb000a;
+    font-size: 10px;
+    }
+    main > aside > .best > ol > li > a .org_price > span::after {
+    content: "↓";
+    }
+
+    main > aside > .best > ol > li > a .dis_price > ins {
+    font-size: 14px;
+    text-decoration: none;
+    }
+
+    main > aside > .best > ol > li > a .dis_price > span {
+    display: inline-block;
+    font-size: 0;
+    vertical-align: text-bottom;
+    width: 55px;
+    height: 13px;
+    background: url("./img/ico_freeshipping.gif") no-repeat;
+    }
+
+/* aside index 복붙해옴 --aside best 끝 --*/
+    
 main > section {
     float: right;
     width: 985px;
