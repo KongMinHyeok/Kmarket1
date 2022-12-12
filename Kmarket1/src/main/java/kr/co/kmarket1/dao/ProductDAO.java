@@ -7,27 +7,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import kr.co.kmarket1.db.DBHelper;
-<<<<<<< HEAD
-import kr.co.kmarket1.db.SQL;
+
+import kr.co.kmarket1.db.MainSQL;
 import kr.co.kmarket1.vo.Cate1VO;
 
-public class ProductDAO extends DBHelper{
-
-=======
 import kr.co.kmarket1.db.ProductSQL;
 import kr.co.kmarket1.vo.ProductVO;
 
 public class ProductDAO extends DBHelper{
-	
-	Logger logger = LoggerFactory.getLogger(this.getClass());
-
-	
->>>>>>> 7fef7b4bd116a0257534887c7cd861f1400545c8
 	private static ProductDAO instance = new ProductDAO();
 	public static ProductDAO getInstance() {
 		return instance;
 	}
-<<<<<<< HEAD
+
 	
 	private ProductDAO() {}
 	
@@ -41,7 +33,7 @@ public class ProductDAO extends DBHelper{
 			logger.info("selctCate1 start...");
 			
 			conn = getConnection();
-			psmt = conn.prepareStatement(SQL.SELECT_CATE1);
+			psmt = conn.prepareStatement(MainSQL.SELECT_CATE1);
 			psmt.setString(1, c1Name);
 			
 			rs = psmt.executeQuery();
@@ -61,13 +53,6 @@ public class ProductDAO extends DBHelper{
 		return cate1s;
 	}
 	
-	public void selectSold() {}
-	
-	public void selectThumb2() {}
-	
-	public void selectScore() {}
-=======
-	private ProductDAO() {}
 	
 	public List<ProductVO> selectProducts(String prodCate2) {
 		List<ProductVO> products = new ArrayList<>();
@@ -139,6 +124,6 @@ public class ProductDAO extends DBHelper{
 		return total;		
 	}
 	
->>>>>>> 7fef7b4bd116a0257534887c7cd861f1400545c8
+
 	
 }

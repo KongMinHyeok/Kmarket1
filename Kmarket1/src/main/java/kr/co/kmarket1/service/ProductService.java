@@ -6,11 +6,5 @@ public enum ProductService {
 	
 	INSTANCE;
 	
-	private ProductDAO dao = ProductDAO.getInstance();
-	
-	public int selectCountTotal(int prodCate2) {
-		return dao.selectCountTotal(prodCate2);
-	}
-
 
 }

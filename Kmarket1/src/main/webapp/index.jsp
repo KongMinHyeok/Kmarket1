@@ -7,46 +7,48 @@
           <!-- 카테고리 -->
           <ul class="category">
             <li><i class="fa fa-bars" aria-hidden="true"></i>카테고리</li>
-            <c:forEach var="cate1" items="${cate1}">
+            <c:forEach var="cate" items="${cates}" >
             <li>
               <a href="#">
-                <i class="fas fa-tshirt"></i>${cate1.c1Name}<i class="fas fa-angle-right"></i>
+              	<c:choose>
+              	<c:when test="${cate.cate1 == 10 }">
+                <i class="fas fa-tshirt"></i>${cate.c1Name}<i class="fas fa-angle-right"></i>
+                </c:when>
+				<c:when test="${cate.cate1 == 11 }">
+                <i class="fas fa-tshirt"></i>${cate.c1Name}<i class="fas fa-angle-right"></i>
+                </c:when>
+                <c:when test="${cate.cate1 == 12 }">
+                <i class="fas fa-tshirt"></i>${cate.c1Name}<i class="fas fa-angle-right"></i>
+                </c:when>
+                <c:when test="${cate.cate1 == 13 }">
+                <i class="fas fa-tshirt"></i>${cate.c1Name}<i class="fas fa-angle-right"></i>
+                </c:when>
+                <c:when test="${cate.cate1 == 14 }">
+                <i class="fas fa-tshirt"></i>${cate.c1Name}<i class="fas fa-angle-right"></i>
+                </c:when>
+                <c:when test="${cate.cate1 == 15 }">
+                <i class="fas fa-tshirt"></i>${cate.c1Name}<i class="fas fa-angle-right"></i>
+                </c:when>
+                <c:when test="${cate.cate1 == 16 }">
+                <i class="fas fa-tshirt"></i>${cate.c1Name}<i class="fas fa-angle-right"></i>
+                </c:when>
+                <c:when test="${cate.cate1 == 17 }">
+                <i class="fas fa-tshirt"></i>${cate.c1Name}<i class="fas fa-angle-right"></i>
+                </c:when>
+                <c:when test="${cate.cate1 == 18 }">
+                <i class="fas fa-tshirt"></i>${cate.c1Name}<i class="fas fa-angle-right"></i>
+                </c:when>
+				</c:choose>
               </a>
-            </li>
-            </c:forEach>
-            <li>
-              <a href="#">
-                <i class="fas fa-laptop"></i>가전·디지털<i class="fas fa-angle-right"></i>
-              </a>
-              <ol>
+               <ol>
                 <li><a href="#">노트북/PC</a></li>
                 <li><a href="#">가전</a></li>
                 <li><a href="#">휴대폰</a></li>
                 <li><a href="#">기타</a></li>
               </ol>
             </li>
-            <li>
-              <a href="#">
-                <i class="fas fa-utensils"></i>식품·생필품<i class="fas fa-angle-right"></i>
-              </a>
-              <ol>
-                <li><a href="#">신선식품</a></li>
-                <li><a href="#">가공식품</a></li>
-                <li><a href="#">건강식품</a></li>
-                <li><a href="#">생필품</a></li>
-              </ol>
-            </li>
-            <li>
-              <a href="#">
-                <i class="fas fa-home"></i>홈·문구·취미<i class="fas fa-angle-right"></i>
-              </a>
-              <ol>
-                <li><a href="#">가구/DIY</a></li>
-                <li><a href="#">침구·커튼</a></li>
-                <li><a href="#">생활용품</a></li>
-                <li><a href="#">사무용품</a></li>
-              </ol>
-            </li>
+
+            </c:forEach>
           </ul>
 
           <!-- 베스트상품 배너 -->
