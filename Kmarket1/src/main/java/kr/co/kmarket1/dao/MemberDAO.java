@@ -17,6 +17,32 @@ public class MemberDAO extends DBHelper{
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	// insert
+	public void insertMember(MemberVO member) {
+		try {
+			logger.info("insertMember called");
+			
+			conn = getConnection();
+			psmt = conn.prepareStatement(MemberSQL.INSERT_MEMBER);
+			psmt.setString(1, member.getUid());
+			psmt.setString(2, member.getPass());
+			psmt.setString(3, member.getName());
+			psmt.setInt(4, member.getGender());
+			psmt.setString(5, member.getHp());
+			psmt.setString(6, member.getEmail());
+			psmt.setInt(7, member.getType());
+			psmt.setInt(8, member.getPoint());
+			psmt.setInt(9, member.getLevel());
+			psmt.setString(10, member.getZip());
+			psmt.setString(11, member.getAddr1());
+			psmt.setString(12, member.getAddr2());
+			psmt.setString(13, member.getRegip());
+			psmt.executeUpdate();
+			close();
+			
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
 	
 	// select
 	public MemberVO selectMember(String uid, String pass) {
