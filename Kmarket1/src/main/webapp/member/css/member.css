@@ -284,4 +284,9 @@
     vertical-align: middle;
 }
 
+#btnEmail{
+	border: none;
+	background: none;
+}
+
 /* register(판매 회원) */

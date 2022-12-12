@@ -10,6 +10,9 @@ public enum MemberService{
 	private MemberDAO dao = MemberDAO.getInstance();
 	
 	// insert
+	public void insertMember(MemberVO member) {
+		dao.insertMember(member);
+	}
 	
 	// select
 	public MemberVO selectMember(String uid, String pass) {

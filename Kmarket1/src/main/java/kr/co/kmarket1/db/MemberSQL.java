@@ -3,6 +3,11 @@ package kr.co.kmarket1.db;
 public class MemberSQL {
 	// member
 	// insert
+	public static final String INSERT_MEMBER = "insert into `km_member` where "
+											+ "`uid`=?, `pass`=?, `name`=?, `gender`=?, `hp`=?, `email`=? "
+											+ "`type`=?, `point`=?, `level`=? "
+											+ "`zip`=?, `addr1`=?, `addr2`=? "
+											+ "`regip`=?, `rdate`=NOW()";
 	
 	// select
 	public static final String SELECT_MEMBER = "select * from `km_member` where `uid`=? and `pass`=?";
