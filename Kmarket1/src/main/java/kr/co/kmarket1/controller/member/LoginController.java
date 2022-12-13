@@ -54,7 +54,7 @@ public class LoginController extends HttpServlet{
 				
 				service.updateMemberForSession(uid, sessId);
 			}
-			resp.sendRedirect("/Kmarket1/product/list.do");
+			resp.sendRedirect("/Kmarket1/index.do");
 		}else if(member !=null && member.getLevel() == 0) { // 회원 정보는 있지만 탈퇴한 경우
 			resp.sendRedirect("/Kmarket1/member/login.do?success=111");
 		}else { // 회원 정보가 없는 경우

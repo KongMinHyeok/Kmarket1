@@ -38,8 +38,8 @@ public class EmailAuthController extends HttpServlet{
 		int code = ThreadLocalRandom.current().nextInt(100000, 1000000);
 		
 		// 기본 정보
-		String sender = "tnqls0421@gmail.com";
-		String password = "ggpeqvhtitodetfi";
+		String sender = ".";
+		String password = ".";
 		String title = "Kmarket 인증코드입니다";
 		String content = "인증코드 6자리는 " + code + " 입니다\n 인증 페이지로 돌아가 인증을 완료하여 주시기 바랍니다" + "\n<a href='http://localhost:8080/Kmarket1/member/register.do'>인증 페이지</a>";
 		
