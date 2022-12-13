@@ -29,7 +29,7 @@ public class ListController extends HttpServlet{
 		
 		String prodCate1 = req.getParameter("prodCate1");
 		String prodCate2 = req.getParameter("prodCate2");
-		//
+		//페이징 처리용
 		String pg = req.getParameter("pg");
 		int currentPage = 1;
 		int start;
@@ -47,17 +47,40 @@ public class ListController extends HttpServlet{
 		
 		// 전체 게시물 갯수
 		/* prodCate2 형변환 해야함*/
-		total = service.selectCountTotal(prodCate2);
-
+		total = service.selectCountTotal(prodCate1, prodCate2);
+		
+		// 마지막 페이지 번호
+		lastPageNum = service.getLastPageNum(total);
+		
+		// 페이지 그룹 시작 끝
+		int[] result = service.getPageGroupNum(currentPage, lastPageNum);
+		currentPageGroup = result[0];
+		pageGroupStart = result[1];
+		pageGroupEnd = result[2];
+		
+		pageStartNum = total - start +1;
+		
+		req.setAttribute("start", start);
+		req.setAttribute("total", total);
+		req.setAttribute("lastPageNum", lastPageNum);
+		req.setAttribute("currentPage", currentPage);
+		req.setAttribute("currentPageGroup", currentPageGroup);
+		req.setAttribute("pageGroupStart", pageGroupStart);
+		req.setAttribute("pageGroupEnd", pageGroupEnd);
+		req.setAttribute("pageStartNum", pageStartNum);
+		
+		
+		
 		req.setAttribute("prodCate1", prodCate1);
 		req.setAttribute("prodCate2", prodCate2);
 		
 		// ProductDAO 객체 생성
 		ProductDAO dao = ProductDAO.getInstance();
-		ProductService service = ProductService.INSTANCE;
 		
 		// 상품 목록 가져오기
-		List<ProductVO> products = dao.selectProducts(prodCate2);
+		List<ProductVO> products = null;
+		products = dao.selectProducts(prodCate1, prodCate2, start);
+		req.setAttribute("products", products);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/product/list.jsp");
 		dispatcher.forward(req, resp);

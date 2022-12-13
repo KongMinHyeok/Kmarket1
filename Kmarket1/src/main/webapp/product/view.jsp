@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -115,11 +117,7 @@
             </aside>
             <section class="view">
                 <!-- 제목, 페이지 네비게이션 -->
-                <nav>
-                    <h1>상품보기</h1>
-                    <p>HOME > 패션·의류·뷰티 > 남성의류</p>
-                </nav>
-
+				<jsp:include page="./_${prodCate1}.jsp"/>
                 <!-- 상품 전체 내용 -->
                 <article class="info">
                     <div class="image">
@@ -127,27 +125,36 @@
                     </div>
                     <div class="summary">
                         <nav>
-                            <h1>(주)판매자명</h1>
-                            <h2>상품번호 : 10010118412</h2>
+                            <h1>${product.seller}</h1>
+                            <h2>상품번호 : ${product.prodNo}</h2>
                         </nav>
                         <nav>
-                            <h3>상품명</h3>
-                            <p>상품설명 출력</p>
+                            <h3>${product.prodName}</h3>
+                            <p>${product.descript}</p>
                             <h5 class="rating star4">
                                 <a href="#">상품평보기</a>
                             </h5>
                         </nav>
                         <nav>
                             <div class="original-price">
-                                <del>30,000</del>
-                                <span>10%</span>
+                                <del>${product.price}</del>
+                                <span>${product.discount}%</span>
                             </div>
                             <div class="discount-price">
                                 <ins>27,000</ins>
                             </div>
                         </nav>
                         <nav>
-                            <span class="delivery">무료배송</span>
+                            <span class="delivery">
+                            <c:choose>
+                            <c:when test="${product.delivery == 0}">
+                            	무료배송
+                            </c:when>
+                            <c:otherwise>
+                            	${product.delivery}원
+                            </c:otherwise>
+                            </c:choose>
+                            </span>
                             <span class="arrival">모레(금) 7/8 도착예정</span>
                             <span class="desc">본 상품은 국내배송만 가능합니다.</span>
                         </nav>
@@ -156,7 +163,7 @@
                             <span class="card cardadd"><i>아이콘</i>카드추가혜택</span>
                         </nav>
                         <nav class="origin">
-                            원산지-상세설명 참조
+                            원산지-${product.origin}
                         </nav>
                         <img src="./img/vip_plcc_banner.png" alt="100원만 결제해도 1만원 적립" class="banner">
                         <div class="count">
@@ -193,31 +200,31 @@
                         <tbody>
                             <tr>
                                 <td>상품번호</td>
-                                <td>10110125435</td>
+                                <td>${product.prodNo}</td>
                             </tr>
                             <tr>
                                 <td>상품상태</td>
-                                <td>새상품</td>
+                                <td>${product.status}</td>
                             </tr>
                             <tr>
                                 <td>부가세 면세여부</td>
-                                <td>과세상품</td>
+                                <td>${product.duty}</td>
                             </tr>
                             <tr>
                                 <td>영수증발행</td>
-                                <td>발행가능 - 신용카드 전표, 온라인 현금영수증</td>
+                                <td>${product.receipt}</td>
                             </tr>
                             <tr>
                                 <td>사업자구분</td>
-                                <td>사업자 판매자</td>
+                                <td>${product.bizType}</td>
                             </tr>
                             <tr>
                                 <td>브랜드</td>
-                                <td>블루포스</td>
+                                <td>${product.company}</td>
                             </tr>
                             <tr>
                                 <td>원산지</td>
-                                <td>국내생산</td>
+                                <td>${product.origin}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -256,7 +263,7 @@
                                 <td>상세정보 직접입력</td>
                             </tr>
                             <tr>
-                                <td>A/S 책임자오 전화번호</td>
+                                <td>A/S 책임자와 전화번호</td>
                                 <td>상세정보 직접입력</td>
                             </tr>
                             <tr>
