@@ -6,6 +6,20 @@ public class ProductSQL {
 												+ "WHERE `prodCate1` =? AND `prodCate2` =? "
 												+ "ORDER BY `prodNo` DESC limit ?, 10";
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public static final String SELECT_COUNT_TOTAL = "SELECT COUNT(`prodNo`) FROM `km_product` "
 													+ "where `prodCate1`=? AND `prodCate2`=?";
 }
