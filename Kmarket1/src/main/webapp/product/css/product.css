@@ -296,9 +296,11 @@ main > section {
     border: 1px solid #454c5f;
     text-decoration: none;
 }
-#product > .list > .paging > .num > a.on {
+#product > .list > .paging > .num > a.num_on {
     color: #fe434c;
     font-weight: bold;
+}
+#product > .list > .paging > .num > a.num_off {
 }
 
 /* footer */

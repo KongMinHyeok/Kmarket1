@@ -13,6 +13,9 @@ public enum MemberService{
 	public void insertMember(MemberVO member) {
 		dao.insertMember(member);
 	}
+	public void insertSellerMember(MemberVO seller) {
+		dao.insertSellerMember(seller);
+	}
 	
 	// select
 	public MemberVO selectMember(String uid, String pass) {
@@ -26,6 +29,9 @@ public enum MemberService{
 	}
 	public int selectCountUid(String uid) {
 		return dao.selectCountUid(uid);
+	}
+	public int selectCountReg(String reg) {
+		return dao.selectCountReg(reg);
 	}
 	
 	// update

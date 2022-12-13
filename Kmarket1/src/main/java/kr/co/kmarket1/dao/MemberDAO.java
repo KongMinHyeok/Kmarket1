@@ -44,6 +44,37 @@ public class MemberDAO extends DBHelper{
 		}
 	}
 	
+	public void insertSellerMember(MemberVO seller) {
+		try {
+			logger.info("insertSellerMember called");
+			
+			conn = getConnection();
+			psmt = conn.prepareStatement(MemberSQL.INSERT_SELLER_MEMBER);
+			psmt.setString(1, seller.getUid());
+			psmt.setString(2, seller.getPass());
+			psmt.setString(3, seller.getName());
+			psmt.setString(4, seller.getHp());
+			psmt.setString(5, seller.getEmail());
+			psmt.setString(6, seller.getZip());
+			psmt.setString(7, seller.getAddr1());
+			psmt.setString(8, seller.getAddr2());
+			psmt.setString(9, seller.getCompany());
+			psmt.setString(10, seller.getCeo());
+			psmt.setString(11, seller.getBizRegNum());
+			psmt.setString(12, seller.getComRegNum());
+			psmt.setString(13, seller.getTel());
+			psmt.setString(14, seller.getManager());
+			psmt.setString(15, seller.getManagerHp());
+			psmt.setString(16, seller.getFax());
+			psmt.setString(17, seller.getRegip());
+			psmt.executeUpdate();
+			close();
+			
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
+	
 	// select
 	public MemberVO selectMember(String uid, String pass) {
 		MemberVO member = null;
@@ -180,6 +211,28 @@ public class MemberDAO extends DBHelper{
 			logger.error(e.getMessage());
 		}
 		logger.debug("result " + result);
+		return result;
+	}
+	
+	public int selectCountReg(String reg) {
+		int result = 0;
+		try {
+			logger.info("selectCountReg called");
+			
+			conn = getConnection();
+			psmt = conn.prepareStatement(MemberSQL.SELECT_COUNT_REG);
+			psmt.setString(1, reg);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			close();
+			
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.info("result " + result);
 		return result;
 	}
 	
