@@ -30,7 +30,7 @@ public class ProductDAO extends DBHelper{
 		List<Cate1VO> cate1s = new ArrayList<>();
 		
 		try {
-			logger.info("selctCate1 start...");
+			logger.info("selectCate1 start...");
 			
 			conn = getConnection();
 			psmt = conn.prepareStatement(MainSQL.SELECT_CATE1);
@@ -52,15 +52,65 @@ public class ProductDAO extends DBHelper{
 		logger.debug("cate1 : " + cate1s);
 		return cate1s;
 	}
-	
-	
-	public List<ProductVO> selectProducts(String prodCate2) {
+	// 상품 상세 정보 불러오기
+	public ProductVO selectProduct(String prodNo) {
+		ProductVO product = null;
+		try {
+			logger.info("selectProduct start...");
+			
+			conn = getConnection();
+			psmt = conn.prepareStatement(ProductSQL.SELECT_PRODUCT);
+			psmt.setString(1, prodNo);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				product = new ProductVO();
+				product.setProdNo(rs.getInt(1));
+				product.setProdCate1(rs.getInt(2));
+				product.setProdCate2(rs.getInt(3));
+				product.setProdName(rs.getString(4));
+				product.setDescript(rs.getString(5));
+				product.setCompany(rs.getString(6));
+				product.setSeller(rs.getString(7));
+				product.setPrice(rs.getInt(8));
+				product.setDiscount(rs.getInt(9));
+				product.setPoint(rs.getInt(10));
+				product.setStock(rs.getInt(11));
+				product.setSold(rs.getInt(12));
+				product.setDelivery(rs.getInt(13));
+				product.setHit(rs.getInt(14));
+				product.setScore(rs.getInt(15));
+				product.setReview(rs.getInt(16));
+				product.setThumb1(rs.getString(17));
+				product.setThumb2(rs.getString(18));
+				product.setThumb3(rs.getString(19));
+				product.setDetail(rs.getString(20));
+				product.setStatus(rs.getString(21));
+				product.setDuty(rs.getString(22));
+				product.setReceipt(rs.getString(23));
+				product.setBizType(rs.getString(24));
+				product.setOrigin(rs.getString(25));
+				product.setIp(rs.getString(26));
+				product.setRdate(rs.getString(27));
+			}
+			close();
+			
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("product : " + product);
+		return product;
+	}
+	// 상품 리스트 불러오기
+	public List<ProductVO> selectProducts(String prodCate1, String prodCate2, int start) {
 		List<ProductVO> products = new ArrayList<>();
 		try {
 			logger.info("selectProducts start...");
 			conn = getConnection();
 			psmt = conn.prepareStatement(ProductSQL.SELECT_PRODUCTS);
-			psmt.setString(1, prodCate2);
+			psmt.setString(1, prodCate1);
+			psmt.setString(2, prodCate2);
+			psmt.setInt(3, start);
 			
 			rs = psmt.executeQuery();
 			while(rs.next()) {
@@ -99,18 +149,23 @@ public class ProductDAO extends DBHelper{
 		}catch(Exception e) {
 			logger.error(e.getMessage());
 		}
+		logger.debug("products : " + products);
+
 		return products;
 	}
-	public int selectCountTotal(int prodCate2) {
+	public int selectCountTotal(String prodCate1, String prodCate2) {
 		
 		int total = 0;
 		
 		try {
 			logger.info("selectCountTotal start...");
 			conn = getConnection();
-			stmt = conn.createStatement();
+			psmt = conn.prepareStatement(ProductSQL.SELECT_COUNT_TOTAL);
+			psmt.setString(1, prodCate1);
+			psmt.setString(2, prodCate2);
 			
-			rs = stmt.executeQuery(ProductSQL.SELECT_COUNT_TOTAL);
+			rs = psmt.executeQuery();
+
 			
 			if(rs.next()) {
 				total = rs.getInt(1);
@@ -120,9 +175,12 @@ public class ProductDAO extends DBHelper{
 		}catch (Exception e) {
 			logger.error(e.getMessage());
 		}
-		
+		logger.debug("total : " + total);
+
 		return total;		
 	}
+
+
 	
 
 	

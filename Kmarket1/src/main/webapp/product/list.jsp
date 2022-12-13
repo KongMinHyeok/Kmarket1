@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -115,10 +117,7 @@
             </aside>
             <section class="list">
                 <!-- 제목, 페이지 네비게이션 -->
-                <nav>
-                    <h1>상품목록</h1>
-                    <p>HOME > 패션·의류·뷰티 > 남성의류</p>
-                </nav>
+                <jsp:include page="./_${prodCate1}.jsp"/>
                 <!-- 정렬 메뉴 -->
                 <ul class="sort">
                     <li><a href="#" class="on">판매많은순</a></li>
@@ -131,141 +130,53 @@
                 <!-- 상품 목록 -->
                 <table border="0">
                     <tbody>
+                        <c:forEach var="product" items="${products}">
                         <tr>
                             <!-- img는 예시 사이트에서 받아왔음 -->
                             <td><a href="#" class="goods"><img src="./img/120x120.png" alt="상품이미지"></a></td>
                             <td>
-                                <h3 class="name">상품명</h3>
-                                <a href="#" class="desc">상품설명</a>
+                                <h3 class="name">${product.prodName}</h3>
+                                <a href="#" class="desc">${producs.descript}</a>
                             </td>
                             <td>
                                 <ul>
-                                    <li><ins class="discount-price">27,000</ins></li>
+                                    <li><ins class="discount-price">${product.price / product.discount}</ins></li>
                                     <li>
                                         <!-- del태그는 텍스트 한가운데 라인을 추가하여 문서에서 삭제된 텍스트 표현-->
-                                        <del class="original-price">30,000</del>
-                                        <span class="discount">10%</span>
+                                        <del class="original-price">${product.price}</del>
+                                        <span class="discount">${product.discount}%</span>
                                     </li>
                                     <li><span class="free-delivery">무료배송</span></li>
                                 </ul>
                             </td>
                             <td>
-                                <h4 class="seller"><i class="fas fa-home"></i>&nbsp;판매자</h4>
+                                <h4 class="seller"><i class="fas fa-home"></i>&nbsp;${product.seller}</h4>
                                 <h5 class="badge power">판매자등급</h5>
                                 <h6 class="rating star1">상품평</h6>
                               </td>
                         </tr>
-                        <tr>
-                            <td><a href="#" class="goods"><img src="./img/120x120.png" alt="상품이미지"></a></td>
-                            <td>
-                                <h3 class="name">상품명</h3>
-                                <a href="#" class="desc">상품설명</a>
-                            </td>
-                            <td>
-                                <ul>
-                                    <li><ins class="discount-price">27,000</ins></li>
-                                    <li>
-                                        <!-- del태그는 텍스트 한가운데 라인을 추가하여 문서에서 삭제된 텍스트 표현-->
-                                        <del class="original-price">30,000</del>
-                                        <span class="discount">10%</span>
-                                    </li>
-                                    <li><span class="free-delivery">무료배송</span></li>
-                                </ul>
-                            </td>
-                            <td>
-                                <h4 class="seller"><i class="fas fa-home"></i>&nbsp;판매자</h4>
-                                <h5 class="badge power">판매자등급</h5>
-                                <h6 class="rating star2">상품평</h6>
-                              </td>
-                        </tr>
-                        <tr>
-                            <td><a href="#" class="goods"><img src="./img/120x120.png" alt="상품이미지"></a></td>
-                            <td>
-                                <h3 class="name">상품명</h3>
-                                <a href="#" class="desc">상품설명</a>
-                            </td>
-                            <td>
-                                <ul>
-                                    <li><ins class="discount-price">27,000</ins></li>
-                                    <li>
-                                        <!-- del태그는 텍스트 한가운데 라인을 추가하여 문서에서 삭제된 텍스트 표현-->
-                                        <del class="original-price">30,000</del>
-                                        <span class="discount">10%</span>
-                                    </li>
-                                    <li><span class="free-delivery">무료배송</span></li>
-                                </ul>
-                            </td>
-                            <td>
-                                <h4 class="seller"><i class="fas fa-home"></i>&nbsp;판매자</h4>
-                                <h5 class="badge power">판매자등급</h5>
-                                <h6 class="rating star3">상품평</h6>
-                              </td>
-                        </tr>
-                        <tr>
-                            <td><a href="#" class="goods"><img src="./img/120x120.png" alt="상품이미지"></a></td>
-                            <td>
-                                <h3 class="name">상품명</h3>
-                                <a href="#" class="desc">상품설명</a>
-                            </td>
-                            <td>
-                                <ul>
-                                    <li><ins class="discount-price">27,000</ins></li>
-                                    <li>
-                                        <!-- del태그는 텍스트 한가운데 라인을 추가하여 문서에서 삭제된 텍스트 표현-->
-                                        <del class="original-price">30,000</del>
-                                        <span class="discount">10%</span>
-                                    </li>
-                                    <li><span class="free-delivery">무료배송</span></li>
-                                </ul>
-                            </td>
-                            <td>
-                                <h4 class="seller"><i class="fas fa-home"></i>&nbsp;판매자</h4>
-                                <h5 class="badge power">판매자등급</h5>
-                                <h6 class="rating star4">상품평</h6>
-                              </td>
-                        </tr>
-                        <tr>
-                            <td><a href="#" class="goods"><img src="./img/120x120.png" alt="상품이미지"></a></td>
-                            <td>
-                                <h3 class="name">상품명</h3>
-                                <a href="#" class="desc">상품설명</a>
-                            </td>
-                            <td>
-                                <ul>
-                                    <li><ins class="discount-price">27,000</ins></li>
-                                    <li>
-                                        <!-- del태그는 텍스트 한가운데 라인을 추가하여 문서에서 삭제된 텍스트 표현-->
-                                        <del class="original-price">30,000</del>
-                                        <span class="discount">10%</span>
-                                    </li>
-                                    <li><span>배송비 2500</span></li>
-                                </ul>
-                            </td>
-                            <td>
-                                <h4 class="seller"><i class="fas fa-home"></i>&nbsp;판매자</h4>
-                                <h5 class="badge power">판매자등급</h5>
-                                <h6 class="rating star5">상품평</h6>
-                              </td>
-                        </tr>
+                        </c:forEach>
+                       
                     </tbody>
                 </table>
                 <!-- 상품목록 페이지번호 -->
               <div class="paging">
+              	<c:if test="${pageGroupStart >1}">
                 <span class="prev">
-                  <a href="#"><&nbsp;이전</a>
+                  <a href="/Kmarket1/product/list.do?pg=${pageGroupStart -1}&prodCate1=${prodCate1}&prodCate2=${prodCate2}"><&nbsp;이전</a>
                 </span>
+                </c:if>
+                <c:forEach var="num" begin="${pageGroupStart}" end="${pageGroupEnd}" step="1">
                 <span class="num">
-                  <a href="#" class="on">1</a>
-                  <a href="#">2</a>
-                  <a href="#">3</a>
-                  <a href="#">4</a>
-                  <a href="#">5</a>
-                  <a href="#">6</a>
-                  <a href="#">7</a>
+                  <a href="/Kmarket1/product/list.do?pg=${num}&prodCate1=${prodCate1}&prodCate2=${prodCate2}" 
+                  class="num${(num == currentPage)? '_on' : '_off'}">${num}</a>
                 </span>
+                </c:forEach>
+                <c:if test="${pageGroupEnd < lastPageNum}">
                 <span class="next">
-                  <a href="#">다음&nbsp;></a>
+                  <a href="/Kmarket1/product/list.do?pg=${pageGroupEnd +1}&prodCate1=${prodCate1}&prodCate2=${prodCate2}">다음&nbsp;></a>
                 </span>
+                </c:if>
               </div>
             </section>
         </main>

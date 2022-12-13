@@ -1,6 +1,9 @@
 package kr.co.kmarket1.service;
 
+import java.util.List;
+
 import kr.co.kmarket1.dao.ProductDAO;
+import kr.co.kmarket1.vo.ProductVO;
 
 public enum ProductService {
 	
@@ -8,8 +11,8 @@ public enum ProductService {
 	
 	private ProductDAO dao = ProductDAO.getInstance();
 	
-	public int selectCountTotal(String prodCate2) {
-		return dao.selectCountTotal(prodCate2);
+	public int selectCountTotal(String prodCate1, String prodCate2) {
+		return dao.selectCountTotal(prodCate1, prodCate2);
 	}
 	
 	// 마지막 페이지 번호
@@ -36,6 +39,16 @@ public enum ProductService {
 			int[] result = {currentPageGroup, pageGroupStart, pageGroupEnd};
 			return result;
 		}
+		
+		// 리스트 불러오기
+		public List<ProductVO> selectProducts(int start, String prodCate1, String prodCate2) {
+			return dao.selectProducts(prodCate1, prodCate2, start);
+		}
+		
+		// 상품 상세정보 불러오기(view 페이지)
+		public ProductVO selectProduct(String prodNo) {
+			return dao.selectProduct(prodNo);
+		};
 	
 
 
