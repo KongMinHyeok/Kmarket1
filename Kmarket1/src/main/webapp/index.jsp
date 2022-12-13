@@ -7,47 +7,47 @@
           <!-- 카테고리 -->
           <ul class="category">
             <li><i class="fa fa-bars" aria-hidden="true"></i>카테고리</li>
-            <c:forEach var="cate" items="${cates}" >
+            <c:forEach var="Cate1" items="${cates1}">
             <li>
               <a href="#">
-              	<c:choose>
-              	<c:when test="${cate.cate1 == 10 }">
-                <i class="fas fa-tshirt"></i>${cate.c1Name}<i class="fas fa-angle-right"></i>
-                </c:when>
-				<c:when test="${cate.cate1 == 11 }">
-                <i class="fas fa-tshirt"></i>${cate.c1Name}<i class="fas fa-angle-right"></i>
-                </c:when>
-                <c:when test="${cate.cate1 == 12 }">
-                <i class="fas fa-tshirt"></i>${cate.c1Name}<i class="fas fa-angle-right"></i>
-                </c:when>
-                <c:when test="${cate.cate1 == 13 }">
-                <i class="fas fa-tshirt"></i>${cate.c1Name}<i class="fas fa-angle-right"></i>
-                </c:when>
-                <c:when test="${cate.cate1 == 14 }">
-                <i class="fas fa-tshirt"></i>${cate.c1Name}<i class="fas fa-angle-right"></i>
-                </c:when>
-                <c:when test="${cate.cate1 == 15 }">
-                <i class="fas fa-tshirt"></i>${cate.c1Name}<i class="fas fa-angle-right"></i>
-                </c:when>
-                <c:when test="${cate.cate1 == 16 }">
-                <i class="fas fa-tshirt"></i>${cate.c1Name}<i class="fas fa-angle-right"></i>
-                </c:when>
-                <c:when test="${cate.cate1 == 17 }">
-                <i class="fas fa-tshirt"></i>${cate.c1Name}<i class="fas fa-angle-right"></i>
-                </c:when>
-                <c:when test="${cate.cate1 == 18 }">
-                <i class="fas fa-tshirt"></i>${cate.c1Name}<i class="fas fa-angle-right"></i>
-                </c:when>
-				</c:choose>
+				<c:choose>
+              	<c:when test="${Cate1.cate1 == 10 }">
+              	<i class="fas fa-folder" aria-hidden="true"></i>${Cate1.c1Name}<i class="fas fa-angle-right" aria-hidden="true"></i>
+              	</c:when>
+				<c:when test="${Cate1.cate1 == 11 }">
+              	<i class="fas fa-tshirt" aria-hidden="true"></i>${Cate1.c1Name}<i class="fas fa-angle-right" aria-hidden="true"></i>
+              	</c:when>
+              	<c:when test="${Cate1.cate1 == 12 }">
+              	<i class="fas fa-baby" aria-hidden="true"></i>${Cate1.c1Name}<i class="fas fa-angle-right" aria-hidden="true"></i>
+              	</c:when>
+              	<c:when test="${Cate1.cate1 == 13 }">
+              	<i class="fas fa-utensils" aria-hidden="true"></i>${Cate1.c1Name}<i class="fas fa-angle-right" aria-hidden="true"></i>
+              	</c:when>
+              	<c:when test="${Cate1.cate1 == 14 }">
+              	<i class="fas fa-home" aria-hidden="true"></i>${Cate1.c1Name}<i class="fas fa-angle-right" aria-hidden="true"></i>
+              	</c:when>
+              	<c:when test="${Cate1.cate1 == 15 }">
+              	<i class="fas fa-laptop" aria-hidden="true"></i>${Cate1.c1Name}<i class="fas fa-angle-right" aria-hidden="true"></i>
+              	</c:when>
+              	<c:when test="${Cate1.cate1 == 16 }">
+              	<i class="fas fa-running" aria-hidden="true"></i>${Cate1.c1Name}<i class="fas fa-angle-right" aria-hidden="true"></i>
+              	</c:when>
+              	<c:when test="${Cate1.cate1 == 17 }">
+              	<i class="fas fa-shuttle-van" aria-hidden="true"></i>${Cate1.c1Name}<i class="fas fa-angle-right" aria-hidden="true"></i>
+              	</c:when>
+              	<c:when test="${Cate1.cate1 == 18 }">
+              	<i class="fas fa-plane" aria-hidden="true"></i>${Cate1.c1Name}<i class="fas fa-angle-right" aria-hidden="true"></i>
+              	</c:when>
+               	</c:choose>
               </a>
                <ol>
-                <li><a href="#">노트북/PC</a></li>
-                <li><a href="#">가전</a></li>
-                <li><a href="#">휴대폰</a></li>
-                <li><a href="#">기타</a></li>
+               <c:forEach var="Cate2" items="${cates2}">
+               	<c:if test="${Cate1.cate1 eq Cate2.cate1}">
+                <li><a href="#">${Cate2.c2Name}</a></li>
+                </c:if>
+                </c:forEach>
               </ol>
             </li>
-
             </c:forEach>
           </ul>
 
