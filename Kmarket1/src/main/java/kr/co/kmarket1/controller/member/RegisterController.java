@@ -55,6 +55,6 @@ public class RegisterController extends HttpServlet{
 		
 		service.insertMember(member);
 		
-		resp.sendRedirect("/member/login.do");
+		resp.sendRedirect("/Kmarket1/member/login.do");
 	}
 }
