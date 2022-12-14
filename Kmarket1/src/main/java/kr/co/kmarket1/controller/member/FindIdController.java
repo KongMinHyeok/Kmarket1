@@ -1,4 +1,4 @@
-package kr.co.kmarket1.controller.cs.qna;
+package kr.co.kmarket1.controller.member;
 
 import java.io.IOException;
 
@@ -9,27 +9,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kr.co.kmarket1.service.CsService;
+import kr.co.kmarket1.service.MemberService;
 
-@WebServlet("/cs/qna/list.do")
-public class ListController extends HttpServlet{
+@WebServlet("/member/findId.do")
+public class FindIdController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
-	private CsService service = CsService.instance;
+	private MemberService service = MemberService.INSTANCE;
+	
 	@Override
-	public void init() throws ServletException {
-	}
+	public void init() throws ServletException {}
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/qna/list.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/member/findId.jsp");
 		dispatcher.forward(req, resp);
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 	}
-	
-	
 }

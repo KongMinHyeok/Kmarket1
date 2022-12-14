@@ -36,6 +36,7 @@ public class ViewController extends HttpServlet{
 		
 		ProductVO product = service.selectProduct(prodNo);
 		req.setAttribute("product", product);
+		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/product/view.jsp");
 		dispatcher.forward(req, resp);
 	}
