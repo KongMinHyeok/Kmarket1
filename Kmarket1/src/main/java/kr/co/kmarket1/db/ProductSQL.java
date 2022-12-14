@@ -25,6 +25,3 @@ public class ProductSQL {
 													+ "where `prodCate1`=? AND `prodCate2`=?";
 
 }
-
-
-}

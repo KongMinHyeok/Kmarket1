@@ -4,8 +4,8 @@
   <head>
     <meta charset="UTF-8" />
     <title>케이마켓::대한민국 1등 온라인 쇼핑몰</title>
-    <link rel="shortcut icon" type="image/x-icon" href="/Kmarket/img/favicon.ico">
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="shortcut icon" type="image/x-icon" href="/Kmarket1/img/favicon.ico">
+    <link rel="stylesheet" href="/Kmarket1/css/style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
