@@ -40,7 +40,7 @@
                             <input type="checkbox" name="auto">
                             자동 로그인
                         </label>
-                        <a href="#">아이디찾기</a>
+                        <a href="/Kmarket1/member/findId.do">아이디찾기</a>
                         <a href="#">비밀번호찾기</a>
                         <a href="/Kmarket1/member/join.do">회원가입</a>
                     </span>

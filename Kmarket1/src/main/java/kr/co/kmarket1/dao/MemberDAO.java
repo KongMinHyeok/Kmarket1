@@ -235,6 +235,27 @@ public class MemberDAO extends DBHelper{
 		logger.info("result " + result);
 		return result;
 	}
+	public String selectMemberByContact(String name, String contact) {
+		String result = null;
+		try {
+			logger.info("selectMemberByContact called");
+			
+			conn = getConnection();
+			psmt = conn.prepareStatement(MemberSQL.SELECT_MEMBER_BY_CONTACT);
+			psmt.setString(1, name);
+			psmt.setString(2, contact);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getString(1);
+			}
+			
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("result: " + result);
+		return result;
+	}
 	
 	// update
 	public void updateMemberForSession(String uid, String sessId) {
