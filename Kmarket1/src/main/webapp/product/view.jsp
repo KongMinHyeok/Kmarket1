@@ -10,6 +10,26 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="./css/common.css">
     <link rel="stylesheet" href="./css/product.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+    	$(function(){
+    		// count * 가격 해서 총 금액 보여주기
+    		// count 감소
+    		$(.decrease).click(function(){
+    			while('[name="num"]'){
+    				$('[name="num"]'-1)
+    				alert('되나?');
+    			}
+    		});
+    		
+    		// count 증가
+			$(.increase).click(function(){
+    			
+    		});
+    		
+    		//마지막
+    	});
+    </script>
 </head>
 <body>
     <div id="wrapper">
@@ -80,10 +100,12 @@
                     <li>
                         <a href="#"><i class="fas fa-tshirt"></i>패션·의류·뷰티</a>
                         <ol>
-                            <li><a href="#">남성의류</a></li>
-                            <li><a href="#">여성의류</a></li>
-                            <li><a href="#">잡화</a></li>
-                            <li><a href="#">뷰티</a></li>
+                            <li><a href="/Kmarket1/product/list.do?pg=1&prodCate1=10&prodCate2=10&type=1">여성의류</a></li>
+                            <li><a href="/Kmarket1/product/list.do?pg=1&prodCate1=10&prodCate2=11&type=1">남성의류</a></li>
+                            <li><a href="/Kmarket1/product/list.do?pg=1&prodCate1=10&prodCate2=12&type=1">진/캐쥬얼</a></li>
+                            <li><a href="/Kmarket1/product/list.do?pg=1&prodCate1=10&prodCate2=13&type=1">신발/가방</a></li>
+                            <li><a href="/Kmarket1/product/list.do?pg=1&prodCate1=10&prodCate2=14&type=1">주얼리/시계</a></li>
+                            <li><a href="/Kmarket1/product/list.do?pg=1&prodCate1=10&prodCate2=15&type=1">아웃도어</a></li>
                         </ol>
                     </li>
                     <li>
@@ -141,7 +163,7 @@
                                 <span>${product.discount}%</span>
                             </div>
                             <div class="discount-price">
-                                <ins>27,000</ins>
+                                <ins>${product.price * ((100 - product.discount)/100)}</ins>
                             </div>
                         </nav>
                         <nav>

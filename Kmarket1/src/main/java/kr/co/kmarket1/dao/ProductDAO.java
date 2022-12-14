@@ -52,6 +52,7 @@ public class ProductDAO extends DBHelper{
 		logger.debug("cate1 : " + cate1s);
 		return cate1s;
 	}
+	
 	// 상품 상세 정보 불러오기
 	public ProductVO selectProduct(String prodNo) {
 		ProductVO product = null;
@@ -101,13 +102,13 @@ public class ProductDAO extends DBHelper{
 		logger.debug("product : " + product);
 		return product;
 	}
-	// 상품 리스트 불러오기
-	public List<ProductVO> selectProducts(String prodCate1, String prodCate2, int start) {
+	// 상품 리스트 불러오기1
+	public List<ProductVO> selectProducts1(String prodCate1, String prodCate2, int start) {
 		List<ProductVO> products = new ArrayList<>();
 		try {
-			logger.info("selectProducts start...");
+			logger.info("selectProducts1 start...");
 			conn = getConnection();
-			psmt = conn.prepareStatement(ProductSQL.SELECT_PRODUCTS);
+			psmt = conn.prepareStatement(ProductSQL.SELECT_PRODUCTS1);
 			psmt.setString(1, prodCate1);
 			psmt.setString(2, prodCate2);
 			psmt.setInt(3, start);
@@ -149,10 +150,270 @@ public class ProductDAO extends DBHelper{
 		}catch(Exception e) {
 			logger.error(e.getMessage());
 		}
-		logger.debug("products : " + products);
+		logger.debug("products1 : " + products);
 
 		return products;
 	}
+	// 상품 리스트 불러오기2
+		public List<ProductVO> selectProducts2(String prodCate1, String prodCate2, int start) {
+			List<ProductVO> products = new ArrayList<>();
+			try {
+				logger.info("selectProducts2 start...");
+				conn = getConnection();
+				psmt = conn.prepareStatement(ProductSQL.SELECT_PRODUCTS2);
+				psmt.setString(1, prodCate1);
+				psmt.setString(2, prodCate2);
+				psmt.setInt(3, start);
+				
+				rs = psmt.executeQuery();
+				while(rs.next()) {
+					ProductVO product = new ProductVO();
+					product.setProdNo(rs.getInt(1));
+					product.setProdCate1(rs.getInt(2));
+					product.setProdCate2(rs.getInt(3));
+					product.setProdName(rs.getString(4));
+					product.setDescript(rs.getString(5));
+					product.setCompany(rs.getString(6));
+					product.setSeller(rs.getString(7));
+					product.setPrice(rs.getInt(8));
+					product.setDiscount(rs.getInt(9));
+					product.setPoint(rs.getInt(10));
+					product.setStock(rs.getInt(11));
+					product.setSold(rs.getInt(12));
+					product.setDelivery(rs.getInt(13));
+					product.setHit(rs.getInt(14));
+					product.setScore(rs.getInt(15));
+					product.setReview(rs.getInt(16));
+					product.setThumb1(rs.getString(17));
+					product.setThumb2(rs.getString(18));
+					product.setThumb3(rs.getString(19));
+					product.setDetail(rs.getString(20));
+					product.setStatus(rs.getString(21));
+					product.setDuty(rs.getString(22));
+					product.setReceipt(rs.getString(23));
+					product.setBizType(rs.getString(24));
+					product.setOrigin(rs.getString(25));
+					product.setIp(rs.getString(26));
+					product.setRdate(rs.getString(27));
+					
+					products.add(product);
+				}
+				close();
+			}catch(Exception e) {
+				logger.error(e.getMessage());
+			}
+			logger.debug("products2 : " + products);
+
+			return products;
+		}
+		// 상품 리스트 불러오기3
+		public List<ProductVO> selectProducts3(String prodCate1, String prodCate2, int start) {
+			List<ProductVO> products = new ArrayList<>();
+			try {
+				logger.info("selectProducts3 start...");
+				conn = getConnection();
+				psmt = conn.prepareStatement(ProductSQL.SELECT_PRODUCTS3);
+				psmt.setString(1, prodCate1);
+				psmt.setString(2, prodCate2);
+				psmt.setInt(3, start);
+				
+				rs = psmt.executeQuery();
+				while(rs.next()) {
+					ProductVO product = new ProductVO();
+					product.setProdNo(rs.getInt(1));
+					product.setProdCate1(rs.getInt(2));
+					product.setProdCate2(rs.getInt(3));
+					product.setProdName(rs.getString(4));
+					product.setDescript(rs.getString(5));
+					product.setCompany(rs.getString(6));
+					product.setSeller(rs.getString(7));
+					product.setPrice(rs.getInt(8));
+					product.setDiscount(rs.getInt(9));
+					product.setPoint(rs.getInt(10));
+					product.setStock(rs.getInt(11));
+					product.setSold(rs.getInt(12));
+					product.setDelivery(rs.getInt(13));
+					product.setHit(rs.getInt(14));
+					product.setScore(rs.getInt(15));
+					product.setReview(rs.getInt(16));
+					product.setThumb1(rs.getString(17));
+					product.setThumb2(rs.getString(18));
+					product.setThumb3(rs.getString(19));
+					product.setDetail(rs.getString(20));
+					product.setStatus(rs.getString(21));
+					product.setDuty(rs.getString(22));
+					product.setReceipt(rs.getString(23));
+					product.setBizType(rs.getString(24));
+					product.setOrigin(rs.getString(25));
+					product.setIp(rs.getString(26));
+					product.setRdate(rs.getString(27));
+					
+					products.add(product);
+				}
+				close();
+			}catch(Exception e) {
+				logger.error(e.getMessage());
+			}
+			logger.debug("products3 : " + products);
+
+			return products;
+		}
+		// 상품 리스트 불러오기4
+		public List<ProductVO> selectProducts4(String prodCate1, String prodCate2, int start) {
+			List<ProductVO> products = new ArrayList<>();
+			try {
+				logger.info("selectProducts4 start...");
+				conn = getConnection();
+				psmt = conn.prepareStatement(ProductSQL.SELECT_PRODUCTS4);
+				psmt.setString(1, prodCate1);
+				psmt.setString(2, prodCate2);
+				psmt.setInt(3, start);
+				
+				rs = psmt.executeQuery();
+				while(rs.next()) {
+					ProductVO product = new ProductVO();
+					product.setProdNo(rs.getInt(1));
+					product.setProdCate1(rs.getInt(2));
+					product.setProdCate2(rs.getInt(3));
+					product.setProdName(rs.getString(4));
+					product.setDescript(rs.getString(5));
+					product.setCompany(rs.getString(6));
+					product.setSeller(rs.getString(7));
+					product.setPrice(rs.getInt(8));
+					product.setDiscount(rs.getInt(9));
+					product.setPoint(rs.getInt(10));
+					product.setStock(rs.getInt(11));
+					product.setSold(rs.getInt(12));
+					product.setDelivery(rs.getInt(13));
+					product.setHit(rs.getInt(14));
+					product.setScore(rs.getInt(15));
+					product.setReview(rs.getInt(16));
+					product.setThumb1(rs.getString(17));
+					product.setThumb2(rs.getString(18));
+					product.setThumb3(rs.getString(19));
+					product.setDetail(rs.getString(20));
+					product.setStatus(rs.getString(21));
+					product.setDuty(rs.getString(22));
+					product.setReceipt(rs.getString(23));
+					product.setBizType(rs.getString(24));
+					product.setOrigin(rs.getString(25));
+					product.setIp(rs.getString(26));
+					product.setRdate(rs.getString(27));
+					
+					products.add(product);
+				}
+				close();
+			}catch(Exception e) {
+				logger.error(e.getMessage());
+			}
+			logger.debug("products4 : " + products);
+
+			return products;
+		}
+		// 상품 리스트 불러오기5
+		public List<ProductVO> selectProducts5(String prodCate1, String prodCate2, int start) {
+			List<ProductVO> products = new ArrayList<>();
+			try {
+				logger.info("selectProducts5 start...");
+				conn = getConnection();
+				psmt = conn.prepareStatement(ProductSQL.SELECT_PRODUCTS5);
+				psmt.setString(1, prodCate1);
+				psmt.setString(2, prodCate2);
+				psmt.setInt(3, start);
+				
+				rs = psmt.executeQuery();
+				while(rs.next()) {
+					ProductVO product = new ProductVO();
+					product.setProdNo(rs.getInt(1));
+					product.setProdCate1(rs.getInt(2));
+					product.setProdCate2(rs.getInt(3));
+					product.setProdName(rs.getString(4));
+					product.setDescript(rs.getString(5));
+					product.setCompany(rs.getString(6));
+					product.setSeller(rs.getString(7));
+					product.setPrice(rs.getInt(8));
+					product.setDiscount(rs.getInt(9));
+					product.setPoint(rs.getInt(10));
+					product.setStock(rs.getInt(11));
+					product.setSold(rs.getInt(12));
+					product.setDelivery(rs.getInt(13));
+					product.setHit(rs.getInt(14));
+					product.setScore(rs.getInt(15));
+					product.setReview(rs.getInt(16));
+					product.setThumb1(rs.getString(17));
+					product.setThumb2(rs.getString(18));
+					product.setThumb3(rs.getString(19));
+					product.setDetail(rs.getString(20));
+					product.setStatus(rs.getString(21));
+					product.setDuty(rs.getString(22));
+					product.setReceipt(rs.getString(23));
+					product.setBizType(rs.getString(24));
+					product.setOrigin(rs.getString(25));
+					product.setIp(rs.getString(26));
+					product.setRdate(rs.getString(27));
+					
+					products.add(product);
+				}
+				close();
+			}catch(Exception e) {
+				logger.error(e.getMessage());
+			}
+			logger.debug("products5 : " + products);
+
+			return products;
+		}
+		// 상품 리스트 불러오기6
+		public List<ProductVO> selectProducts6(String prodCate1, String prodCate2, int start) {
+			List<ProductVO> products = new ArrayList<>();
+			try {
+				logger.info("selectProducts6 start...");
+				conn = getConnection();
+				psmt = conn.prepareStatement(ProductSQL.SELECT_PRODUCTS6);
+				psmt.setString(1, prodCate1);
+				psmt.setString(2, prodCate2);
+				psmt.setInt(3, start);
+				
+				rs = psmt.executeQuery();
+				while(rs.next()) {
+					ProductVO product = new ProductVO();
+					product.setProdNo(rs.getInt(1));
+					product.setProdCate1(rs.getInt(2));
+					product.setProdCate2(rs.getInt(3));
+					product.setProdName(rs.getString(4));
+					product.setDescript(rs.getString(5));
+					product.setCompany(rs.getString(6));
+					product.setSeller(rs.getString(7));
+					product.setPrice(rs.getInt(8));
+					product.setDiscount(rs.getInt(9));
+					product.setPoint(rs.getInt(10));
+					product.setStock(rs.getInt(11));
+					product.setSold(rs.getInt(12));
+					product.setDelivery(rs.getInt(13));
+					product.setHit(rs.getInt(14));
+					product.setScore(rs.getInt(15));
+					product.setReview(rs.getInt(16));
+					product.setThumb1(rs.getString(17));
+					product.setThumb2(rs.getString(18));
+					product.setThumb3(rs.getString(19));
+					product.setDetail(rs.getString(20));
+					product.setStatus(rs.getString(21));
+					product.setDuty(rs.getString(22));
+					product.setReceipt(rs.getString(23));
+					product.setBizType(rs.getString(24));
+					product.setOrigin(rs.getString(25));
+					product.setIp(rs.getString(26));
+					product.setRdate(rs.getString(27));
+					
+					products.add(product);
+				}
+				close();
+			}catch(Exception e) {
+				logger.error(e.getMessage());
+			}
+			logger.debug("products6 : " + products);
+
+			return products;
+		}
 	public int selectCountTotal(String prodCate1, String prodCate2) {
 		
 		int total = 0;

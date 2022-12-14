@@ -254,6 +254,12 @@ main > section {
     background: url('../img/ico_free_delivery.gif') no-repeat;
     margin-top: 4px;
 }
+#product > .list > table .nonfree-delivery {
+	width: 55px;
+    height: 13px;
+    color: gray;
+}
+
 
 #product > .list > table .seller {  
     font-size: 12px;
