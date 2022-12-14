@@ -18,7 +18,19 @@ public enum MainService {
 		return dao.selectCate2();
 	}
 	
-	public List<ProductVO> selectProductCountSold(String sold) {
-		return dao.selectProductCountSold(sold);
+	public List<ProductVO> selectProductCountSold() {
+		return dao.selectProductCountSold();
+	}
+	public List<ProductVO> selectProductCountHit() {
+		return dao.selectProductCountHit();
+	}
+	public List<ProductVO> selectProductCountScore() {
+		return dao.selectProductCountScore();
+	}
+	public List<ProductVO> selectProductCountNew() {
+		return dao.selectProductCountNew();
+	}
+	public List<ProductVO> selectProductCountDiscount() {
+		return dao.selectProductCountDiscount();
 	}
 }

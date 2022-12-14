@@ -33,6 +33,9 @@ public enum MemberService{
 	public int selectCountReg(String reg) {
 		return dao.selectCountReg(reg);
 	}
+	public String selectMemberByContact(String name, String contact) {
+		return dao.selectMemberByContact(name, contact);
+	}
 	
 	// update
 	public void updateMemberForSession(String uid, String sessId) {

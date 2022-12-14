@@ -74,23 +74,24 @@ public class MainDAO extends DBHelper{
 	}
 	
 	public void selectProduct() {}
-	public List<ProductVO> selectProductCountSold(String sold) {
+	
+	public List<ProductVO> selectProductCountSold() {
 		
 		List<ProductVO> prodSd = new ArrayList<>();
 		
 		try {
 			logger.info("selectProductCountSold start...");
 			conn = getConnection();
-			psmt = conn.prepareStatement(MainSQL.SELECT_KM_PRODUCT_SOLD_COUNT);
-			psmt.setString(1, sold);
-			rs = psmt.executeQuery();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(MainSQL.SELECT_KM_PRODUCT_SOLD_COUNT);
 			
 			while(rs.next()) {
 				ProductVO pdv = new ProductVO();
-				pdv.setProdName(rs.getString(1));
-				pdv.setThumb1(rs.getString(2));
-				pdv.setPrice(rs.getInt(3));
-				pdv.setDiscount(rs.getInt(4));
+				pdv.setProdNo(rs.getInt(1));
+				pdv.setProdName(rs.getString(2));
+				pdv.setThumb1(rs.getString(3));
+				pdv.setPrice(rs.getInt(4));
+				pdv.setDiscount(rs.getInt(5));
 				prodSd.add(pdv);
 			}
 			close();
@@ -100,7 +101,110 @@ public class MainDAO extends DBHelper{
 		logger.debug("prodSd : " + prodSd);
 		return prodSd;
 	}
-	public void selectProductCountHit() {}
-	public void selectProductCountScore() {}
+	public List<ProductVO> selectProductCountHit() {
+		
+		List<ProductVO> Hitpd = new ArrayList<>();
+		
+		try {
+			logger.info("selectProductCountHit start...");
+			conn = getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(MainSQL.SELECT_KM_PRODUCT_HIT_COUNT);
+			
+			while(rs.next()) {
+				ProductVO pdv = new ProductVO();
+				pdv.setProdNo(rs.getInt(1));
+				pdv.setProdName(rs.getString(2));
+				pdv.setDescript(rs.getString(3));
+				pdv.setThumb1(rs.getString(4));
+				pdv.setPrice(rs.getInt(5));
+				pdv.setDiscount(rs.getInt(6));
+				Hitpd.add(pdv);
+			}
+			close();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("Hitpd : " + Hitpd);
+		return Hitpd;
+	}
+	public List<ProductVO> selectProductCountScore() {
+		List<ProductVO> Scorepd = new ArrayList<>();
+		
+		try {
+			logger.info("selectProductCountScore start...");
+			conn = getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(MainSQL.SELECT_KM_PRODUCT_SCORE_COUNT);
+			
+			while(rs.next()) {
+				ProductVO pdv = new ProductVO();
+				pdv.setProdNo(rs.getInt(1));
+				pdv.setProdName(rs.getString(2));
+				pdv.setDescript(rs.getString(3));
+				pdv.setThumb1(rs.getString(4));
+				pdv.setPrice(rs.getInt(5));
+				pdv.setDiscount(rs.getInt(6));
+				Scorepd.add(pdv);
+			}
+			close();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("Scorepd : " + Scorepd);
+		return Scorepd;
+	}
+	public List<ProductVO> selectProductCountNew() {
+		List<ProductVO> Newpd = new ArrayList<>();
+		
+		try {
+			logger.info("selectProductCountNew start...");
+			conn = getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(MainSQL.SELECT_KM_PRODUCT_NEW_COUNT);
+			
+			while(rs.next()) {
+				ProductVO pdv = new ProductVO();
+				pdv.setProdNo(rs.getInt(1));
+				pdv.setProdName(rs.getString(2));
+				pdv.setDescript(rs.getString(3));
+				pdv.setThumb1(rs.getString(4));
+				pdv.setPrice(rs.getInt(5));
+				pdv.setDiscount(rs.getInt(6));
+				Newpd.add(pdv);
+			}
+			close();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("Newpd : " + Newpd);
+		return Newpd;
+	}
+	public List<ProductVO> selectProductCountDiscount() {
+		List<ProductVO> Discountpd = new ArrayList<>();
+		
+		try {
+			logger.info("selectProductCountDiscount start...");
+			conn = getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(MainSQL.SELECT_KM_PRODUCT_DISCOUNT_COUNT);
+			
+			while(rs.next()) {
+				ProductVO pdv = new ProductVO();
+				pdv.setProdNo(rs.getInt(1));
+				pdv.setProdName(rs.getString(2));
+				pdv.setDescript(rs.getString(3));
+				pdv.setThumb1(rs.getString(4));
+				pdv.setPrice(rs.getInt(5));
+				pdv.setDiscount(rs.getInt(6));
+				Discountpd.add(pdv);
+			}
+			close();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("Discountpd : " + Discountpd);
+		return Discountpd;
+	}
 	
 }

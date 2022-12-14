@@ -108,7 +108,7 @@ let isHpOk = false;
 				
 				setTimeout(function(){
 					$.ajax({
-						url: '/Kmarket1/user/emailAuth.do',
+						url: '/Kmarket1/member/emailAuth.do',
 						method: 'GET',
 						data: {"email":email},
 						dataType: 'json',
