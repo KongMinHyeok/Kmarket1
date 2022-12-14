@@ -65,6 +65,27 @@ header > .top > div > a:hover{
 .fa, .far, .fas {
     font-family: "Font Awesome 5 Free";
 }
+.fa-circle-check::before{content: "\f111";}
+#member_gnb > li:nth-child(1) > a > i.on::before{content: "\f058";}
+#member_gnb > li:nth-child(1) > a > i.off::before{content: "\f111";}
+#member_gnb > li:nth-child(2) > a > i.on::before{content: "\f058";}
+#member_gnb > li:nth-child(2) > a > i.off::before{content: "\f111";}
+.fa-solid {
+    font-family: "Font Awesome 5 Free";
+}
+.fa-solid{font-weight: 900;}
+.fa-solid{
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1;
+}
+.fa-solid {
+    font-family: "Font Awesome 5 Free";
+}
 
 header > .logo{
     height: 115px;

@@ -20,6 +20,7 @@ public class MemberSQL {
 	public static final String SELECT_TERMS = "select * from `km_member_terms`";
 	public static final String SELECT_COUNT_UID = "select count(*) from `km_member` where `uid`=?";
 	public static final String SELECT_COUNT_REG = "select count(*) from `km_member` where `bizRegNum`=?";
+	public static final String SELECT_MEMBER_BY_CONTACT = "select * from `km_member` where `name`=? and `email`=?";
 	
 	// update
 	public static final String UPDATE_MEMBER_FOR_SESSION ="update `km_member` set `sessId`=?, `sessDateLimit`=DATE_ADD(NOW(), INTERVAL 3 DAY) where `uid`=?";
