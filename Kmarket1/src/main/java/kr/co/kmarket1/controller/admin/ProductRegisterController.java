@@ -9,7 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kr.co.kmarket1.dao.ProductDAO;
+
+import kr.co.kmarket1.dao.AdminDAO;
 import kr.co.kmarket1.vo.ProductVO;
 
 @WebServlet("/admin/productRegister.do")
@@ -29,8 +30,10 @@ public class ProductRegisterController extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+			
 		//데이터 수신
+		String prodCate1 = req.getParameter("category1");
+		String prodCate2 = req.getParameter("category2");
 		String prodName = req.getParameter("prodName");
 		String descript = req.getParameter("descript");
 		String company  = req.getParameter("company");
@@ -51,6 +54,8 @@ public class ProductRegisterController extends HttpServlet {
 		
 		ProductVO vo = new ProductVO();
 		
+		vo.setProdCate1(prodCate1);
+		vo.setProdCate2(prodCate2);
 		vo.setProdName(prodName);
 		vo.setDescript(descript);
 		vo.setCompany(company);
@@ -69,8 +74,9 @@ public class ProductRegisterController extends HttpServlet {
 		vo.setBizType(bizType);
 		vo.setOrigin(origin);
 		
-		ProductDAO.getInstance().insertProduct(vo);;
-		
+		AdminDAO.getInstance().insertProductRegister(vo);
+	
+		resp.sendRedirect("/Kmarket1/member/login.do");
 	}
 	
 }

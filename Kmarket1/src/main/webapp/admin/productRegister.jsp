@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="./_header.jsp"/>
         <main>
             <aside>
@@ -122,15 +123,9 @@
                                     <td>
                                         <select name="category1">
                                             <option value="cate0">1차 분류 선택</option>
-                                            <option value="cate10">브랜드패션</option>
-                                            <option value="cate11">패션의류·잡화·뷰티</option>
-                                            <option value="cate12">유아동</option>
-                                            <option value="cate13">식품·생필품</option>
-                                            <option value="cate14">홈데코·문구·취미·반려</option>
-                                            <option value="cate15">컴퓨터·디지털·가전</option>
-                                            <option value="cate16">스포츠·건강·렌탈</option>
-                                            <option value="cate17">자동차·공구</option>
-                                            <option value="cate18">여행·도서·티켓·e쿠폰</option>
+                                            <c:forEach var="c1" items="${cate1s}">
+                                            	<option value="${c1.cate1}">${c1.c1Name}</option>
+                                            </c:forEach>
                                         </select>
                                     </td>
                                 </tr>
@@ -139,15 +134,6 @@
                                     <td>
                                         <select name="category2">
                                             <option value="cate0">2차 분류 선택</option>
-                                            <option value="cate10">브랜드 여성의류</option>
-                                            <option value="cate11">브랜드 남성의류</option>
-                                            <option value="cate12">브랜드 진/캐쥬얼</option>
-                                            <option value="cate13">브랜드 신발/가방</option>
-                                            <option value="cate14">브랜드 쥬얼리/시계</option>
-                                            <option value="cate15">브랜드 아웃도어</option>
-                                            <option value="cate22">가전·디지털</option>
-                                            <option value="cate23">식품·생필품</option>
-                                            <option value="cate24">홈·문구·취미</option>
                                         </select>
                                     </td>
                                 </tr>
@@ -160,71 +146,71 @@
                                 <tr>
                                     <td>상품명</td>
                                     <td>
-                                        <input type="text">
+                                        <input type="text" name="prodName">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>기본설명</td>
                                     <td>
                                         <span>상품명 하단에 상품에 대한 추가적인 설명이 필요한 경우에 입력</span>
-                                        <input type="text">
+                                        <input type="text" name="descript">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>제조사</td>
                                     <td>
-                                        <input type="text">
+                                        <input type="text" name="company">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>판매가격</td>
                                     <td>
-                                        <input type="text"> 원
+                                        <input type="text" name="price"> 원
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>할인율</td>
                                     <td>
                                         <span>0을 입력하면 할인율 없음</span>
-                                        <input type="text"> %
+                                        <input type="text" name="discount"> %
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>포인트</td>
                                     <td>
                                         <span>0을 입력하면 포인트 없음</span>
-                                        <input type="text"> 원
+                                        <input type="text" name="point"> 원
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>재고수량</td>
                                     <td>
-                                        <input type="text"> 개
+                                        <input type="text" name="stock"> 개
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>배송비</td>
                                     <td>
                                         <span>0을 입력하면 배송비 무료</span>
-                                        <input type="text"> 원
+                                        <input type="text" name="delivery"> 원
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>상품 썸네일</td>
                                     <td>
                                         <span>크기 190 x 190, 상품 목록에 출력될 이미지 입니다.</span>
-                                        <input type="file">
+                                        <input type="file" name="thumb1">
                                         <span>크기 230 x 230, 상품 메인에 출력될 이미지 입니다.</span>
-                                        <input type="file">
+                                        <input type="file" name="thumb2">
                                         <span>크기 456 x 456, 상품 상세에 출력될 이미지 입니다.</span>
-                                        <input type="file">
+                                        <input type="file" name="thumb3">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>상세 상품정보</td>
                                     <td>
                                         <span>크기 가로 940px 높이 제약없음, 크기 최대 1MB, 상세페이지 상품정보에 출력될 이미지 입니다.</span>
-                                        <input type="file">
+                                        <input type="file" name="detail">
                                     </td>
                                 </tr>
                             </table>
@@ -236,31 +222,31 @@
                                 <tr>
                                     <td>상품상태</td>
                                     <td>
-                                        <input type="text" placeholder="새상품">
+                                        <input type="text" name="status" placeholder="새상품">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>부가세 면세여부</td>
                                     <td>
-                                        <input type="text" placeholder="과세상품">
+                                        <input type="text" name="duty" placeholder="과세상품">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>영수증발행</td>
                                     <td>
-                                        <input type="text" placeholder="발행가능 - 신용카드 전표, 온라인 현금 영수증">
+                                        <input type="text" name="receipt" placeholder="발행가능 - 신용카드 전표, 온라인 현금 영수증">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>사업자구분</td>
                                     <td>
-                                        <input type="text" placeholder="사업자 판매자">
+                                        <input type="text" name="bizType" placeholder="사업자 판매자">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>원산지</td>
                                     <td>
-                                        <input type="text" placeholder="국내산">
+                                        <input type="text" name="origin" placeholder="국내산">
                                     </td>
                                 </tr>
                             </table>

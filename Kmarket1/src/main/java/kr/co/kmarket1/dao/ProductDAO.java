@@ -33,7 +33,7 @@ public class ProductDAO extends DBHelper{
 			logger.info("selectCate1 start...");
 			
 			conn = getConnection();
-			psmt = conn.prepareStatement(MainSQL.SELECT_CATE1);
+			psmt = conn.prepareStatement(MainSQL.SELECT_KM_PRODUCT_CATE1);
 			psmt.setString(1, c1Name);
 			
 			rs = psmt.executeQuery();
