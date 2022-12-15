@@ -1,7 +1,6 @@
 package kr.co.kmarket1;
 
-import java.io.IOException;
-import java.util.List;
+public class IndexController {
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -37,6 +36,5 @@ public class IndexController extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	}
-	
 	
 }

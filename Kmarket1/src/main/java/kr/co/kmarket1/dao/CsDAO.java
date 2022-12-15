@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import kr.co.kmarket1.db.CsSQL;
 import kr.co.kmarket1.db.DBHelper;
 import kr.co.kmarket1.vo.CsNoticeVO;
+import kr.co.kmarket1.vo.CsQnaVO;
 
 public class CsDAO extends DBHelper{
 	private static CsDAO instance = new CsDAO();
@@ -56,7 +57,7 @@ public class CsDAO extends DBHelper{
 		return notice;
 	}
 	
-	public List<CsNoticeVO> selectNotices(int start) {
+	public List<CsNoticeVO> selectNotices() {
 		
 		List<CsNoticeVO> notices = new ArrayList<>();
 		
@@ -64,9 +65,8 @@ public class CsDAO extends DBHelper{
 			logger.info("selectNotices call...");
 			
 			conn = getConnection();
-			psmt = conn.prepareStatement(CsSQL.SELECT_NOTICES);
-			psmt.setInt(1, start);
-			rs = psmt.executeQuery();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(CsSQL.SELECT_NOTICES);
 			
 			while(rs.next()) {
 				CsNoticeVO notice = new CsNoticeVO();
@@ -77,8 +77,9 @@ public class CsDAO extends DBHelper{
 				notice.setTitle(rs.getString(5));
 				notice.setContent(rs.getString(6));
 				notice.setHit(rs.getInt(7));
-				notice.setRegip(rs.getString(8));
-				notice.setRdate(rs.getString(9).substring(2, 10));
+				notice.setUid(rs.getString(8));
+				notice.setRegip(rs.getString(9));
+				notice.setRdate(rs.getString(10).substring(2, 10));
 				
 				notices.add(notice);
 			}
@@ -90,6 +91,38 @@ public class CsDAO extends DBHelper{
 		return notices;
 	}
 	public void selectFaq() {}
-	public void selectQna() {}
+	public List<CsQnaVO> selectQnas() {
+		
+		List<CsQnaVO> Qnas = new ArrayList<>();
+		
+		try {
+			logger.info("selectQna call...");
+			
+			conn = getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(CsSQL.SELECT_QNAS);
+			
+			while(rs.next()) {
+				CsQnaVO qna = new CsQnaVO();
+				qna.setNo(rs.getInt(1));
+				qna.setParent(rs.getInt(2));
+				qna.setComment(rs.getInt(3));
+				qna.setCate(rs.getString(4));
+				qna.setTitle(rs.getString(5));
+				qna.setContent(rs.getString(6));
+				qna.setHit(rs.getInt(7));
+				qna.setUid(rs.getString(8));
+				qna.setRegip(rs.getString(9));
+				qna.setRdate(rs.getString(10).substring(2, 10));
+				
+				Qnas.add(qna);
+			}
+			close();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("Qnas : " + Qnas);
+		return Qnas;
+	}
 	
 }
