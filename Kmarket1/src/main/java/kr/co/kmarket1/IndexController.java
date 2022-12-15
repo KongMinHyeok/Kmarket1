@@ -14,7 +14,7 @@ import kr.co.kmarket1.dao.ProductDAO;
 import kr.co.kmarket1.service.MainService;
 import kr.co.kmarket1.vo.Cate1VO;
 
-@WebServlet("/index.do")
+@WebServlet("/main/index.do")
 public class IndexController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	private MainService service = MainService.instance;

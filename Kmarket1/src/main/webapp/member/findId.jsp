@@ -78,6 +78,14 @@ let isEmailAuthCodeOk = false;
 </script>
 	<main id="member">
     	<div class="findId">
+    			<div class="findTabContainer">
+                    <div class="findTab tabId on" onclick="location.href='/Kmarket1/member/findId.do';" style="cursor:pointer">
+                        <a href="/Kmarket1/member/findId.do" class="on">아이디 찾기</a>
+                    </div>
+                    <div class="findTab tabPw" onclick="location.href='/Kmarket1/member/findPw.do';" style="cursor:pointer">
+                        <a href="/Kmarket1/member/findPw.do">비밀번호 재설정</a>
+                    </div>
+                </div>
                	<ul id="member_gnb">
                     <li>
                         <a>

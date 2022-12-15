@@ -313,7 +313,7 @@
     box-sizing: border-box;
 }
 #member_gnb > li:nth-of-type(1){
-    border-top: 0;
+    /* border-top: 0; */
 }
 #member_gnb > li > a{
     display: block;
@@ -363,4 +363,62 @@
     font-weight: bolder;
     margin-top: 10px;
     height: 45px;
+}
+.findTabContainer{
+	padding: 0 !important;
+	height: 60px;
+}
+.findTab{
+	position: relative;
+    float: left;
+    width: 50%;
+    height: 60px;
+    text-align: center;
+
+}
+.findTab > a{
+	display: block;
+	position: absolute;
+	top: 18px;
+	left: 80px;
+	font-size: 18px;
+    background-color: #fefefe;
+    color: #333;
+}
+.findTab.on{
+	border-bottom: 1px solid #0e6ad3;
+	color: #0e6ad3;
+}
+.findTab.off{
+	border-bottom: 0;
+	color: black;
+}
+.findTab > a.on{
+	display: block;
+	position: absolute;
+	top: 18px;
+	left: 80px;
+	font-size: 18px;
+    background-color: #fefefe;
+    color: #0e6ad3;
+}	
+.findTab > a.off{
+	display: block;
+	position: absolute;
+	top: 18px;
+	left: 80px;
+	font-size: 18px;
+    background-color: #fefefe;
+    color: #333;
+}
+
+/* findPw */
+.findPwDiv{
+	display: block !important;
+	position: relative;
+	top: 35px;	
+}	
+.findPwA{
+	position: relative;
+	top: 13px;
 }
