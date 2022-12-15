@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import kr.co.kmarket1.service.CsService;
 import kr.co.kmarket1.vo.CsNoticeVO;
+import kr.co.kmarket1.vo.CsQnaVO;
 
 @WebServlet("/cs/index.do")
 public class IndexController extends HttpServlet{
@@ -26,25 +27,19 @@ public class IndexController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		String pg = req.getParameter("pg");
-		String search = req.getParameter("search");
 		int currentPage =1;
-		int start;
 		int total = 0;
 		
 		if(pg != null) {
 			currentPage = Integer.parseInt(pg);
 		}
 		
-		start = (currentPage - 1)*10;
 		
-	
-		List<CsNoticeVO> notices = null;
-		if(search == null) {
-			notices = service.selectNotices(start);
-		}else {
-		}
+		List<CsNoticeVO> notices = service.selectNotices();
+		List<CsQnaVO> qnas = service.selectQnas();
 		
 		req.setAttribute("notices", notices);
+		req.setAttribute("qnas", qnas);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/index.jsp");
 		dispatcher.forward(req, resp);

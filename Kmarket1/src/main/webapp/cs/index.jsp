@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <jsp:include page="./_header.jsp"/>
 <section id="cs">
     <div class="main">
@@ -11,26 +13,12 @@
                 <a href="/Kmarket1/cs/notice/list.do?group=notice">전체보기</a>
             </h1>
             <ul>
-                <li>
-                    <a href="#" class="title">[안내] 해외결제 사칭 문자 주의</a>
-                    <span class="date">22.10.31</span>
-                </li>
-                <li>
-                    <a href="#" class="title">[안내] 해외결제 사칭 문자 주의</a>
-                    <span class="date">22.10.31</span>
-                </li>
-                <li>
-                    <a href="#" class="title">[안내] 해외결제 사칭 문자 주의</a>
-                    <span class="date">22.10.31</span>
-                </li>
-                <li>
-                    <a href="#" class="title">[안내] 해외결제 사칭 문자 주의</a>
-                    <span class="date">22.10.31</span>
-                </li>
-                <li>
-                    <a href="#" class="title">[안내] 해외결제 사칭 문자 주의</a>
-                    <span class="date">22.10.31</span>
-                </li>
+           		<c:forEach var="notice" items="${notices}">
+	                <li>
+	                    <a href="#" class="title">${notice.title}</a>
+	                    <span class="date">${notice.rdate}</span>
+	                </li>
+				</c:forEach>
             </ul>
         </section>
         <section class="faq">
@@ -62,41 +50,22 @@
         <section class="qna">
             <h1>문의하기<a href="/cs/qna/list.do?group=qna">전체보기</a></h1>
             <ul>
+            <c:forEach var="qna" items="${qnas}">
                 <li>
-                    <a href="#" class="title">[회원] 개인회원과 법인회원에 차이가 있나요?</a>
+                    <a href="#" class="title">${qna.title}</a>
                     <p>
-                        <span class="uid">chh**</span>
-                        <span class="date">22.10.31</span>
+						<c:choose>
+						<c:when test="${fn:length(qna.uid) gt 5}">
+							<span class="uid">${fn:substring (qna.uid,0,fn:length(qna.uid)-3)}***</span>
+                        </c:when>
+	                    <c:otherwise>
+                        	<span class="uid">${fn:substring (qna.uid,0,fn:length(qna.uid)-2)}**</span>
+	                    </c:otherwise>
+                        </c:choose>
+                        <span class="date">${qna.rdate}</span>
                     </p>
                 </li>
-                <li>
-                    <a href="#" class="title">[쿠폰/이벤트] 스마일포인트는 어디에 사용하나요?</a>
-                    <p>
-                        <span class="uid">chh**</span>
-                        <span class="date">22.10.31</span>
-                    </p>
-                </li>
-                <li>
-                    <a href="#" class="title">[주문/결제] 신용카드 결제 중 오류가 난 경우 어떻게 하나요?</a>
-                    <p>
-                        <span class="uid">chh**</span>
-                        <span class="date">22.10.31</span>
-                    </p>
-                </li>
-                <li>
-                    <a href="#" class="title">[배송] 주문한 상품은 언제 배송되나요?</a>
-                    <p>
-                        <span class="uid">chh**</span>
-                        <span class="date">22.10.31</span>
-                    </p>
-                </li>
-                <li>
-                    <a href="#" class="title">[취소/반품/교환] 주문을 취소하고 싶어요.</a>
-                    <p>
-                        <span class="uid">chh**</span>
-                        <span class="date">22.10.31</span>
-                    </p>
-                </li>
+            </c:forEach>
             </ul>
             <a href="/cs/write.do?group=qna" class="ask">문의글 작성 ></a>
         </section>
