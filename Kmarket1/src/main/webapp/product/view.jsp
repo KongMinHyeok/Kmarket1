@@ -12,24 +12,48 @@
     <link rel="stylesheet" href="./css/product.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script>
-    	$(function(){
-    		// count * 가격 해서 총 금액 보여주기
-    		// count 감소
-    		$(.decrease).click(function(){
-    			while('[name="num"]'){
-    				$('[name="num"]'-1)
-    				alert('되나?');
-    			}
-    		});
-    		
-    		// count 증가
-			$(.increase).click(function(){
-    			
-    		});
-    		
-    		//마지막
+    	// 페이지 로딩때부터 판매가 * 1
+    $(document).ready(function(){
+    	var countnum = $('input[name = num]').val();
+    	var num = parseInt(countnum);
+    	var total = num * ${product.price * ((100 - product.discount)/100)};
+    	$('input[name=total]').attr('value',total);
+	});
+    $(function(){
+    	// 감소 버튼 클릭시----------------------------------------------------------------
+    	$('.decrease').click(function(){
+    	var countnum = $('input[name = num]').val();
+    	if(countnum > 1){
+    	countnum--;
+    	}
+    	var num = parseInt(countnum);
+    	$('input[name=num]').attr('value',num);
+    	var total = num * ${product.price * ((100 - product.discount)/100)};
+    	$('input[name=total]').attr('value',total);
     	});
+
+    	//증가 버튼 클릭시------------------------------------------------------------------
+    	$('.increase').click(function(){
+    	var countnum = $('input[name = num]').val();
+    	countnum++;
+    	var num = parseInt(countnum);
+    	$('input[name=num]').attr('value',num);
+    	var total = num * ${product.price * ((100 - product.discount)/100)};
+    	$('input[name=total]').attr('value',total);
+    	});
+    	//장바구니 버튼 클릭시-----------------------------------------------------------------
+    	
+    	//리뷰가 있을 시 리뷰가 없다는 멘트 지우기
+    	$(function(){
+    		if('${reviews}' != null){
+    			$('.empty').hide();
+    		}
+    	});
+    	//
+    });
     </script>
+    <style>
+    </style>
 </head>
 <body>
     <div id="wrapper">
@@ -44,7 +68,7 @@
             </div>
             <div class="logo">
                 <div>
-                    <a href="#"><img src="./img/header_logo.png" alt="Kmarket" width="180px" height="49px"></a>
+                    <a href="/Kmarket1/"><img src="./img/header_logo.png" alt="Kmarket" width="180px" height="49px"></a>
                     <form action="#">
                         <input type="text" name="keyword">
                         <button>
@@ -194,7 +218,7 @@
                             <button class="increase"></button>
                         </div>
                         <div class="total">
-                            <span>35,000</span>
+                            <span><input type="text" name="total" value"" readonly"></span>
                             <em>총 상품금액</em>
                         </div>
                         <div class="button">
@@ -315,6 +339,15 @@
                         <h1>상품리뷰</h1>
                     </nav>
                     <ul>
+                    	<li>
+                    		<div class="empty">
+	                    		<h4>등록된 리뷰가 없습니다</h4>
+	                    		<h4>구매 후 첫 리뷰를 남겨주세요</h4>
+                    		</div>
+                    	</li>
+                    </ul>
+                    <ul>
+                    <!-- 여기 반복문 써야할듯 -->
                         <li>
                             <div>
                                 <h5 class="rating star1">상품평</h5>

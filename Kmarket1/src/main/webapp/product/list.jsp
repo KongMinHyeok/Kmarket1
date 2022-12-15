@@ -24,7 +24,7 @@
             </div>
             <div class="logo">
                 <div>
-                    <a href="#"><img src="./img/header_logo.png" alt="Kmarket" width="180px" height="49px"></a>
+                    <a href="/Kmarket1/"><img src="./img/header_logo.png" alt="Kmarket" width="180px" height="49px"></a>
                     <form action="#">
                         <input type="text" name="keyword">
                         <button>

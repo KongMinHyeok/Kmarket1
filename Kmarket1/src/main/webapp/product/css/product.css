@@ -745,7 +745,16 @@ footer p > strong {
     text-align: right;
     letter-spacing: -0.5px;
 }
-
+#product > .view > .info > .summary .total > span input {
+	 border:none;
+    display: inline-block;
+    line-height: 38px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #000;
+    text-align: right;
+    letter-spacing: -0.5px; 
+}
 #product > .view > .info > .summary .total > span::after {
     content: "원";
 }
@@ -823,6 +832,7 @@ footer p > strong {
 #product > .view > .review > ul > li > div {
     overflow: hidden;
 }
+
 #product > .view > .review > ul > li > div > h5 {
     float: left;
 }
