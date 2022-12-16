@@ -1,7 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:include page="/member/_header.jsp" />
 <script>
-	let success = ${success};
+	let success = '${success}';
+	
 	if(success == '100'){
 		alert('일치하는 회원이 없습니다');
 	}else if(success == '111'){
@@ -41,7 +42,7 @@
                             자동 로그인
                         </label>
                         <a href="/Kmarket1/member/findId.do">아이디찾기</a>
-                        <a href="#">비밀번호찾기</a>
+                        <a href="/Kmarket1/member/findPw.do">비밀번호찾기</a>
                         <a href="/Kmarket1/member/join.do">회원가입</a>
                     </span>
                     <a href="#" class="banner">

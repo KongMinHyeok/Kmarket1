@@ -66,6 +66,8 @@ public class RegisterSellerController extends HttpServlet{
 		seller.setName(name);
 		seller.setHp(hp);
 		seller.setRegip(regip);
+		seller.setManager(name);
+		seller.setManagerHp(hp);
 		
 		service.insertSellerMember(seller);
 		

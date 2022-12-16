@@ -21,10 +21,12 @@ public class MemberSQL {
 	public static final String SELECT_COUNT_UID = "select count(*) from `km_member` where `uid`=?";
 	public static final String SELECT_COUNT_REG = "select count(*) from `km_member` where `bizRegNum`=?";
 	public static final String SELECT_MEMBER_BY_CONTACT = "select * from `km_member` where `name`=? and `email`=?";
+	public static final String SELECT_COUNT_MEMBER_BY_CONTACT= "select count(*) from `km_member` where `name`=? and `email`=? and `uid`=?";
 	
 	// update
 	public static final String UPDATE_MEMBER_FOR_SESSION ="update `km_member` set `sessId`=?, `sessDateLimit`=DATE_ADD(NOW(), INTERVAL 3 DAY) where `uid`=?";
 	public static final String UPDATE_MEMBER_FOR_SESSION_OUT = "update `km_member` set `sessId`=NULL, `sessDateLimit`=NULL where `uid`=?";
+	public static final String UPDATE_PASS = "update `km_member` set `pass`=SHA2(?, 256) where `uid`=?";
 	
 	// delete
 }

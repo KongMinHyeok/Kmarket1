@@ -36,6 +36,9 @@ public enum MemberService{
 	public String selectMemberByContact(String name, String contact) {
 		return dao.selectMemberByContact(name, contact);
 	}
+	public int selectMemberByContact(String name, String contact, String uid) {
+		return dao.selectMemberByContact(name, contact, uid);
+	}
 	
 	// update
 	public void updateMemberForSession(String uid, String sessId) {
@@ -44,6 +47,10 @@ public enum MemberService{
 	public void updateMemberForSessionOut(String uid) {
 		dao.updateMemberForSessionOut(uid);
 	}
+	public int updatePass(String pass, String uid) {
+		return dao.updatePass(pass, uid);
+	}
+	
 	// delete
 	
 	

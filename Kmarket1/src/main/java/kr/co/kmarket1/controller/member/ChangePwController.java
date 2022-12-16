@@ -14,8 +14,8 @@ import com.google.gson.JsonObject;
 
 import kr.co.kmarket1.service.MemberService;
 
-@WebServlet("/member/findPw.do")
-public class FindPwController extends HttpServlet{
+@WebServlet("/member/changePw.do")
+public class ChangePwController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	private MemberService service = MemberService.INSTANCE;
 	
@@ -24,15 +24,19 @@ public class FindPwController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/member/findPw.jsp");
+		String id = req.getParameter("id");
+		req.setAttribute("id", id);
+		
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/member/changePw.jsp");
 		dispatcher.forward(req, resp);
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String pass = req.getParameter("pass");
 		String id = req.getParameter("id");
 		
-		int result = service.selectCountUid(id);
+		int result = service.updatePass(pass, id);
 		
 		JsonObject json = new JsonObject();
 		json.addProperty("result", result);
