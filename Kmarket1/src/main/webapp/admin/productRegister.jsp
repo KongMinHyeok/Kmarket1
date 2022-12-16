@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="./_header.jsp"/>
+<!-- 마지막에 /admin/product 폴더 만들고 이름 list로 바꾸고 경로 재설정 해야됨 -->
 <script type="text/javascript">
 	$(function(){
 		$("select[name=category1]").click(function(){
@@ -55,7 +56,7 @@
                 <a href="#"><i class="fa fa-box-open" aria-hidden="true"></i>상품관리</a>
                 <ol>
                     <li><a href="/Kmarket1/admin/productList.do">상품현황</a></li>
-                    <li><a href="/kmarket1/admin/productRegister.do">상품등록</a></li>
+                    <li><a href="/Kmarket1/admin/productRegister.do">상품등록</a></li>
                     <li><a href="#">재고관리</a></li>
                 </ol>
             </li>
@@ -102,6 +103,7 @@
                             </td>
                         </tr>
                         <tr>
+                        	<!-- ajax로 처리함 -->
                             <td>2차 분류</td>
                             <td>
                                 <select name="category2">
@@ -132,6 +134,13 @@
                             <td>제조사</td>
                             <td>
                                 <input type="text" name="company">
+                            </td>
+                        </tr>
+                        <!-- 판매자(seller) 추가함 -->
+                        <tr>
+                            <td>판매자</td>
+                            <td>
+                                <input type="text" name="seller">
                             </td>
                         </tr>
                         <tr>

@@ -83,22 +83,22 @@ public class ProductRegisterController extends HttpServlet {
 		String prodName  = mr.getParameter("prodName"); 
 		String descript  = mr.getParameter("descript"); 
 		String company	 = mr.getParameter("company");  
-		String seller	 = mr.getParameter("seller");   
+		String seller	 = mr.getParameter("seller");  
 		String price	 = mr.getParameter("price");	
 		String discount  = mr.getParameter("discount");
 		String point	 = mr.getParameter("point");	
 		String stock	 = mr.getParameter("stock");	
 		String delivery	 = mr.getParameter("delivery");	
-		String thumb1	= "/Kmarket1/file/"+newFiles.get(0);	
-		String thumb2	= "/Kmarket1/file/"+newFiles.get(1);	
-		String thumb3	= "/Kmarket1/file/"+newFiles.get(2);	
-		String detail	= "/Kmarket1/file/"+newFiles.get(3);	
-		String status	= mr.getParameter("status");	
-		String duty		= mr.getParameter("duty");		
-		String receipt	= mr.getParameter("receipt");	
-		String bizType	= mr.getParameter("bizType");	
-		String origin	= mr.getParameter("origin");	
-		String ip		= req.getRemoteAddr();
+		String thumb1	 = "/Kmarket1/file/"+newFiles.get(0);	
+		String thumb2	 = "/Kmarket1/file/"+newFiles.get(1);	
+		String thumb3	 = "/Kmarket1/file/"+newFiles.get(2);	
+		String detail	 = "/Kmarket1/file/"+newFiles.get(3);	
+		String status	 = mr.getParameter("status");	
+		String duty		 = mr.getParameter("duty");		
+		String receipt	 = mr.getParameter("receipt");	
+		String bizType	 = mr.getParameter("bizType");	
+		String origin	 = mr.getParameter("origin");	
+		String ip		 = req.getRemoteAddr();
 		
 		ProductVO vo = new ProductVO();
 		
@@ -125,6 +125,9 @@ public class ProductRegisterController extends HttpServlet {
 		vo.setIp(ip);
 		
 		AdminDAO.getInstance().insertProduct(vo);
+		
+		//productList로 리다이렉트
+		resp.sendRedirect("/Kmarket1/admin/productList.do");
 	}
 	
 }
