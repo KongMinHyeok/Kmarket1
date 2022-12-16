@@ -48,7 +48,7 @@
             </ol>
         </section>
         <section class="qna">
-            <h1>문의하기<a href="/cs/qna/list.do?group=qna">전체보기</a></h1>
+            <h1>문의하기<a href="/Kmarket1/cs/qna/list.do?group=qna">전체보기</a></h1>
             <ul>
             <c:forEach var="qna" items="${qnas}">
                 <li>
@@ -67,7 +67,7 @@
                 </li>
             </c:forEach>
             </ul>
-            <a href="/cs/write.do?group=qna" class="ask">문의글 작성 ></a>
+            <a href="/Kmarket1/cs/qna/write.do?group=qna" class="ask">문의글 작성 ></a>
         </section>
         <section class="tel">
             <h1>1:1 상담이 필요하신가요?</h1>

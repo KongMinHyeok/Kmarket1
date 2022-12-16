@@ -27,14 +27,7 @@ public class IndexController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		String pg = req.getParameter("pg");
-		int currentPage =1;
-		int total = 0;
-		
-		if(pg != null) {
-			currentPage = Integer.parseInt(pg);
-		}
-		
-		
+
 		List<CsNoticeVO> notices = service.selectNotices();
 		List<CsQnaVO> qnas = service.selectQnas();
 		

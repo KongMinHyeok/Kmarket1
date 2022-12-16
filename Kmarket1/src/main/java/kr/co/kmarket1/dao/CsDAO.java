@@ -36,15 +36,13 @@ public class CsDAO extends DBHelper{
 			if(rs.next()) {
 				notice = new CsNoticeVO();
 				notice.setNo(rs.getInt(1));
-				notice.setParent(rs.getInt(2));
-				notice.setComment(rs.getInt(3));
-				notice.setCate(rs.getString(4));
-				notice.setTitle(rs.getString(5));
-				notice.setContent(rs.getString(6));
-				notice.setHit(rs.getInt(7));
-				notice.setUid(rs.getString(8));
-				notice.setRegip(rs.getString(9));
-				notice.setRdate(rs.getString(10));
+				notice.setComment(rs.getInt(2));
+				notice.setCate(rs.getString(3));
+				notice.setTitle(rs.getString(4));
+				notice.setContent(rs.getString(5));
+				notice.setUid(rs.getString(6));
+				notice.setRegip(rs.getString(7));
+				notice.setRdate(rs.getString(8));
 			}
 			
 			rs.close();
@@ -71,15 +69,13 @@ public class CsDAO extends DBHelper{
 			while(rs.next()) {
 				CsNoticeVO notice = new CsNoticeVO();
 				notice.setNo(rs.getInt(1));
-				notice.setParent(rs.getInt(2));
-				notice.setComment(rs.getInt(3));
-				notice.setCate(rs.getString(4));
-				notice.setTitle(rs.getString(5));
-				notice.setContent(rs.getString(6));
-				notice.setHit(rs.getInt(7));
-				notice.setUid(rs.getString(8));
-				notice.setRegip(rs.getString(9));
-				notice.setRdate(rs.getString(10).substring(2, 10));
+				notice.setComment(rs.getInt(2));
+				notice.setCate(rs.getString(3));
+				notice.setTitle(rs.getString(4));
+				notice.setContent(rs.getString(5));
+				notice.setUid(rs.getString(6));
+				notice.setRegip(rs.getString(7));
+				notice.setRdate(rs.getString(8).substring(2, 10));
 				
 				notices.add(notice);
 			}
@@ -90,7 +86,7 @@ public class CsDAO extends DBHelper{
 		logger.debug("notices : " + notices);
 		return notices;
 	}
-	public void selectFaq() {}
+
 	public List<CsQnaVO> selectQnas() {
 		
 		List<CsQnaVO> Qnas = new ArrayList<>();
@@ -105,15 +101,13 @@ public class CsDAO extends DBHelper{
 			while(rs.next()) {
 				CsQnaVO qna = new CsQnaVO();
 				qna.setNo(rs.getInt(1));
-				qna.setParent(rs.getInt(2));
-				qna.setComment(rs.getInt(3));
-				qna.setCate(rs.getString(4));
-				qna.setTitle(rs.getString(5));
-				qna.setContent(rs.getString(6));
-				qna.setHit(rs.getInt(7));
-				qna.setUid(rs.getString(8));
-				qna.setRegip(rs.getString(9));
-				qna.setRdate(rs.getString(10).substring(2, 10));
+				qna.setComment(rs.getInt(2));
+				qna.setCate(rs.getString(3));
+				qna.setTitle(rs.getString(4));
+				qna.setContent(rs.getString(5));
+				qna.setUid(rs.getString(6));
+				qna.setRegip(rs.getString(7));
+				qna.setRdate(rs.getString(8).substring(2, 10));
 				
 				Qnas.add(qna);
 			}
@@ -125,4 +119,132 @@ public class CsDAO extends DBHelper{
 		return Qnas;
 	}
 	
+	public int selectCountNotice(String cate) {
+		
+		int total = 0;
+		
+		try {
+			logger.info("selectCountNotice... start");
+			
+			conn = getConnection();
+			psmt = conn.prepareStatement(CsSQL.SELECT_COUNT_NOTICE);
+			psmt.setString(1, cate);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				total = rs.getInt(1);
+			}
+			
+			close();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("total : " + total);
+		return total;
+	}
+	
+	public int selectCountNotices() {
+		
+		int total = 0;
+		
+		try {
+			logger.info("selectCountNotices... start");
+			
+			conn = getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(CsSQL.SELECT_COUNT_NOTICES);
+			
+			if(rs.next()) {
+				total = rs.getInt(1);
+			}
+			
+			close();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("total : " + total);
+		return total;
+	}
+	
+	public List<CsNoticeVO> selectNoticesGroup(int start) {
+		
+		List<CsNoticeVO> notices = new ArrayList<>();
+		
+		try {
+			logger.info("selectNoticesGroup start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(CsSQL.SELECT_NOTICES_GROUP);
+			psmt.setInt(1, start);
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				CsNoticeVO notice = new CsNoticeVO();
+				notice.setNo(rs.getInt(1));
+				notice.setTitle(rs.getString(2));
+				notice.setRdate(rs.getString(3).substring(2,10));
+				
+				notices.add(notice);
+			}
+			close();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("notices" + notices);
+		return notices;
+	}
+	public List<CsNoticeVO> selectNoticesCate(String cate, int start) {
+		
+		List<CsNoticeVO> notices = new ArrayList<>();
+		
+		try {
+			logger.info("selectNoticesCate start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(CsSQL.SELECT_NOTICES_CATE);
+			psmt.setString(1, cate);
+			psmt.setInt(2, start);
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				CsNoticeVO notice = new CsNoticeVO();
+				notice.setNo(rs.getInt(1));
+				notice.setTitle(rs.getString(2));
+				notice.setRdate(rs.getString(3));
+				
+				notices.add(notice);
+			}
+			close();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("notices" + notices);
+		
+		return notices;
+	}
+	
+	public CsNoticeVO selectArticleNotice(String no) {
+		
+		CsNoticeVO notice = null;
+		
+		try {
+			logger.info("selectArticleNotice start...");
+			
+			conn = getConnection();
+			psmt = conn.prepareStatement(CsSQL.SELECT_ARTICLE_NOTICE);
+			psmt.setString(1, no);
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				notice = new CsNoticeVO();
+				notice.setTitle(rs.getString(1));
+				notice.setRdate(rs.getString(2).substring(2, 10));
+				notice.setContent(rs.getString(3));
+			}
+			close();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("notice : " + notice );
+		return notice;
+	}
+	public void selectFaq() {}
 }

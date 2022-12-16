@@ -9,10 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kr.co.kmarket1.service.CsService;
+import kr.co.kmarket1.vo.CsNoticeVO;
+
 @WebServlet("/cs/notice/view.do")
 public class ViewController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
-
+	private CsService service = CsService.instance;
 	@Override
 	public void init() throws ServletException {
 	}
@@ -20,6 +23,20 @@ public class ViewController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		String group = req.getParameter("group");
+		String cate  = req.getParameter("cate");
+		String pg 	 = req.getParameter("pg");
+		String no 	 = req.getParameter("no");
+		
+		CsNoticeVO notice = service.selectArticleNotice(no);
+		
+		req.setAttribute("group", group);
+		req.setAttribute("cate", cate);
+		req.setAttribute("pg", pg);
+		req.setAttribute("no", no);
+		req.setAttribute("notice", notice);
+		
+			
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/notice/view.jsp");
 		dispatcher.forward(req, resp);
 	}
