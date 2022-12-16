@@ -49,6 +49,33 @@
     			$('.empty').hide();
     		}
     	});
+    	/* view에서 장바구니로 데이터 넘기기
+    	$('.cart').click(function(){
+    		let jsonData = {
+    				"prodNo": prodNo,
+    				"count": num,
+    				"price": price,
+    				"discount": discount,
+    				"point": point,
+    				"delivery": delivery,
+    				"total": total,
+    				"rdate": rdate
+    		};
+    		$.ajax({
+    			url: '/Kmarket1/product/view.do'
+    			method: 'POST',
+    			data: jsonData,
+    			dataType: 'json',
+    			success: function(data){
+    				alert('장바구니에 상품이 추가되었습니다');
+    			}
+    		});
+    	});
+    	*/
+    	// 리뷰 페이징
+    	$('.num').click(function(){
+    		alert(${num});
+    	});
     	//
     });
     </script>
@@ -173,6 +200,7 @@
                         <nav>
                             <h1>${product.seller}</h1>
                             <h2>상품번호 : ${product.prodNo}</h2>
+                            <input type="hidden" ${product.rdate}>
                         </nav>
                         <nav>
                             <h3>${product.prodName}</h3>
@@ -201,7 +229,7 @@
                             </c:otherwise>
                             </c:choose>
                             </span>
-                            <span class="arrival">모레(금) 7/8 도착예정</span>
+                            <span class="arrival">모레(${koreanDOW}) ${formatedNow} 도착예정</span>
                             <span class="desc">본 상품은 국내배송만 가능합니다.</span>
                         </nav>
                         <nav>
@@ -348,6 +376,22 @@
                     </ul>
                     <ul>
                     <!-- 여기 반복문 써야할듯 -->
+                    <!-- 
+                    	<c:forEach var="comment" items="${comments}">
+                     <li>
+                            <div>
+                                <h5 class="rating star1">상품평</h5>
+                                <span>seo******	2018-07-10</span>
+                            </div>
+                            <h3>상품명1/BLUE/L</h3>
+                            <p>
+                                가격대비 정말 괜찮은 옷이라 생각되네요 핏은 음...제가 입기엔 어깨선이 맞고 루즈핏이라 하기도 좀 힘드네요.
+                                아주 약간 루즈한정도...?그래도 이만한 옷은 없다고 봅니다 깨끗하고 포장도 괜찮고 다음에도 여기서 판매하는
+                                제품들을 구매하고 싶네요 정말 만족하고 후기 남깁니다 많이 파시길 바래요 ~ ~ ~
+                            </p>
+                        </li>
+                    </c:forEach>
+                     -->
                         <li>
                             <div>
                                 <h5 class="rating star1">상품평</h5>
@@ -409,7 +453,7 @@
                             </p>
                         </li>
                     </ul>    
-                <!-- 상품목록 페이지번호 -->
+                 <!-- 상품목록 페이지번호 -->
               <div class="paging">
                 <span class="prev">
                   <a href="#"><&nbsp;이전</a>

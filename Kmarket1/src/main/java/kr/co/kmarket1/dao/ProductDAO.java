@@ -440,9 +440,80 @@ public class ProductDAO extends DBHelper{
 
 		return total;		
 	}
+	public List<ProductVO> selectProductComments(String prodNo){
+		List<ProductVO> comments = new ArrayList<>();
+		try {
+			logger.info("selectProductComments start...");
+			
+			conn = getConnection();
+			psmt = conn.prepareStatement(ProductSQL.SELECT_COMMENTS);
+			psmt.setString(1, prodNo);
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				ProductVO comment = new ProductVO();
+				comment.setProdNo(rs.getInt(2));
+				comment.setContent(rs.getString(3));
+				comment.setUid(rs.getString(4));
+				comment.setRating(rs.getInt(5));
+				comment.setRegip(rs.getString(6));
+				comment.setRdate(rs.getString(7));
+				comments.add(comment);
+			}
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return comments;
+	}
+	// cart에 상품 넣기
+	public void insertProductCart(String uid, int prodNo, int count, int price, int discount, int point, int delivery, int total, String rdate) {
+		ProductVO cart = null;
+		try {
+			logger.info("insertProductCart...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(ProductSQL.INSERT_PRODUCT_CART);
+			psmt.setString(1, uid);
+			psmt.setInt(2, prodNo);
+			psmt.setInt(3, count);
+			psmt.setInt(4, price);
+			psmt.setInt(5, discount);
+			psmt.setInt(6, point);
+			psmt.setInt(7, delivery);
+			psmt.setInt(8, total);
+			psmt.setString(9, rdate);
+			
+			psmt.executeUpdate();
+			
+				
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
+	// 리뷰 총갯수
+	public int selectReviewCountTotal(String prodNo) {
+		int total = 0;
+		
+		try {
+			logger.info("selectCountTotal start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(ProductSQL.SELECT_REVIEW_COUNT_TOTAL);
+			psmt.setString(1, prodNo);
 
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				total = rs.getInt(1);
+			}
+			close();		
+			
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("total : " + total);
 
-	
+		return total;
+	}
 
 	
 }

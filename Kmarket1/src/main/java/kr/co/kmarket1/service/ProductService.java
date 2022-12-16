@@ -64,6 +64,25 @@ public enum ProductService {
 		public ProductVO selectProduct(String prodNo) {
 			return dao.selectProduct(prodNo);
 		};
+		
+		// 리뷰 불러오기(view 페이지)
+		public List<ProductVO> selectProductComments(String prodNo){
+			return dao.selectProductComments(prodNo);
+		}
+		
+		// 리뷰 총갯수
+		public int selectReviewCountTotal(String prodNo) {
+			return dao.selectReviewCountTotal(prodNo);
+		}
+		
+		
+		/*
+		// cart에 상품 추가
+		public ProductVO insertProductCart() {
+			return dao.insertProductCart();
+		};
+		*/
+		
 	
 
 
