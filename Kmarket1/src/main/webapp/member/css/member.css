@@ -422,3 +422,23 @@
 	position: relative;
 	top: 13px;
 }
+
+/* changePw */
+.changePw{
+    width: 500px;
+    height: auto;
+    border: 1px solid #c0c0c0;
+    box-sizing: border-box;
+    margin: 0 auto;
+    text-align: center;
+    margin-bottom: 100px;
+}
+.changePwDiv{
+	display: block !important;
+	position: relative;
+	top: 25px;
+}
+.changePwA{
+	position: relative;
+	top: 13px;
+}

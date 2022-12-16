@@ -235,6 +235,7 @@ public class MemberDAO extends DBHelper{
 		logger.info("result " + result);
 		return result;
 	}
+	
 	public String selectMemberByContact(String name, String contact) {
 		String result = null;
 		try {
@@ -248,6 +249,29 @@ public class MemberDAO extends DBHelper{
 			
 			if(rs.next()) {
 				result = rs.getString(1);
+			}
+			
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("result: " + result);
+		return result;
+	}
+	
+	public int selectMemberByContact(String name, String contact, String uid) {
+		int result = 0;
+		try {
+			logger.info("selectMemberByContact called");
+			
+			conn = getConnection();
+			psmt = conn.prepareStatement(MemberSQL.SELECT_COUNT_MEMBER_BY_CONTACT);
+			psmt.setString(1, name);
+			psmt.setString(2, contact);
+			psmt.setString(3, uid);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt(1);
 			}
 			
 		}catch(Exception e) {
@@ -287,6 +311,25 @@ public class MemberDAO extends DBHelper{
 		}catch(Exception e) {
 			logger.error(e.getMessage());
 		}
+	}
+	
+	public int updatePass(String pass, String uid) {
+		int result = 0;
+		try {
+			logger.info("updatePass called");
+			
+			conn = getConnection();
+			psmt = conn.prepareStatement(MemberSQL.UPDATE_PASS);
+			psmt.setString(1, pass);
+			psmt.setString(2, uid);
+			result = psmt.executeUpdate();
+			close();
+			
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("result " + result);
+		return result;
 	}
 	
 	// delete

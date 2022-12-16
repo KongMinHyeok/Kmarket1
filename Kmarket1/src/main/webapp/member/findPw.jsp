@@ -12,7 +12,7 @@
 				dataType: 'json',
 				success: function(data){
 					if(data.result > 0){
-						location.href="/Kmarket1/member/changePw.do";
+						location.href="/Kmarket1/member/changePwVerify.do?id=" + id;
 					}else{
 						alert('일치하는 회원 정보가 없습니다\n아이디를 다시 확인하시거나 아이디 찾기를 이용해주시기 바랍니다');
 					}
@@ -34,7 +34,7 @@
                	<ul id="member_gnb" style="height:250px;">
                     <li>
                         <a class="findPwA">
-                            비밀번호를 재설정하시려면 먼저 아이디를 확인해주세요.
+                            비밀번호를 변경하고자 하는 아이디를 입력해주세요.
                         </a>
                         <div class="findPwDiv">
                             <form action="#" method="post" onsubmit="return false;">
