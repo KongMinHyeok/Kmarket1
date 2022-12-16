@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <jsp:include page="./_header.jsp"/>
+<!-- 마지막에 /admin/product 폴더 만들고 이름 register로 바꾸고 경로 재설정 해야됨 -->
 <main>
     <aside>
         <ul id="gnb">
@@ -30,7 +31,7 @@
                 <a href="#"><i class="fa fa-box-open" aria-hidden="true"></i>상품관리</a>
                 <ol>
                     <li><a href="/Kmarket1/admin/productList.do">상품현황</a></li>
-                    <li><a href="/kmarket1/admin/productRegister.do">상품등록</a></li>
+                    <li><a href="/Kmarket1/admin/productRegister.do">상품등록</a></li>
                     <li><a href="#">재고관리</a></li>
                 </ol>
             </li>
