@@ -35,6 +35,7 @@ public class ViewController extends HttpServlet{
 		String prodNo = req.getParameter("prodNo");
 		String pg = req.getParameter("pg");
 		
+		
 		req.setAttribute("prodCate1", prodCate1);
 		req.setAttribute("prodCate2", prodCate2);
 		req.setAttribute("prodNo", prodNo);
@@ -125,7 +126,6 @@ public class ViewController extends HttpServlet{
 		comments = service.selectProductComments(prodNo);
         req.setAttribute("connents", comments);
 
-		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/product/view.jsp");
 		dispatcher.forward(req, resp);
 	}

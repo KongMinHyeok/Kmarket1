@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.co.kmarket1.dao.ProductDAO;
+import kr.co.kmarket1.vo.ProductCartVO;
 import kr.co.kmarket1.vo.ProductVO;
 
 @WebServlet("/product/cart.do")
@@ -25,6 +26,17 @@ public class CartController extends HttpServlet{
 	}
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String uid = req.getParameter("uid");
+		req.setAttribute("uid", uid);
+
+
+		// ProductDAO 객체 생성
+		ProductDAO dao = ProductDAO.getInstance();
+		List<ProductCartVO> carts = null;
+		
+		carts = dao.selectProductCarts(uid);
+		req.setAttribute("carts", carts);
+		
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/product/cart.jsp");
 		dispatcher.forward(req, resp);
@@ -34,10 +46,7 @@ public class CartController extends HttpServlet{
 		// ProductDAO 객체 생성
 		ProductDAO dao = ProductDAO.getInstance();
 		
-		List<ProductVO> products = null;
-		products = dao.insertProductCart
-				(prodCate1, prodCate2, start);
-		req.setAttribute("products", products);
+		
 
 	}
 

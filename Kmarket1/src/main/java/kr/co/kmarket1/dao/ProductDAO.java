@@ -10,7 +10,7 @@ import kr.co.kmarket1.db.DBHelper;
 
 import kr.co.kmarket1.db.MainSQL;
 import kr.co.kmarket1.vo.Cate1VO;
-
+import kr.co.kmarket1.vo.ProductCartVO;
 import kr.co.kmarket1.db.ProductSQL;
 import kr.co.kmarket1.vo.ProductVO;
 
@@ -513,6 +513,42 @@ public class ProductDAO extends DBHelper{
 		logger.debug("total : " + total);
 
 		return total;
+	}
+	// cart 목록 불러오기
+	public List<ProductCartVO> selectProductCarts(String uid) {
+		List<ProductCartVO> carts = new ArrayList<>();
+		try {
+			logger.info("selectProductCarts start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(ProductSQL.SELECT_PRODUCT_CARTS);
+			psmt.setString(1, uid);
+			
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				ProductCartVO cart = new ProductCartVO();
+				cart.setCartNo(rs.getInt(1));
+				cart.setUid(rs.getString(2));
+				cart.setProdNo(rs.getInt(3));
+				cart.setCount(rs.getInt(4));
+				cart.setPrice(rs.getInt(5));
+				cart.setDiscount(rs.getInt(6));
+				cart.setPoint(rs.getInt(7));
+				cart.setDelivery(rs.getInt(8));
+				cart.setTotal(rs.getInt(9));
+				cart.setRdate(rs.getString(10));
+				cart.setProdName(rs.getString(11));
+				cart.setDescript(rs.getString(12));
+				cart.setThumb3(rs.getString(13));
+				carts.add(cart);
+			}
+			close();
+			
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("carts : " + carts);
+		return carts;
 	}
 
 	

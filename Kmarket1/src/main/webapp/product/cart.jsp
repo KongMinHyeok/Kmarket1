@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +9,33 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="./css/common.css">
     <link rel="stylesheet" href="./css/product.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+    // 시작부터 전부다 체크 상태
+    $(document).ready(function(){
+    	$("input[type=checkbox]").prop("checked",true);
+    });
+    $(document).ready(function(){
+    	// 전체 선택
+    	$("input[name='all']").click(function(){
+        	if($("input[name='all']").prop("checked")){
+        		$("input[type=checkbox]").prop("checked",true);
+        		console.log($(this).val());
+        	} else {
+        		$("input[type=checkbox]").prop("checked",false);
+        	}
+        });
+    	
+        $("input[name='chkProduct']").change(function(){
+            if($("input[name='chkProduct']").is(":checked")){
+                console.log($(this).val());
+            }
+            else{
+                alert("체크 해제");
+            }
+        });
+    });
+    </script>
 </head>
 <body>
     <div id="wrapper">
@@ -142,75 +170,34 @@
                                 <td colspan="7">장바구니에 상품이 없습니다.</td>
                             </tr>
                             <!---->
+                            <c:forEach var="cart" items="${carts}">
                             <tr>
-                                <td><input type="checkbox" name=""></td>
+                                <td><input type="checkbox" name="chkProduct" value="${cart.prodNo}">${cart.prodNo}</td>
                                 <td>
                                     <article>
+                                    <!-- 이거 상품번호로 carts products 조인해서 이미지 들고와야할듯 -->
                                         <a href="#">
                                             <img src="./img/80x80.png" alt="상품이미지">
                                         </a>
                                         <div>
                                             <h2>
-                                                <a href="#">상품명</a>
+                                                <a href="#">${cart.prodName}</a>
                                             </h2>
-                                            <p>상품설명</p>
+                                            <p>${cart.descript}</p>
                                         </div>
                                     </article>
                                 </td>
-                                <td>1</td>
-                                <td>27,000</td>
-                                <td>5%</td>
-                                <td>270</td>
-                                <td>무료배송</td>
-                                <td>27,000</td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox" name=""></td>
-                                <td>
-                                    <article>
-                                        <a href="#">
-                                            <img src="./img/80x80.png" alt="상품이미지">
-                                        </a>
-                                        <div>
-                                            <h2>
-                                                <a href="#">상품명</a>
-                                            </h2>
-                                            <p>상품설명</p>
-                                        </div>
-                                    </article>
-                                </td>
-                                <td>1</td>
-                                <td>27,000</td>
-                                <td>5%</td>
-                                <td>270</td>
-                                <td>무료배송</td>
+                                <td>${cart.count}</td>
+                                <td>${cart.price}</td>
+                                <td>${cart.discount}%</td>
+                                <td>${cart.point}</td>
+                                <td>${cart.delivery}</td>
                                 <td>27,000</td>
                             </tr>
-                            <tr>
-                                <td><input type="checkbox" name=""></td>
-                                <td>
-                                    <article>
-                                        <a href="#">
-                                            <img src="./img/80x80.png" alt="상품이미지">
-                                        </a>
-                                        <div>
-                                            <h2>
-                                                <a href="#">상품명</a>
-                                            </h2>
-                                            <p>상품설명</p>
-                                        </div>
-                                    </article>
-                                </td>
-                                <td>1</td>
-                                <td>27,000</td>
-                                <td>5%</td>
-                                <td>270</td>
-                                <td>무료배송</td>
-                                <td>27,000</td>
-                            </tr>
+                            </c:forEach>
                         </tbody>
                     </table>
-                    <input type="button" value="선택삭제" name="del">
+                    <input type="button" value="선택삭제" name="del" class="del">
                     <div class="total">
                         <table border="0">
                             <h2>전체합계</h2>

@@ -13,65 +13,7 @@
 </head>
 <body>
     <div id="wrapper">
-        <header>
-            <div class="top">
-                <div>
-		            <a href="/Kmarket1/member/login.jsp">로그인</a>
-		            <a href="/Kmarket1/member/join.jsp">회원가입</a>
-		            <a href="/Kmarket1/member/login.jsp">마이페이지</a>
-		            <a href="/Kmarket1/product/cart.jsp"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;장바구니</a>
-                </div>
-            </div>
-            <div class="logo">
-                <div>
-                    <a href="/Kmarket1/"><img src="./img/header_logo.png" alt="Kmarket" width="180px" height="49px"></a>
-                    <form action="#">
-                        <input type="text" name="keyword">
-                        <button>
-                            <i class="fa fa-search" aria-hidden="true"></i>
-                        </button>
-                    </form>
-                </div>
-            </div>
-            <div class="menu">
-                <div>
-                    <ul>
-                        <li>
-                            <a href="#">히트상품</a>
-                        </li>
-                        <li>
-                            <a href="#">추천상품</a>
-                        </li>
-                        <li>
-                            <a href="#">최신상품</a>
-                        </li>
-                        <li>
-                            <a href="#">인기상품</a>
-                        </li>
-                        <li>
-                            <a href="#">할인상품</a>
-                        </li>
-                    </ul>
-                    <ul>
-                        <li>
-                            <a href="#">쿠폰존</a>
-                        </li>
-                        <li>
-                            <a href="#">사용후기</a>
-                        </li>
-                        <li>
-                            <a href="#">개인결제</a>
-                        </li>
-                        <li>
-                            <a href="#">고객센터</a>
-                        </li>
-                        <li>
-                            <a href="#">FAQ</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </header>
+        <jsp:include page="/product/_header.jsp" />
         <main id="product">
             <aside>
                 <ul class="category">
@@ -116,6 +58,95 @@
                         </ol>
                     </li>
                 </ul>
+                <!-- 베스트상품 배너 -->
+                    <article class="best">
+                      <h1><i class="fas fa-crown"></i>베스트상품</h1>
+                      <ol>
+                      <li>
+                          <a href="#">
+                          <div class="thumb">
+                              <i>1</i><img src="./img/sample_thumb.jpg" alt="item1" />
+                          </div>
+                          <h2>상품명</h2>
+                          <div class="org_price">
+                              <del>30,000</del><span>10%</span>
+                          </div>
+                          <div class="dis_price">
+                              <ins>27,000</ins>
+                          </div>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="#">
+                          <div class="thumb">
+                              <i>2</i><img src="./img/sample_thumb.jpg" alt="item1" />
+                          </div>
+                          <article>
+                              <h2>상품명</h2>
+                              <div class="org_price">
+                              <del>30,000</del>
+                              <span>10%</span>
+                              </div>
+                              <div class="dis_price">
+                              <ins>27,000</ins>
+                              </div>
+                          </article>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="#">
+                          <div class="thumb">
+                              <i>3</i><img src="./img/sample_thumb.jpg" alt="item1" />
+                          </div>
+                          <article>
+                              <h2>상품명</h2>
+                              <div class="org_price">
+                              <del>30,000</del>
+                              <span>10%</span>
+                              </div>
+                              <div class="dis_price">
+                              <ins>27,000</ins>
+                              </div>
+                          </article>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="#">
+                          <div class="thumb">
+                              <i>4</i><img src="./img/sample_thumb.jpg" alt="item1" />
+                          </div>
+                          <article>
+                              <h2>상품명</h2>
+                              <div class="org_price">
+                              <del>30,000</del>
+                              <span>10%</span>
+                              </div>
+                              <div class="dis_price">
+                              <ins>27,000</ins>
+                              </div>
+                          </article>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="#">
+                          <div class="thumb">
+                              <i>5</i><img src="./img/sample_thumb.jpg" alt="item1" />
+                          </div>
+                          <article>
+                              <h2>상품명</h2>
+                              <div class="org_price">
+                              <del>30,000</del>
+                              <span>10%</span>
+                              </div>
+                              <div class="dis_price">
+                              <ins>27,000</ins>
+                              </div>
+                          </article>
+                          </a>
+                      </li>
+                      </ol>
+                  </article>
+              </aside>
             </aside>
             <section class="list">
                 <!-- 제목, 페이지 네비게이션 -->
