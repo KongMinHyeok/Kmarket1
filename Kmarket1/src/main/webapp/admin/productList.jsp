@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <jsp:include page="./_header.jsp"/>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 마지막에 /admin/product 폴더 만들고 이름 register로 바꾸고 경로 재설정 해야됨 -->
 <main>
     <aside>
@@ -89,90 +90,36 @@
                     <th>조회</th>
                     <th>관리</th>
                 </tr>
+                <c:forEach var="vo" items="${products}">
                 <tr>
-                    <td>
-                        <label>
-                            <input type="checkbox" name="all">
-                        </label>
-                    </td>
-                    <td>
-                        <img src="./img/sample_thumb.jpg" class="thumb">
-                    </td>
-                    <td>201603292</td>
-                    <td>FreeMovement BLUEFORCE</td>
-                    <td>36,000</td>
-                    <td>10</td>
-                    <td>360</td>
-                    <td>400</td>
-                    <td>홍길동</td>
-                    <td>126</td>
+                	<td><input type="checkbox" name="상품코드"></td>
+                	<td><img src="./img/sample_thumb.jpg" class="thumb"></td>
+                	<td>${vo.prodNo}</td>
+                    <td>${vo.prodName}</td>
+                    <td>${vo.price}</td>
+                    <td>${vo.discount}</td>
+                    <td>${vo.point}</td>
+                    <td>${vo.stock}</td>
+                    <td>${vo.seller}</td>
+                    <td>${vo.hit}</td>
                     <td>
                         <a href="#">[삭제]</a>
                         <a href="#">[수정]</a>
                     </td>
                 </tr>
-                <tr>
-                    <td>
-                        <label>
-                            <input type="checkbox" name="all">
-                        </label>
-                    </td>
-                    <td>
-                        <img src="./img/sample_thumb.jpg" class="thumb">
-                    </td>
-                    <td>201603292</td>
-                    <td>FreeMovement BLUEFORCE</td>
-                    <td>36,000</td>
-                    <td>10</td>
-                    <td>360</td>
-                    <td>400</td>
-                    <td>홍길동</td>
-                    <td>126</td>
-                    <td>
-                        <a href="#">[삭제]</a>
-                        <a href="#">[수정]</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label>
-                            <input type="checkbox" name="all">
-                        </label>
-                    </td>
-                    <td>
-                        <img src="./img/sample_thumb.jpg" class="thumb">
-                    </td>
-                    <td>201603292</td>
-                    <td>FreeMovement BLUEFORCE</td>
-                    <td>36,000</td>
-                    <td>10</td>
-                    <td>360</td>
-                    <td>400</td>
-                    <td>홍길동</td>
-                    <td>126</td>
-                    <td>
-                        <a href="#">[삭제]</a>
-                        <a href="#">[수정]</a>
-                    </td>
-                </tr>
+                </c:forEach>
             </table>
             <input type="button" value="선택삭제">
             <div class="paging">
-                <span class="prev">
-                    <a href="#"><&nbsp;이전</a>
-                </span>
-                <span class="num">
-                    <a href="#" class="on">1</a>
-                    <a href="#">2</a>
-                    <a href="#">3</a>
-                    <a href="#">4</a>
-                    <a href="#">5</a>
-                    <a href="#">6</a>
-                    <a href="#">7</a>
-                </span>
-                <span class="next">
-                    <a href="#">다음&nbsp;></a>
-                </span>
+            	<c:if test="${pageGroupStart > 1}">
+		            <a href="/Kmarket1/admin/productlist.do?pg=${pageGroupStart - 1}" class="prev"><&nbsp;이전</a>
+	            </c:if>
+	            <c:forEach var="num" begin="${pageGroupStart}" end="${pageGroupEnd}">
+		            <a href="/Kmarket1/admin/productlist.do?pg=${num}" class="num ${num == currentPage ? 'current':'off'}">${num}</a>
+	            </c:forEach>
+	            <c:if test="${pageGroupEnd < lastPageNum}">
+		            <a href="/Kmarket1/admin/productlist.do?pg=${pageGroupEnd + 1}" class="next">다음&nbsp;></a>
+	            </c:if>
             </div>
         </section>
         <p class="ico info">

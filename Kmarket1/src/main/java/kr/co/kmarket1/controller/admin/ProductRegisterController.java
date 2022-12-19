@@ -34,8 +34,6 @@ public class ProductRegisterController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		
-		
 		// cate1 리스트 불러오기
 		List<Cate1VO> cate1_1 = CateDAO.getInstance().selectCates1();
 		req.setAttribute("cate1_1", cate1_1);
