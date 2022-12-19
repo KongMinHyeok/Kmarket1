@@ -260,5 +260,8 @@ public class ProductVO {
 		this.total = total;
 	}
 	
+	
+	
+	
 
 }

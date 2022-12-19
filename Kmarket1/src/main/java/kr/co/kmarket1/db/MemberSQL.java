@@ -29,4 +29,27 @@ public class MemberSQL {
 	public static final String UPDATE_PASS = "update `km_member` set `pass`=SHA2(?, 256) where `uid`=?";
 	
 	// delete
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// complete
+	public static final String SELECT_ORDER_BY_ORDNO = "select a.*, b.name, b.hp from `km_product_order` as a "
+													+ "join `km_member` as b "
+													+ "on a.ordUid = b.uid "
+													+ "where `ordNo`=?";
+	public static final String SELECT_ITEMS_BY_ORDNO = "select a.thumb1, a.prodCate1, a.prodCate2, a.prodName, a.descript, b.* from `km_product` as a "
+													+ "join `km_product_order_item` as b "
+													+ "on a.prodNo = b.prodNo "
+													+ "where b.ordNo = ?";
 }
