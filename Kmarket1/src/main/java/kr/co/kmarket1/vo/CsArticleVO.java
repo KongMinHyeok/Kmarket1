@@ -1,11 +1,13 @@
 package kr.co.kmarket1.vo;
 
-public class CsNoticeVO {
+public class CsArticleVO {
 	private int no;
 	private int comment;
 	private String cate;
+	private String cate2;
 	private String title;
 	private String content;
+	private int hit;
 	private String uid;
 	private String regip;
 	private String rdate;
@@ -28,6 +30,12 @@ public class CsNoticeVO {
 	public void setCate(String cate) {
 		this.cate = cate;
 	}
+	public String getCate2() {
+		return cate2;
+	}
+	public void setCate2(String cate2) {
+		this.cate2 = cate2;
+	}
 	public String getTitle() {
 		return title;
 	}
@@ -39,6 +47,12 @@ public class CsNoticeVO {
 	}
 	public void setContent(String content) {
 		this.content = content;
+	}
+	public int getHit() {
+		return hit;
+	}
+	public void setHit(int hit) {
+		this.hit = hit;
 	}
 	public String getUid() {
 		return uid;
@@ -58,6 +72,5 @@ public class CsNoticeVO {
 	public void setRdate(String rdate) {
 		this.rdate = rdate;
 	}
-
 	
 }

@@ -382,7 +382,7 @@ header>.menu > div > ul > li > a {
 }
 #cs > .notice > .list > article > .page > .prev {
     font-size: 0;
-    background-image: url('./img/cs_sprites.png');
+    background-image: url('../img/cs_sprites.png');
     background-position: -706px -652px;
 }
 #cs > .notice > .list > article > .page > a {
@@ -396,13 +396,13 @@ header>.menu > div > ul > li > a {
     vertical-align: bottom;
 }
 #cs > .notice > .list > article > .page > .on {
-    background: #0078ff;
+    background-color: #006cff;
     border-radius: 17px;
     color: #fff;
 }
 #cs > .notice > .list > article > .page > .next {
     font-size: 0;
-    background-image: url('./img/cs_sprites.png');
+    background-image: url('../img/cs_sprites.png');
     background-position: -628px -652px;
 }
 /*#cs고객센터 .notice공지사항 .view글내용*/
@@ -690,7 +690,7 @@ header>.menu > div > ul > li > a {
     vertical-align: bottom;
 }
 #cs > .qna > .list > article > .page > .on {
-    background: #0078ff;
+    background-color: #006cff;
     border-radius: 17px;
     color: #fff;
 }

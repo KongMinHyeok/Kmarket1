@@ -22,28 +22,28 @@
             </ul>
         </section>
         <section class="faq">
-            <h1>자주 묻는 질문<a href="/cs/faq/list.do?group=faq&cate=member">전체보기</a></h1>
+            <h1>자주 묻는 질문<a href="/Kmarket1/cs/faq/list.do?group=faq">전체보기</a></h1>
             <ol>
                 <li>
-                    <a href="/cs/faq/list.do?group=faq&cate=member"><span>회원</span></a>
+                    <a href="/Kmarket1/cs/faq/list.do?group=faq&cate=member"><span>회원</span></a>
                 </li>
                 <li>
-                    <a href="/cs/faq/list.do?group=faq&cate=member"><span>쿠폰/이벤트</span></a>
+                    <a href="/Kmarket1/cs/faq/list.do?group=faq&cate=member"><span>쿠폰/이벤트</span></a>
                 </li>
                 <li>
-                    <a href="/cs/faq/list.do?group=faq&cate=member""><span>주문/결제</span></a>
+                    <a href="/Kmarket1/cs/faq/list.do?group=faq&cate=member""><span>주문/결제</span></a>
                 </li>
                 <li>
-                    <a href="/cs/faq/list.do?group=faq&cate=member""><span>배송</span></a>
+                    <a href="/Kmarket1/cs/faq/list.do?group=faq&cate=member""><span>배송</span></a>
                 </li>
                 <li>
-                    <a href="/cs/faq/list.do?group=faq&cate=member""><span>취소/반품/교환</span></a>
+                    <a href="/Kmarket1/cs/faq/list.do?group=faq&cate=member""><span>취소/반품/교환</span></a>
                 </li>
                 <li>
-                    <a href="/cs/faq/list.do?group=faq&cate=member""><span>여행/숙박/항공</span></a>
+                    <a href="/Kmarket1/cs/faq/list.do?group=faq&cate=member""><span>여행/숙박/항공</span></a>
                 </li>
                 <li>
-                    <a href="/cs/faq/list.do?group=faq&cate=member""><span>안전거래</span></a>
+                    <a href="/Kmarket1/cs/faq/list.do?group=faq&cate=member""><span>안전거래</span></a>
                 </li>
             </ol>
         </section>

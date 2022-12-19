@@ -35,7 +35,7 @@
                   감사합니다.<br />
                 </p>
               </div>
-              <a href="/Kmarket1/cs/notice/list.do?cate=${cate}&pg=${pg}" class="btnList">목록보기</a>
+              <a href="/Kmarket1/cs/notice/list.do?cate=${notice.cate}" class="btnList">목록보기</a>
             </article>  
           </section>
         </div>

@@ -11,31 +11,31 @@
             <li>
               <a href="#">
 				<c:choose>
-              	<c:when test="${Cate1.cate1 == 10 }">
+              	<c:when test="${Cate1.cate1 eq 10 }">
               	<i class="fas fa-folder" aria-hidden="true"></i>${Cate1.c1Name}<i class="fas fa-angle-right" aria-hidden="true"></i>
               	</c:when>
-				<c:when test="${Cate1.cate1 == 11 }">
+				<c:when test="${Cate1.cate1 eq 11 }">
               	<i class="fas fa-tshirt" aria-hidden="true"></i>${Cate1.c1Name}<i class="fas fa-angle-right" aria-hidden="true"></i>
               	</c:when>
-              	<c:when test="${Cate1.cate1 == 12 }">
+              	<c:when test="${Cate1.cate1 eq 12 }">
               	<i class="fas fa-baby" aria-hidden="true"></i>${Cate1.c1Name}<i class="fas fa-angle-right" aria-hidden="true"></i>
               	</c:when>
-              	<c:when test="${Cate1.cate1 == 13 }">
+              	<c:when test="${Cate1.cate1 eq 13 }">
               	<i class="fas fa-utensils" aria-hidden="true"></i>${Cate1.c1Name}<i class="fas fa-angle-right" aria-hidden="true"></i>
               	</c:when>
-              	<c:when test="${Cate1.cate1 == 14 }">
+              	<c:when test="${Cate1.cate1 eq 14 }">
               	<i class="fas fa-home" aria-hidden="true"></i>${Cate1.c1Name}<i class="fas fa-angle-right" aria-hidden="true"></i>
               	</c:when>
-              	<c:when test="${Cate1.cate1 == 15 }">
+              	<c:when test="${Cate1.cate1 eq 15 }">
               	<i class="fas fa-laptop" aria-hidden="true"></i>${Cate1.c1Name}<i class="fas fa-angle-right" aria-hidden="true"></i>
               	</c:when>
-              	<c:when test="${Cate1.cate1 == 16 }">
+              	<c:when test="${Cate1.cate1 eq 16 }">
               	<i class="fas fa-running" aria-hidden="true"></i>${Cate1.c1Name}<i class="fas fa-angle-right" aria-hidden="true"></i>
               	</c:when>
-              	<c:when test="${Cate1.cate1 == 17 }">
+              	<c:when test="${Cate1.cate1 eq 17 }">
               	<i class="fas fa-shuttle-van" aria-hidden="true"></i>${Cate1.c1Name}<i class="fas fa-angle-right" aria-hidden="true"></i>
               	</c:when>
-              	<c:when test="${Cate1.cate1 == 18 }">
+              	<c:when test="${Cate1.cate1 eq 18 }">
               	<i class="fas fa-plane" aria-hidden="true"></i>${Cate1.c1Name}<i class="fas fa-angle-right" aria-hidden="true"></i>
               	</c:when>
                	</c:choose>
@@ -69,7 +69,7 @@
 	                  <c:choose>
 		                  <c:when test="${sold.discount ne 0}">
 			                  <div class="dis_price">
-			                    <ins>${sold.price- Math.round(sold.price*(sold.discount/100))}</ins>
+			                    <ins>${sold.price - Math.round(sold.price*(sold.discount/100))}</ins>
 			                  </div>
 		                  </c:when>
 		                  <c:otherwise>
@@ -153,7 +153,7 @@
                 <c:choose>
                 <c:when test="${hit.discount ne 0}">
 	               <div class="dis_price">
-	                 <ins>${hit.price- Math.round(hit.price*(hit.discount/100))}</ins>
+	                 <ins>${hit.price - Math.round(hit.price*(hit.discount/100))}</ins>
 	                 <span class="free">무료배송</span>
 	               </div>
 	            </c:when>
@@ -186,7 +186,7 @@
                 <c:choose>
                 <c:when test="${score.discount ne 0}">
 	               <div class="dis_price">
-	                 <ins>${score.price- Math.round(score.price*(score.discount/100))}</ins>
+	                 <ins>${score.price - Math.round(score.price*(score.discount/100))}</ins>
 	                 <span class="free">무료배송</span>
 	               </div>
 	            </c:when>
@@ -219,7 +219,7 @@
                 <c:choose>
                 <c:when test="${newprods.discount ne 0}">
 	               <div class="dis_price">
-	                 <ins>${newprods.price- Math.round(newprods.price*(newprods.discount/100))}</ins>
+	                 <ins>${newprods.price - Math.round(newprods.price*(newprods.discount/100))}</ins>
 	                 <span class="free">무료배송</span>
 	               </div>
 	            </c:when>

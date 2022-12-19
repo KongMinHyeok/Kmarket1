@@ -3,22 +3,32 @@ package kr.co.kmarket1.service;
 import java.util.List;
 
 import kr.co.kmarket1.dao.CsDAO;
-import kr.co.kmarket1.vo.CsNoticeVO;
-import kr.co.kmarket1.vo.CsQnaVO;
+import kr.co.kmarket1.vo.CsArticleVO;
+
 
 public enum CsService {
 	instance;
 	
 	private CsDAO dao = CsDAO.getInstance();
 	
-	public List<CsQnaVO> selectQnas() {
+	public List<CsArticleVO> selectQnas() {
 		return dao.selectQnas();
 	}
 
-	public List<CsNoticeVO> selectNotices() {
+	public List<CsArticleVO> selectNotices() {
 		return dao.selectNotices();
 	}
 	
+	public List<CsArticleVO> selectFaq() {
+		return dao.selectFaq();
+	}
+	public List<CsArticleVO> selectFaqs() {
+		return dao.selectFaqs();
+	}
+	
+	public List<CsArticleVO> selectFaqsCate2(String cate) {
+		return dao.selectFaqsCate2(cate);
+	}
 	
 	
 	public int getLastPageNum(int total) {
@@ -46,8 +56,7 @@ public enum CsService {
 		return result;
 	}
 	
-	public CsNoticeVO selectArticleNotice(String no) {
+	public CsArticleVO selectArticleNotice(String no) {
 		return dao.selectArticleNotice(no);
 	}
-	
 }

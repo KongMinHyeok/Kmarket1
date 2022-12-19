@@ -12,7 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import kr.co.kmarket1.dao.CsDAO;
 import kr.co.kmarket1.service.CsService;
-import kr.co.kmarket1.vo.CsNoticeVO;
+import kr.co.kmarket1.vo.CsArticleVO;
+
 
 @WebServlet("/cs/notice/list.do")
 public class ListController extends HttpServlet{
@@ -62,7 +63,7 @@ public class ListController extends HttpServlet{
 		// 페이지 그룹 스타트, 엔드
 		int[] result = service.getPageGroupNum(currentPage, lastPageNum);
 		
-		List<CsNoticeVO> articles = null;
+		List<CsArticleVO> articles = null;
 		
 		
 		if(cate == null) {
