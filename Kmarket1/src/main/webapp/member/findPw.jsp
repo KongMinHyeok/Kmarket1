@@ -46,11 +46,6 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
                                             <input type="submit" value="확인" id="btnVerifyId">
                                         </td>
                                     </tr>

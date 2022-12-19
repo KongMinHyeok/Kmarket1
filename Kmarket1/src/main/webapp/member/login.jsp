@@ -10,6 +10,20 @@
 	}else if(success == '201'){
 		alert('정상적으로 로그아웃되었습니다');
 	}
+	
+	$(function(){
+		$('.fa-eye').click(function(e){
+			 e.preventDefault();
+			 
+			 if($(this).hasClass("on")){
+				 $(this).removeClass("on").addClass("off");
+				 $('input[name=pass]').attr("type", "password");
+			 }else{
+				 $(this).removeClass("off").addClass("on");
+				 $('input[name=pass]').attr("type", "text");
+			 }
+		});
+	});
 </script>
         <main id="member">
             <div class="login">
@@ -32,6 +46,7 @@
                             <td>비밀번호</td>
                             <td>
                                 <input type="password" name="pass" placeholder="비밀번호 입력">
+                                <i class="fa-thin fa-eye off" style="cursor: pointer;"></i>
                             </td>
                         </tr>
                     </table>

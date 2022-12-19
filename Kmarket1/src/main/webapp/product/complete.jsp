@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/product/_header.jsp"/>
+<!-- 베스트 상품 배너 추가해주세요 -->
         <main id="product">
             <aside>
                 <ul class="category">
@@ -64,21 +66,24 @@
                         <th>수량</th>
                         <th>주문금액</th>
                       </tr>
+                      <c:forEach items="${items}" var="item">
                       <tr>
                         <td>
                           <article>
-                            <img src="https://via.placeholder.com/80x80" alt="">
+                            <img src="/Kmarket1_images/${item.thumb1}" alt=""> <!-- server.xml > host > context에 이미지 로드 설정해놓음 -->
+                            												   <!-- 예시: <Context docBase="C:\Users\java1\Desktop\kmarket_images" path="/Kmarket1_images/"></Context> -->
                             <div>
-                              <h2><a href="#">상품명</a></h2>
-                              <p>상품설명</p>
+                              <h2><a href="/Kmarket1/product/view.do?prodCate1=${item.prodCate1}&prodCate2=${item.prodCate2}&prodNo=${item.prodNo}&pg=1">${item.prodName}</a></h2>
+                              <p>${item.descript}</p>
                             </div>
                           </article>
                         </td>
-                        <td>17,000원</td>
-                        <td>1,000원</td>
-                        <td>1</td>
-                        <td>16,000원</td>
+                        <td>${item.price}원</td>
+                        <td>${item.discount}원</td>
+                        <td>${item.count}</td>
+                        <td>${item.total}원</td>
                       </tr>
+                      </c:forEach>
                       
                       <tr class="total">
                         <td colspan="4"></td>
@@ -86,19 +91,26 @@
                           <table border="0">
                             <tr>
                               <td>총 상품금액</td>
-                              <td><span>34,000</span>원</td>
+                              <td><span>${order.ordPrice}</span>원</td>
                             </tr>
                             <tr>
                               <td>총 할인금액</td>
-                              <td><span>-2,000</span>원</td>
+                              <c:choose>
+                              	<c:when test="${order.ordDiscount eq 0 }">
+                              		<td><span>${order.ordDiscount}</span>원</td>
+                              	</c:when>
+                              	<c:otherwise>
+                              		<td><span>-${order.ordDiscount}</span>원</td>
+                              	</c:otherwise>
+                              </c:choose>
                             </tr>
                             <tr>
                               <td>배송비</td>
-                              <td><span>3,000</span>원</td>
+                              <td><span>${order.ordDelivery}</span>원</td>
                             </tr>
                             <tr>
                               <td>총 결제금액</td>
-                              <td><span>35,000</span>원</td>
+                              <td><span>${order.ordTotPrice}</span>원</td>
                             </tr>
                           </table>                      
                         </td>
@@ -110,17 +122,36 @@
                 <table border="0">
                   <tr>
                     <td>주문번호</td>
-                    <td>2008101324568</td>
+                    <td>${order.ordNo}</td>
                     <td rowspan="3">총 결제금액</td>
-                    <td rowspan="3"><span>35,000</span>원</td>
+                    <td rowspan="3"><span>${order.ordTotPrice}</span>원</td>
                   </tr>
                   <tr>
                     <td>결제방법</td>
-                    <td>신용카드</td>
+                    <c:choose>
+                    	<c:when test="${order.ordPayment eq 1}">
+                    	<td>신용카드</td>
+                    	</c:when>
+                    	<c:when test="${order.ordPayment eq 2}">
+                    	<td>체크카드</td>
+                    	</c:when>
+                    	<c:when test="${order.ordPayment eq 3}">
+                    	<td>실시간 계좌이체</td>
+                    	</c:when>
+                    	<c:when test="${order.ordPayment eq 4}">
+                    	<td>무통장입금</td>
+                    	</c:when>
+                    	<c:when test="${order.ordPayment eq 5}">
+                    	<td>휴대폰결제</td>
+                    	</c:when>
+                    	<c:when test="${order.ordPayment eq 6}">
+                    	<td>카카오페이</td>
+                    	</c:when>
+                    </c:choose>
                   </tr>
                   <tr>
                     <td>주문자/연락처</td>
-                    <td>홍길동/010-1234-1234</td>
+                    <td>${order.name}/${order.hp}</td>
                   </tr>
                 </table>
               </article>
@@ -131,20 +162,20 @@
                 <table border="0">
                   <tr>
                     <td>수취인</td>
-                    <td>홍길동</td>                    
+                    <td>${order.recipname}</td>                    
                     <td>주문자 정보</td>
                   </tr>
                   <tr>
                     <td>연락처</td>
-                    <td>010-1234-1234</td>
+                    <td>${order.recipHp}</td>
                     <td rowspan="2">
-                      홍길동<br/>
-                      010-1234-1234
+                      ${order.name}<br/>
+                      ${order.hp}
                     </td>
                   </tr>
                   <tr>
                     <td>배송지 주소</td>
-                    <td>부산광역시 강남구 대연동 123 10층</td>
+                    <td>${order.recipAddr1} &nbsp; ${order.recipAddr2}</td>
                   </tr>
                 </table>
               </article>

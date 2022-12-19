@@ -86,6 +86,27 @@ header > .top > div > a:hover{
 .fa-solid {
     font-family: "Font Awesome 5 Free";
 }
+.fa-eye::before{content: "\f06e";}
+#member > div > form > table > tbody > tr:nth-child(2) > td:nth-child(2) > i.on::before{content:"\f070";}
+#member > div > form > table > tbody > tr:nth-child(2) > td:nth-child(2) > i.off::before{content:"\f06e";}
+.fa-eye{
+	position:absolute;
+	left:275px;
+	top: 110px;
+}
+.fa-thin{font-weight: 900;}
+.fa-thin{
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1;
+}
+.fa-thin {
+    font-family: "Font Awesome 5 Free";
+}
 
 header > .logo{
     height: 115px;

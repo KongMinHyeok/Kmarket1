@@ -11,8 +11,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://kit.fontawesome.com/20962f3e4b.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="./css/common.css?c">
-    <link rel="stylesheet" href="./css/member.css?c">
+    <link rel="stylesheet" href="./css/common.css?g">
+    <link rel="stylesheet" href="./css/member.css?g">
 </head>
 <body>
     <div id="wrapper">
