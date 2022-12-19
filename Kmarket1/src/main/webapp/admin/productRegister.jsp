@@ -103,7 +103,7 @@
                             </td>
                         </tr>
                         <tr>
-                        	<!-- ajax로 처리함 -->
+                        	<!-- 2차 분류는 ajax로 처리함 -->
                             <td>2차 분류</td>
                             <td>
                                 <select name="category2">

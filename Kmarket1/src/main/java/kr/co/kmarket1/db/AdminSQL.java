@@ -29,4 +29,8 @@ public class AdminSQL {
 											  + "`ip` = ?, "
 											  + "`rdate`=NOW()";
 	
+	public static final String SELECT_PRODUCT_LIST = "SELECT * FROM `km_product` ";
+	
+	public static final String SELECT_LIST_COUNT_TOTAL = "SELECT COUNT(`prodNo`) FROM `km_product` ";
+	
 }

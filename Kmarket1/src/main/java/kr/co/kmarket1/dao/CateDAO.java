@@ -51,7 +51,7 @@ public class CateDAO extends DBHelper{
 		try {
 			logger.info("selectCate2 start...");
 			conn = getConnection();
-			psmt = conn.prepareStatement("SELCT * FROM `km_product_cate2`");
+			psmt = conn.prepareStatement("SELECT * FROM `km_product_cate2`");
 			rs = psmt.executeQuery();
 			
 			while(rs.next()) {
