@@ -11,6 +11,7 @@ import kr.co.kmarket1.db.DBHelper;
 import kr.co.kmarket1.db.MainSQL;
 import kr.co.kmarket1.vo.Cate1VO;
 import kr.co.kmarket1.vo.ProductCartVO;
+import kr.co.kmarket1.vo.ProductReviewVO;
 import kr.co.kmarket1.db.ProductSQL;
 import kr.co.kmarket1.vo.ProductVO;
 
@@ -440,35 +441,38 @@ public class ProductDAO extends DBHelper{
 
 		return total;		
 	}
-	public List<ProductVO> selectProductComments(String prodNo){
-		List<ProductVO> comments = new ArrayList<>();
+	public List<ProductReviewVO> selectProductReviews(String prodNo, int start){
+		List<ProductReviewVO> reviews = new ArrayList<>();
 		try {
-			logger.info("selectProductComments start...");
+			logger.info("selectProductReviews start...");
 			
 			conn = getConnection();
-			psmt = conn.prepareStatement(ProductSQL.SELECT_COMMENTS);
+			psmt = conn.prepareStatement(ProductSQL.SELECT_REVIEWS);
 			psmt.setString(1, prodNo);
+			psmt.setInt(2, start);
 			rs = psmt.executeQuery();
 			
 			while(rs.next()) {
-				ProductVO comment = new ProductVO();
-				comment.setProdNo(rs.getInt(2));
-				comment.setContent(rs.getString(3));
-				comment.setUid(rs.getString(4));
-				comment.setRating(rs.getInt(5));
-				comment.setRegip(rs.getString(6));
-				comment.setRdate(rs.getString(7));
-				comments.add(comment);
+				ProductReviewVO review= new ProductReviewVO();
+				review.setRevNo(rs.getInt(1));
+				review.setProdNo(rs.getInt(2));
+				review.setContent(rs.getString(3));
+				review.setUid(rs.getString(4).replaceAll("(?<=.{4}).","*"));
+				review.setRating(rs.getInt(5));
+				review.setRegip(rs.getString(6));
+				review.setRdate(rs.getString(7).substring(0,10));
+				review.setProdName(rs.getString(8));
+				reviews.add(review);
 			}
 			close();
 		}catch(Exception e) {
 			logger.error(e.getMessage());
 		}
-		return comments;
+		return reviews;
 	}
 	// cart에 상품 넣기
-	public void insertProductCart(String uid, int prodNo, int count, int price, int discount, int point, int delivery, int total, String rdate) {
-		ProductVO cart = null;
+	public ProductCartVO insertProductCart(String uid, int prodNo, int count, int price, int discount, int point, int delivery, int total, String rdate) {
+		ProductCartVO cart = null;
 		try {
 			logger.info("insertProductCart...");
 			conn = getConnection();
@@ -485,10 +489,25 @@ public class ProductDAO extends DBHelper{
 			
 			psmt.executeUpdate();
 			
+			if(rs.next()) {
+				cart = new ProductCartVO();
+				cart.setCartNo(rs.getInt(1));
+				cart.setUid(rs.getString(2));
+				cart.setProdNo(rs.getInt(3));
+				cart.setCount(rs.getInt(4));
+				cart.setPrice(rs.getInt(5));
+				cart.setDiscount(rs.getInt(6));
+				cart.setPoint(rs.getInt(7));
+				cart.setDelivery(rs.getInt(8));
+				cart.setTotal(rs.getInt(9));
+				cart.setRdate(rs.getString(10));
+			}
+			close();
 				
 		}catch(Exception e) {
 			logger.error(e.getMessage());
 		}
+		return cart;
 	}
 	// 리뷰 총갯수
 	public int selectReviewCountTotal(String prodNo) {

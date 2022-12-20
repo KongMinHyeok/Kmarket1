@@ -33,37 +33,6 @@ public class ProductVO {
 	private int count;
 	private int total;
 	
-	// review때문에 추가함
-	private String uid;
-	private int rating;
-	private String regip;
-	private String content;
-	
-	
-	public String getContent() {
-		return content;
-	}
-	public void setContent(String content) {
-		this.content = content;
-	}
-	public String getUid() {
-		return uid;
-	}
-	public void setUid(String uid) {
-		this.uid = uid;
-	}
-	public int getRating() {
-		return rating;
-	}
-	public void setRating(int rating) {
-		this.rating = rating;
-	}
-	public String getRegip() {
-		return regip;
-	}
-	public void setRegip(String regip) {
-		this.regip = regip;
-	}
 	public int getProdNo() {
 		return prodNo;
 	}
