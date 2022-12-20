@@ -127,9 +127,7 @@ public class AdminDAO extends DBHelper{
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(AdminSQL.SELECT_LIST_COUNT_TOTAL);
 			
-			if(rs.next()) {
-				result = rs.getInt(1);
-			}
+			if(rs.next()) result = rs.getInt(1);
 			close();
 		} catch (Exception e) {
 			logger.error(e.getMessage());
@@ -175,6 +173,42 @@ public class AdminDAO extends DBHelper{
 		return result;
 	}
 	public void updateProduct() {}
-	public void deleteProduct() {}
+	public void deleteProduct(String prodNo) {
+		try {
+			logger.info("deleteProduct...");
+			conn = getConnection();
+			psmt = conn.prepareStatement("delete from `km_product` where `prodNo`=?");
+			psmt.setString(1, prodNo);
+			psmt.executeUpdate();
+			
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		
+	}
+	public ProductVO modifyProduct(String prodNo) {
+		
+		ProductVO vo = null;
+		
+		try {
+			logger.info("modifyProduct...");
+			conn = getConnection();
+			psmt = conn.prepareStatement("select * from `km_product` where `prodNo`=?");
+			psmt.setString(1, prodNo);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				vo = new ProductVO();
+			}
+			
+			close();
+			
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		
+		return vo;
+	}
 	
 }

@@ -103,8 +103,8 @@
                     <td>${vo.seller}</td>
                     <td>${vo.hit}</td>
                     <td>
-                        <a href="#">[삭제]</a>
-                        <a href="#">[수정]</a>
+                        <a href="/Kmarket1/admin/delete.do?prodNo=${vo.prodNo}">[삭제]</a>
+                        <a href="/Kmarket1/admin/modify.do?prodNo=${vo.prodNo}">[수정]</a>
                     </td>
                 </tr>
                 </c:forEach>
