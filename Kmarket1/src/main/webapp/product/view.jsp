@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,7 +19,7 @@
     $(document).ready(function(){
     	var countnum = $('input[name = num]').val();
     	var num = parseInt(countnum);
-    	var total = num * ${product.price * ((100 - product.discount)/100)};
+    	var total =${product.delivery} +  num * ${product.price * ((100 - product.discount)/100)};
     	$('input[name=total]').attr('value',total);
 	});
     $(function(){
@@ -28,7 +31,7 @@
     	}
     	var num = parseInt(countnum);
     	$('input[name=num]').attr('value',num);
-    	var total = num * ${product.price * ((100 - product.discount)/100)};
+    	var total =${product.delivery} + num * ${product.price * ((100 - product.discount)/100)};
     	$('input[name=total]').attr('value',total);
     	});
 
@@ -38,22 +41,27 @@
     	countnum++;
     	var num = parseInt(countnum);
     	$('input[name=num]').attr('value',num);
-    	var total = num * ${product.price * ((100 - product.discount)/100)};
+    	var total =${product.delivery} + num * ${product.price * ((100 - product.discount)/100)};
     	$('input[name=total]').attr('value',total);
     	});
-    	//장바구니 버튼 클릭시-----------------------------------------------------------------
-    	
-    	//리뷰가 있을 시 리뷰가 없다는 멘트 지우기
-    	$(function(){
-    		if('${reviews}' != null){
-    			$('.empty').hide();
-    		}
-    	});
-    	/* view에서 장바구니로 데이터 넘기기
+    	//장바구니 버튼 클릭시-----------------------------------------------------------------	
+    	// view에서 장바구니로 데이터 넘기기
     	$('.cart').click(function(){
+    		
+    		let uid = $('input[name=uid]').val();
+			let prodNo = $('input[name=prodNo]').val();
+			let count = $('input[name=num]').val();
+			let price = $('input[name=price]').val();
+			let discount = $('input[name=discount]').val();
+			let point = $('input[name=point]').val();
+			let delivery = $('input[name=delivery]').val();
+			let total = $('input[name=total]').val();
+			let rdate = $('input[name=rdate]').val();
+			
     		let jsonData = {
+    				"uid": uid,
     				"prodNo": prodNo,
-    				"count": num,
+    				"count": count,
     				"price": price,
     				"discount": discount,
     				"point": point,
@@ -61,22 +69,26 @@
     				"total": total,
     				"rdate": rdate
     		};
+			console.log(jsonData);
+			
     		$.ajax({
-    			url: '/Kmarket1/product/view.do'
-    			method: 'POST',
+    			url: '/Kmarket1/product/view.do',
+    			type: 'POST',
     			data: jsonData,
     			dataType: 'json',
-    			success: function(data){
-    				alert('장바구니에 상품이 추가되었습니다');
-    			}
+    			success: function(result) {
+    		          if (result) {
+    		              alert("완료");
+    		          } else {
+    		              alert("전송된 값 없음");
+    		          }
+    		      },
+    		      error: function() {
+    		          alert("에러 발생");
+    		      }
     		});
     	});
-    	*/
-    	// 리뷰 페이징
-    	$('.num').click(function(){
-    		alert(${num});
-    	});
-    	//
+	//
     });
     </script>
     <style>
@@ -84,65 +96,7 @@
 </head>
 <body>
     <div id="wrapper">
-        <header>
-            <div class="top">
-                <div>
-		            <a href="/Kmarket1/member/login.jsp">로그인</a>
-		            <a href="/Kmarket1/member/join.jsp">회원가입</a>
-		            <a href="/Kmarket1/member/login.jsp">마이페이지</a>
-		            <a href="/Kmarket1/product/cart.jsp"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;장바구니</a>
-                </div>
-            </div>
-            <div class="logo">
-                <div>
-                    <a href="/Kmarket1/"><img src="./img/header_logo.png" alt="Kmarket" width="180px" height="49px"></a>
-                    <form action="#">
-                        <input type="text" name="keyword">
-                        <button>
-                            <i class="fa fa-search" aria-hidden="true"></i>
-                        </button>
-                    </form>
-                </div>
-            </div>
-            <div class="menu">
-                <div>
-                    <ul>
-                        <li>
-                            <a href="#">히트상품</a>
-                        </li>
-                        <li>
-                            <a href="#">추천상품</a>
-                        </li>
-                        <li>
-                            <a href="#">최신상품</a>
-                        </li>
-                        <li>
-                            <a href="#">인기상품</a>
-                        </li>
-                        <li>
-                            <a href="#">할인상품</a>
-                        </li>
-                    </ul>
-                    <ul>
-                        <li>
-                            <a href="#">쿠폰존</a>
-                        </li>
-                        <li>
-                            <a href="#">사용후기</a>
-                        </li>
-                        <li>
-                            <a href="#">개인결제</a>
-                        </li>
-                        <li>
-                            <a href="#">고객센터</a>
-                        </li>
-                        <li>
-                            <a href="#">FAQ</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </header>
+                <jsp:include page="/product/_header.jsp" />
         <main id="product">
             <aside>
                 <ul class="category">
@@ -191,6 +145,8 @@
             <section class="view">
                 <!-- 제목, 페이지 네비게이션 -->
 				<jsp:include page="./_${prodCate1}.jsp"/>
+				<input type="hidden" name="uid" value="${sessMember.uid}">
+				<input type="hidden" name="prodNo" value="${product.prodNo}">
                 <!-- 상품 전체 내용 -->
                 <article class="info">
                     <div class="image">
@@ -200,7 +156,7 @@
                         <nav>
                             <h1>${product.seller}</h1>
                             <h2>상품번호 : ${product.prodNo}</h2>
-                            <input type="hidden" ${product.rdate}>
+                            <input type="hidden" name="rdate" value="${product.rdate}">
                         </nav>
                         <nav>
                             <h3>${product.prodName}</h3>
@@ -212,14 +168,18 @@
                         <nav>
                             <div class="original-price">
                                 <del>${product.price}</del>
+                                <input type="hidden" name="price" value="${product.price}">
                                 <span>${product.discount}%</span>
+                                <input type="hidden" name="discount" value="${product.discount}">
                             </div>
                             <div class="discount-price">
-                                <ins>${product.price * ((100 - product.discount)/100)}</ins>
+                                <ins><fmt:formatNumber value="${product.price * ((100 - product.discount)/100)}" pattern="0"/></ins>
+                                <input type="hidden" name="point" value="${product.point}">
                             </div>
                         </nav>
                         <nav>
                             <span class="delivery">
+                            <input type="hidden" name="delivery" value="${product.delivery}">
                             <c:choose>
                             <c:when test="${product.delivery == 0}">
                             	무료배송
@@ -367,110 +327,36 @@
                         <h1>상품리뷰</h1>
                     </nav>
                     <ul>
-                    	<li>
-                    		<div class="empty">
-	                    		<h4>등록된 리뷰가 없습니다</h4>
-	                    		<h4>구매 후 첫 리뷰를 남겨주세요</h4>
-                    		</div>
-                    	</li>
-                    </ul>
-                    <ul>
-                    <!-- 여기 반복문 써야할듯 -->
-                    <!-- 
-                    	<c:forEach var="comment" items="${comments}">
-                     <li>
-                            <div>
-                                <h5 class="rating star1">상품평</h5>
-                                <span>seo******	2018-07-10</span>
-                            </div>
-                            <h3>상품명1/BLUE/L</h3>
-                            <p>
-                                가격대비 정말 괜찮은 옷이라 생각되네요 핏은 음...제가 입기엔 어깨선이 맞고 루즈핏이라 하기도 좀 힘드네요.
-                                아주 약간 루즈한정도...?그래도 이만한 옷은 없다고 봅니다 깨끗하고 포장도 괜찮고 다음에도 여기서 판매하는
-                                제품들을 구매하고 싶네요 정말 만족하고 후기 남깁니다 많이 파시길 바래요 ~ ~ ~
-                            </p>
-                        </li>
-                    </c:forEach>
-                     -->
-                        <li>
-                            <div>
-                                <h5 class="rating star1">상품평</h5>
-                                <span>seo******	2018-07-10</span>
-                            </div>
-                            <h3>상품명1/BLUE/L</h3>
-                            <p>
-                                가격대비 정말 괜찮은 옷이라 생각되네요 핏은 음...제가 입기엔 어깨선이 맞고 루즈핏이라 하기도 좀 힘드네요.
-                                아주 약간 루즈한정도...?그래도 이만한 옷은 없다고 봅니다 깨끗하고 포장도 괜찮고 다음에도 여기서 판매하는
-                                제품들을 구매하고 싶네요 정말 만족하고 후기 남깁니다 많이 파시길 바래요 ~ ~ ~
-                            </p>
-                        </li>
-                        <li>
-                            <div>
-                                <h5 class="rating star2">상품평</h5>
-                                <span>seo******	2018-07-10</span>
-                            </div>
-                            <h3>상품명1/BLUE/L</h3>
-                            <p>
-                                가격대비 정말 괜찮은 옷이라 생각되네요 핏은 음...제가 입기엔 어깨선이 맞고 루즈핏이라 하기도 좀 힘드네요.
-                                아주 약간 루즈한정도...?그래도 이만한 옷은 없다고 봅니다 깨끗하고 포장도 괜찮고 다음에도 여기서 판매하는
-                                제품들을 구매하고 싶네요 정말 만족하고 후기 남깁니다 많이 파시길 바래요 ~ ~ ~
-                            </p>
-                        </li>
-                        <li>
-                            <div>
-                                <h5 class="rating star3">상품평</h5>
-                                <span>seo******	2018-07-10</span>
-                            </div>
-                            <h3>상품명1/BLUE/L</h3>
-                            <p>
-                                가격대비 정말 괜찮은 옷이라 생각되네요 핏은 음...제가 입기엔 어깨선이 맞고 루즈핏이라 하기도 좀 힘드네요.
-                                아주 약간 루즈한정도...?그래도 이만한 옷은 없다고 봅니다 깨끗하고 포장도 괜찮고 다음에도 여기서 판매하는
-                                제품들을 구매하고 싶네요 정말 만족하고 후기 남깁니다 많이 파시길 바래요 ~ ~ ~
-                            </p>
-                        </li>
-                        <li>
-                            <div>
-                                <h5 class="rating star4">상품평</h5>
-                                <span>seo******	2018-07-10</span>
-                            </div>
-                            <h3>상품명1/BLUE/L</h3>
-                            <p>
-                                가격대비 정말 괜찮은 옷이라 생각되네요 핏은 음...제가 입기엔 어깨선이 맞고 루즈핏이라 하기도 좀 힘드네요.
-                                아주 약간 루즈한정도...?그래도 이만한 옷은 없다고 봅니다 깨끗하고 포장도 괜찮고 다음에도 여기서 판매하는
-                                제품들을 구매하고 싶네요 정말 만족하고 후기 남깁니다 많이 파시길 바래요 ~ ~ ~
-                            </p>
-                        </li>
-                        <li>
-                            <div>
-                                <h5 class="rating star5">상품평</h5>
-                                <span>seo******	2018-07-10</span>
-                            </div>
-                            <h3>상품명1/BLUE/L</h3>
-                            <p>
-                                가격대비 정말 괜찮은 옷이라 생각되네요 핏은 음...제가 입기엔 어깨선이 맞고 루즈핏이라 하기도 좀 힘드네요.
-                                아주 약간 루즈한정도...?그래도 이만한 옷은 없다고 봅니다 깨끗하고 포장도 괜찮고 다음에도 여기서 판매하는
-                                제품들을 구매하고 싶네요 정말 만족하고 후기 남깁니다 많이 파시길 바래요 ~ ~ ~
-                            </p>
-                        </li>
-                    </ul>    
+		            <c:forEach var="review" items="${reviews}">
+		                <li>
+		                    <div>
+		                        <h5 class="rating star${review.rating}">상품평</h5>
+		                        <span>${review.uid}	${review.rdate}</span>
+		                    </div>
+		                    <h3>${review.prodName}</h3>
+		                    <p>${review.content}</p>
+		                </li>
+		            </c:forEach>
+            		</ul>    
                  <!-- 상품목록 페이지번호 -->
-              <div class="paging">
-                <span class="prev">
-                  <a href="#"><&nbsp;이전</a>
-                </span>
-                <span class="num">
-                  <a href="#" class="on">1</a>
-                  <a href="#">2</a>
-                  <a href="#">3</a>
-                  <a href="#">4</a>
-                  <a href="#">5</a>
-                  <a href="#">6</a>
-                  <a href="#">7</a>
-                </span>
-                <span class="next">
-                  <a href="#">다음&nbsp;></a>
-                </span>
-              </div>
+              	<!-- 리뷰 페이지 번호 -->
+	            <div class="paging">
+		            <span class="prev">
+			            <c:if test="${pageGroupStart > 1}">
+			                <a href="/Kmarket1/product/view.do?prodNo=${prodNo}&prodCate1=${prodCate1}&prodCate2=${prodCate2}&pg=${pageGroupStart - 1}"><&nbsp;이전</a>
+			            </c:if>
+			        </span>
+			        <span class="num">
+			            <c:forEach var="num" begin="${pageGroupStart}" end="${pageGroupEnd}">
+			                <a href="/Kmarket1/product/view.do?prodNo=${prodNo}&prodCate1=${prodCate1}&prodCate2=${prodCate2}&pg=${num}" class="num ${num == currentPage ? 'on':'off'}">${num}</a>
+			            </c:forEach>
+			        </span>
+			        <span class="next">
+			            <c:if test="${pageGroupEnd < lastPageNum}">
+			                <a href="/Kmarket1/product/view.do?prodNo=${prodNo}&prodCate1=${prodCate1}&prodCate2=${prodCate2}&pg=${pageGroupEnd + 1}">다음&nbsp;></a>
+			            </c:if>
+		            </span>
+	        	</div>
                 </article>
             </section>
         </main>
