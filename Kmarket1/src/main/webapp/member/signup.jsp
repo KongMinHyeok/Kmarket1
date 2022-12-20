@@ -19,7 +19,7 @@
 					alert('모든 항목에 동의하셔야 다음으로 넘어갈 수 있습니다');
 				}
 			}else{
-				if(agree1 && agree2 && agree3 && agree5){
+				if(agree1 && agree2 && agree3){
 					location.href ='/Kmarket1/member/registerSeller.do';
 				}else{
 					alert('모든 항목에 동의하셔야 다음으로 넘어갈 수 있습니다');
@@ -34,15 +34,30 @@
                     <h1>약관동의</h1>
                 </nav>
                 <section>
-                    <h3>
-                        <span class="essential">(필수)</span>
-                        케이마켓 이용약관
-                    </h3>
-                    <textarea class="terms" readonly>${term}</textarea>
-                    <label>
-                        <input type="checkbox" name="agree1">
-                        동의합니다.
-                    </label>
+                	<c:choose>
+	                	<c:when test="${type eq 'normal'}">
+		                    <h3>
+		                        <span class="essential">(필수)</span>
+		                        케이마켓 이용약관
+		                    </h3>
+		                    <textarea class="terms" readonly>${term}</textarea>
+		                    <label>
+		                        <input type="checkbox" name="agree1">
+		                        동의합니다.
+		                    </label>
+	                    </c:when>
+	                    <c:otherwise>
+	                    	<h3>
+		                        <span class="essential">(필수)</span>
+		                        오픈마켓 판매자약관
+		                    </h3>
+		                    <textarea class="financial" readonly>${tax}</textarea>
+		                    <label>
+		                        <input type="checkbox" name="agree1">
+		                        동의합니다.
+		                    </label>
+	                    </c:otherwise>
+                    </c:choose>
                     <h3>
                         <span class="essential">(필수)</span>
                         전자금융거래 이용약관
@@ -52,17 +67,6 @@
                         <input type="checkbox" name="agree2">
                         동의합니다.
                     </label>
-                    <c:if test="${type eq 'seller'}">
-                    	<h3>
-                        <span class="essential">(필수)</span>
-                        오픈마켓 판매자약관
-                    </h3>
-                    <textarea class="financial" readonly>${tax}</textarea>
-                    <label>
-                        <input type="checkbox" name="agree5">
-                        동의합니다.
-                    </label>
-                    </c:if>
                     <h3>
                         <span class="essential">(필수)</span>
                         개인정보 수집동의
@@ -73,17 +77,19 @@
                         동의합니다.
                     </label>
                 </section>
-                <section>
-                    <h3>
-                        <span class="optional">(선택)</span>
-                        위치정보 이용약관
-                    </h3>
-                    <textarea class="location" readonly>${location}</textarea>
-                    <label>
-                        <input type="checkbox" name="agree4">
-                        동의합니다.
-                    </label>
-                </section>
+                <c:if test="${type eq 'normal'}">
+	                <section>
+	                    <h3>
+	                        <span class="optional">(선택)</span>
+	                        위치정보 이용약관
+	                    </h3>
+	                    <textarea class="location" readonly>${location}</textarea>
+	                    <label>
+	                        <input type="checkbox" name="agree4">
+	                        동의합니다.
+	                    </label>
+	                </section>
+                </c:if>
                 <div>
                     <input type="button" class="agree" value="동의하기">
                 </div>
