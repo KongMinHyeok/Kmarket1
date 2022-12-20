@@ -29,7 +29,6 @@ public class ListController extends HttpServlet{
 		
 		String cate  = req.getParameter("cate");
 		String pg 	 = req.getParameter("pg");
-		String group = req.getParameter("group");
 		
 		int start = 0;
 		int currentPage = 1;
@@ -74,7 +73,6 @@ public class ListController extends HttpServlet{
 
 		req.setAttribute("cate", cate);
 		req.setAttribute("pg", pg);
-		req.setAttribute("group", group);
 		req.setAttribute("lastPageNum", lastPageNum);
 		req.setAttribute("currentPage", currentPage);
 		req.setAttribute("currentPageGroup", currentPageGroup);

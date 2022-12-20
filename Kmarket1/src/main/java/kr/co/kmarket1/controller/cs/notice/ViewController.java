@@ -23,14 +23,12 @@ public class ViewController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		String group = req.getParameter("group");
 		String cate  = req.getParameter("cate");
 		String pg 	 = req.getParameter("pg");
 		String no 	 = req.getParameter("no");
 		
 		CsArticleVO notice = service.selectArticleNotice(no);
 		
-		req.setAttribute("group", group);
 		req.setAttribute("cate", cate);
 		req.setAttribute("pg", pg);
 		req.setAttribute("no", no);

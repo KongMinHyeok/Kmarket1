@@ -1,4 +1,4 @@
-package kr.co.kmarket1.controller.cs.faq;
+package kr.co.kmarket1.controller.admin;
 
 import java.io.IOException;
 
@@ -9,13 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kr.co.kmarket1.service.CsService;
-import kr.co.kmarket1.vo.CsArticleVO;
+import kr.co.kmarket1.dao.AdminDAO;
+import kr.co.kmarket1.vo.ProductVO;
 
-@WebServlet("/cs/faq/view.do")
-public class ViewController extends HttpServlet{
+@WebServlet("/admin/modify.do")
+public class AdminModifyController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private CsService service = CsService.instance;
 	
 	@Override
 	public void init() throws ServletException {
@@ -23,23 +22,16 @@ public class ViewController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String prodNo = req.getParameter("prodNo");
+		ProductVO vo = AdminDAO.getInstance().modifyProduct(prodNo);
 		
-		String no   = req.getParameter("no");
-		String cate = req.getParameter("cate");
+		req.setAttribute("vo", vo);
 		
-		CsArticleVO article = service.selectFaqArticle(no);
-		
-		
-		req.setAttribute("article", article);
-		req.setAttribute("cate", cate);
-		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/faq/view.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/modify.jsp");
 		dispatcher.forward(req, resp);
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	}
-	
-	
 }

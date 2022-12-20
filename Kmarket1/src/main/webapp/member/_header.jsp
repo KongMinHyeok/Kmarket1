@@ -24,7 +24,7 @@
 	                    <a href="/Kmarket1/member/login.do">로그인</a>
 	                    <a href="/Kmarket1/member/join.do">회원가입</a>
 	                    <a href="/Kmarket1/member/login.do">마이페이지</a>
-	                    <a href="#">
+	                    <a href="/Kmarket1/member/login.do">
 	                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
 	                        장바구니
 	                    </a>
@@ -35,7 +35,7 @@
 	                    <a href="/Kmarket1/member/logout.do?uid=${sessMember.uid}">로그아웃</a>
 	                    <a href="#">${sessMember.name}님</a>
 	                    <a href="/Kmarket1/member/myPage.do?uid=${sessMember.uid}">마이페이지</a>
-	                    <a href="#">
+	                    <a href="/Kmarket1/product/cart.do?uid=${sessMember.uid}">
 	                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
 	                        장바구니
 	                    </a>
