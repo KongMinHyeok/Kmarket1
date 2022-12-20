@@ -1,6 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+<script>
+$(function() {	
+	
+	$('.more').click(function(e) {
+			e.preventDefault();
+			$('li').show();
+			$('.more').click(function(e){
+				$('.list:nth-child(n+4)').hide();
+			});
+		});
+	
+});
+</script>
 <jsp:include page="../_header.jsp"/>
       <section id="cs">
         <div class="faq">
@@ -37,14 +50,12 @@
               <div>
               <c:forEach var="cate" items="${cate2}">
                 <h3>${cate.cate2}</h3>
+				<ul>
                  <c:forEach var="faq" items="${faqs}">
 					<c:if test="${faq.cate2 eq cate.cate2}">
-	                 <ul>
-	                  <li><a href="/Kmarket1/cs/faq/list.do?cate=${cate}&no=${faq.no}&cate2=${faq.cate2}"><span>Q.</span>${faq.title}</a></li>
-	                 </ul>
+	                  <li class="list"><a href="/Kmarket1/cs/faq/view.do?no=${faq.no}&cate=${faq.cate}"><span>Q.</span>${faq.title}</a></li>
 	                </c:if>
                  </c:forEach>
-                 <ul>
                   <li class="more"><a href="#">더보기</a></li>
                 </ul>
                 </c:forEach>

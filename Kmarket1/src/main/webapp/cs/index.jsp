@@ -22,7 +22,7 @@
             </ul>
         </section>
         <section class="faq">
-            <h1>자주 묻는 질문<a href="/Kmarket1/cs/faq/list.do?group=faq">전체보기</a></h1>
+            <h1>자주 묻는 질문<a href="/Kmarket1/cs/faq/list.do?cate=member">전체보기</a></h1>
             <ol>
                 <li>
                     <a href="/Kmarket1/cs/faq/list.do?group=faq&cate=member"><span>회원</span></a>

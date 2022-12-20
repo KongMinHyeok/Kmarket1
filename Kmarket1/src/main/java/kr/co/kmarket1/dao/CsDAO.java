@@ -306,4 +306,211 @@ public class CsDAO extends DBHelper{
 		logger.debug("cate2 : " + cate2);
 		return cate2;
 	}
+	
+	public CsArticleVO selectFaqArticle(String no) {
+		
+		
+		CsArticleVO article = null;
+		
+		try {
+			logger.info("selectFaqArticle start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(CsSQL.SELECT_FAQ_ARTICLE);
+			psmt.setString(1, no);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				article = new CsArticleVO();
+				article.setCate(rs.getString(1));
+				article.setTitle(rs.getString(2));
+				article.setContent(rs.getString(3));
+			}
+			close();
+			
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+			logger.debug("faqArticle : " + article);
+		return article;
+	}
+	
+public List<CsArticleVO> selectQnasGroup(int start) {
+		
+		List<CsArticleVO> qnas = new ArrayList<>();
+		
+		try {
+			logger.info("selectQnasGroup start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(CsSQL.SELECT_QNAS_GROUP);
+			psmt.setInt(1, start);
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				CsArticleVO qna = new CsArticleVO();
+				qna.setNo(rs.getInt(1));
+				qna.setCate2(rs.getString(2));
+				qna.setTitle(rs.getString(3));
+				qna.setUid(rs.getString(4));
+				qna.setRdate(rs.getString(5).substring(2,10));
+				qna.setCate(rs.getString(6));	
+				
+				qnas.add(qna);
+			}
+			close();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("qnas" + qnas);
+		return qnas;
+	}
+
+	public List<CsArticleVO> selectQnasCate(String cate, int start) {
+		
+		List<CsArticleVO> qnas = new ArrayList<>();
+		
+		try {
+			logger.info("selectQnasCate start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(CsSQL.SELECT_QNAS_CATE);
+			psmt.setString(1, cate);
+			psmt.setInt(2, start);
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				CsArticleVO qna = new CsArticleVO();
+				qna.setNo(rs.getInt(1));
+				qna.setCate2(rs.getString(2));
+				qna.setTitle(rs.getString(3));
+				qna.setUid(rs.getString(4));
+				qna.setRdate(rs.getString(5).substring(2, 10));
+				qna.setCate(rs.getString(6));
+				
+				qnas.add(qna);
+			}
+			close();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("qnas" + qnas);
+		
+		return qnas;
+	}
+	
+	public int selectCountQna(String cate) {
+		
+		int total = 0;
+		
+		try {
+			logger.info("selectCountQna... start");
+			
+			conn = getConnection();
+			psmt = conn.prepareStatement(CsSQL.SELECT_COUNT_QNA);
+			psmt.setString(1, cate);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				total = rs.getInt(1);
+			}
+			
+			close();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("total : " + total);
+		return total;
+	}
+	
+	public int selectCountQnas() {
+		
+		int total = 0;
+		
+		try {
+			logger.info("selectCountQnas... start");
+			
+			conn = getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(CsSQL.SELECT_COUNT_QNAS);
+			
+			if(rs.next()) {
+				total = rs.getInt(1);
+			}
+			
+			close();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("total : " + total);
+		return total;
+	}
+	
+	public CsArticleVO selectArticleQna(String no) {
+		
+		CsArticleVO qna = new CsArticleVO();
+		
+		try {
+			logger.info("selectArticleQna start...");
+			
+			conn = getConnection();
+			psmt = conn.prepareStatement(CsSQL.SELECT_ARTICLE_QNA);
+			psmt.setString(1, no);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				qna.setCate2(rs.getString(1));
+				qna.setTitle(rs.getString(2));
+				qna.setUid(rs.getString(3));
+				qna.setRdate(rs.getString(4).substring(2, 10));
+				qna.setContent(rs.getString(5));
+				qna.setCate(rs.getString(6));
+
+			}
+			close();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("qna : " + qna );
+		return qna;
+	}
+
+	public CsArticleVO selectCateQna() {
+		
+		CsArticleVO qna = new CsArticleVO();
+		
+		try {
+			logger.info("selectCateQna start...");
+			
+			conn = getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(CsSQL.SELECT_CATE_QNA);
+			
+			if(rs.next()) {
+				qna.setCate(rs.getString(1));
+			}
+			close();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return qna;
+	}
+	
+	public void insertArticleQna(CsArticleVO article) {
+		
+		try {
+			logger.info("insertArticleQna start...");
+			
+			conn = getConnection();
+			psmt = conn.prepareStatement(CsSQL.INSERT_ARTICLE_QNA);
+			psmt.setString(1, article.getUid());
+			psmt.setString(2, article.getCate());
+			psmt.setString(3, article.getCate2());
+			psmt.setString(4, article.getTitle());
+			psmt.setString(5, article.getContent());
+			psmt.setString(6, article.getRegip());
+			psmt.setString(7, article.getRdate());
+			psmt.executeUpdate();
+			close();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
 }

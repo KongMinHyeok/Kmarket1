@@ -30,7 +30,15 @@ public enum CsService {
 		return dao.selectFaqsCate2(cate);
 	}
 	
-	
+	public CsArticleVO selectFaqArticle(String no) {
+		return dao.selectFaqArticle(no);
+	}
+	public CsArticleVO selectCateQna() {
+		return dao.selectCateQna();
+	}
+	public void insertArticleQna(CsArticleVO article) {
+		 dao.insertArticleQna(article);
+	}
 	public int getLastPageNum(int total) {
 		int lastPageNum = 0;
 		
@@ -58,5 +66,9 @@ public enum CsService {
 	
 	public CsArticleVO selectArticleNotice(String no) {
 		return dao.selectArticleNotice(no);
+	}
+	
+	public CsArticleVO selectArticleQna(String no) {
+		return dao.selectArticleQna(no);
 	}
 }
