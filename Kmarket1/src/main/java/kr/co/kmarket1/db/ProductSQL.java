@@ -41,7 +41,7 @@ public class ProductSQL {
 	// 리뷰 총갯수
 	public static final String SELECT_REVIEW_COUNT_TOTAL = "SELECT COUNT(`revNo`) FROM `km_product_review` "
 												+ "where `prodNo`=?";
-	// 장바구니 불렁기
+	// 장바구니 불러오기
 	public static final String SELECT_PRODUCT_CARTS = "SELECT a.*, b.`prodName`,`descript`,`thumb1` FROM `km_product_cart` AS a "
 													+ "JOIN `km_product` AS b ON a.prodNo = b.prodNo WHERE `uid`=?";
 

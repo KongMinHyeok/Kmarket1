@@ -100,13 +100,12 @@ public enum ProductService {
 			int[] result = {currentPageGroup, pageGroupStart, pageGroupEnd};
 			return result;
 		}
-		
-		
+		/*
 		// cart에 상품 추가
-		public ProductCartVO insertProductCart(String uid, int prodNo, int count, int price, int discount, int point, int delivery, int total, String rdate) {
-			return dao.insertProductCart(uid, prodNo, count, price, discount, point, delivery, total, rdate);
+		public void insertProductCart(String uid, int prodNo, int count, int price, int discount, int point, int delivery, int total, String rdate) {
+			return;
 		};
-		
+		 */
 	
 
 

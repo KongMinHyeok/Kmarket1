@@ -16,13 +16,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
+import com.mysql.cj.xdevapi.JsonString;
 
+import kr.co.kmarket1.dao.ProductDAO;
 import kr.co.kmarket1.service.ProductService;
 import kr.co.kmarket1.vo.ProductCartVO;
 import kr.co.kmarket1.vo.ProductReviewVO;
 import kr.co.kmarket1.vo.ProductVO;
-
 @WebServlet("/product/view.do")
 public class ViewController extends HttpServlet{
 	private ProductService service = ProductService.INSTANCE;
@@ -135,35 +138,35 @@ public class ViewController extends HttpServlet{
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+		
 		String uid = req.getParameter("uid");
-		int prodNo = Integer.parseInt(req.getParameter("prodNo"));
-		int count = Integer.parseInt(req.getParameter("count"));
-		int price = Integer.parseInt(req.getParameter("price"));
-		int discount = Integer.parseInt(req.getParameter("discount"));
-		int point = Integer.parseInt(req.getParameter("point"));
-		int delivery = Integer.parseInt(req.getParameter("delivery"));
-		int total = Integer.parseInt(req.getParameter("total"));
+		String prodNo = req.getParameter("prodNo");
+		String count = req.getParameter("count");
+		String price = req.getParameter("price");
+		String discount = req.getParameter("discount");
+		String point = req.getParameter("point");
+		String delivery = req.getParameter("delivery");
+		String total = req.getParameter("total");
 		String rdate = req.getParameter("rdate");
 		
-		resp.setCharacterEncoding("UTF-8");
+		ProductCartVO cart = new ProductCartVO();
+		cart.setUid(uid);
+		cart.setProdNo(prodNo);
+		cart.setCount(count);
+		cart.setPrice(price);
+		cart.setDiscount(discount);
+		cart.setPoint(point);
+		cart.setDelivery(delivery);
+		cart.setTotal(total);
+		cart.setRdate(rdate);
 		
-		ProductCartVO cart = service.insertProductCart(uid, prodNo, count, price, discount, point, delivery, total, rdate);
- 
+		int result = ProductDAO.getInstance().insertProductCart(cart);
+		
 		JsonObject json = new JsonObject();
-		json.addProperty("uid", cart.getUid());
-		json.addProperty("prodNo", cart.getProdNo());
-		json.addProperty("count", cart.getCount());
-		json.addProperty("price", cart.getPrice());
-		json.addProperty("discount", cart.getDiscount());
-		json.addProperty("point", cart.getPoint());
-		json.addProperty("delivery", cart.getDelivery());
-		json.addProperty("total", cart.getTotal());
-		json.addProperty("rdate", cart.getRdate());
-
+		json.addProperty("result", result);
+		
 		PrintWriter writer = resp.getWriter();
 		writer.print(json.toString());
-
 		
 	}
 }
