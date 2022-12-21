@@ -3,7 +3,6 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,6 +47,7 @@
     	// view에서 장바구니로 데이터 넘기기
     	$('.cart').click(function(){
     		
+    		
     		let uid = $('input[name=uid]').val();
 			let prodNo = $('input[name=prodNo]').val();
 			let count = $('input[name=num]').val();
@@ -57,6 +57,11 @@
 			let delivery = $('input[name=delivery]').val();
 			let total = $('input[name=total]').val();
 			let rdate = $('input[name=rdate]').val();
+			
+			if(uid == ''){
+				alert('로그인 후 이용해주세요');
+				location.href= '/Kmarket1/member/login.do';
+				};
 			
     		let jsonData = {
     				"uid": uid,
@@ -69,25 +74,69 @@
     				"total": total,
     				"rdate": rdate
     		};
-			console.log(jsonData);
-			
     		$.ajax({
     			url: '/Kmarket1/product/view.do',
-    			type: 'POST',
+    			type: 'post',
     			data: jsonData,
     			dataType: 'json',
-    			success: function(result) {
-    		          if (result) {
-    		              alert("완료");
-    		          } else {
-    		              alert("전송된 값 없음");
-    		          }
-    		      },
-    		      error: function() {
-    		          alert("에러 발생");
-    		      }
+    			success: function(data){
+	    				if(data.result > 0){
+							alert('장바구니에 추가완료');
+							location.href = '/kmarket/product/cart.do?uid='+uid;
+						}else{
+							alert('오류발생! 다시 시도해주세요.')
+						}
+    			}
     		});
     	});
+    	///////////////////////////////////////////////////////////////////////
+    	///////////////////////////////////////////////////////////////////////
+    	/* order버튼 누르면 장바구니랑 다르게 바로 주문으로 넘어가야해서 코드 하나 더 만들어야한다
+    	$('.order').click(function(){
+    		
+    		
+    		let uid = $('input[name=uid]').val();
+			let prodNo = $('input[name=prodNo]').val();
+			let count = $('input[name=num]').val();
+			let price = $('input[name=price]').val();
+			let discount = $('input[name=discount]').val();
+			let point = $('input[name=point]').val();
+			let delivery = $('input[name=delivery]').val();
+			let total = $('input[name=total]').val();
+			let rdate = $('input[name=rdate]').val();
+			
+			if(uid == ''){
+				alert('로그인 후 이용해주세요');
+				location.href= '/Kmarket1/member/login.do';
+				};
+			
+    		let jsonData = {
+    				"uid": uid,
+    				"prodNo": prodNo,
+    				"count": count,
+    				"price": price,
+    				"discount": discount,
+    				"point": point,
+    				"delivery": delivery,
+    				"total": total,
+    				"rdate": rdate
+    		};
+    		$.ajax({
+    			url: '/Kmarket1/product/view.do',
+    			type: 'post',
+    			data: jsonData,
+    			dataType: 'json',
+    			success: function(data){
+	    				if(data.result > 0){
+							alert('장바구니에 추가완료');
+							location.href = '/kmarket/product/cart.do?uid='+uid;
+						}else{
+							alert('오류발생! 다시 시도해주세요.')
+						}
+    			}
+    		});
+    	});
+   	*/
 	//
     });
     </script>
@@ -320,7 +369,6 @@
                         환급신청은 [나의쇼핑정보]에서 하실 수 있으며, 자세한 문의는 개별 판매자에게 연락하여 주시기 바랍니다.
                     </p>
                 </article>
-
                 <!-- 상품 리뷰-->
                 <article class="review">
                     <nav>

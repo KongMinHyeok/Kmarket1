@@ -457,11 +457,10 @@ public class ProductDAO extends DBHelper{
 				review.setRevNo(rs.getInt(1));
 				review.setProdNo(rs.getInt(2));
 				review.setContent(rs.getString(3));
-				review.setUid(rs.getString(4).replaceAll("(?<=.{4}).","*"));
+				review.setUid(rs.getString(4));
 				review.setRating(rs.getInt(5));
 				review.setRegip(rs.getString(6));
-				review.setRdate(rs.getString(7).substring(0,10));
-				review.setProdName(rs.getString(8));
+				review.setRdate(rs.getString(7));
 				reviews.add(review);
 			}
 			close();
@@ -471,43 +470,29 @@ public class ProductDAO extends DBHelper{
 		return reviews;
 	}
 	// cart에 상품 넣기
-	public ProductCartVO insertProductCart(String uid, int prodNo, int count, int price, int discount, int point, int delivery, int total, String rdate) {
-		ProductCartVO cart = null;
+	public int insertProductCart(ProductCartVO cart) {
+		int result = 0;
 		try {
 			logger.info("insertProductCart...");
 			conn = getConnection();
 			psmt = conn.prepareStatement(ProductSQL.INSERT_PRODUCT_CART);
-			psmt.setString(1, uid);
-			psmt.setInt(2, prodNo);
-			psmt.setInt(3, count);
-			psmt.setInt(4, price);
-			psmt.setInt(5, discount);
-			psmt.setInt(6, point);
-			psmt.setInt(7, delivery);
-			psmt.setInt(8, total);
-			psmt.setString(9, rdate);
+			psmt.setString(1, cart.getUid());
+			psmt.setInt(2, cart.getProdNo());
+			psmt.setInt(3, cart.getCount());
+			psmt.setInt(4, cart.getPrice());
+			psmt.setInt(5, cart.getDiscount());
+			psmt.setInt(6, cart.getPoint());
+			psmt.setInt(7, cart.getDelivery());
+			psmt.setInt(8, cart.getTotal());
+			psmt.setString(9, cart.getRdate());
 			
-			psmt.executeUpdate();
-			
-			if(rs.next()) {
-				cart = new ProductCartVO();
-				cart.setCartNo(rs.getInt(1));
-				cart.setUid(rs.getString(2));
-				cart.setProdNo(rs.getInt(3));
-				cart.setCount(rs.getInt(4));
-				cart.setPrice(rs.getInt(5));
-				cart.setDiscount(rs.getInt(6));
-				cart.setPoint(rs.getInt(7));
-				cart.setDelivery(rs.getInt(8));
-				cart.setTotal(rs.getInt(9));
-				cart.setRdate(rs.getString(10));
-			}
+			result = psmt.executeUpdate();
 			close();
 				
 		}catch(Exception e) {
 			logger.error(e.getMessage());
 		}
-		return cart;
+		return result;
 	}
 	// 리뷰 총갯수
 	public int selectReviewCountTotal(String prodNo) {
