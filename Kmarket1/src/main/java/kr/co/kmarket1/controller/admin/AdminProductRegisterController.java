@@ -18,13 +18,13 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-import kr.co.kmarket1.dao.AdminDAO;
+import kr.co.kmarket1.dao.AdminProductRegisterDAO;
 import kr.co.kmarket1.dao.CateDAO;
 import kr.co.kmarket1.vo.Cate1VO;
 import kr.co.kmarket1.vo.ProductVO;
 
-@WebServlet("/admin/productRegister.do")
-public class ProductRegisterController extends HttpServlet {
+@WebServlet("/admin/product/register.do")
+public class AdminProductRegisterController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
@@ -34,21 +34,23 @@ public class ProductRegisterController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		
 		// cate1 리스트 불러오기
 		List<Cate1VO> cate1_1 = CateDAO.getInstance().selectCates1();
 		req.setAttribute("cate1_1", cate1_1);
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/productRegister.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/product/register.jsp");
 		dispatcher.forward(req, resp);
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		//Multipart 전송 데이터 수신
 		ServletContext sc = req.getServletContext();
-		String savePath = sc.getRealPath("/file");
+		String savePath = sc.getRealPath("/file"); //thumb 이미지 파일 저장 경로
 		
-		int maxSize = 1024 * 1024 * 10;
+		int maxSize = 1024 * 1024 * 10; //파일 최대 용량 10MB
 		MultipartRequest mr = new MultipartRequest(req, savePath, maxSize, "UTF-8", new DefaultFileRenamePolicy());
 		Enumeration e = mr.getFileNames();
 		ArrayList<String> saveFiles = new ArrayList<>();
@@ -63,8 +65,8 @@ public class ProductRegisterController extends HttpServlet {
 			String Fname = saveFiles.get(i);
 			
 			int idx = Fname.lastIndexOf(".");
-			String ext = Fname.substring(idx);
 			
+			String ext = Fname.substring(idx);
 			String random = UUID.randomUUID().toString();
 			String newName = random + ext;
 			
@@ -122,10 +124,10 @@ public class ProductRegisterController extends HttpServlet {
 		vo.setOrigin(origin);
 		vo.setIp(ip);
 		
-		AdminDAO.getInstance().insertProduct(vo);
+		AdminProductRegisterDAO.getInstance().insertAdminRegister(vo);
 		
-		//productList로 리다이렉트
-		resp.sendRedirect("/Kmarket1/admin/productList.do");
+		//list로 리다이렉트
+		resp.sendRedirect("/Kmarket1/admin/product/list.do");
 	}
 	
 }

@@ -73,7 +73,7 @@ public class CateDAO extends DBHelper{
 	public List<Cate2VO> selectCates2(String cate1) {
 		List<Cate2VO> cate2_1 = new ArrayList<>();
 		try {
-			logger.info("selectCate_2 start...");
+			logger.info("selectCate2 start...");
 			conn = getConnection();
 			psmt = conn.prepareStatement("SELECT * FROM `km_product_cate2` WHERE `cate1`=?");
 			psmt.setString(1, cate1);

@@ -15,7 +15,7 @@ import com.google.gson.Gson;
 import kr.co.kmarket1.dao.CateDAO;
 import kr.co.kmarket1.vo.Cate2VO;
 
-@WebServlet("/admin/cate2List.do")
+@WebServlet("/admin/product/cate2List.do")
 public class Cate2ListController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 
@@ -41,6 +41,7 @@ public class Cate2ListController extends HttpServlet{
 		String jsonData = gson.toJson(cate2_1);
 		
 		resp.setCharacterEncoding("UTF-8");
+		
 		PrintWriter out = resp.getWriter();
 		out.print(jsonData);
 	}
