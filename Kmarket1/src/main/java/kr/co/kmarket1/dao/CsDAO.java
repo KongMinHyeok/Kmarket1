@@ -39,9 +39,10 @@ public class CsDAO extends DBHelper{
 				notice.setCate(rs.getString(3));
 				notice.setTitle(rs.getString(4));
 				notice.setContent(rs.getString(5));
-				notice.setUid(rs.getString(6));
-				notice.setRegip(rs.getString(7));
-				notice.setRdate(rs.getString(8).substring(2, 10));
+				notice.setHit(rs.getInt(6));
+				notice.setUid(rs.getString(7));
+				notice.setRegip(rs.getString(8));
+				notice.setRdate(rs.getString(9).substring(2, 10));
 				
 				notices.add(notice);
 			}
@@ -69,11 +70,13 @@ public class CsDAO extends DBHelper{
 				qna.setNo(rs.getInt(1));
 				qna.setComment(rs.getInt(2));
 				qna.setCate(rs.getString(3));
-				qna.setTitle(rs.getString(4));
-				qna.setContent(rs.getString(5));
-				qna.setUid(rs.getString(6));
-				qna.setRegip(rs.getString(7));
-				qna.setRdate(rs.getString(8).substring(2, 10));
+				qna.setCate2(rs.getString(4));
+				qna.setTitle(rs.getString(5));
+				qna.setContent(rs.getString(6));
+				qna.setHit(rs.getInt(7));
+				qna.setUid(rs.getString(8));
+				qna.setRegip(rs.getString(9));
+				qna.setRdate(rs.getString(10).substring(2, 10));
 				
 				Qnas.add(qna);
 			}
@@ -506,7 +509,6 @@ public List<CsArticleVO> selectQnasGroup(int start) {
 			psmt.setString(4, article.getTitle());
 			psmt.setString(5, article.getContent());
 			psmt.setString(6, article.getRegip());
-			psmt.setString(7, article.getRdate());
 			psmt.executeUpdate();
 			close();
 		}catch (Exception e) {

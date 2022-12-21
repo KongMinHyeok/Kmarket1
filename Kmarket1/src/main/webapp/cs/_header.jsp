@@ -21,16 +21,16 @@
         <div class="top">
           <div>
             <p>
-	            <a href="/Kmarket1/member/login.jsp">로그인</a>
-	            <a href="/Kmarket1/member/join.jsp">회원가입</a>
-	            <a href="/Kmarket1/member/login.jsp">마이페이지</a>
-	            <a href="/Kmarket1/product/cart.jsp"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;장바구니</a>
+	            <a href="/Kmarket1/member/login.do">로그인</a>
+	            <a href="/Kmarket1/member/join.do">회원가입</a>
+	            <a href="/Kmarket1/member/login.do">마이페이지</a>
+	            <a href="/Kmarket1/product/cart.do"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;장바구니</a>
             </p>
           </div>
         </div>
         <div class="logo">
           <div>
-            <a href="/Kmarket1/cs/index.jsp"><img src="/Kmarket1/cs/img/logo.png" alt="로고" />고객센터</a>
+            <a href="/Kmarket1/cs/index.do"><img src="/Kmarket1/cs/img/logo.png" alt="로고" />고객센터</a>
           </div>
         </div>
       </header>

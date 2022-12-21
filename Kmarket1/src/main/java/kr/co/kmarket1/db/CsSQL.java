@@ -29,7 +29,7 @@ public class CsSQL {
 	public static final String SELECT_FAQ_ARTICLE = "select `cate`, `title`, `content` from `km_cs_faq` "
 													+"where `no`=?";
 	
-	public static final String SELECT_QNAS = "select * from `km_cs_qna`"
+	public static final String SELECT_QNAS = "select * from `km_cs_qna` "
 											+"order by `no` DESC "
 											+"limit 0, 5";
 	
@@ -49,8 +49,13 @@ public class CsSQL {
 	public static final String SELECT_CATE_QNA = "select `cate` from km_cs_qna";
 	
 	public static final String INSERT_ARTICLE_QNA = "insert into `km_cs_qna` set "
-												+ "`uid`=?, `cate`=?, `cate2`=?, "
-												+ "`title`=?, `content`=?, `regip`=?";
+												+ "`uid`=?, "
+												+ "`cate`=?, "
+												+ "`cate2`=?, "
+												+ "`title`=?, "
+												+ "`content`=?, "
+												+ "`regip`=?, "
+												+ "`rdate`=now()";
 	
 	
 }

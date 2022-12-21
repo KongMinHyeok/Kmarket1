@@ -28,22 +28,22 @@
                     <a href="/Kmarket1/cs/faq/list.do?group=faq&cate=member"><span>회원</span></a>
                 </li>
                 <li>
-                    <a href="/Kmarket1/cs/faq/list.do?group=faq&cate=member"><span>쿠폰/이벤트</span></a>
+                    <a href="/Kmarket1/cs/faq/list.do?group=faq&cate=event"><span>쿠폰/이벤트</span></a>
                 </li>
                 <li>
-                    <a href="/Kmarket1/cs/faq/list.do?group=faq&cate=member""><span>주문/결제</span></a>
+                    <a href="/Kmarket1/cs/faq/list.do?group=faq&cate=order""><span>주문/결제</span></a>
                 </li>
                 <li>
-                    <a href="/Kmarket1/cs/faq/list.do?group=faq&cate=member""><span>배송</span></a>
+                    <a href="/Kmarket1/cs/faq/list.do?group=faq&cate=trip""><span>배송</span></a>
                 </li>
                 <li>
-                    <a href="/Kmarket1/cs/faq/list.do?group=faq&cate=member""><span>취소/반품/교환</span></a>
+                    <a href="/Kmarket1/cs/faq/list.do?group=faq&cate=cancel""><span>취소/반품/교환</span></a>
                 </li>
                 <li>
-                    <a href="/Kmarket1/cs/faq/list.do?group=faq&cate=member""><span>여행/숙박/항공</span></a>
+                    <a href="/Kmarket1/cs/faq/list.do?group=faq&cate=trip""><span>여행/숙박/항공</span></a>
                 </li>
                 <li>
-                    <a href="/Kmarket1/cs/faq/list.do?group=faq&cate=member""><span>안전거래</span></a>
+                    <a href="/Kmarket1/cs/faq/list.do?group=faq&cate=safe""><span>안전거래</span></a>
                 </li>
             </ol>
         </section>
@@ -52,7 +52,7 @@
             <ul>
             <c:forEach var="qna" items="${qnas}">
                 <li>
-                    <a href="#" class="title">${qna.title}</a>
+                    <a href="#" class="title">[${qna.cate2}]${qna.title}</a>
                     <p>
 						<c:choose>
 						<c:when test="${fn:length(qna.uid) gt 5}">

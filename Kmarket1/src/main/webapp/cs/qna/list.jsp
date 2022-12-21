@@ -13,7 +13,7 @@
             <aside>
               <h2>문의하기</h2>
               <ul>
-	            <li class="${cate eq null || cate eq 'member' ? 'on':'off'}"><a href="/Kmarket1/cs/qna/list.do?cate=member">회원</a></li>
+	            <li class="${cate eq 'member' ? 'on':'off'}"><a href="/Kmarket1/cs/qna/list.do?cate=member">회원</a></li>
                 <li class="${cate eq 'event' ? 'on':'off'}"><a href="/Kmarket1/cs/qna/list.do?cate=event">쿠폰/이벤트</a></li>
                 <li class="${cate eq 'order' ? 'on':'off'}"><a href="/Kmarket1/cs/qna/list.do?cate=order">주문/결제</a></li>
                 <li class="${cate eq 'ship' ? 'on':'off'}"><a href="/Kmarket1/cs/qna/list.do?cate=ship">배송</a></li>
@@ -38,6 +38,12 @@
 				<c:forEach var="qna" items="${articles}">
                 <tr>
                   <td><a href="/Kmarket1/cs/qna/view.do?no=${qna.no}&cate=${qna.cate}">[${qna.cate2}]${qna.title}</a></td>
+                  <td>
+                  	<c:choose>
+                  	 <c:when test="${qna.comment eq 0}"><span style="color:#8C8C8C; font-weight:bold; font-size:13px">검토중</span></c:when>
+                  	 <c:otherwise><span style="color:#3DB7CC; font-weight:bold; font-size:13px">답변완료</span></c:otherwise>
+                  	</c:choose>
+                  </td>
              		<c:choose>
 					<c:when test="${fn:length(qna.uid) gt 5}">
 						<td>${fn:substring (qna.uid,0,fn:length(qna.uid)-3)}***</td>
@@ -60,12 +66,12 @@
                 <c:forEach var="num" begin="${pageGroupStart}" end="${pageGroupEnd}" step="1">
                 <c:choose>
 	                <c:when test="${cate ne null}">
-	                	<a href="/Kmarket1/cs/qna/list.do?pg=${num}&cate=${cate}" class="num on${(num eq currentPage)? 'current':'off'}">${num}</a>
+	                	<a href="/Kmarket1/cs/qna/list.do?pg=${num}&cate=${cate}" class="num${(num eq currentPage)? 'on':'off'}">${num}</a>
 	               	</c:when>
                	</c:choose>
                	<c:choose>
 	                <c:when test="${cate eq null}">
-						<a href="/Kmarket1/cs/qna/list.do?pg=${num}" class="num on${(num eq currentPage)? 'current':'off'}">${num}</a>
+						<a href="/Kmarket1/cs/qna/list.do?pg=${num}" class="num${(num eq currentPage)? 'on':'off'}">${num}</a>
 	               	</c:when>
                	</c:choose>
                 </c:forEach>

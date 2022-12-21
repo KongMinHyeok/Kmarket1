@@ -39,9 +39,7 @@
               </nav>
 
               <div class="content">
-                <p>
-                  ${qna.content}
-                </p>
+                <p>${qna.content}</p>
                 <p>
                   ※ 피싱 관련 피해신고<br /><br />
                   ▶ 경찰청 사이버수사국 (국번없이)182 :
