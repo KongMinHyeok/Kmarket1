@@ -31,8 +31,8 @@ public class ProductSQL {
 	public static final String SELECT_COUNT_TOTAL = "SELECT COUNT(`prodNo`) FROM `km_product` "
 													+ "where `prodCate1`=? AND `prodCate2`=?";
 	
-	public static final String INSERT_PRODUCT_CART = "INSERT INTO `km_product_cart` set "
-													+ "`uid`=?, `prodNo`=?, `count`=?, `price`=?, `discount`=?, `point`=?, `delivery`=?, `total`=?, `rdate`=? ";
+	public static final String INSERT_PRODUCT_CART = "INSERT INTO `km_product_cart` SET "
+													+ "`uid`=?, `prodNo`=?, `count`=?, `price`=?, `discount`=?, `point`=?, `delivery`=?, `total`=?, `rdate`=?;";
 	
 	public static final String SELECT_REVIEWS = "SELECT a.*, b.`prodName` FROM `km_product_review` AS a "
 												+"JOIN `km_product` as b ON a.prodNo = b.prodNo "
@@ -41,10 +41,11 @@ public class ProductSQL {
 	// 리뷰 총갯수
 	public static final String SELECT_REVIEW_COUNT_TOTAL = "SELECT COUNT(`revNo`) FROM `km_product_review` "
 												+ "where `prodNo`=?";
-	// 장바구니 불러오기
+	// 장바구니 불렁기
 	public static final String SELECT_PRODUCT_CARTS = "SELECT a.*, b.`prodName`,`descript`,`thumb1` FROM `km_product_cart` AS a "
 													+ "JOIN `km_product` AS b ON a.prodNo = b.prodNo WHERE `uid`=?";
 
-
+	// 장바구니 선택 삭제
+	public static final String DELETE_PRODUCT_CART = "DELETE FROM `km_product_cart` WHERE `cartNo` = ? ";
 }
 
