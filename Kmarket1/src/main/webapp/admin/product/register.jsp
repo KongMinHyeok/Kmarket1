@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:include page="./_header.jsp"/>
-<!-- 마지막에 /admin/product 폴더 만들고 이름 list로 바꾸고 경로 재설정 해야됨 -->
+<jsp:include page="../_header.jsp"/>
 <script type="text/javascript">
+	//Ajax로 카테고리 불러오기
 	$(function(){
 		$("select[name=category1]").click(function(){
 			let cate1 = $(this).val();
@@ -10,7 +10,7 @@
 			
 			$('.opt').remove();
 			$.ajax({
-				url:'/Kmarket1/admin/cate2List.do',
+				url:'/Kmarket1/admin/product/cate2List.do',
 				method:'POST',
 				data:jsonData,
 				dataType:'json',
@@ -23,6 +23,33 @@
 				}
 			});
 		});
+	});
+</script>
+<script>
+	// 판매가격의 1%를 포인트로 계산
+	$(function(){
+		$('input[name=price]').keydown(function(){
+			autoPoint();
+			discount();
+		});
+		
+		function autoPoint(){
+			let price = $('input[name=price]').val();
+			console.log(price);
+			let point = (price/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+			console.log(point);
+			$('input[name=point]').val(point);
+		}
+		
+		$('#discount').keydown(function(){
+			discount();
+		});
+		
+		function discount(){
+			let price = $('input[name=price]').val();
+			let dis = $('#discount').val();
+			$('.step_val').text("할인가 : "+(price-(price/100*dis)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') +"원 ("+(price/100*dis).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+"원 할인)");
+		}
 	});
 </script>
 <main>
@@ -55,8 +82,8 @@
             <li>
                 <a href="#"><i class="fa fa-box-open" aria-hidden="true"></i>상품관리</a>
                 <ol>
-                    <li><a href="/Kmarket1/admin/productList.do">상품현황</a></li>
-                    <li><a href="/Kmarket1/admin/productRegister.do">상품등록</a></li>
+                    <li><a href="/Kmarket1/admin/product/list.do">상품현황</a></li>
+                    <li><a href="/Kmarket1/admin/product/register.do">상품등록</a></li>
                     <li><a href="#">재고관리</a></li>
                 </ol>
             </li>
@@ -86,7 +113,7 @@
             </p>
         </nav>
         <article>
-            <form action="/Kmarket1/admin/productRegister.do" method="post" enctype="multipart/form-data">
+            <form action="/Kmarket1/admin/product/register.do" method="post" enctype="multipart/form-data">
                 <section>
                     <h4>상품분류</h4>
                     <p>기본분류는 반드시 선택하셔야 합니다. 하나의 상품에 1개의 분류를 지정합니다.</p>
@@ -242,4 +269,4 @@
         </p>
     </section>
 </main>
-<jsp:include page="./_footer.jsp"/>
+<jsp:include page="../_footer.jsp"/>

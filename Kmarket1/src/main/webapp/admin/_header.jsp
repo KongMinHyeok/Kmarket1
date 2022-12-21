@@ -9,16 +9,16 @@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <script src="https://kit.fontawesome.com/20962f3e4b.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="./css/common.css">
-    <link rel="stylesheet" href="./css/admin.css">
-    <script src="./js/gnb.js"></script>
+    <link rel="stylesheet" href="/Kmarket1/admin/css/common.css">
+    <link rel="stylesheet" href="/Kmarket1/admin/css/admin.css">
+    <script src="/Kmarket1/admin/js/gnb.js"></script>
 </head>
 <body>
     <div id="admin-wrapper">
         <header>
             <div>
-                <a href="./index.jsp" class="logo">
-                    <img src="./img/admin_logo.png" alt="admin_logo">
+                <a href="/Kmarket1/admin/index.jsp" class="logo">
+                    <img src="/Kmarket1/admin/img/admin_logo.png" alt="admin_logo">
                 </a>
                 <p>
                     <span>홍길동님 반갑습니다. </span>

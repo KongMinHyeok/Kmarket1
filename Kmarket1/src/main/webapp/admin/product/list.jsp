@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<jsp:include page="./_header.jsp"/>
+<jsp:include page="../_header.jsp"/>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 마지막에 /admin/product 폴더 만들고 이름 register로 바꾸고 경로 재설정 해야됨 -->
 <main>
@@ -31,8 +31,8 @@
             <li>
                 <a href="#"><i class="fa fa-box-open" aria-hidden="true"></i>상품관리</a>
                 <ol>
-                    <li><a href="/Kmarket1/admin/productList.do">상품현황</a></li>
-                    <li><a href="/Kmarket1/admin/productRegister.do">상품등록</a></li>
+                    <li><a href="/Kmarket1/admin/product/list.do">상품현황</a></li>
+                    <li><a href="/Kmarket1/admin/product/register.do">상품등록</a></li>
                     <li><a href="#">재고관리</a></li>
                 </ol>
             </li>
@@ -92,8 +92,9 @@
                 </tr>
                 <c:forEach var="vo" items="${products}">
                 <tr>
+                	<td>${pageStartNum = pageStartNum - 1}</td>
                 	<td><input type="checkbox" name="상품코드"></td>
-                	<td><img src="./img/sample_thumb.jpg" class="thumb"></td>
+                	<td><img src="../../img/sample_thumb.jpg" class="thumb"></td>
                 	<td>${vo.prodNo}</td>
                     <td>${vo.prodName}</td>
                     <td>${vo.price}</td>
@@ -103,8 +104,8 @@
                     <td>${vo.seller}</td>
                     <td>${vo.hit}</td>
                     <td>
-                        <a href="/Kmarket1/admin/delete.do?prodNo=${vo.prodNo}">[삭제]</a>
-                        <a href="/Kmarket1/admin/modify.do?prodNo=${vo.prodNo}">[수정]</a>
+                        <a href="/Kmarket1/admin/product/delete.do?prodNo=${vo.prodNo}">[삭제]</a>
+                        <a href="/Kmarket1/admin/product/modify.do?prodNo=${vo.prodNo}">[수정]</a>
                     </td>
                 </tr>
                 </c:forEach>
@@ -112,13 +113,13 @@
             <input type="button" value="선택삭제">
             <div class="paging">
             	<c:if test="${pageGroupStart > 1}">
-		            <a href="/Kmarket1/admin/productlist.do?pg=${pageGroupStart - 1}" class="prev"><&nbsp;이전</a>
+		            <a href="/Kmarket1/admin/product/list.do?pg=${pageGroupStart - 1}&search=${search}" class="prev"><&nbsp;이전</a>
 	            </c:if>
 	            <c:forEach var="num" begin="${pageGroupStart}" end="${pageGroupEnd}">
-		            <a href="/Kmarket1/admin/productlist.do?pg=${num}" class="num ${num == currentPage ? 'current':'off'}">${num}</a>
+		            <a href="/Kmarket1/admin/product/list.do?pg=${num}&search=${search}" class="num ${num == currentPage ? 'current':'off'}">${num}</a>
 	            </c:forEach>
 	            <c:if test="${pageGroupEnd < lastPageNum}">
-		            <a href="/Kmarket1/admin/productlist.do?pg=${pageGroupEnd + 1}" class="next">다음&nbsp;></a>
+		            <a href="/Kmarket1/admin/product/list.do?pg=${pageGroupEnd + 1}" class="next">다음&nbsp;></a>
 	            </c:if>
             </div>
         </section>
@@ -128,4 +129,4 @@
         </p>
     </section>
 </main>
-<jsp:include page="./_footer.jsp"/>
+<jsp:include page="../_footer.jsp"/>

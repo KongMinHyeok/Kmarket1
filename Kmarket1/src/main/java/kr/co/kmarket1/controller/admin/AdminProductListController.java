@@ -10,14 +10,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kr.co.kmarket1.dao.AdminDAO;
+import kr.co.kmarket1.dao.AdminProductListDAO;
 import kr.co.kmarket1.service.AdminProductService;
 import kr.co.kmarket1.vo.ProductVO;
 
-@WebServlet("/admin/productList.do")
-public class ProductListController extends HttpServlet {
+@WebServlet("/admin/product/list.do")
+public class AdminProductListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private AdminProductService service = AdminProductService.INSTANCE;
+	
+	AdminProductService service = AdminProductService.INSTANCE;
+	AdminProductListDAO dao = AdminProductListDAO.getInstance();
 
 	@Override
 	public void init() throws ServletException {
@@ -26,16 +28,19 @@ public class ProductListController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		String pg = req.getParameter("pg");
+		String search = req.getParameter("search");
+		String pg	  = req.getParameter("pg");
+		
 		int currentPage = service.getCurrentPage(pg);
 		
-		int total = 0;
-		total = service.selectListCountTotal();
+		//페이지 번호
+		int total = 0; // 전체 게시물 갯수 
+		total = service.selectAdminListCountTotal();
 		
-		int lastPageNum = service.getLastPageNum(total);
-		int[] result = service.getPageGroupNum(currentPage, lastPageNum);
-		int pageStartNum = service.getPageStartNum(total, currentPage);
-		int start = service.getStartNum(currentPage);
+		int lastPageNum = service.getLastPageNum(total);// 마지막 페이지 번호
+		int[] result = service.getPageGroupNum(currentPage, lastPageNum);// 페이지 그룹 start, end 번호
+		int pageStartNum = service.getPageStartNum(total, currentPage);// 페이지 시작번호
+		int start = service.getStartNum(currentPage);// 시작 인덱스
 		
 		req.setAttribute("lastPageNum", lastPageNum);		
 		req.setAttribute("currentPage", currentPage);		
@@ -43,10 +48,10 @@ public class ProductListController extends HttpServlet {
 		req.setAttribute("pageGroupEnd", result[1]);
 		req.setAttribute("pageStartNum", pageStartNum+1);
 		
-		List<ProductVO> products = AdminDAO.getInstance().selectProductList();
+		List<ProductVO> products = AdminProductListDAO.getInstance().selectAdminList();
 		req.setAttribute("products", products);
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/productList.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/product/list.jsp");
 		dispatcher.forward(req, resp);
 	}
 	
