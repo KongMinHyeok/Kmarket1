@@ -47,5 +47,7 @@ public class ProductSQL {
 
 	// 장바구니 선택 삭제
 	public static final String DELETE_PRODUCT_CART = "DELETE FROM `km_product_cart` WHERE `cartNo` = ? ";
+	
+	public static final String SELECT_PRODUCT_ORDERS = "";
 }
 

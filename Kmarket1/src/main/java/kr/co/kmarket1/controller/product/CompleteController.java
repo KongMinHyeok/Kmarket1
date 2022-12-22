@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import kr.co.kmarket1.service.ProductCompleteService;
 import kr.co.kmarket1.service.ProductService;
-import kr.co.kmarket1.vo.OrderVO;
+import kr.co.kmarket1.vo.ProductOrderVO;
 import kr.co.kmarket1.vo.ProductVO;
 
 @WebServlet("/product/complete.do")
@@ -31,7 +31,7 @@ public class CompleteController extends HttpServlet{
 		
 		// 파라미터로 받아온 주문번호를 이용해 주문자 정보와 주문 내용 받아오기
 		// 첫 번째는 주문자 정보 받아오기; 편의를 위해서 orderVO 생성
-		OrderVO order = service.selectOrderByOrdNo(Integer.parseInt(ordNo));
+		ProductOrderVO order = service.selectOrderByOrdNo(Integer.parseInt(ordNo));
 		
 		// 두 번째는 주문 내용 받아오기; productVO 사용
 		List<ProductVO> items = service.selectItemsByOrdNo(Integer.parseInt(ordNo));

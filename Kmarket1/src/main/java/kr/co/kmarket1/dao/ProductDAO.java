@@ -11,6 +11,7 @@ import kr.co.kmarket1.db.DBHelper;
 import kr.co.kmarket1.db.MainSQL;
 import kr.co.kmarket1.vo.Cate1VO;
 import kr.co.kmarket1.vo.ProductCartVO;
+import kr.co.kmarket1.vo.ProductOrderVO;
 import kr.co.kmarket1.vo.ProductReviewVO;
 import kr.co.kmarket1.db.ProductSQL;
 import kr.co.kmarket1.vo.ProductVO;
@@ -570,6 +571,36 @@ public class ProductDAO extends DBHelper{
 		}
 		logger.debug("result : " + result);
 		return result;
+	}
+	
+	public List<ProductOrderVO> selectProductOrders(int ordNo) {
+		List<ProductOrderVO> orders = new ArrayList<>();
+
+		try {
+			logger.info("selectProductOrders start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(ProductSQL.SELECT_PRODUCT_ORDERS);
+			psmt.setInt(1, ordNo);
+			
+			
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				ProductOrderVO order = new ProductOrderVO();
+				order.setOrdNo(rs.getInt(1));
+				order.setProdNo(rs.getInt(2));
+				order.setCount(rs.getInt(3));
+				order.setPrice(rs.getInt(3));
+				order.setDiscount(rs.getInt(4));
+				order.setPoint(rs.getInt(5));
+				order.setDelivery(rs.getInt(6));
+				order.setTotal(rs.getInt(7));
+			}
+		} catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("orders : " + orders);
+		return orders;
 	}
 
 	

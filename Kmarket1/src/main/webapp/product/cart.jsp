@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,8 +38,9 @@
   			 });
     		}
     	});
+    	
+    	// 주문하기--------------------------------------------------------------------
     	/*
-    	// 주문하기
     	$('input[name=order]').click(function(){
     		$("input[name=chkProduct]:checked").each(function (index) {  
     	        let orderList =  $('input[name=chkProduct]').val();
@@ -50,11 +53,37 @@
 			location.href = "/Kmarker1/product/order.do?cartNo="orderList;
 
     	});
-    	
-    	// 값 계산
-    	$('input[name=chkProduct]').each(function() {}
     	*/
-    	// 선택 항목 삭제
+    	// 값 계산----------------------------------------------------------------------
+    	
+    	
+    	$('input[name=chkProduct]').click(function() {
+    		// alert('!');
+    		// 이거 지금 문자배열이라 계산이 안되니깐 숫자배열로 바꾸는거 찾아서 해라
+    		let totalList = [];
+    		let checkArr = $("input[name=chkProduct]:checked").length;
+    		let checkbox  = $("input[name=chkProduct]:checked");
+    		checkbox.each(function(i){
+    			let tr = checkbox.parent().parent().eq(i);
+    			let td = tr.children();
+    			
+    			let total = td.eq(7).text();
+    			
+    			totalList.push(total);
+    			
+    		});
+    		console.log(totalList);
+    		let sum = 0;
+    			for(let i=0; i < checkArr; i++ ){
+    			       if( "input[name=chkProduct]:checked" == true ){
+    				    sum += parseInt(total);
+    			       }
+    			   }
+    			   console.log(sum);
+    		
+    	});
+    	
+    	// 선택 항목 삭제------------------------------------------------------------------
     	$('.del').click(function(){
     		let chk = [];
     		let checkArr = $("input[name=chkProduct]:checked").length;
@@ -73,7 +102,6 @@
     						url : '/Kmarket1/product/cart.do',
     						type : 'POST',
     						data : {'chk': chk},
-    						traditional: true,
     						dataType : 'json',
     						success : function(data){
     							if(data.result > 0){
@@ -161,7 +189,6 @@
                                 <th>포인트</th>
                                 <th>배송비</th>
                                 <th>소계</th>
-                                <input type="hidden" name="uid" value= ${sessMember.uid }>
                             </tr>
                         </thead>
                         <tbody>
@@ -169,10 +196,9 @@
                             <tr class="empty">
                                 <td colspan="7">장바구니에 상품이 없습니다.</td>
                             </tr>
-                            <!---->
                             <c:forEach var="cart" items="${carts}">
                             <tr>
-                                <td><input type="checkbox" name="chkProduct" value="${cart.cartNo}">${cart.cartNo}</td>
+                                <td><input type="checkbox" name="chkProduct" value="${cart.cartNo}"></td>
                                 <td>
                                     <article>
                                     <!-- 이거 상품번호로 carts products 조인해서 이미지 들고와야할듯 -->
@@ -183,18 +209,19 @@
                                             <h2>
                                                 <a href="#">${cart.prodName}</a>
                                             </h2>
-                                            <p>${cart.descript}</p>
+                                            <p>${cart.descript}<input type="hidden" class="descript" value="${cart.descript}"/></p>
                                         </div>
                                     </article>
                                 </td>
                                 <td>${cart.count}</td>
-                                <td>${cart.price}</td>
+                                <td><fmt:formatNumber value="${cart.price}" pattern="#,###,###" /></td>
                                 <td>${cart.discount}%</td>
-                                <td>${cart.point}</td>
-                                <td>${cart.delivery}</td>
-                                <td>${cart.total}</td>
+                                <td><fmt:formatNumber value="${cart.point}" pattern="#,###,###" /></td>
+                                <td><fmt:formatNumber value="${cart.delivery}" pattern="#,###,###" /></td>
+                                <td><fmt:formatNumber value="${cart.total}" pattern="#,###,###" /><input type="hidden" value=${cart.total}></td>
                             </tr>
                             </c:forEach>
+                            <tr><td><input type="hidden" name="uid" value= ${sessMember.uid }></td></tr>
                         </tbody>
                     </table>
                     <input type="button" value="선택삭제" name="del" class="del">
