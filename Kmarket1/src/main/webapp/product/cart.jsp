@@ -11,93 +11,92 @@
     <link rel="stylesheet" href="./css/product.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script>
-    // 시작부터 전부다 체크 상태
     $(document).ready(function(){
-    	$("input[type=checkbox]").prop("checked",true);
-    });
-    $(document).ready(function(){
-    	// 전체 선택
-    	$("input[name='all']").click(function(){
-        	if($("input[name='all']").prop("checked")){
-        		$("input[type=checkbox]").prop("checked",true);
-        		console.log($(this).val());
-        	} else {
-        		$("input[type=checkbox]").prop("checked",false);
-        	}
-        });
     	
-        $("input[name='chkProduct']").change(function(){
-            if($("input[name='chkProduct']").is(":checked")){
-                console.log($(this).val());
-            }
-            else{
-                alert("체크 해제");
-            }
-        });
+    	// 전체 선택
+    	$("input[name=all]").click(function(){
+    		if ($(this).is(":checked")){
+    			$('input[name=chkProduct]').each(function() {
+
+    			      this.checked = true; //checked 처리
+
+    			      if(this.checked){//checked 처리된 항목의 값
+
+    			            console.log(this.value); 
+
+    			      }
+
+    			 });
+    			
+    		}else{
+    			$('input[name=chkProduct]').each(function() {
+
+  			      this.checked = false; //checked 해제 처리
+
+  			 });
+    		}
+    	});
+    	/*
+    	// 주문하기
+    	$('input[name=order]').click(function(){
+    		$("input[name=chkProduct]:checked").each(function (index) {  
+    	        let orderList =  $('input[name=chkProduct]').val();
+
+    	        jsonData = {
+    	        		"orderList": chkProduct
+    	        }
+    	        
+    	    });
+			location.href = "/Kmarker1/product/order.do?cartNo="orderList;
+
+    	});
+    	
+    	// 값 계산
+    	$('input[name=chkProduct]').each(function() {}
+    	*/
+    	// 선택 항목 삭제
+    	$('.del').click(function(){
+    		let chk = [];
+    		let checkArr = $("input[name=chkProduct]:checked").length;
+    		 $('input[name=chkProduct]:checked').each(function(){
+    		      chk.push($(this).val());
+    		    });
+    		 console.log(chk);
+    		 if(checkArr == 0) {
+    				
+    				//리스트에 값이 존재하지 않음
+    				alert("선택한 상품이 존재하지 않습니다");
+    			}else if(
+    				confirm("선택한 상품을 삭제하시겠습니까?")){
+    				$('input[name=chkProduct]:checked').parents('tr').remove();
+    					$.ajax({
+    						url : '/Kmarket1/product/cart.do',
+    						type : 'POST',
+    						data : {'chk': chk},
+    						traditional: true,
+    						dataType : 'json',
+    						success : function(data){
+    							if(data.result > 0){
+    								alert('삭제가 완료되었습니다');
+    								location.reload();
+    							}else{
+    								return;
+    							}
+    						}
+    					});
+    				}
+    			
+    		 
+    	});
+    	
+    	
+        // 끝
     });
     </script>
 </head>
 <body>
     <div id="wrapper">
-        <header>
-            <div class="top">
-                <div>
-		            <a href="/Kmarket1/member/login.jsp">로그인</a>
-		            <a href="/Kmarket1/member/join.jsp">회원가입</a>
-		            <a href="/Kmarket1/member/login.jsp">마이페이지</a>
-		            <a href="/Kmarket1/product/cart.jsp"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;장바구니</a>
-                </div>
-            </div>
-            <div class="logo">
-                <div>
-                    <a href="#"><img src="./img/header_logo.png" alt="Kmarket" width="180px" height="49px"></a>
-                    <form action="#">
-                        <input type="text" name="keyword">
-                        <button>
-                            <i class="fa fa-search" aria-hidden="true"></i>
-                        </button>
-                    </form>
-                </div>
-            </div>
-            <div class="menu">
-                <div>
-                    <ul>
-                        <li>
-                            <a href="#">히트상품</a>
-                        </li>
-                        <li>
-                            <a href="#">추천상품</a>
-                        </li>
-                        <li>
-                            <a href="#">최신상품</a>
-                        </li>
-                        <li>
-                            <a href="#">인기상품</a>
-                        </li>
-                        <li>
-                            <a href="#">할인상품</a>
-                        </li>
-                    </ul>
-                    <ul>
-                        <li>
-                            <a href="#">쿠폰존</a>
-                        </li>
-                        <li>
-                            <a href="#">사용후기</a>
-                        </li>
-                        <li>
-                            <a href="#">개인결제</a>
-                        </li>
-                        <li>
-                            <a href="#">고객센터</a>
-                        </li>
-                        <li>
-                            <a href="#">FAQ</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </header>
+                        <jsp:include page="/product/_header.jsp" />
         <main id="product">
             <aside>
                 <ul class="category">
@@ -150,7 +149,7 @@
                     <p>HOME > 장바구니</p>
                 </nav>
                 <!-- 장바구니 목록 -->
-                <form action="#">
+                <form action="/Kmarket1/product/cart.do">
                     <table border="0">
                         <thead>
                             <tr>
@@ -162,6 +161,7 @@
                                 <th>포인트</th>
                                 <th>배송비</th>
                                 <th>소계</th>
+                                <input type="hidden" name="uid" value= ${sessMember.uid }>
                             </tr>
                         </thead>
                         <tbody>
@@ -172,7 +172,7 @@
                             <!---->
                             <c:forEach var="cart" items="${carts}">
                             <tr>
-                                <td><input type="checkbox" name="chkProduct" value="${cart.prodNo}">${cart.prodNo}</td>
+                                <td><input type="checkbox" name="chkProduct" value="${cart.cartNo}">${cart.cartNo}</td>
                                 <td>
                                     <article>
                                     <!-- 이거 상품번호로 carts products 조인해서 이미지 들고와야할듯 -->
@@ -192,7 +192,7 @@
                                 <td>${cart.discount}%</td>
                                 <td>${cart.point}</td>
                                 <td>${cart.delivery}</td>
-                                <td>27,000</td>
+                                <td>${cart.total}</td>
                             </tr>
                             </c:forEach>
                         </tbody>
@@ -226,7 +226,7 @@
                                 <td>26,000</td>
                             </tr>
                         </table>
-                        <input type="submit" name="" value="주문하기">
+                        <input type="submit" name="order" value="주문하기">
                     </div>
                 </form>
             </section>

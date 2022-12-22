@@ -18,7 +18,7 @@
     $(document).ready(function(){
     	var countnum = $('input[name = num]').val();
     	var num = parseInt(countnum);
-    	var total =${product.delivery} +  num * ${product.price * ((100 - product.discount)/100)};
+    	var total = num * ${product.price * ((100 - product.discount)/100)};
     	$('input[name=total]').attr('value',total);
 	});
     $(function(){
@@ -30,7 +30,7 @@
     	}
     	var num = parseInt(countnum);
     	$('input[name=num]').attr('value',num);
-    	var total =${product.delivery} + num * ${product.price * ((100 - product.discount)/100)};
+    	var total =num * ${product.price * ((100 - product.discount)/100)};
     	$('input[name=total]').attr('value',total);
     	});
 
@@ -40,7 +40,7 @@
     	countnum++;
     	var num = parseInt(countnum);
     	$('input[name=num]').attr('value',num);
-    	var total =${product.delivery} + num * ${product.price * ((100 - product.discount)/100)};
+    	var total = num * ${product.price * ((100 - product.discount)/100)};
     	$('input[name=total]').attr('value',total);
     	});
     	//장바구니 버튼 클릭시-----------------------------------------------------------------	
@@ -82,7 +82,7 @@
     			success: function(data){
 	    				if(data.result > 0){
 							alert('장바구니에 추가완료');
-							location.href = '/kmarket/product/cart.do?uid='+uid;
+							location.href = '/Kmarket1/product/cart.do?uid='+uid;
 						}else{
 							alert('오류발생! 다시 시도해주세요.')
 						}
@@ -216,13 +216,13 @@
                         </nav>
                         <nav>
                             <div class="original-price">
-                                <del>${product.price}</del>
+                                <del><fmt:formatNumber value="${product.price}" pattern="#,###"/></del>
                                 <input type="hidden" name="price" value="${product.price}">
                                 <span>${product.discount}%</span>
                                 <input type="hidden" name="discount" value="${product.discount}">
                             </div>
                             <div class="discount-price">
-                                <ins><fmt:formatNumber value="${product.price * ((100 - product.discount)/100)}" pattern="0"/></ins>
+                                <ins><fmt:formatNumber value="${product.price * ((100 - product.discount)/100)}" pattern="#,###"/></ins>
                                 <input type="hidden" name="point" value="${product.point}">
                             </div>
                         </nav>
@@ -234,7 +234,7 @@
                             	무료배송
                             </c:when>
                             <c:otherwise>
-                            	${product.delivery}원
+                            	<fmt:formatNumber value="${product.delivery}" pattern="#,###"/>원
                             </c:otherwise>
                             </c:choose>
                             </span>
