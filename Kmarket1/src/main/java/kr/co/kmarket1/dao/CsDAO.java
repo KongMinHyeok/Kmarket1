@@ -151,8 +151,9 @@ public class CsDAO extends DBHelper{
 				notice.setNo(rs.getInt(1));
 				notice.setTitle(rs.getString(2));
 				notice.setUid(rs.getString(3));
-				notice.setRdate(rs.getString(4).substring(2,10));
-				notice.setCate(rs.getString(5));	
+				notice.setHit(rs.getInt(4));
+				notice.setRdate(rs.getString(5).substring(2,10));
+				notice.setCate(rs.getString(6));	
 				
 				notices.add(notice);
 			}
@@ -180,8 +181,9 @@ public class CsDAO extends DBHelper{
 				notice.setNo(rs.getInt(1));
 				notice.setTitle(rs.getString(2));
 				notice.setUid(rs.getString(3));
-				notice.setRdate(rs.getString(4).substring(2, 10));
-				notice.setCate(rs.getString(5));
+				notice.setHit(rs.getInt(4));
+				notice.setRdate(rs.getString(5).substring(2, 10));
+				notice.setCate(rs.getString(6));
 				
 				notices.add(notice);
 			}
@@ -221,6 +223,19 @@ public class CsDAO extends DBHelper{
 		}
 		logger.debug("notice : " + notice );
 		return notice;
+	}
+	
+	public void updateArticleHit(String no) {
+		try {
+			logger.info("updateArticleHit start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(CsSQL.UPDATE_ARTICLE_HIT);
+			psmt.setString(1, no);
+			psmt.executeUpdate();
+			close();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
 	}
 	
 	public List<CsArticleVO> selectFaq() {

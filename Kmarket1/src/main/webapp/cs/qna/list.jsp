@@ -66,12 +66,12 @@
                 <c:forEach var="num" begin="${pageGroupStart}" end="${pageGroupEnd}" step="1">
                 <c:choose>
 	                <c:when test="${cate ne null}">
-	                	<a href="/Kmarket1/cs/qna/list.do?pg=${num}&cate=${cate}" class="num${(num eq currentPage)? 'on':'off'}">${num}</a>
+	                	<a href="/Kmarket1/cs/qna/list.do?pg=${num}&cate=${cate}" class="num ${currentPage eq num ? 'on' : 'off' }">${num}</a>
 	               	</c:when>
                	</c:choose>
                	<c:choose>
 	                <c:when test="${cate eq null}">
-						<a href="/Kmarket1/cs/qna/list.do?pg=${num}" class="num${(num eq currentPage)? 'on':'off'}">${num}</a>
+						<a href="/Kmarket1/cs/qna/list.do?pg=${num}" class="num ${currentPage eq num ? 'on' : 'off' }">${num}</a>
 	               	</c:when>
                	</c:choose>
                 </c:forEach>

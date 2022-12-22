@@ -87,7 +87,12 @@ $(function(){
                   </tr>
                 </table>
                 <div>
+                <c:if test="${cate ne null && cate ne ''}">
                   <a href="/Kmarket1/cs/qna/list.do?cate=${cate}" class="btnList">취소하기</a>
+                </c:if>
+                <c:if test="${cate eq null || cate eq ''}">
+                  <a href="/Kmarket1/cs/qna/list.do" class="btnList">취소하기</a>
+                </c:if>
                   <input type="submit" class="btnSubmit" value="등록하기"/>
                 </div>
               </form>

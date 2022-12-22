@@ -11,16 +11,18 @@ public class CsSQL {
 	public static final String SELECT_COUNT_NOTICE = "select count(`no`) from `km_cs_notice` where `cate`=?";
 	public static final String SELECT_COUNT_NOTICES = "select count(`no`) from `km_cs_notice`";
 	
-	public static final String SELECT_NOTICES_GROUP = "select `no`, `title`,`uid`, `rdate`, `cate` from `km_cs_notice` "
+	public static final String SELECT_NOTICES_GROUP = "select `no`, `title`,`uid`, `hit`, `rdate`, `cate` from `km_cs_notice` "
 													+"order by `no` DESC "
 													+"limit ?, 10";
 	
-	public static final String SELECT_NOTICES_CATE = "select `no`, `title`, `uid`, `rdate`, `cate` from `km_cs_notice` "
+	public static final String SELECT_NOTICES_CATE = "select `no`, `title`, `uid`, `hit`, `rdate`, `cate` from `km_cs_notice` "
 													+"where `cate`=?"
 													+"order by `no` DESC "
 													+"limit ?, 10";
 	
 	public static final String SELECT_ARTICLE_NOTICE = "select `title`,`uid`, `rdate`, `content`, `cate` from `km_cs_notice` where `no`=?";
+	public static final String UPDATE_ARTICLE_HIT = "update `km_cs_notice` set `hit`=`hit`+1 where `no`=?";
+	
 	
 	public static final String SELECT_FAQ = "select * from `km_cs_faq`";
 	

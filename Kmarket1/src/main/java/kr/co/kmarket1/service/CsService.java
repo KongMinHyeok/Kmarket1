@@ -68,6 +68,10 @@ public enum CsService {
 		return dao.selectArticleNotice(no);
 	}
 	
+	public void updateArticleHit(String no) {
+		dao.updateArticleHit(no);
+	}
+	
 	public CsArticleVO selectArticleQna(String no) {
 		return dao.selectArticleQna(no);
 	}

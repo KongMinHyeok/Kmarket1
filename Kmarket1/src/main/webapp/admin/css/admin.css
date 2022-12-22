@@ -207,3 +207,177 @@ p.alert{
     border-color: #fdd845;
     background: #fff6bf url(../img/admin_ico_alert.png) no-repeat scroll 15px 16px;
 }
+
+
+.btnWrite{
+    float: right;
+    padding: 10px 20px;
+    text-align: center;
+    margin-top: -40px;
+    background-color: #067dfd;
+    border: 1px solid #0063ce;
+    border-radius: 4px;
+    font-size: 20px;
+    color: #fff;
+    box-sizing: border-box;
+}
+.btnDelete{
+    float: left;
+    padding: 10px 20px;
+    text-align: center;
+    margin-top: -40px;
+    background-color: #bcc3cb;
+    border: 1px solid #aeb0b3;
+    border-radius: 4px;
+    font-size: 20px;
+    color: #fff;
+    box-sizing: border-box;
+}
+
+.btnList:hover{background-color: #f7f7f7;}
+.btnSubmit{
+    display: inline-block;
+    width: 200px;
+    height: 60px;
+    margin: 40px auto 0;
+    background-color: #067dfd;
+    border: 1px solid #0063ce;
+    border-radius: 34px;
+    font-size: 16px;
+    color: #fff;
+    line-height: 58px;
+    text-align: center;
+    box-sizing: border-box;
+}
+.btnSubmit:hover{background-color: #0954f6;}
+
+
+/* 고객센터 글목록 */
+#admin-notice-list > .list > select{
+    margin-bottom: 10px;
+    
+}
+#admin-notice-list > .list > table{
+    width: 100%;
+    border-collapse: collapse;
+    border-top: 1px solid #ccc;
+}
+#admin-notice-list > .list > table tr{
+    width: 100%;
+    height: 26px;
+}
+#admin-notice-list > .list > table th{
+    padding: 16px;
+    border-bottom: 1px solid #ccc;
+    font-weight: bold;
+}
+#admin-notice-list > .list > table td:first-child{background:#fefefe;}
+#admin-notice-list > .list > table td:nth-child(4){text-align: left;}
+#admin-notice-list > .list > table td{
+   padding: 16px;
+   border-bottom: 1px solid #ccc;
+   text-align: center;
+}
+#admin-notice-list > .list > table a{
+   font-size: 12px;
+}
+#admin-notice-list > .list > .page{
+   text-align: center;
+   margin-top: 26px;;
+}
+#admin-notice-list > .list > .page > a{
+   display: inline-block;
+   width: 34px;
+   height: 34px;
+   box-sizing: border-box;
+   text-align: center;
+   line-height: 34px;
+   font-size: 13px;
+   font-weight: bold;
+   vertical-align: bottom;
+}
+#admin-notice-list > .list > .page > .prev{
+    font-size: 0;
+    background-image: url(../img/cs_sprites.png);
+    background-position: -706px -652px;
+}
+#admin-notice-list > .list > .page > .next{
+    font-size: 0;
+    background-image: url(../img/cs_sprites.png);
+    background-position: -628px -652px;
+}
+#admin-notice-list > .list > .page > .on{
+    background: #006cff;
+    border-radius: 17px;
+    color: #fff;
+}
+#admin-notice-list > .list > .page > .current {
+    border: 1px solid #6d6d6d;
+    background: #888;
+    color: #fff;
+}
+#admin-notice-view > .list > table{
+    width: 100%;
+    height: auto;
+    border-collapse: collapse;
+    margin: 50px 0;
+    text-align: left;
+    border-top: 2px solid #111;
+}
+
+#admin-notice-view > .list > table th{
+    padding: 16px;
+    border-bottom: 1px solid #ccc;
+    font-weight: bold;
+    width: 8%;
+    text-align: center;
+}
+#admin-notice-view > .list > table th:last-child{
+	padding: 50px 0;
+}
+#admin-notice-view > .list > table td{
+   padding: 16px;
+   border-bottom: 1px solid #ccc;
+   text-align: left;
+}
+#admin-notice-view > .list > table a{
+   font-size: 12px;
+}
+#admin-notice-view .btnDelete{
+    float: right;
+    padding: 10px 30px;
+    text-align: center;
+    margin-top: -40px;
+	margin-right: 10px;
+    background-color: #bcc3cb;
+    border: 1px solid #aeb0b3;
+    border-radius: 4px;
+    font-size: 20px;
+    color: #fff;
+    box-sizing: border-box;
+}
+#admin-notice-view .btnModify{
+    float: right;
+    padding: 10px 30px;
+    text-align: center;
+    margin-top: -40px;
+    margin-right: 10px;
+    background-color: #bcc3cb;
+    border: 1px solid #aeb0b3;
+    border-radius: 4px;
+    font-size: 20px;
+    color: #fff;
+    box-sizing: border-box;
+}
+#admin-notice-view .btnList{
+    float: right;
+    padding: 10px 30px;
+    text-align: center;
+    margin-top: -40px;
+    background-color: #067dfd;
+    border: 1px solid #0063ce;
+    border-radius: 4px;
+    font-size: 20px;
+    color: #fff;
+    box-sizing: border-box;
+}
