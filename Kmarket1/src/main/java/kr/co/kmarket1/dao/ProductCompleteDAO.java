@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import kr.co.kmarket1.db.DBHelper;
 import kr.co.kmarket1.db.MemberSQL;
-import kr.co.kmarket1.vo.OrderVO;
+import kr.co.kmarket1.vo.ProductOrderVO;
 import kr.co.kmarket1.vo.ProductVO;
 
 public class ProductCompleteDAO extends DBHelper{
@@ -21,8 +21,8 @@ public class ProductCompleteDAO extends DBHelper{
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	// select order info by ordNo
-	public OrderVO selectOrderByOrdNo(int ordNo) {
-		OrderVO order = null;
+	public ProductOrderVO selectOrderByOrdNo(int ordNo) {
+		ProductOrderVO order = null;
 		try {
 			logger.info("selectOrderByOrdNo called");
 			
@@ -32,7 +32,7 @@ public class ProductCompleteDAO extends DBHelper{
 			rs = psmt.executeQuery();
 			
 			if(rs.next()) {
-				order = new OrderVO();
+				order = new ProductOrderVO();
 				order.setOrdNo(rs.getInt(1));
 				order.setOrdUid(rs.getString(2));
 				order.setOrdCount(rs.getInt(3));

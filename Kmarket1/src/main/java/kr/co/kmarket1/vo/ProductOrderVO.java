@@ -1,6 +1,6 @@
 package kr.co.kmarket1.vo;
 
-public class OrderVO {
+public class ProductOrderVO {
 	private int ordNo;
 	private String ordUid;
 	private int ordCount;
@@ -21,7 +21,39 @@ public class OrderVO {
 	private String name;
 	private String hp;
 	
+	//
+	private int prodNo;
+	private int count;
+	private int price;
+	private int discount;
+	private int point;
+	private int delivery;
+	private int total;
 	
+	public int getDiscount() {
+		return discount;
+	}
+	public void setDiscount(int discount) {
+		this.discount = discount;
+	}
+	public int getPoint() {
+		return point;
+	}
+	public void setPoint(int point) {
+		this.point = point;
+	}
+	public int getDelivery() {
+		return delivery;
+	}
+	public void setDelivery(int delivery) {
+		this.delivery = delivery;
+	}
+	public int getTotal() {
+		return total;
+	}
+	public void setTotal(int total) {
+		this.total = total;
+	}
 	public String getHp() {
 		return hp;
 	}
@@ -135,5 +167,23 @@ public class OrderVO {
 	}
 	public void setOrdDate(String ordDate) {
 		this.ordDate = ordDate;
+	}
+	public int getProdNo() {
+		return prodNo;
+	}
+	public void setProdNo(int prodNo) {
+		this.prodNo = prodNo;
+	}
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
 	}
 }
