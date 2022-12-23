@@ -7,13 +7,6 @@ public enum AdminProductService {
 	INSTANCE;
 	AdminProductListDAO dao = AdminProductListDAO.getInstance();
 	
-	//List Page 번호
-	public int selectAdminListCountTotal() {
-		return dao.selectAdminListCountTotal();
-	}
-	
-	
-	
 	//마지막 Page
 	public int getLastPageNum(int total) {
 		int lastPageNum = 0;

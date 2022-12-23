@@ -22,14 +22,16 @@ public class AdminProductListDAO extends DBHelper {
 	//로거 생성
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	//List 상품 출력
-	public List<ProductVO> selectAdminList() {
+	// List 상품출력
+	public List<ProductVO> selectAdminList(int start) {
+		logger.info("selectAdminProductList...");
 		List<ProductVO> products = new ArrayList<>();
 		try {
-			logger.info("selectAdminList...");
+			logger.info("상품 리스트");
 			conn = getConnection();
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery(AdminSQL.SELECT_ADMIN_LIST);
+			psmt = conn.prepareStatement(AdminSQL.SELECT_ADMIN_LIST);
+			psmt.setInt(1, start);
+			rs = psmt.executeQuery();
 			
 			while(rs.next()) {
 				ProductVO vo = new ProductVO();
@@ -69,9 +71,76 @@ public class AdminProductListDAO extends DBHelper {
 		logger.debug("result :" + products);
 		return products;
 	}
+	
 	public void selectAdminLists() {}
 	public void insertAdminList() {}
 	public void updateAdminList() {}
+	
+	//페이지 리스트
+	public int selectCountTotal() {
+		int result = 0;
+		try {
+			conn = getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(AdminSQL.SELECT_COUNT_TOTAL_LIST);
+			
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return result;
+	}
+	
+	public List<ProductVO> searchAdminList(String cate, String search) {
+		List<ProductVO> products = new ArrayList<>();
+		try {
+			logger.info("상품 리스트 검색 : " + cate + search);
+			conn = getConnection();
+			psmt = conn.prepareStatement("SELECT * FROM `km_product` WHERE `"+cate+"` LIKE ? ORDER BY `prodNo` DESC LIMIT 10");
+			psmt.setString(1, "%"+search+"%");
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				ProductVO vo = new ProductVO();
+				vo.setProdNo(rs.getInt(1));
+				vo.setProdCate1(rs.getInt(2));
+				vo.setProdCate2(rs.getInt(3));
+				vo.setProdName(rs.getString(4));
+				vo.setDescript(rs.getString(5));
+				vo.setCompany(rs.getString(6));
+				vo.setSeller(rs.getString(7));
+				vo.setPrice(rs.getInt(8));
+				vo.setDiscount(rs.getInt(9));
+				vo.setPoint(rs.getInt(10));
+				vo.setStock(rs.getInt(11));
+				vo.setSold(rs.getInt(12));
+				vo.setDelivery(rs.getInt(13));
+				vo.setHit(rs.getInt(14));
+				vo.setScore(rs.getInt(15));
+				vo.setReview(rs.getInt(16));
+				vo.setThumb1(rs.getString(17));
+				vo.setThumb2(rs.getString(18));
+				vo.setThumb3(rs.getString(19));
+				vo.setDetail(rs.getString(20));
+				vo.setStatus(rs.getString(21));
+				vo.setDuty(rs.getString(22));
+				vo.setReceipt(rs.getString(23));
+				vo.setBizType(rs.getString(24));
+				vo.setOrigin(rs.getString(25));
+				vo.setIp(rs.getString(26));
+				vo.setRdate(rs.getString(27));
+				products.add(vo);
+			}
+			close();
+		} catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.info("상품 리스트 검색 : " + products.size());
+		return products;
+	}
 	
 	// 상품 삭제
 	public void deleteAdminList(String prodNo) {
@@ -87,23 +156,5 @@ public class AdminProductListDAO extends DBHelper {
 		}
 	}
 	
-	// 상품 목록 출력
-	public int selectAdminListCountTotal() {
-		int result = 0;
-		try {
-			logger.info("selectAdminListCountTotal...");
-			conn = getConnection();
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery(AdminSQL.SELECT_ADMIN_LIST_COUNT_TOTAL);
-			
-			if(rs.next()) result = rs.getInt(1);
-			close();
-		} catch (Exception e) {
-			logger.error(e.getMessage());
-		}
-		logger.debug("result : " + result);
-		
-		return result;
-	}
 	
 }

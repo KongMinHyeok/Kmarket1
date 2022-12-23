@@ -3,9 +3,9 @@ package kr.co.kmarket1.db;
 public class AdminSQL {
 	
 	//Admin List DAO\\
-	public static final String SELECT_ADMIN_LIST = "SELECT * FROM `km_product` ORDER BY `prodNo` DESC LIMIT 10";
+	public static final String SELECT_ADMIN_LIST = "SELECT * FROM `km_product` ORDER BY `prodNo` DESC LIMIT ?,10";
 	//Admin 상품 갯수 출력
-	public static final String SELECT_ADMIN_LIST_COUNT_TOTAL = "SELECT COUNT(`prodNo`) FROM `km_product`";
+	public static final String SELECT_COUNT_TOTAL_LIST = "SELECT COUNT(*) FROM `km_product`";
 	//Admin List 삭제
 	public static final String DELETE_ADMIN_LIST = "DELETE FROM `km_product` WHERE `prodNo`=?";
 	

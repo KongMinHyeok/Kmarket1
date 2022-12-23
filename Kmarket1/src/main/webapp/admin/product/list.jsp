@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <jsp:include page="../_header.jsp"/>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!-- 마지막에 /admin/product 폴더 만들고 이름 register로 바꾸고 경로 재설정 해야됨 -->
     <section id="admin-product-list">
         <nav>
             <h3>상품목록</h3>
@@ -12,13 +11,16 @@
         </nav>
         <section>
             <div>
-                <select name="search">
-                    <option value="search1">상품명</option>
-                    <option value="search1">상품코드</option>
-                    <option value="search1">제조사</option>
-                    <option value="search1">판매자</option>
-                </select>
-                <input type="text" name="search">
+                <form action="/Kmarket1/admin/product/list.do" method="get">
+	                <select name="type">
+	                    <option value="prodName">상품명</option>
+	                    <option value="prodCode">상품코드</option>
+	                    <option value="company">제조사</option>
+	                    <option value="seller">판매자</option>                               
+	                </select>
+	                <input type="text" name="search">
+	                <button type="submit">검색</button>
+                </form>
             </div>
             <table>
                 <tr>
@@ -40,8 +42,7 @@
                 </tr>
                 <c:forEach var="vo" items="${products}">
                 <tr>
-                	<td>${pageStartNum = pageStartNum - 1}</td>
-                	<td><input type="checkbox" name="상품코드"></td>
+                	<td><input type="checkbox" name="상품코드"><input type="hidden" name="size" value="${products.size()}"/></td>
                 	<td><img src="../../img/sample_thumb.jpg" class="thumb"></td>
                 	<td>${vo.prodNo}</td>
                     <td>${vo.prodName}</td>
@@ -60,16 +61,16 @@
             </table>
             <input type="button" value="선택삭제">
             <div class="paging">
-            	<c:if test="${pageGroupStart > 1}">
-		            <a href="/Kmarket1/admin/product/list.do?pg=${pageGroupStart - 1}&search=${search}" class="prev"><&nbsp;이전</a>
+	        	<c:if test="${pageGroupStart > 1}">
+		            <a href="/Kmarket1/admin/product/list.do?pg=${pageGroupStart - 1}" class="prev"><&nbsp;이전</a>
 	            </c:if>
 	            <c:forEach var="num" begin="${pageGroupStart}" end="${pageGroupEnd}">
-		            <a href="/Kmarket1/admin/product/list.do?pg=${num}&search=${search}" class="num ${num == currentPage ? 'current':'off'}">${num}</a>
+		            <a href="/Kmarket1/admin/product/list.do?pg=${num}" class="num ${num == currentPage ? 'current':'off'}">${num}</a>
 	            </c:forEach>
 	            <c:if test="${pageGroupEnd < lastPageNum}">
 		            <a href="/Kmarket1/admin/product/list.do?pg=${pageGroupEnd + 1}" class="next">다음&nbsp;></a>
 	            </c:if>
-            </div>
+	        </div>
         </section>
         <p class="ico info">
             <strong>Tip!</strong>

@@ -1,6 +1,7 @@
 package kr.co.kmarket1.controller.admin;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -11,14 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.co.kmarket1.dao.AdminProductListDAO;
-import kr.co.kmarket1.service.AdminProductService;
 import kr.co.kmarket1.vo.ProductVO;
 
 @WebServlet("/admin/product/list.do")
 public class AdminProductListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	AdminProductService service = AdminProductService.INSTANCE;
 	AdminProductListDAO dao = AdminProductListDAO.getInstance();
 
 	@Override
@@ -28,27 +27,56 @@ public class AdminProductListController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		String pg     = req.getParameter("pg");
+		String cate   = req.getParameter("cate");
 		String search = req.getParameter("search");
-		String pg	  = req.getParameter("pg");
 		
-		int currentPage = service.getCurrentPage(pg);
+		//페이징 처리
+		int start = 0;
+		int total = 0;
+		int lastPageNum = 0;
+		int currentPage = 1;
+		int currentPageGroup = 1;
+		int pageGroupStart = 0;
+		int pageGroupEnd = 0;
+		int pageStartNum = 0;
 		
-		//페이지 번호
-		int total = 0; // 전체 게시물 갯수 
-		total = service.selectAdminListCountTotal();
+		if(pg != null){
+			currentPage = Integer.parseInt(pg);
+		}
 		
-		int lastPageNum = service.getLastPageNum(total);// 마지막 페이지 번호
-		int[] result = service.getPageGroupNum(currentPage, lastPageNum);// 페이지 그룹 start, end 번호
-		int pageStartNum = service.getPageStartNum(total, currentPage);// 페이지 시작번호
-		int start = service.getStartNum(currentPage);// 시작 인덱스
+		currentPageGroup = (int)Math.ceil(currentPage / 10.0);
+		pageGroupStart = (currentPageGroup -1) * 10 + 1; //시작번호
+		pageGroupEnd= currentPageGroup * 10; //끝번호
 		
-		req.setAttribute("lastPageNum", lastPageNum);		
-		req.setAttribute("currentPage", currentPage);		
-		req.setAttribute("pageGroupStart", result[0]);
-		req.setAttribute("pageGroupEnd", result[1]);
-		req.setAttribute("pageStartNum", pageStartNum+1);
+		total = dao.selectCountTotal();
 		
-		List<ProductVO> products = AdminProductListDAO.getInstance().selectAdminList();
+		if(total % 10 == 0){
+			lastPageNum = total / 10;
+		}else{
+			lastPageNum = total / 10 +1;
+		}
+		if(pageGroupEnd > lastPageNum){
+			pageGroupEnd = lastPageNum;
+		}
+		
+		start = (currentPage - 1) * 10;
+		
+		req.setAttribute("pageGroupStart", pageGroupStart);
+		req.setAttribute("pageGroupEnd", pageGroupEnd);
+		req.setAttribute("currentPage", currentPage);
+		req.setAttribute("lastPageNum", lastPageNum);
+		req.setAttribute("total", total);
+		req.setAttribute("start", start);
+		
+		List<ProductVO> products = new ArrayList<>();
+		
+		if(search != null && cate != null) {
+			products = dao.searchAdminList(cate, search);
+		}else {
+			products = dao.selectAdminList(start);
+		}
+		
 		req.setAttribute("products", products);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/product/list.jsp");

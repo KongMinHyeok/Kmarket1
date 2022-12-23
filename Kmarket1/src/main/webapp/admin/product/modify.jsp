@@ -60,7 +60,7 @@
             </p>
         </nav>
         <article>
-            <form action="/Kmarket1/admin/product/register.do" method="post" enctype="multipart/form-data">
+            <form action="/Kmarket1/admin/product/modify.do" method="post" enctype="multipart/form-data">
                 <section>
                     <h4>상품분류</h4>
                     <p>기본분류는 반드시 선택하셔야 합니다. 하나의 상품에 1개의 분류를 지정합니다.</p>
@@ -128,7 +128,8 @@
                             <td>할인율</td>
                             <td>
                                 <span>0을 입력하면 할인율 없음</span>
-                                <input type="text" name="discount" value="${product.discount}"> %
+                                <input id="discount" maxlength="2" value="0">
+                                <input type="hidden" name="discount" value="${product.discount}"> %
                             </td>
                         </tr>
                         <tr>
