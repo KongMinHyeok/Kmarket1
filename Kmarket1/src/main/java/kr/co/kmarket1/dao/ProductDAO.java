@@ -11,6 +11,7 @@ import kr.co.kmarket1.db.DBHelper;
 import kr.co.kmarket1.db.MainSQL;
 import kr.co.kmarket1.vo.Cate1VO;
 import kr.co.kmarket1.vo.ProductCartVO;
+import kr.co.kmarket1.vo.ProductOrderItemVO;
 import kr.co.kmarket1.vo.ProductOrderVO;
 import kr.co.kmarket1.vo.ProductReviewVO;
 import kr.co.kmarket1.db.ProductSQL;
@@ -472,7 +473,7 @@ public class ProductDAO extends DBHelper{
 	}
 	// cart에 상품 넣기
 	public int insertProductCart(ProductCartVO cart) {
-		int result = 0;
+		int result1 = 0;
 		try {
 			logger.info("insertProductCart...");
 			conn = getConnection();
@@ -487,14 +488,66 @@ public class ProductDAO extends DBHelper{
 			psmt.setInt(8, cart.getTotal());
 			psmt.setString(9, cart.getRdate());
 			
-			result = psmt.executeUpdate();
+			result1 = psmt.executeUpdate();
 			close();
 				
 		}catch(Exception e) {
 			logger.error(e.getMessage());
 		}
-		return result;
+		return result1;
 	}
+	/////////// 여기부터 하자!!!!!!!!!!!!!!!!!!!!!
+	public int insertProductOrder(ProductOrderVO order) {
+		int result2 = 0;
+		try {
+			logger.info("insertProductCart2...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(ProductSQL.INSERT_PRODUCT_ORDER);
+			psmt.setString(1, cart.getUid());
+			psmt.setInt(2, cart.getProdNo());
+			psmt.setInt(3, cart.getCount());
+			psmt.setInt(4, cart.getPrice());
+			psmt.setInt(5, cart.getDiscount());
+			psmt.setInt(6, cart.getPoint());
+			psmt.setInt(7, cart.getDelivery());
+			psmt.setInt(8, cart.getTotal());
+			psmt.setString(9, cart.getRdate());
+			
+			result2 = psmt.executeUpdate();
+			close();
+				
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return result2;
+	}
+	/*
+	public int insertProductOrderDirect(ProductOrderVO order) {
+		int result2 = 0;
+		try {
+			logger.info("insertProductOrderDirect start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(ProductSQL.INSERT_PRODUCT_ORDER_DIRECT);
+			psmt.setInt(1, order.getUid());
+			psmt.setInt(2, order.getProdNo());
+			psmt.setInt(3, item.getCount());
+			psmt.setInt(4, item.getPrice());
+			psmt.setInt(5, item.getDiscount());
+			psmt.setInt(6, item.getPoint());
+			psmt.setInt(7, item.getDelivery());
+			psmt.setInt(8, item.getTotal());
+			psmt.setString(9, item.getRdate());
+			
+
+			result2 = psmt.executeUpdate();
+			close();
+				
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return result2;
+	}
+	*/
 	// 리뷰 총갯수
 	public int selectReviewCountTotal(String prodNo) {
 		int total = 0;
@@ -572,8 +625,8 @@ public class ProductDAO extends DBHelper{
 		logger.debug("result : " + result);
 		return result;
 	}
-	
-	public List<ProductOrderVO> selectProductOrders(int ordNo) {
+	/*
+	public List<ProductOrderVO> selectProductOrders(int ordNo, String uid) {
 		List<ProductOrderVO> orders = new ArrayList<>();
 
 		try {
@@ -581,6 +634,7 @@ public class ProductDAO extends DBHelper{
 			conn = getConnection();
 			psmt = conn.prepareStatement(ProductSQL.SELECT_PRODUCT_ORDERS);
 			psmt.setInt(1, ordNo);
+			psmt.setString(2, uid);
 			
 			
 			rs = psmt.executeQuery();
@@ -602,6 +656,43 @@ public class ProductDAO extends DBHelper{
 		logger.debug("orders : " + orders);
 		return orders;
 	}
+	*/
+	// cart 목록 불러오기
+		public List<ProductCartVO> selectProductCart(String prodNo) {
+			List<ProductCartVO> carts = new ArrayList<>();
+			try {
+				logger.info("selectProductCart start...");
+				conn = getConnection();
+				psmt = conn.prepareStatement(ProductSQL.SELECT_PRODUCT_CART);
+				psmt.setString(1, prodNo);
+				
+				rs = psmt.executeQuery();
+				
+				while(rs.next()) {
+					ProductCartVO cart = new ProductCartVO();
+					cart.setCartNo(rs.getInt(1));
+					cart.setUid(rs.getString(2));
+					cart.setProdNo(rs.getInt(3));
+					cart.setCount(rs.getInt(4));
+					cart.setPrice(rs.getInt(5));
+					cart.setDiscount(rs.getInt(6));
+					cart.setPoint(rs.getInt(7));
+					cart.setDelivery(rs.getInt(8));
+					cart.setTotal(rs.getInt(9));
+					cart.setRdate(rs.getString(10));
+					cart.setProdName(rs.getString(11));
+					cart.setDescript(rs.getString(12));
+					cart.setThumb3(rs.getString(13));
+					carts.add(cart);
+				}
+				close();
+				
+			}catch(Exception e) {
+				logger.error(e.getMessage());
+			}
+			logger.debug("carts : " + carts);
+			return carts;
+		}
 
 	
 }

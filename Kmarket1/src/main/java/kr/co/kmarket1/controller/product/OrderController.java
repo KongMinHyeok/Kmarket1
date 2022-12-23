@@ -26,13 +26,20 @@ public class OrderController extends HttpServlet{
 	}
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String prodNo = req.getParameter("prodNo");
+		req.setAttribute("prodNo", prodNo);
 		
 		ProductDAO dao = ProductDAO.getInstance();
 		List<ProductOrderVO> orders = null;
 		
-		orders = dao.selectProductOrders(orderNo);
-		req.setAttribute("orders", orders);
-		
+		List<ProductCartVO> carts = null;
+		// 만약 바로 구매로 왔으면
+		//if() {
+			
+			carts = dao.selectProductCart(prodNo);
+			req.setAttribute("carts", carts);
+		//}else{// 장바구니 선택으로 왔으면
+		//}
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/product/order.jsp");
 		dispatcher.forward(req, resp);
 	}

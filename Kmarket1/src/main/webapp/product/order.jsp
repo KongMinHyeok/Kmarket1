@@ -1,4 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,65 +15,7 @@
 </head>
 <body>
     <div id="wrapper">
-        <header>
-            <div class="top">
-                <div>
-		            <a href="/Kmarket1/member/login.jsp">로그인</a>
-		            <a href="/Kmarket1/member/join.jsp">회원가입</a>
-		            <a href="/Kmarket1/member/login.jsp">마이페이지</a>
-		            <a href="/Kmarket1/product/cart.jsp"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;장바구니</a>
-                </div>
-            </div>
-            <div class="logo">
-                <div>
-                    <a href="#"><img src="./img/header_logo.png" alt="Kmarket" width="180px" height="49px"></a>
-                    <form action="#">
-                        <input type="text" name="keyword">
-                        <button>
-                            <i class="fa fa-search" aria-hidden="true"></i>
-                        </button>
-                    </form>
-                </div>
-            </div>
-            <div class="menu">
-                <div>
-                    <ul>
-                        <li>
-                            <a href="#">히트상품</a>
-                        </li>
-                        <li>
-                            <a href="#">추천상품</a>
-                        </li>
-                        <li>
-                            <a href="#">최신상품</a>
-                        </li>
-                        <li>
-                            <a href="#">인기상품</a>
-                        </li>
-                        <li>
-                            <a href="#">할인상품</a>
-                        </li>
-                    </ul>
-                    <ul>
-                        <li>
-                            <a href="#">쿠폰존</a>
-                        </li>
-                        <li>
-                            <a href="#">사용후기</a>
-                        </li>
-                        <li>
-                            <a href="#">개인결제</a>
-                        </li>
-                        <li>
-                            <a href="#">고객센터</a>
-                        </li>
-                        <li>
-                            <a href="#">FAQ</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </header>
+                        <jsp:include page="/product/_header.jsp" />
         <main id="product">
             <aside>
                 <ul class="category">
@@ -132,63 +78,40 @@
                             </tr>
                         </thead>
                         <tbody>
+                        <c:forEach var="cart" items="${carts}">
                             <tr>
+                                <td class="cart_info_td">
+                                	<input type="checkbox" name="chkProduct" value="${cart.cartNo}">
+                                	<input type="hidden" class="prodNo" value="${cart.prodNo}">
+                                	<input type="hidden" class="count" value="${cart.count}">
+                                	<input type="hidden" class="price" value="${cart.price}">
+                                	<input type="hidden" class="discount" value="${cart.price * cart.count * (cart.discount/100)}">
+                                	<input type="hidden" class="point" value="${cart.point}">
+                                	<input type="hidden" class="delivery" value="${cart.delivery}">
+                                	<input type="hidden" class="total" value="${cart.total - cart.price * cart.count * (cart.discount/100)}">
+                                </td>
                                 <td>
                                     <article>
+                                    <!-- 이거 상품번호로 carts products 조인해서 이미지 들고와야할듯 -->
                                         <a href="#">
                                             <img src="./img/80x80.png" alt="상품이미지">
                                         </a>
                                         <div>
                                             <h2>
-                                                <a href="#">상품명</a>
+                                                <a href="#">${cart.prodName}</a>
                                             </h2>
-                                            <p>상품설명</p>
+                                            <p>${cart.descript}</p>
                                         </div>
                                     </article>
                                 </td>
-                                <td>1</td>
-                                <td>27,000</td>
-                                <td>무료배송</td>
-                                <td>27,000</td>
+                                <td>${cart.count}</td>
+                                <td><fmt:formatNumber value="${cart.price}" pattern="#,###,###" /></td>
+                                <td>${cart.discount}%</td>
+                                <td><fmt:formatNumber value="${cart.point}" pattern="#,###,###" /></td>
+                                <td><fmt:formatNumber value="${cart.delivery}" pattern="#,###,###" /></td>
+                                <td><fmt:formatNumber value="${cart.total}" pattern="#,###,###" /></td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <article>
-                                        <a href="#">
-                                            <img src="./img/80x80.png" alt="상품이미지">
-                                        </a>
-                                        <div>
-                                            <h2>
-                                                <a href="#">상품명</a>
-                                            </h2>
-                                            <p>상품설명</p>
-                                        </div>
-                                    </article>
-                                </td>
-                                <td>1</td>
-                                <td>27,000</td>
-                                <td>무료배송</td>
-                                <td>27,000</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <article>
-                                        <a href="#">
-                                            <img src="./img/80x80.png" alt="상품이미지">
-                                        </a>
-                                        <div>
-                                            <h2>
-                                                <a href="#">상품명</a>
-                                            </h2>
-                                            <p>상품설명</p>
-                                        </div>
-                                    </article>
-                                </td>
-                                <td>1</td>
-                                <td>27,000</td>
-                                <td>무료배송</td>
-                                <td>27,000</td>
-                            </tr>
+                            </c:forEach>
                         </table>
                         <div class="final">
                             <table border="0">

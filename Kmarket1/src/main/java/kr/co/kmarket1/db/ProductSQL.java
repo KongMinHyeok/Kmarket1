@@ -32,7 +32,7 @@ public class ProductSQL {
 													+ "where `prodCate1`=? AND `prodCate2`=?";
 	
 	public static final String INSERT_PRODUCT_CART = "INSERT INTO `km_product_cart` SET "
-													+ "`uid`=?, `prodNo`=?, `count`=?, `price`=?, `discount`=?, `point`=?, `delivery`=?, `total`=?, `rdate`=?;";
+													+ "`uid`=?, `prodNo`=?, `count`=?, `price`=?, `discount`=?, `point`=?, `delivery`=?, `total`=?, `rdate`=?";
 	
 	public static final String SELECT_REVIEWS = "SELECT a.*, b.`prodName` FROM `km_product_review` AS a "
 												+"JOIN `km_product` as b ON a.prodNo = b.prodNo "
@@ -49,5 +49,8 @@ public class ProductSQL {
 	public static final String DELETE_PRODUCT_CART = "DELETE FROM `km_product_cart` WHERE `cartNo` = ? ";
 	
 	public static final String SELECT_PRODUCT_ORDERS = "";
+	// 상품 상세 정보에서 바로 구매창
+	public static final String SELECT_PRODUCT_CART = "SELECT a.*, b.`prodName`,`descript`,`thumb1` FROM `km_product_cart` AS a "
+													+ "JOIN `km_product` AS b ON a.prodNo = b.prodNo WHERE b.`prodNo`=?";
 }
 

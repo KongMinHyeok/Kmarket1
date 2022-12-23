@@ -61,9 +61,9 @@
 			if(uid == ''){
 				alert('로그인 후 이용해주세요');
 				location.href= '/Kmarket1/member/login.do';
-				};
+				}else{
 			
-    		let jsonData = {
+    		let jsonData1 = {
     				"uid": uid,
     				"prodNo": prodNo,
     				"count": count,
@@ -77,10 +77,10 @@
     		$.ajax({
     			url: '/Kmarket1/product/view.do',
     			type: 'post',
-    			data: jsonData,
+    			data: jsonData1,
     			dataType: 'json',
     			success: function(data){
-	    				if(data.result > 0){
+	    				if(data.result1 > 0){
 							alert('장바구니에 추가완료');
 							location.href = '/Kmarket1/product/cart.do?uid='+uid;
 						}else{
@@ -88,13 +88,12 @@
 						}
     			}
     		});
+				}
     	});
     	///////////////////////////////////////////////////////////////////////
     	///////////////////////////////////////////////////////////////////////
-    	/* order버튼 누르면 장바구니랑 다르게 바로 주문으로 넘어가야해서 코드 하나 더 만들어야한다
+    	//order버튼 누르면 장바구니랑 다르게 바로 주문으로 넘어가야해서 코드 하나 더 만들어야한다
     	$('.order').click(function(){
-    		
-    		
     		let uid = $('input[name=uid]').val();
 			let prodNo = $('input[name=prodNo]').val();
 			let count = $('input[name=num]').val();
@@ -108,9 +107,9 @@
 			if(uid == ''){
 				alert('로그인 후 이용해주세요');
 				location.href= '/Kmarket1/member/login.do';
-				};
+				}else{
 			
-    		let jsonData = {
+    		let jsonData2 = {
     				"uid": uid,
     				"prodNo": prodNo,
     				"count": count,
@@ -124,19 +123,19 @@
     		$.ajax({
     			url: '/Kmarket1/product/view.do',
     			type: 'post',
-    			data: jsonData,
+    			data: jsonData2,
     			dataType: 'json',
     			success: function(data){
-	    				if(data.result > 0){
-							alert('장바구니에 추가완료');
-							location.href = '/kmarket/product/cart.do?uid='+uid;
+	    				if(data.result2 > 0){
+							location.href = '/Kmarket1/product/order.do?prodNo='+prodNo;
 						}else{
 							alert('오류발생! 다시 시도해주세요.')
 						}
     			}
     		});
+				}
     	});
-   	*/
+
 	//
     });
     </script>
@@ -258,6 +257,7 @@
                             <span><input type="text" name="total" value"" readonly"></span>
                             <em>총 상품금액</em>
                         </div>
+                       
                         <div class="button">
                             <input type="button" class="cart" value="장바구니">
                             <input type="button" class="order" value="구매하기">

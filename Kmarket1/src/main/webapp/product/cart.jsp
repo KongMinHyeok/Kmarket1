@@ -55,7 +55,7 @@
 	    	
 	    		if($(element).find("input[name=chkProduct]").is(":checked") === true){ //체크여부
 	    		
-	    		totalPrice += parseInt($(element).find(".price").val());
+	    		totalPrice += parseInt($(element).find(".price").val())*parseInt($(element).find(".count").val());
 	    		totalCount += parseInt($(element).find(".count").val());
 	    		totalDiscount += parseInt($(element).find(".discount").val());
 	    		totalDelivery += parseInt($(element).find(".delivery").val());
@@ -79,12 +79,28 @@
     	// 주문하기--------------------------------------------------------------------
     	
     	$('input[name=order]').click(function(){
+    		let form_contents ='';
+    		let ordNo = 0;
     		if($('input[name=chkProduct]').is(':checked')==false){
     			alert('상품이 선택되지 않았습니다');
     			return false;
     		}else{
     			if(confirm('주문하시겠습니까?')){
-    				$('.submitCart').submit();	
+    				$(".cart_info_td").each(function(index, element){
+    		    		if($(element).find("input[name=chkProduct]").is(":checked") === true){ //체크여부
+
+    					let prodNo = $(element).find(".prodNo").val();
+    					let count = $(element).find(".count").val();
+    					
+    					let prodNo_input = "<input name='orders[" + orderNo + "].prodNo' type='hidden' value='" + prodNo + "'>";
+    					form_contents += prodNo_input;
+    					let count_input = "<input name='orders[" + orderNo + "].count' type='hidden' value='" + count + "'>";
+    					form_contents += count_input;
+    					
+    					ordNo += 1;
+    		    		}
+    				});
+    				$("")
     			}else{
     				return false;
     			}
