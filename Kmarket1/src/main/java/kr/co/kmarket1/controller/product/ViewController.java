@@ -24,6 +24,8 @@ import com.mysql.cj.xdevapi.JsonString;
 import kr.co.kmarket1.dao.ProductDAO;
 import kr.co.kmarket1.service.ProductService;
 import kr.co.kmarket1.vo.ProductCartVO;
+import kr.co.kmarket1.vo.ProductOrderItemVO;
+import kr.co.kmarket1.vo.ProductOrderVO;
 import kr.co.kmarket1.vo.ProductReviewVO;
 import kr.co.kmarket1.vo.ProductVO;
 @WebServlet("/product/view.do")
@@ -148,6 +150,7 @@ public class ViewController extends HttpServlet{
 		String delivery = req.getParameter("delivery");
 		String total = req.getParameter("total");
 		String rdate = req.getParameter("rdate");
+		String ordNo = req.getParameter("ordNo");
 		
 		ProductCartVO cart = new ProductCartVO();
 		cart.setUid(uid);
@@ -160,10 +163,16 @@ public class ViewController extends HttpServlet{
 		cart.setTotal(total);
 		cart.setRdate(rdate);
 		
-		int result = ProductDAO.getInstance().insertProductCart(cart);
+		int result1 = ProductDAO.getInstance().insertProductCart(cart);
+		/*----------------------------------------------------*/
+		
+		int result2 = ProductDAO.getInstance().insertProductCart2(cart);
 		
 		JsonObject json = new JsonObject();
-		json.addProperty("result", result);
+		json.addProperty("result1", result1);
+		
+		
+		json.addProperty("result2", result2);
 		
 		PrintWriter writer = resp.getWriter();
 		writer.print(json.toString());
