@@ -39,21 +39,59 @@
     		}
     	});
     	
+    	/************************************/
+    	function setTotalInfo(){
+    		
+    	
+	    	let totalPrice = 0; // 상품금액 합
+	    	let totalCount = 0; // 상품수 합
+	    	let totalDiscount = 0; // 상품 할인 금액 합(이거는 계산해서 들어가야할듯)
+	    	let totalDelivery = 0; // 배송비 합
+	    	let totalPoint = 0; // 포인트 합
+	    	let finalTotalPrice = 0;
+	    	
+	    	$(".cart_info_td").each(function(index, element){
+	    		
+	    	
+	    		if($(element).find("input[name=chkProduct]").is(":checked") === true){ //체크여부
+	    		
+	    		totalPrice += parseInt($(element).find(".price").val());
+	    		totalCount += parseInt($(element).find(".count").val());
+	    		totalDiscount += parseInt($(element).find(".discount").val());
+	    		totalDelivery += parseInt($(element).find(".delivery").val());
+	    		totalPoint += parseInt($(element).find(".point").val());
+	    		
+	    		}
+	    	});
+	    	/* 최종 가격 */
+	    	finalTotalPrice = totalPrice - totalDiscount + totalDelivery;
+	    	/* 값 삽입 */
+	    	$('.totalPrice').text(totalPrice);			
+	    	$('.totalCount').text(totalCount);
+			$('.totalDiscount').text(' - '+totalDiscount);			
+			$('.totalDelivery').text(totalDelivery);			
+			$('.totalPoint').text(totalPoint);			
+			$('.finalTotalPrice').text(finalTotalPrice+'원');
+    	}
+    	$("input[name=chkProduct]").on("change", function(){
+    		setTotalInfo($(".cart_info_td"));
+    	});
     	// 주문하기--------------------------------------------------------------------
-    	/*
+    	
     	$('input[name=order]').click(function(){
-    		$("input[name=chkProduct]:checked").each(function (index) {  
-    	        let orderList =  $('input[name=chkProduct]').val();
-
-    	        jsonData = {
-    	        		"orderList": chkProduct
-    	        }
-    	        
-    	    });
-			location.href = "/Kmarker1/product/order.do?cartNo="orderList;
+    		if($('input[name=chkProduct]').is(':checked')==false){
+    			alert('상품이 선택되지 않았습니다');
+    			return false;
+    		}else{
+    			if(confirm('주문하시겠습니까?')){
+    				$('.submitCart').submit();	
+    			}else{
+    				return false;
+    			}
+    		}
 
     	});
-    	*/
+    	
     	// 값 계산----------------------------------------------------------------------
     	
     	
@@ -101,6 +139,7 @@
     					$.ajax({
     						url : '/Kmarket1/product/cart.do',
     						type : 'POST',
+    						traditional: true,
     						data : {'chk': chk},
     						dataType : 'json',
     						success : function(data){
@@ -177,7 +216,7 @@
                     <p>HOME > 장바구니</p>
                 </nav>
                 <!-- 장바구니 목록 -->
-                <form action="/Kmarket1/product/cart.do">
+                <form action="/Kmarket1/product/cart.do" class="submitCart" method="post">
                     <table border="0">
                         <thead>
                             <tr>
@@ -198,7 +237,16 @@
                             </tr>
                             <c:forEach var="cart" items="${carts}">
                             <tr>
-                                <td><input type="checkbox" name="chkProduct" value="${cart.cartNo}"></td>
+                                <td class="cart_info_td">
+                                	<input type="checkbox" name="chkProduct" value="${cart.cartNo}">
+                                	<input type="hidden" class="prodNo" value="${cart.prodNo}">
+                                	<input type="hidden" class="count" value="${cart.count}">
+                                	<input type="hidden" class="price" value="${cart.price}">
+                                	<input type="hidden" class="discount" value="${cart.price * cart.count * (cart.discount/100)}">
+                                	<input type="hidden" class="point" value="${cart.point}">
+                                	<input type="hidden" class="delivery" value="${cart.delivery}">
+                                	<input type="hidden" class="total" value="${cart.total - cart.price * cart.count * (cart.discount/100)}">
+                                </td>
                                 <td>
                                     <article>
                                     <!-- 이거 상품번호로 carts products 조인해서 이미지 들고와야할듯 -->
@@ -209,7 +257,7 @@
                                             <h2>
                                                 <a href="#">${cart.prodName}</a>
                                             </h2>
-                                            <p>${cart.descript}<input type="hidden" class="descript" value="${cart.descript}"/></p>
+                                            <p>${cart.descript}</p>
                                         </div>
                                     </article>
                                 </td>
@@ -218,7 +266,7 @@
                                 <td>${cart.discount}%</td>
                                 <td><fmt:formatNumber value="${cart.point}" pattern="#,###,###" /></td>
                                 <td><fmt:formatNumber value="${cart.delivery}" pattern="#,###,###" /></td>
-                                <td><fmt:formatNumber value="${cart.total}" pattern="#,###,###" /><input type="hidden" value=${cart.total}></td>
+                                <td><fmt:formatNumber value="${cart.total}" pattern="#,###,###" /></td>
                             </tr>
                             </c:forEach>
                             <tr><td><input type="hidden" name="uid" value= ${sessMember.uid }></td></tr>
@@ -230,27 +278,27 @@
                             <h2>전체합계</h2>
                             <tr>
                                 <td>상품수</td>
-                                <td>1</td>
+                                <td class="totalCount">0</td>
                             </tr>
                             <tr>
                                 <td>상품금액</td>
-                                <td>27,000</td>
+                                <td class="totalPrice">0</td>
                             </tr>
                             <tr>
                                 <td>할인금액</td>
-                                <td>-1,000</td>
+                                <td class="totalDiscount">0</td>
                             </tr>
                             <tr>
                                 <td>배송비</td>
-                                <td>0</td>
+                                <td class="totalDelivery">0</td>
                             </tr>
                             <tr>
                                 <td>포인트</td>
-                                <td>260</td>
+                                <td class="totalPoint">0</td>
                             </tr>
                             <tr>
                                 <td>전체주문금액</td>
-                                <td>26,000</td>
+                                <td class="finalTotalPrice">0</td>
                             </tr>
                         </table>
                         <input type="submit" name="order" value="주문하기">
