@@ -25,7 +25,7 @@ public class FindIdEmailVerifiyController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String name = req.getParameter("name");
 		String email = req.getParameter("email");
-		// String contact = (email == null)? hp : email;
+		// String contact = (email == null)? hp : email; 휴대폰 번호로 찾기, 이메일로 찾기 두 기능을 모두 구현한 상태에서 쓸 변수, 현재는 이메일로 찾기 기능만 구현되어 있음
 		
 		String result = service.selectMemberByContact(name, email);
 		
