@@ -14,7 +14,7 @@ import com.google.gson.JsonObject;
 
 import kr.co.kmarket1.service.MemberService;
 
-@WebServlet("/member/findPw.do")
+@WebServlet("/member/findPw.do") // 1차 개발에 미포함된 기능; 임의로 제가 만든 기능으로, 2차 개발 시 삭제하겠습니다
 public class FindPwController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	private MemberService service = MemberService.INSTANCE;

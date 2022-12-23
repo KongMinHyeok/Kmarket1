@@ -10,7 +10,6 @@
 			let agree3 = $('input:checkbox[name=agree3]').is(':checked');
 			let agree4 = $('input:checkbox[name=agree4]').is(':checked');
 			let agree5 = $('input:checkbox[name=agree5]').is(':checked');
-			console.log(agree5);
 			
 			if(type == 'normal'){
 				if(agree1 && agree2 && agree3){
