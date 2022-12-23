@@ -127,7 +127,8 @@
                             <td>할인율</td>
                             <td>
                                 <span>0을 입력하면 할인율 없음</span>
-                                <input type="text" name="discount"> %
+                                <input id="discount" maxlength="2" value="0">
+                                <input type="hidden" name="discount" value="0"> %
                             </td>
                         </tr>
                         <tr>
