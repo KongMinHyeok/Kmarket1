@@ -22,6 +22,9 @@ public enum CsService {
 	public List<CsArticleVO> selectFaq() {
 		return dao.selectFaq();
 	}
+	public List<CsArticleVO> selectFaqCate() {
+		return dao.selectFaqCate();
+	}
 	public List<CsArticleVO> selectFaqs() {
 		return dao.selectFaqs();
 	}
@@ -74,5 +77,20 @@ public enum CsService {
 	
 	public CsArticleVO selectArticleQna(String no) {
 		return dao.selectArticleQna(no);
+	}
+	
+	public void insertArticleNotice(CsArticleVO article) {
+		dao.insertArticleNotice(article);
+	}
+	
+	public void deleteNotice(String no) {
+		dao.deleteNotice(no);
+	}
+	
+	public void updateNotice(String no, String cate, String title, String content) {
+		dao.updateNotice(no, cate, title, content);
+	}
+	public void deleteFaq(String no) {
+		dao.deleteFaq(no);
 	}
 }

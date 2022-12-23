@@ -53,7 +53,7 @@ $(function(){
             </aside>
             <article>
               <form action="/Kmarket1/cs/qna/write.do" method="post">
-              <input type="hidden" name="uid" value="${sessUser.uid}">
+              <input type="hidden" name="uid" value="${sessMember.uid}">
                 <table>
                   <tr>
                     <td>문의유형</td>

@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import kr.co.kmarket1.service.CsService;
 import kr.co.kmarket1.vo.CsArticleVO;
 
-@WebServlet("/admin/cs/notice/modify.do")
-public class ModifyController extends HttpServlet{
+@WebServlet("/admin/cs/notice/delete.do")
+public class DeleteController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	private CsService service = CsService.instance;
 	@Override
@@ -26,25 +26,13 @@ public class ModifyController extends HttpServlet{
 
 		String no = req.getParameter("no");
 		
-		CsArticleVO notice = service.selectArticleNotice(no);
+		service.deleteNotice(no);
 		
-		req.setAttribute("notice", notice);
-		
-		RequestDispatcher dispathcer = req.getRequestDispatcher("/admin/cs/notice/modify.jsp");
-		dispathcer.forward(req, resp);
+		resp.sendRedirect("/Kmarket1/admin/cs/notice/list.do");
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	
-		String cate = req.getParameter("cate");
-		String title = req.getParameter("title");
-		String content = req.getParameter("content");
-		String no = req.getParameter("no");
-		
-		service.updateNotice(no, cate, title, content);
-		
-		resp.sendRedirect("/Kmarket1/admin/cs/notice/view.do?no=" + no);
 	}
 	
 	

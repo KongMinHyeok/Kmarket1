@@ -1,4 +1,4 @@
-package kr.co.kmarket1.controller.cs.qna;
+package kr.co.kmarket1.controller.admin.cs.faq;
 
 import java.io.IOException;
 
@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import kr.co.kmarket1.service.CsService;
 import kr.co.kmarket1.vo.CsArticleVO;
 
-@WebServlet("/cs/qna/write.do")
-public class WriteController extends HttpServlet{
+@WebServlet("/admin/cs/faq/view.do")
+public class ViewController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	private CsService service = CsService.instance;
 	
@@ -23,39 +23,23 @@ public class WriteController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+	
+		String no   = req.getParameter("no");
 		String cate = req.getParameter("cate");
-		CsArticleVO qna = service.selectCateQna();
 		
+		CsArticleVO article = service.selectFaqArticle(no);
+		
+		
+		req.setAttribute("article", article);
 		req.setAttribute("cate", cate);
-		req.setAttribute("qna", qna);
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/qna/write.jsp");
+		
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/cs/faq/view.jsp");
 		dispatcher.forward(req, resp);
+		
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	
-		String uid 		= req.getParameter("uid");
-		String cate 	= req.getParameter("cate");
-		String cate2 	= req.getParameter("cate2");
-		String title 	= req.getParameter("title");
-		String content 	= req.getParameter("content");
-		String regip 	= req.getRemoteAddr();
-		
-		CsArticleVO article = new CsArticleVO();
-		article.setUid(uid);
-		article.setCate(cate);
-		article.setCate2(cate2);
-		article.setTitle(title);
-		article.setContent(content);
-		article.setRegip(req.getRemoteAddr());
-		
-		service.insertArticleQna(article);
-		
-		resp.sendRedirect("/Kmarket1/cs/qna/list.do");
-		
 	}
-	
 	
 }

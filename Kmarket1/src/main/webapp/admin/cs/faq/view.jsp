@@ -3,7 +3,7 @@
 <jsp:include page="/admin/_header.jsp"/>
             <section id="admin-notice-view">
                 <nav>
-                    <h3>공지사항 보기</h3>
+                    <h3>자주묻는질문 보기</h3>
                     <p>
                         HOME > 고객센터 > <strong>공지사항</strong>
                     </p>
@@ -12,26 +12,26 @@
 	               <table>
 	               	<tr>
 	               		<th>유형</th>
-	               		<td>${notice.cate}</td>
+	               		<td>${article.cate}-${article.cate2}</td>
 	               	</tr>
 	               	<tr>
 	               		<th>제목</th>
-	               		<td>${notice.title}</td>
+	               		<td>${article.title}</td>
 	               	</tr>
 	               	<tr>
 	               		<th>내용</th>
-	               		<td>${notice.content}</td>
+	               		<td>${article.content}</td>
 	               	</tr>
 	               </table>
 	               <div>
-	               <c:if test="${pg eq ''}">
-	               	<a href="/Kmarket1/admin/cs/notice/list.do" class="btnNoticeList">목록</a>
+	               <c:if test="${pg eq ''}">	
+	               	<a href="/Kmarket1/admin/cs/faq/list.do" class="btnList">목록</a>
 	               </c:if>
 	               <c:if test="${pg ne ''}">
-					<a href="/Kmarket1/admin/cs/notice/list.do?pg=${pg}" class="btnNoticeList">목록</a>
+					<a href="/Kmarket1/admin/cs/faq/list.do?pg=${pg}" class="btnList">목록</a>
 					</c:if>
-						<a href="/Kmarket1/admin/cs/notice/modify.do?&cate=${cate}&no=${no}" class="btnModify">수정</a>
-						<a href="/Kmarket1/admin/cs/notice/delete.do?&cate=${cate}&no=${no}&pg=${pg}" class="btnDelete">삭제</a>
+						<a href="/Kmarket1/admin/cs/faq/modify.do?&cate=${cate}&cate2=${cate2}&no=${no}" class="btnModify">수정</a>
+						<a href="/Kmarket1/admin/cs/faq/delete.do?&cate=${cate}&no=${no}" class="btnDelete">삭제</a>
 					</div>
 	        	</article>        
             </section>

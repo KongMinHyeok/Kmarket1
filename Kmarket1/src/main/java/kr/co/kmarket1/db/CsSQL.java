@@ -20,16 +20,35 @@ public class CsSQL {
 													+"order by `no` DESC "
 													+"limit ?, 10";
 	
-	public static final String SELECT_ARTICLE_NOTICE = "select `title`,`uid`, `rdate`, `content`, `cate` from `km_cs_notice` where `no`=?";
+	public static final String SELECT_ARTICLE_NOTICE = "select `no`, `title`,`uid`, `rdate`, `content`, `cate` from `km_cs_notice` where `no`=?";
 	public static final String UPDATE_ARTICLE_HIT = "update `km_cs_notice` set `hit`=`hit`+1 where `no`=?";
 	
+	public static final String INSERT_ARTICLE_NOTICE = "insert into `km_cs_notice` set"
+													+ "`uid`=?, "
+													+ "`cate`=?, "
+													+ "`title`=?, "
+													+ "`content`=?, "
+													+ "`regip`=?, "
+													+ "`rdate`=now()";
 	
-	public static final String SELECT_FAQ = "select * from `km_cs_faq`";
+	public static final String DELETE_NOTICE = "delete from `km_cs_notice` where `no`=?";
+	public static final String UPDATE_NOTICE = "update `km_cs_notice` set "
+											+"`cate`=?, "
+											+"`title`=?, "
+											+"`content`=?, "
+											+"`rdate`=now() "
+											+"where `no`= ?";
+	
+	
+	public static final String SELECT_FAQ = "select * from `km_cs_faq` order by `no` desc";
 	
 	public static final String SELECT_FAQ_CATE = "select DISTINCT `cate2` from `km_cs_faq` where `cate`=?";
+	public static final String SELECT_FAQ_CATE1 = "select DISTINCT `cate` from `km_cs_faq`";
 	
-	public static final String SELECT_FAQ_ARTICLE = "select `cate`, `title`, `content` from `km_cs_faq` "
+	public static final String SELECT_FAQ_ARTICLE = "select `cate`, `cate2`, `title`, `content` from `km_cs_faq` "
 													+"where `no`=?";
+	
+	public static final String DELETE_FAQ = "delete from `km_cs_faq` where `no`=?";
 	
 	public static final String SELECT_QNAS = "select * from `km_cs_qna` "
 											+"order by `no` DESC "

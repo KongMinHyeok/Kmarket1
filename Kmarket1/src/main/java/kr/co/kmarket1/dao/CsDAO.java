@@ -210,11 +210,12 @@ public class CsDAO extends DBHelper{
 			
 			while(rs.next()) {
 				notice = new CsArticleVO();
-				notice.setTitle(rs.getString(1));
-				notice.setUid(rs.getString(2));
-				notice.setRdate(rs.getString(3).substring(2, 10));
-				notice.setContent(rs.getString(4));
-				notice.setCate(rs.getString(5));
+				notice.setNo(rs.getInt(1));
+				notice.setTitle(rs.getString(2));
+				notice.setUid(rs.getString(3));
+				notice.setRdate(rs.getString(4).substring(2, 10));
+				notice.setContent(rs.getString(5));
+				notice.setCate(rs.getString(6));
 
 			}
 			close();
@@ -272,6 +273,32 @@ public class CsDAO extends DBHelper{
 		return faqs;
 	}
 	
+public List<CsArticleVO> selectFaqCate(){
+		
+		List<CsArticleVO> cates = new ArrayList<>();
+		
+		try {
+			logger.info("selectcate start...");
+			
+			conn = getConnection();
+			psmt = conn.prepareStatement(CsSQL.SELECT_FAQ_CATE1);
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				CsArticleVO ct = new CsArticleVO();
+				ct.setCate(rs.getString(1));
+				
+				cates.add(ct);
+			}
+			
+			close();
+			
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return cates;
+	}
+	
 	public List<CsArticleVO> selectFaqs() {
 		
 		List<CsArticleVO> faqs = new ArrayList<>();
@@ -301,10 +328,10 @@ public class CsDAO extends DBHelper{
 	
 	public List<CsArticleVO> selectFaqsCate2(String cate) {
 		
-		List<CsArticleVO> cate2 = new ArrayList<>();
+		List<CsArticleVO> faqct2 = new ArrayList<>();
 		
 		try {
-			logger.info("selectfaqs call...");
+			logger.info("selectfaqCate2 start...");
 			
 			conn = getConnection();
 			psmt = conn.prepareStatement(CsSQL.SELECT_FAQ_CATE);
@@ -315,14 +342,14 @@ public class CsDAO extends DBHelper{
 				CsArticleVO ct = new CsArticleVO();
 				ct.setCate2(rs.getString(1));
 				
-				cate2.add(ct);
+				faqct2.add(ct);
 			}	
 			close();
 		}catch (Exception e) {
 			logger.error(e.getMessage());
 		}
-		logger.debug("cate2 : " + cate2);
-		return cate2;
+		logger.debug("cate2 : " + faqct2);
+		return faqct2;
 	}
 	
 	public CsArticleVO selectFaqArticle(String no) {
@@ -340,8 +367,9 @@ public class CsDAO extends DBHelper{
 			if(rs.next()) {
 				article = new CsArticleVO();
 				article.setCate(rs.getString(1));
-				article.setTitle(rs.getString(2));
-				article.setContent(rs.getString(3));
+				article.setCate2(rs.getString(2));
+				article.setTitle(rs.getString(3));
+				article.setContent(rs.getString(4));
 			}
 			close();
 			
@@ -529,5 +557,70 @@ public List<CsArticleVO> selectQnasGroup(int start) {
 		}catch (Exception e) {
 			logger.error(e.getMessage());
 		}
+	}
+	
+	public void insertArticleNotice(CsArticleVO article) {
+		
+		try {
+			logger.info("insertArticleNotice start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(CsSQL.INSERT_ARTICLE_NOTICE);
+			psmt.setString(1, article.getUid());
+			psmt.setString(2, article.getCate());
+			psmt.setString(3, article.getTitle());
+			psmt.setString(4, article.getContent());
+			psmt.setString(5, article.getRegip());
+			psmt.executeUpdate();
+			close();
+			
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("insertArticleNotice : " + article);
+	}
+	
+	public void deleteNotice(String no) {
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(CsSQL.DELETE_NOTICE);
+			psmt.setString(1, no);
+			psmt.executeUpdate();
+			close();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("notice delete : " + no);
+	}
+	
+	public void updateNotice(String no, String cate, String title, String content) {
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(CsSQL.UPDATE_NOTICE);	
+			psmt.setString(1, cate);
+			psmt.setString(2, title);
+			psmt.setString(3, content);
+			psmt.setString(4, no);
+			psmt.executeUpdate();
+			close();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("notice update : " + no);
+	}
+	
+	public void deleteFaq(String no) {
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(CsSQL.DELETE_FAQ);
+			psmt.setString(1, no);
+			psmt.executeUpdate();
+			close();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("Faq delete : " + no);
 	}
 }

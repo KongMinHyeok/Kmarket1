@@ -1,4 +1,4 @@
-package kr.co.kmarket1.controller.admin.cs.notice;
+package kr.co.kmarket1.controller.admin.cs.faq;
 
 import java.io.IOException;
 
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import kr.co.kmarket1.service.CsService;
 import kr.co.kmarket1.vo.CsArticleVO;
 
-@WebServlet("/admin/cs/notice/modify.do")
+@WebServlet("/admin/cs/faq/modify.do")
 public class ModifyController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	private CsService service = CsService.instance;
@@ -30,7 +30,7 @@ public class ModifyController extends HttpServlet{
 		
 		req.setAttribute("notice", notice);
 		
-		RequestDispatcher dispathcer = req.getRequestDispatcher("/admin/cs/notice/modify.jsp");
+		RequestDispatcher dispathcer = req.getRequestDispatcher("/admin/cs/faq/modify.jsp");
 		dispathcer.forward(req, resp);
 	}
 	
@@ -44,7 +44,7 @@ public class ModifyController extends HttpServlet{
 		
 		service.updateNotice(no, cate, title, content);
 		
-		resp.sendRedirect("/Kmarket1/admin/cs/notice/view.do?no=" + no);
+		resp.sendRedirect("/Kmarket1/admin/cs/faq/view.do?no=" + no);
 	}
 	
 	

@@ -18,7 +18,7 @@ $(function(){
              </p>
          </nav>
          <article class="list">
-             <select name="cate" id="">
+             <select name="cate">
               <option value="0">유형선택</option>
               <option value="service">고객 서비스</option>
               <option value="safe">안전거래</option>
