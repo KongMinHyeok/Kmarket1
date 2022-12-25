@@ -17,6 +17,7 @@ public class ProductCartVO {
 	private String descript;
 	private String thumb3;
 	//
+	private int direct;
 	
 	public String getProdName() {
 		return prodName;
@@ -117,12 +118,15 @@ public class ProductCartVO {
 	public void setRdate(String rdate) {
 		this.rdate = rdate;
 	}
-	@Override
-	public String toString() {
-		return "ProductCartVO [cartNo=" + cartNo + ", uid=" + uid + ", prodNo=" + prodNo + ", count=" + count
-				+ ", price=" + price + ", discount=" + discount + ", point=" + point + ", delivery=" + delivery
-				+ ", total=" + total + ", rdate=" + rdate + ", prodName=" + prodName + ", descript=" + descript
-				+ ", thumb3=" + thumb3 + "]";
+	
+	public int getDirect() {
+		return direct;
+	}
+	public void setDirect(int direct) {
+		this.direct = direct;
+	}
+	public void setDirect(String direct) {
+		this.direct = Integer.parseInt(direct);
 	}
 	
 	

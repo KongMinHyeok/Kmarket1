@@ -57,6 +57,7 @@
 			let delivery = $('input[name=delivery]').val();
 			let total = $('input[name=total]').val();
 			let rdate = $('input[name=rdate]').val();
+			let direct = '0';
 			
 			if(uid == ''){
 				alert('로그인 후 이용해주세요');
@@ -72,7 +73,8 @@
     				"point": point,
     				"delivery": delivery,
     				"total": total,
-    				"rdate": rdate
+    				"rdate": rdate,
+    				"direct": direct
     		};
     		$.ajax({
     			url: '/Kmarket1/product/view.do',
@@ -80,7 +82,7 @@
     			data: jsonData1,
     			dataType: 'json',
     			success: function(data){
-	    				if(data.result1 > 0){
+	    				if(data.result > 0){
 							alert('장바구니에 추가완료');
 							location.href = '/Kmarket1/product/cart.do?uid='+uid;
 						}else{
@@ -103,6 +105,7 @@
 			let delivery = $('input[name=delivery]').val();
 			let total = $('input[name=total]').val();
 			let rdate = $('input[name=rdate]').val();
+			let direct = '1';
 			
 			if(uid == ''){
 				alert('로그인 후 이용해주세요');
@@ -118,7 +121,8 @@
     				"point": point,
     				"delivery": delivery,
     				"total": total,
-    				"rdate": rdate
+    				"rdate": rdate,
+    				"direct": direct
     		};
     		$.ajax({
     			url: '/Kmarket1/product/view.do',
@@ -126,8 +130,8 @@
     			data: jsonData2,
     			dataType: 'json',
     			success: function(data){
-	    				if(data.result2 > 0){
-							location.href = '/Kmarket1/product/order.do?prodNo='+prodNo;
+	    				if(data.result > 0){
+							location.href = '/Kmarket1/product/order.do?uid='+uid;
 						}else{
 							alert('오류발생! 다시 시도해주세요.')
 						}
