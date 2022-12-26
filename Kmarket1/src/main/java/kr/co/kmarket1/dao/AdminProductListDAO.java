@@ -156,5 +156,25 @@ public class AdminProductListDAO extends DBHelper {
 		}
 	}
 	
+	// 선택삭제
+		public int selectdelete(String prodNo) {
+			int result = 0;
+			
+			try {
+				logger.info("선택삭제");
+				conn = getConnection();
+				
+				psmt = conn.prepareStatement(SQL.SELECT_DELETE);
+				psmt.setString(1, prodNo);
+				result = psmt.executeUpdate();
+				
+				close();
+			} catch (Exception e) {
+				logger.error(e.getMessage());
+			}
+			logger.debug("result : " + result);
+			return result;
+		}
+	
 	
 }
