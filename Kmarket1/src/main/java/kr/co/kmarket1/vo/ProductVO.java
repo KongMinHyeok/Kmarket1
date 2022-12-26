@@ -32,7 +32,21 @@ public class ProductVO {
 	// cart때문에 추가함
 	private int count;
 	private int total;
+	private int cartNo;
+	private String uid;
 	
+	public int getCartNo() {
+		return cartNo;
+	}
+	public void setCartNo(int cartNo) {
+		this.cartNo = cartNo;
+	}
+	public String getUid() {
+		return uid;
+	}
+	public void setUid(String uid) {
+		this.uid = uid;
+	}
 	public int getProdNo() {
 		return prodNo;
 	}

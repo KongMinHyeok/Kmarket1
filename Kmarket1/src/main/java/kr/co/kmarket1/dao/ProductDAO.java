@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import kr.co.kmarket1.db.DBHelper;
 
 import kr.co.kmarket1.db.MainSQL;
+import kr.co.kmarket1.db.MemberSQL;
 import kr.co.kmarket1.vo.Cate1VO;
 import kr.co.kmarket1.vo.ProductCartVO;
 import kr.co.kmarket1.vo.ProductOrderItemVO;
@@ -158,265 +159,265 @@ public class ProductDAO extends DBHelper{
 		return products;
 	}
 	// 상품 리스트 불러오기2
-		public List<ProductVO> selectProducts2(String prodCate1, String prodCate2, int start) {
-			List<ProductVO> products = new ArrayList<>();
-			try {
-				logger.info("selectProducts2 start...");
-				conn = getConnection();
-				psmt = conn.prepareStatement(ProductSQL.SELECT_PRODUCTS2);
-				psmt.setString(1, prodCate1);
-				psmt.setString(2, prodCate2);
-				psmt.setInt(3, start);
+	public List<ProductVO> selectProducts2(String prodCate1, String prodCate2, int start) {
+		List<ProductVO> products = new ArrayList<>();
+		try {
+			logger.info("selectProducts2 start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(ProductSQL.SELECT_PRODUCTS2);
+			psmt.setString(1, prodCate1);
+			psmt.setString(2, prodCate2);
+			psmt.setInt(3, start);
+			
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				ProductVO product = new ProductVO();
+				product.setProdNo(rs.getInt(1));
+				product.setProdCate1(rs.getInt(2));
+				product.setProdCate2(rs.getInt(3));
+				product.setProdName(rs.getString(4));
+				product.setDescript(rs.getString(5));
+				product.setCompany(rs.getString(6));
+				product.setSeller(rs.getString(7));
+				product.setPrice(rs.getInt(8));
+				product.setDiscount(rs.getInt(9));
+				product.setPoint(rs.getInt(10));
+				product.setStock(rs.getInt(11));
+				product.setSold(rs.getInt(12));
+				product.setDelivery(rs.getInt(13));
+				product.setHit(rs.getInt(14));
+				product.setScore(rs.getInt(15));
+				product.setReview(rs.getInt(16));
+				product.setThumb1(rs.getString(17));
+				product.setThumb2(rs.getString(18));
+				product.setThumb3(rs.getString(19));
+				product.setDetail(rs.getString(20));
+				product.setStatus(rs.getString(21));
+				product.setDuty(rs.getString(22));
+				product.setReceipt(rs.getString(23));
+				product.setBizType(rs.getString(24));
+				product.setOrigin(rs.getString(25));
+				product.setIp(rs.getString(26));
+				product.setRdate(rs.getString(27));
 				
-				rs = psmt.executeQuery();
-				while(rs.next()) {
-					ProductVO product = new ProductVO();
-					product.setProdNo(rs.getInt(1));
-					product.setProdCate1(rs.getInt(2));
-					product.setProdCate2(rs.getInt(3));
-					product.setProdName(rs.getString(4));
-					product.setDescript(rs.getString(5));
-					product.setCompany(rs.getString(6));
-					product.setSeller(rs.getString(7));
-					product.setPrice(rs.getInt(8));
-					product.setDiscount(rs.getInt(9));
-					product.setPoint(rs.getInt(10));
-					product.setStock(rs.getInt(11));
-					product.setSold(rs.getInt(12));
-					product.setDelivery(rs.getInt(13));
-					product.setHit(rs.getInt(14));
-					product.setScore(rs.getInt(15));
-					product.setReview(rs.getInt(16));
-					product.setThumb1(rs.getString(17));
-					product.setThumb2(rs.getString(18));
-					product.setThumb3(rs.getString(19));
-					product.setDetail(rs.getString(20));
-					product.setStatus(rs.getString(21));
-					product.setDuty(rs.getString(22));
-					product.setReceipt(rs.getString(23));
-					product.setBizType(rs.getString(24));
-					product.setOrigin(rs.getString(25));
-					product.setIp(rs.getString(26));
-					product.setRdate(rs.getString(27));
-					
-					products.add(product);
-				}
-				close();
-			}catch(Exception e) {
-				logger.error(e.getMessage());
+				products.add(product);
 			}
-			logger.debug("products2 : " + products);
-
-			return products;
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
 		}
-		// 상품 리스트 불러오기3
-		public List<ProductVO> selectProducts3(String prodCate1, String prodCate2, int start) {
-			List<ProductVO> products = new ArrayList<>();
-			try {
-				logger.info("selectProducts3 start...");
-				conn = getConnection();
-				psmt = conn.prepareStatement(ProductSQL.SELECT_PRODUCTS3);
-				psmt.setString(1, prodCate1);
-				psmt.setString(2, prodCate2);
-				psmt.setInt(3, start);
+		logger.debug("products2 : " + products);
+
+		return products;
+	}
+	// 상품 리스트 불러오기3
+	public List<ProductVO> selectProducts3(String prodCate1, String prodCate2, int start) {
+		List<ProductVO> products = new ArrayList<>();
+		try {
+			logger.info("selectProducts3 start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(ProductSQL.SELECT_PRODUCTS3);
+			psmt.setString(1, prodCate1);
+			psmt.setString(2, prodCate2);
+			psmt.setInt(3, start);
+			
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				ProductVO product = new ProductVO();
+				product.setProdNo(rs.getInt(1));
+				product.setProdCate1(rs.getInt(2));
+				product.setProdCate2(rs.getInt(3));
+				product.setProdName(rs.getString(4));
+				product.setDescript(rs.getString(5));
+				product.setCompany(rs.getString(6));
+				product.setSeller(rs.getString(7));
+				product.setPrice(rs.getInt(8));
+				product.setDiscount(rs.getInt(9));
+				product.setPoint(rs.getInt(10));
+				product.setStock(rs.getInt(11));
+				product.setSold(rs.getInt(12));
+				product.setDelivery(rs.getInt(13));
+				product.setHit(rs.getInt(14));
+				product.setScore(rs.getInt(15));
+				product.setReview(rs.getInt(16));
+				product.setThumb1(rs.getString(17));
+				product.setThumb2(rs.getString(18));
+				product.setThumb3(rs.getString(19));
+				product.setDetail(rs.getString(20));
+				product.setStatus(rs.getString(21));
+				product.setDuty(rs.getString(22));
+				product.setReceipt(rs.getString(23));
+				product.setBizType(rs.getString(24));
+				product.setOrigin(rs.getString(25));
+				product.setIp(rs.getString(26));
+				product.setRdate(rs.getString(27));
 				
-				rs = psmt.executeQuery();
-				while(rs.next()) {
-					ProductVO product = new ProductVO();
-					product.setProdNo(rs.getInt(1));
-					product.setProdCate1(rs.getInt(2));
-					product.setProdCate2(rs.getInt(3));
-					product.setProdName(rs.getString(4));
-					product.setDescript(rs.getString(5));
-					product.setCompany(rs.getString(6));
-					product.setSeller(rs.getString(7));
-					product.setPrice(rs.getInt(8));
-					product.setDiscount(rs.getInt(9));
-					product.setPoint(rs.getInt(10));
-					product.setStock(rs.getInt(11));
-					product.setSold(rs.getInt(12));
-					product.setDelivery(rs.getInt(13));
-					product.setHit(rs.getInt(14));
-					product.setScore(rs.getInt(15));
-					product.setReview(rs.getInt(16));
-					product.setThumb1(rs.getString(17));
-					product.setThumb2(rs.getString(18));
-					product.setThumb3(rs.getString(19));
-					product.setDetail(rs.getString(20));
-					product.setStatus(rs.getString(21));
-					product.setDuty(rs.getString(22));
-					product.setReceipt(rs.getString(23));
-					product.setBizType(rs.getString(24));
-					product.setOrigin(rs.getString(25));
-					product.setIp(rs.getString(26));
-					product.setRdate(rs.getString(27));
-					
-					products.add(product);
-				}
-				close();
-			}catch(Exception e) {
-				logger.error(e.getMessage());
+				products.add(product);
 			}
-			logger.debug("products3 : " + products);
-
-			return products;
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
 		}
-		// 상품 리스트 불러오기4
-		public List<ProductVO> selectProducts4(String prodCate1, String prodCate2, int start) {
-			List<ProductVO> products = new ArrayList<>();
-			try {
-				logger.info("selectProducts4 start...");
-				conn = getConnection();
-				psmt = conn.prepareStatement(ProductSQL.SELECT_PRODUCTS4);
-				psmt.setString(1, prodCate1);
-				psmt.setString(2, prodCate2);
-				psmt.setInt(3, start);
+		logger.debug("products3 : " + products);
+
+		return products;
+	}
+	// 상품 리스트 불러오기4
+	public List<ProductVO> selectProducts4(String prodCate1, String prodCate2, int start) {
+		List<ProductVO> products = new ArrayList<>();
+		try {
+			logger.info("selectProducts4 start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(ProductSQL.SELECT_PRODUCTS4);
+			psmt.setString(1, prodCate1);
+			psmt.setString(2, prodCate2);
+			psmt.setInt(3, start);
+			
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				ProductVO product = new ProductVO();
+				product.setProdNo(rs.getInt(1));
+				product.setProdCate1(rs.getInt(2));
+				product.setProdCate2(rs.getInt(3));
+				product.setProdName(rs.getString(4));
+				product.setDescript(rs.getString(5));
+				product.setCompany(rs.getString(6));
+				product.setSeller(rs.getString(7));
+				product.setPrice(rs.getInt(8));
+				product.setDiscount(rs.getInt(9));
+				product.setPoint(rs.getInt(10));
+				product.setStock(rs.getInt(11));
+				product.setSold(rs.getInt(12));
+				product.setDelivery(rs.getInt(13));
+				product.setHit(rs.getInt(14));
+				product.setScore(rs.getInt(15));
+				product.setReview(rs.getInt(16));
+				product.setThumb1(rs.getString(17));
+				product.setThumb2(rs.getString(18));
+				product.setThumb3(rs.getString(19));
+				product.setDetail(rs.getString(20));
+				product.setStatus(rs.getString(21));
+				product.setDuty(rs.getString(22));
+				product.setReceipt(rs.getString(23));
+				product.setBizType(rs.getString(24));
+				product.setOrigin(rs.getString(25));
+				product.setIp(rs.getString(26));
+				product.setRdate(rs.getString(27));
 				
-				rs = psmt.executeQuery();
-				while(rs.next()) {
-					ProductVO product = new ProductVO();
-					product.setProdNo(rs.getInt(1));
-					product.setProdCate1(rs.getInt(2));
-					product.setProdCate2(rs.getInt(3));
-					product.setProdName(rs.getString(4));
-					product.setDescript(rs.getString(5));
-					product.setCompany(rs.getString(6));
-					product.setSeller(rs.getString(7));
-					product.setPrice(rs.getInt(8));
-					product.setDiscount(rs.getInt(9));
-					product.setPoint(rs.getInt(10));
-					product.setStock(rs.getInt(11));
-					product.setSold(rs.getInt(12));
-					product.setDelivery(rs.getInt(13));
-					product.setHit(rs.getInt(14));
-					product.setScore(rs.getInt(15));
-					product.setReview(rs.getInt(16));
-					product.setThumb1(rs.getString(17));
-					product.setThumb2(rs.getString(18));
-					product.setThumb3(rs.getString(19));
-					product.setDetail(rs.getString(20));
-					product.setStatus(rs.getString(21));
-					product.setDuty(rs.getString(22));
-					product.setReceipt(rs.getString(23));
-					product.setBizType(rs.getString(24));
-					product.setOrigin(rs.getString(25));
-					product.setIp(rs.getString(26));
-					product.setRdate(rs.getString(27));
-					
-					products.add(product);
-				}
-				close();
-			}catch(Exception e) {
-				logger.error(e.getMessage());
+				products.add(product);
 			}
-			logger.debug("products4 : " + products);
-
-			return products;
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
 		}
-		// 상품 리스트 불러오기5
-		public List<ProductVO> selectProducts5(String prodCate1, String prodCate2, int start) {
-			List<ProductVO> products = new ArrayList<>();
-			try {
-				logger.info("selectProducts5 start...");
-				conn = getConnection();
-				psmt = conn.prepareStatement(ProductSQL.SELECT_PRODUCTS5);
-				psmt.setString(1, prodCate1);
-				psmt.setString(2, prodCate2);
-				psmt.setInt(3, start);
+		logger.debug("products4 : " + products);
+
+		return products;
+	}
+	// 상품 리스트 불러오기5
+	public List<ProductVO> selectProducts5(String prodCate1, String prodCate2, int start) {
+		List<ProductVO> products = new ArrayList<>();
+		try {
+			logger.info("selectProducts5 start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(ProductSQL.SELECT_PRODUCTS5);
+			psmt.setString(1, prodCate1);
+			psmt.setString(2, prodCate2);
+			psmt.setInt(3, start);
+			
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				ProductVO product = new ProductVO();
+				product.setProdNo(rs.getInt(1));
+				product.setProdCate1(rs.getInt(2));
+				product.setProdCate2(rs.getInt(3));
+				product.setProdName(rs.getString(4));
+				product.setDescript(rs.getString(5));
+				product.setCompany(rs.getString(6));
+				product.setSeller(rs.getString(7));
+				product.setPrice(rs.getInt(8));
+				product.setDiscount(rs.getInt(9));
+				product.setPoint(rs.getInt(10));
+				product.setStock(rs.getInt(11));
+				product.setSold(rs.getInt(12));
+				product.setDelivery(rs.getInt(13));
+				product.setHit(rs.getInt(14));
+				product.setScore(rs.getInt(15));
+				product.setReview(rs.getInt(16));
+				product.setThumb1(rs.getString(17));
+				product.setThumb2(rs.getString(18));
+				product.setThumb3(rs.getString(19));
+				product.setDetail(rs.getString(20));
+				product.setStatus(rs.getString(21));
+				product.setDuty(rs.getString(22));
+				product.setReceipt(rs.getString(23));
+				product.setBizType(rs.getString(24));
+				product.setOrigin(rs.getString(25));
+				product.setIp(rs.getString(26));
+				product.setRdate(rs.getString(27));
 				
-				rs = psmt.executeQuery();
-				while(rs.next()) {
-					ProductVO product = new ProductVO();
-					product.setProdNo(rs.getInt(1));
-					product.setProdCate1(rs.getInt(2));
-					product.setProdCate2(rs.getInt(3));
-					product.setProdName(rs.getString(4));
-					product.setDescript(rs.getString(5));
-					product.setCompany(rs.getString(6));
-					product.setSeller(rs.getString(7));
-					product.setPrice(rs.getInt(8));
-					product.setDiscount(rs.getInt(9));
-					product.setPoint(rs.getInt(10));
-					product.setStock(rs.getInt(11));
-					product.setSold(rs.getInt(12));
-					product.setDelivery(rs.getInt(13));
-					product.setHit(rs.getInt(14));
-					product.setScore(rs.getInt(15));
-					product.setReview(rs.getInt(16));
-					product.setThumb1(rs.getString(17));
-					product.setThumb2(rs.getString(18));
-					product.setThumb3(rs.getString(19));
-					product.setDetail(rs.getString(20));
-					product.setStatus(rs.getString(21));
-					product.setDuty(rs.getString(22));
-					product.setReceipt(rs.getString(23));
-					product.setBizType(rs.getString(24));
-					product.setOrigin(rs.getString(25));
-					product.setIp(rs.getString(26));
-					product.setRdate(rs.getString(27));
-					
-					products.add(product);
-				}
-				close();
-			}catch(Exception e) {
-				logger.error(e.getMessage());
+				products.add(product);
 			}
-			logger.debug("products5 : " + products);
-
-			return products;
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
 		}
-		// 상품 리스트 불러오기6
-		public List<ProductVO> selectProducts6(String prodCate1, String prodCate2, int start) {
-			List<ProductVO> products = new ArrayList<>();
-			try {
-				logger.info("selectProducts6 start...");
-				conn = getConnection();
-				psmt = conn.prepareStatement(ProductSQL.SELECT_PRODUCTS6);
-				psmt.setString(1, prodCate1);
-				psmt.setString(2, prodCate2);
-				psmt.setInt(3, start);
+		logger.debug("products5 : " + products);
+
+		return products;
+	}
+	// 상품 리스트 불러오기6
+	public List<ProductVO> selectProducts6(String prodCate1, String prodCate2, int start) {
+		List<ProductVO> products = new ArrayList<>();
+		try {
+			logger.info("selectProducts6 start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(ProductSQL.SELECT_PRODUCTS6);
+			psmt.setString(1, prodCate1);
+			psmt.setString(2, prodCate2);
+			psmt.setInt(3, start);
+			
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				ProductVO product = new ProductVO();
+				product.setProdNo(rs.getInt(1));
+				product.setProdCate1(rs.getInt(2));
+				product.setProdCate2(rs.getInt(3));
+				product.setProdName(rs.getString(4));
+				product.setDescript(rs.getString(5));
+				product.setCompany(rs.getString(6));
+				product.setSeller(rs.getString(7));
+				product.setPrice(rs.getInt(8));
+				product.setDiscount(rs.getInt(9));
+				product.setPoint(rs.getInt(10));
+				product.setStock(rs.getInt(11));
+				product.setSold(rs.getInt(12));
+				product.setDelivery(rs.getInt(13));
+				product.setHit(rs.getInt(14));
+				product.setScore(rs.getInt(15));
+				product.setReview(rs.getInt(16));
+				product.setThumb1(rs.getString(17));
+				product.setThumb2(rs.getString(18));
+				product.setThumb3(rs.getString(19));
+				product.setDetail(rs.getString(20));
+				product.setStatus(rs.getString(21));
+				product.setDuty(rs.getString(22));
+				product.setReceipt(rs.getString(23));
+				product.setBizType(rs.getString(24));
+				product.setOrigin(rs.getString(25));
+				product.setIp(rs.getString(26));
+				product.setRdate(rs.getString(27));
 				
-				rs = psmt.executeQuery();
-				while(rs.next()) {
-					ProductVO product = new ProductVO();
-					product.setProdNo(rs.getInt(1));
-					product.setProdCate1(rs.getInt(2));
-					product.setProdCate2(rs.getInt(3));
-					product.setProdName(rs.getString(4));
-					product.setDescript(rs.getString(5));
-					product.setCompany(rs.getString(6));
-					product.setSeller(rs.getString(7));
-					product.setPrice(rs.getInt(8));
-					product.setDiscount(rs.getInt(9));
-					product.setPoint(rs.getInt(10));
-					product.setStock(rs.getInt(11));
-					product.setSold(rs.getInt(12));
-					product.setDelivery(rs.getInt(13));
-					product.setHit(rs.getInt(14));
-					product.setScore(rs.getInt(15));
-					product.setReview(rs.getInt(16));
-					product.setThumb1(rs.getString(17));
-					product.setThumb2(rs.getString(18));
-					product.setThumb3(rs.getString(19));
-					product.setDetail(rs.getString(20));
-					product.setStatus(rs.getString(21));
-					product.setDuty(rs.getString(22));
-					product.setReceipt(rs.getString(23));
-					product.setBizType(rs.getString(24));
-					product.setOrigin(rs.getString(25));
-					product.setIp(rs.getString(26));
-					product.setRdate(rs.getString(27));
-					
-					products.add(product);
-				}
-				close();
-			}catch(Exception e) {
-				logger.error(e.getMessage());
+				products.add(product);
 			}
-			logger.debug("products6 : " + products);
-
-			return products;
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
 		}
+		logger.debug("products6 : " + products);
+
+		return products;
+	}
 	public int selectCountTotal(String prodCate1, String prodCate2) {
 		
 		int total = 0;
@@ -487,7 +488,7 @@ public class ProductDAO extends DBHelper{
 			psmt.setInt(7, cart.getDelivery());
 			psmt.setInt(8, cart.getTotal());
 			psmt.setString(9, cart.getRdate());
-			psmt.setInt(10, cart.getDirect());
+			/*psmt.setInt(10, cart.getDirect());*/
 			
 			result = psmt.executeUpdate();
 			close();
@@ -497,33 +498,6 @@ public class ProductDAO extends DBHelper{
 		}
 		return result;
 	}
-	/////////// 여기부터 하자!!!!!!!!!!!!!!!!!!!!!
-	/*
-	public int insertProductCart2(ProductCartVO cart) {
-		int result2 = 0;
-		try {
-			logger.info("insertProductCart2 start...");
-			conn = getConnection();
-			psmt = conn.prepareStatement(ProductSQL.INSERT_PRODUCT_CART);
-			psmt.setString(1, cart.getUid());
-			psmt.setInt(2, cart.getProdNo());
-			psmt.setInt(3, cart.getCount());
-			psmt.setInt(4, cart.getPrice());
-			psmt.setInt(5, cart.getDiscount());
-			psmt.setInt(6, cart.getPoint());
-			psmt.setInt(7, cart.getDelivery());
-			psmt.setInt(8, cart.getTotal());
-			psmt.setString(9, cart.getRdate());
-			psmt.setInt(10, cart.getDirect());
-			
-			result2 = psmt.executeUpdate();
-			close();
-				
-		}catch(Exception e) {
-			logger.error(e.getMessage());
-		}
-		return result2;
-	}*/
 	public ProductCartVO selectProductOrders(String cartNo) {
 		ProductCartVO cart = null;
 		try {
@@ -545,10 +519,9 @@ public class ProductDAO extends DBHelper{
 				cart.setDelivery(rs.getInt(8));
 				cart.setTotal(rs.getInt(9));
 				cart.setRdate(rs.getString(10));
-				cart.setDirect(rs.getInt(11));
-				cart.setProdName(rs.getString(12));
-				cart.setDescript(rs.getString(13));
-				cart.setThumb3(rs.getString(14));
+				cart.setProdName(rs.getString(11));
+				cart.setDescript(rs.getString(12));
+				cart.setThumb3(rs.getString(13));
 				
 			}
 			close();	
@@ -582,15 +555,15 @@ public class ProductDAO extends DBHelper{
 
 		return total;
 	}
+	
 	// cart 목록 불러오기
-	public List<ProductCartVO> selectProductCarts(String uid, String cartNo) {
+	public List<ProductCartVO> selectProductCarts(String uid) {
 		List<ProductCartVO> carts = new ArrayList<>();
 		try {
 			logger.info("selectProductCarts start...");
 			conn = getConnection();
 			psmt = conn.prepareStatement(ProductSQL.SELECT_PRODUCT_CARTS);
 			psmt.setString(1, uid);
-			psmt.setString(2, cartNo);
 			
 			rs = psmt.executeQuery();
 			
@@ -606,10 +579,9 @@ public class ProductDAO extends DBHelper{
 				cart.setDelivery(rs.getInt(8));
 				cart.setTotal(rs.getInt(9));
 				cart.setRdate(rs.getString(10));
-				cart.setDirect(rs.getInt(11));
-				cart.setProdName(rs.getString(12));
-				cart.setDescript(rs.getString(13));
-				cart.setThumb3(rs.getString(14));
+				cart.setProdName(rs.getString(11));
+				cart.setDescript(rs.getString(12));
+				cart.setThumb3(rs.getString(13));
 				carts.add(cart);
 			}
 			close();
@@ -620,68 +592,6 @@ public class ProductDAO extends DBHelper{
 		logger.debug("carts : " + carts);
 		return carts;
 	}
-	// cart 목록 불러오기
-		public List<ProductCartVO> selectProductCarts2(String uid) {
-			List<ProductCartVO> carts = new ArrayList<>();
-			try {
-				logger.info("selectProductCarts2 start...");
-				conn = getConnection();
-				psmt = conn.prepareStatement(ProductSQL.SELECT_PRODUCT_CARTS2);
-				psmt.setString(1, uid);
-				
-				rs = psmt.executeQuery();
-				
-				while(rs.next()) {
-					ProductCartVO cart = new ProductCartVO();
-					cart.setCartNo(rs.getInt(1));
-					cart.setUid(rs.getString(2));
-					cart.setProdNo(rs.getInt(3));
-					cart.setCount(rs.getInt(4));
-					cart.setPrice(rs.getInt(5));
-					cart.setDiscount(rs.getInt(6));
-					cart.setPoint(rs.getInt(7));
-					cart.setDelivery(rs.getInt(8));
-					cart.setTotal(rs.getInt(9));
-					cart.setRdate(rs.getString(10));
-					cart.setDirect(rs.getInt(11));
-					cart.setProdName(rs.getString(12));
-					cart.setDescript(rs.getString(13));
-					cart.setThumb3(rs.getString(14));
-					carts.add(cart);
-				}
-				close();
-				
-			}catch(Exception e) {
-				logger.error(e.getMessage());
-			}
-			logger.debug("carts : " + carts);
-			return carts;
-		}
-	// 다이렉트로 바로 구매하는것이 있으면 1반환
-	public int findDirect(String uid) {
-		
-		int directNum = 0;
-		
-		try {
-			logger.info("findDirect Start..");
-			conn = getConnection();
-			psmt = conn.prepareStatement(ProductSQL.FIND_DIRECT);
-			psmt.setString(1, uid);
-			rs = psmt.executeQuery();
-			
-			while(rs.next()) {
-				directNum = rs.getInt(1);
-			}
-			
-			close();
-			
-		}catch(Exception e) {
-			logger.error(e.getMessage());
-		}
-		logger.debug("directNum : " + directNum);
-		return directNum;
-	}
-	
 	public int deleteProductCart(String cartNo) {
 		int result = 0;
 		try {
@@ -698,61 +608,121 @@ public class ProductDAO extends DBHelper{
 		logger.debug("result : " + result);
 		return result;
 	}
-	// 페이지 벗어났을때 바로구매로 생긴 장바구니 삭제
-	public int deleteProductDirect() {
-		int result = 0;
+	// 바로구매 햇을때 cart 목록 불러오기
+	public List<ProductVO> selectProductDirectOrder(String prodNo, String count) {
+		List<ProductVO> carts = new ArrayList<>();
 		try {
-			logger.info("deleteProductCart start...");
+			logger.info("selectProductDirectOrder start...");
 			conn = getConnection();
-			psmt = conn.prepareStatement(ProductSQL.DELETE_PRODUCT_DIRECT);
+			psmt = conn.prepareStatement(ProductSQL.SELECT_PRODUCT_DIRECT_ORDER);
+			psmt.setString(1, prodNo);
+			psmt.setString(2, count);
 			
-			result = psmt.executeUpdate();
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				ProductVO product = new ProductVO();
+				product.setCartNo(rs.getInt(1));
+				product.setUid(rs.getString(2));
+				product.setProdNo(rs.getInt(3));
+				product.setCount(rs.getInt(4));
+				product.setPrice(rs.getInt(5));
+				product.setDiscount(rs.getInt(6));
+				product.setPoint(rs.getInt(7));
+				product.setDelivery(rs.getInt(8));
+				product.setTotal(rs.getInt(9));
+				product.setRdate(rs.getString(10));
+				product.setProdName(rs.getString(11));
+				product.setDescript(rs.getString(12));
+				product.setThumb3(rs.getString(13));
+				carts.add(product);
+			}
 			close();
-		} catch (Exception e) {
+			
+		}catch(Exception e) {
 			logger.error(e.getMessage());
 		}
-		logger.debug("result : " + result);
-		return result;
+		logger.debug("carts : " + carts);
+		return carts;
 	}
-	// 바로구매 햇을때 cart 목록 불러오기
-		public List<ProductCartVO> selectProductCart(String uid) {
-			List<ProductCartVO> carts = new ArrayList<>();
-			try {
-				logger.info("selectProductCart start...");
-				conn = getConnection();
-				psmt = conn.prepareStatement(ProductSQL.SELECT_PRODUCT_CART);
-				psmt.setString(1, uid);
-				
-				rs = psmt.executeQuery();
-				
-				while(rs.next()) {
-					ProductCartVO cart = new ProductCartVO();
-					cart.setCartNo(rs.getInt(1));
-					cart.setUid(rs.getString(2));
-					cart.setProdNo(rs.getInt(3));
-					cart.setCount(rs.getInt(4));
-					cart.setPrice(rs.getInt(5));
-					cart.setDiscount(rs.getInt(6));
-					cart.setPoint(rs.getInt(7));
-					cart.setDelivery(rs.getInt(8));
-					cart.setTotal(rs.getInt(9));
-					cart.setRdate(rs.getString(10));
-					cart.setDirect(rs.getInt(11));
-					cart.setProdName(rs.getString(12));
-					cart.setDescript(rs.getString(13));
-					cart.setThumb3(rs.getString(14));
-					carts.add(cart);
-				}
-				close();
-				
-			}catch(Exception e) {
-				logger.error(e.getMessage());
+	// select order info by ordNo
+	public ProductOrderVO selectOrderByOrdNo(int ordNo) {
+		ProductOrderVO order = null;
+		try {
+			logger.info("selectOrderByOrdNo called");
+			
+			conn = getConnection();
+			psmt = conn.prepareStatement(ProductSQL.SELECT_ORDER_BY_ORDNO);
+			psmt.setInt(1, ordNo);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				order = new ProductOrderVO();
+				order.setOrdNo(rs.getInt(1));
+				order.setOrdUid(rs.getString(2));
+				order.setOrdCount(rs.getInt(3));
+				order.setOrdPrice(rs.getInt(4));
+				order.setOrdDiscount(rs.getInt(5));
+				order.setOrdDelivery(rs.getInt(6));
+				order.setSavePoint(rs.getInt(7));
+				order.setUsedPoint(rs.getInt(8));
+				order.setOrdTotPrice(rs.getInt(9));
+				order.setRecipname(rs.getString(10));
+				order.setRecipHp(rs.getString(11));
+				order.setRecipZip(rs.getString(12));
+				order.setRecipAddr1(rs.getString(13));
+				order.setRecipAddr2(rs.getString(14));
+				order.setOrdPayment(rs.getInt(15));
+				order.setOrdComplete(rs.getInt(16));
+				order.setOrdDate(rs.getString(17));
+				order.setName(rs.getString(18));
+				order.setHp(rs.getString(19));
 			}
-			logger.debug("carts : " + carts);
-			return carts;
+			close();
+			
+		}catch(Exception e) {
+			logger.error(e.getMessage());
 		}
-		//
+		logger.debug("order : " + order);
+		return order;
+	}
 	
+	// 주문 번호로 주문한 물품들 불러오기
+	public List<ProductVO> selectItemsByOrdNo(int ordNo){
+		List<ProductVO> items = new ArrayList<>();
+		try {
+			logger.info("selectItemsByOrdNo called");
+			
+			conn = getConnection();
+			psmt = conn.prepareStatement(ProductSQL.SELECT_ITEMS_BY_ORDNO);
+			psmt.setInt(1, ordNo);
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				ProductVO item = new ProductVO();
+				item.setThumb1(rs.getString(1).substring(37)); 
+				item.setProdCate1(rs.getInt(2));
+				item.setProdCate2(rs.getInt(3));
+				item.setProdName(rs.getString(4));
+				item.setDescript(rs.getString(5));
+				item.setProdNo(rs.getInt(7));
+				item.setCount(rs.getInt(8));
+				item.setPrice(rs.getInt(9));
+				item.setDiscount(rs.getInt(10));
+				item.setPoint(rs.getInt(11));
+				item.setDelivery(rs.getInt(12));
+				item.setTotal(rs.getInt(13));
+				items.add(item);
+			}
+			close();
+			
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("items : " + items);
+		return items;
+	}
+
 
 	
 }

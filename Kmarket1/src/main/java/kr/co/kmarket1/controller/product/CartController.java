@@ -39,7 +39,7 @@ public class CartController extends HttpServlet{
 		ProductDAO dao = ProductDAO.getInstance();
 		List<ProductCartVO> carts = null;
 		
-		carts = dao.selectProductCarts2(uid);
+		carts = dao.selectProductCarts(uid);
 		req.setAttribute("carts", carts);
 		
 		

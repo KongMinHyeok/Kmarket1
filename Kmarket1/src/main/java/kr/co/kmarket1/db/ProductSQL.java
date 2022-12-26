@@ -31,9 +31,9 @@ public class ProductSQL {
 	public static final String SELECT_COUNT_TOTAL = "SELECT COUNT(`prodNo`) FROM `km_product` "
 													+ "where `prodCate1`=? AND `prodCate2`=?";
 	
-	// direct: 장바구니에 들어가는 거는 0, 바로 구매는 1
 	public static final String INSERT_PRODUCT_CART = "INSERT INTO `km_product_cart` SET "
-													+ "`uid`=?, `prodNo`=?, `count`=?, `price`=?, `discount`=?, `point`=?, `delivery`=?, `total`=?, `rdate`=?, `direct`=? ";
+													+ "`uid`=?, `prodNo`=?, `count`=?, `price`=?, `discount`=?, `point`=?, `delivery`=?, `total`=?, `rdate`=?";
+													//+ ", `direct`=? ";
 	
 	public static final String SELECT_REVIEWS = "SELECT a.*, b.`prodName` FROM `km_product_review` AS a "
 												+"JOIN `km_product` as b ON a.prodNo = b.prodNo "
@@ -42,24 +42,27 @@ public class ProductSQL {
 	// 리뷰 총갯수
 	public static final String SELECT_REVIEW_COUNT_TOTAL = "SELECT COUNT(`revNo`) FROM `km_product_review` "
 												+ "where `prodNo`=?";
-	// 장바구니 불렁기
-	public static final String SELECT_PRODUCT_CARTS = "SELECT a.*, b.`prodName`,`descript`,`thumb1` FROM `km_product_cart` AS a "
-													+ "JOIN `km_product` AS b ON a.prodNo = b.prodNo WHERE `uid`=? AND `direct`=0 AND `cartNo`=?";
 	
 	// view에서 장바구니 불러오기
-	public static final String SELECT_PRODUCT_CARTS2 = "SELECT a.*, b.`prodName`,`descript`,`thumb1` FROM `km_product_cart` AS a "
-														+ "JOIN `km_product` AS b ON a.prodNo = b.prodNo WHERE `uid`=? AND `direct`=0";
+	public static final String SELECT_PRODUCT_CARTS = "SELECT a.*, b.`prodName`,`descript`,`thumb1` FROM `km_product_cart` AS a "
+														+ "JOIN `km_product` AS b ON a.prodNo = b.prodNo WHERE `uid`=?";
 
 	// 장바구니 선택 삭제
 	public static final String DELETE_PRODUCT_CART = "DELETE FROM `km_product_cart` WHERE `cartNo` = ? ";
-	// order페이지 벗어나면 삭제
-	public static final String DELETE_PRODUCT_DIRECT = "DELETE FROM `km_product_cart` WHERE `direct` = 1 ";
 	/*  ----------------------------- 이거 어캐써야하지?------------------------------*/
-	public static final String SELECT_PRODUCT_ORDERS = "SELECT a.*, b.proName, b.descript, b.thumb3FROM `km_product_cart` AS a "
-															+ "JOIN `km_product` AS b ON a.proNo = b.proNo WHERE cartNo = ? ";
+	public static final String SELECT_PRODUCT_ORDERS = "SELECT a.*, b.prodName, b.descript, b.thumb1 FROM `km_product_cart` AS a "
+															+ "JOIN `km_product` AS b ON a.prodNo = b.prodNo WHERE cartNo = ? ";
 	// 상품 상세 정보에서 바로 구매창
-	public static final String SELECT_PRODUCT_CART = "SELECT a.*, b.`prodName`,`descript`,`thumb1` FROM `km_product_cart` AS a "
-													+ "JOIN `km_product` AS b ON a.prodNo = b.prodNo WHERE `uid`=? AND `direct`=1";
-	public static final String FIND_DIRECT = "SELECT COUNT('cartNo') FROM `km_product_cart` WHERE `uid` = ? AND `direct`=1";
+	public static final String SELECT_PRODUCT_DIRECT_ORDER = "SELECT a.*, b.prodName, b.descript, b.thumb1 FROM `km_product_cart` AS a "
+															+ "JOIN `km_product` AS b ON a.prodNo = b.prodNo WHERE a.prodNo=? AND a.count=?";
+	// complete
+	public static final String SELECT_ORDER_BY_ORDNO = "select a.*, b.name, b.hp from `km_product_order` as a "
+													+ "join `km_member` as b "
+													+ "on a.ordUid = b.uid "
+													+ "where `ordNo`=?";
+	public static final String SELECT_ITEMS_BY_ORDNO = "select a.thumb1, a.prodCate1, a.prodCate2, a.prodName, a.descript, b.* from `km_product` as a "
+													+ "join `km_product_order_item` as b "
+													+ "on a.prodNo = b.prodNo "
+													+ "where b.ordNo = ?";
 }
 
