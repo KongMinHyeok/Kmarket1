@@ -71,8 +71,11 @@ public enum CsService {
 		return dao.selectArticleNotice(no);
 	}
 	
-	public void updateArticleHit(String no) {
-		dao.updateArticleHit(no);
+	public void updateNoticeHit(String no) {
+		dao.updateNoticeHit(no);
+	}
+	public void updateFaqHit(String no) {
+		dao.updateFaqHit(no);
 	}
 	
 	public CsArticleVO selectArticleQna(String no) {
@@ -90,7 +93,18 @@ public enum CsService {
 	public void updateNotice(String no, String cate, String title, String content) {
 		dao.updateNotice(no, cate, title, content);
 	}
+	
+	public void insertArticleFaq(CsArticleVO article) {
+		dao.insertArticleFaq(article);
+	}
+	
+	public void updateFaq(String no, String cate, String cate2, String title, String content) {
+		dao.updateFaq(no, cate, cate2, title, content);
+	}
+	
 	public void deleteFaq(String no) {
 		dao.deleteFaq(no);
 	}
+	
+	
 }

@@ -35,7 +35,7 @@ public class CsDAO extends DBHelper{
 			while(rs.next()) {
 				CsArticleVO notice = new CsArticleVO();
 				notice.setNo(rs.getInt(1));
-				notice.setComment(rs.getInt(2));
+				notice.setComment(rs.getString(2));
 				notice.setCate(rs.getString(3));
 				notice.setTitle(rs.getString(4));
 				notice.setContent(rs.getString(5));
@@ -68,7 +68,7 @@ public class CsDAO extends DBHelper{
 			while(rs.next()) {
 				CsArticleVO qna = new CsArticleVO();
 				qna.setNo(rs.getInt(1));
-				qna.setComment(rs.getInt(2));
+				qna.setComment(rs.getString(2));
 				qna.setCate(rs.getString(3));
 				qna.setCate2(rs.getString(4));
 				qna.setTitle(rs.getString(5));
@@ -226,11 +226,11 @@ public class CsDAO extends DBHelper{
 		return notice;
 	}
 	
-	public void updateArticleHit(String no) {
+	public void updateNoticeHit(String no) {
 		try {
-			logger.info("updateArticleHit start...");
+			logger.info("updateNoticeHit start...");
 			conn = getConnection();
-			psmt = conn.prepareStatement(CsSQL.UPDATE_ARTICLE_HIT);
+			psmt = conn.prepareStatement(CsSQL.UPDATE_NOTICE_HIT);
 			psmt.setString(1, no);
 			psmt.executeUpdate();
 			close();
@@ -253,7 +253,7 @@ public class CsDAO extends DBHelper{
 			while(rs.next()) {
 				CsArticleVO faq = new CsArticleVO();
 				faq.setNo(rs.getInt(1));
-				faq.setComment(rs.getInt(2));
+				faq.setComment(rs.getString(2));
 				faq.setCate(rs.getString(3));
 				faq.setCate2(rs.getString(4));
 				faq.setTitle(rs.getString(5));
@@ -366,10 +366,11 @@ public List<CsArticleVO> selectFaqCate(){
 			
 			if(rs.next()) {
 				article = new CsArticleVO();
-				article.setCate(rs.getString(1));
-				article.setCate2(rs.getString(2));
-				article.setTitle(rs.getString(3));
-				article.setContent(rs.getString(4));
+				article.setNo(rs.getInt(1));
+				article.setCate(rs.getString(2));
+				article.setCate2(rs.getString(3));
+				article.setTitle(rs.getString(4));
+				article.setContent(rs.getString(5));
 			}
 			close();
 			
@@ -398,7 +399,7 @@ public List<CsArticleVO> selectQnasGroup(int start) {
 				qna.setTitle(rs.getString(3));
 				qna.setUid(rs.getString(4));
 				qna.setRdate(rs.getString(5).substring(2,10));
-				qna.setCate(rs.getString(6));	
+				qna.setCate(rs.getString(6));
 				
 				qnas.add(qna);
 			}
@@ -508,6 +509,7 @@ public List<CsArticleVO> selectQnasGroup(int start) {
 				qna.setRdate(rs.getString(4).substring(2, 10));
 				qna.setContent(rs.getString(5));
 				qna.setCate(rs.getString(6));
+				qna.setComment(rs.getString(7));
 
 			}
 			close();
@@ -610,6 +612,59 @@ public List<CsArticleVO> selectQnasGroup(int start) {
 		logger.debug("notice update : " + no);
 	}
 	
+	
+	public void insertArticleFaq(CsArticleVO article) {
+		
+		try {
+			logger.info("insertArticleFaq start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(CsSQL.INSERT_ARTICLE_FAQ);
+			psmt.setString(1, article.getUid());
+			psmt.setString(2, article.getCate());
+			psmt.setString(3, article.getCate2());
+			psmt.setString(4, article.getTitle());
+			psmt.setString(5, article.getContent());
+			psmt.setString(6, article.getRegip());
+			psmt.executeUpdate();
+			close();
+			
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("insertArticleFaq : " + article);
+	}
+	
+	public void updateFaq(String no, String cate, String cate2, String title, String content) {
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(CsSQL.UPDATE_FAQ);	
+			psmt.setString(1, cate);
+			psmt.setString(2, cate2);
+			psmt.setString(3, title);
+			psmt.setString(4, content);
+			psmt.setString(5, no);
+			psmt.executeUpdate();
+			close();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("Faq update : " + no);
+	}
+	
+	public void updateFaqHit(String no) {
+		try {
+			logger.info("updateFaqHit start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(CsSQL.UPDATE_FAQ_HIT);
+			psmt.setString(1, no);
+			psmt.executeUpdate();
+			close();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
+	
 	public void deleteFaq(String no) {
 		
 		try {
@@ -618,6 +673,7 @@ public List<CsArticleVO> selectQnasGroup(int start) {
 			psmt.setString(1, no);
 			psmt.executeUpdate();
 			close();
+			
 		}catch (Exception e) {
 			logger.error(e.getMessage());
 		}

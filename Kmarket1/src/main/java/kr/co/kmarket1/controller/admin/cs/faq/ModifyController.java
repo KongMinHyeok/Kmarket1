@@ -25,11 +25,16 @@ public class ModifyController extends HttpServlet{
 		
 
 		String no = req.getParameter("no");
+		String cate = req.getParameter("cate");
+		String cate2 = req.getParameter("cate2");
 		
-		CsArticleVO notice = service.selectArticleNotice(no);
+		CsArticleVO faq = service.selectFaqArticle(no);
 		
-		req.setAttribute("notice", notice);
-		
+		req.setAttribute("faq", faq);
+		req.setAttribute("no", no);
+		req.setAttribute("cate", cate);
+		req.setAttribute("cate2", cate2);
+			
 		RequestDispatcher dispathcer = req.getRequestDispatcher("/admin/cs/faq/modify.jsp");
 		dispathcer.forward(req, resp);
 	}
@@ -38,11 +43,12 @@ public class ModifyController extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	
 		String cate = req.getParameter("cate");
+		String cate2 = req.getParameter("cate2");
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
 		String no = req.getParameter("no");
 		
-		service.updateNotice(no, cate, title, content);
+		service.updateFaq(no, cate, cate2, title, content);
 		
 		resp.sendRedirect("/Kmarket1/admin/cs/faq/view.do?no=" + no);
 	}

@@ -21,7 +21,8 @@ public class CsSQL {
 													+"limit ?, 10";
 	
 	public static final String SELECT_ARTICLE_NOTICE = "select `no`, `title`,`uid`, `rdate`, `content`, `cate` from `km_cs_notice` where `no`=?";
-	public static final String UPDATE_ARTICLE_HIT = "update `km_cs_notice` set `hit`=`hit`+1 where `no`=?";
+	public static final String UPDATE_NOTICE_HIT = "update `km_cs_notice` set `hit`=`hit`+1 where `no`=?";
+	
 	
 	public static final String INSERT_ARTICLE_NOTICE = "insert into `km_cs_notice` set"
 													+ "`uid`=?, "
@@ -45,10 +46,28 @@ public class CsSQL {
 	public static final String SELECT_FAQ_CATE = "select DISTINCT `cate2` from `km_cs_faq` where `cate`=?";
 	public static final String SELECT_FAQ_CATE1 = "select DISTINCT `cate` from `km_cs_faq`";
 	
-	public static final String SELECT_FAQ_ARTICLE = "select `cate`, `cate2`, `title`, `content` from `km_cs_faq` "
+	public static final String SELECT_FAQ_ARTICLE = "select `no`, `cate`, `cate2`, `title`, `content` from `km_cs_faq` "
 													+"where `no`=?";
 	
+	public static final String INSERT_ARTICLE_FAQ = "insert into `km_cs_faq` set"
+													+ "`uid`=?, "
+													+ "`cate`=?, "
+													+ "`cate2`=?, "
+													+ "`title`=?, "
+													+ "`content`=?, "
+													+ "`regip`=?, "
+													+ "`rdate`=now()";
+	
+	public static final String UPDATE_FAQ = "update `km_cs_faq` set "
+												+"`cate`=?, "
+												+"`cate2`=?, "
+												+"`title`=?, "
+												+"`content`=?, "
+												+"`rdate`=now() "
+												+"where `no`= ?";
+	
 	public static final String DELETE_FAQ = "delete from `km_cs_faq` where `no`=?";
+	public static final String UPDATE_FAQ_HIT = "update `km_cs_faq` set `hit`=`hit`+1 where `no`=?";
 	
 	public static final String SELECT_QNAS = "select * from `km_cs_qna` "
 											+"order by `no` DESC "
@@ -66,7 +85,7 @@ public class CsSQL {
 													+"order by `no` DESC "
 													+"limit ?, 10";
 	
-	public static final String SELECT_ARTICLE_QNA = "select `cate2`, `title`,`uid`, `rdate`, `content`, `cate` from `km_cs_qna` where `no`=?";
+	public static final String SELECT_ARTICLE_QNA = "select `cate2`, `title`,`uid`, `rdate`, `content`, `cate`, `comment` from `km_cs_qna` where `no`=?";
 	public static final String SELECT_CATE_QNA = "select `cate` from km_cs_qna";
 	
 	public static final String INSERT_ARTICLE_QNA = "insert into `km_cs_qna` set "

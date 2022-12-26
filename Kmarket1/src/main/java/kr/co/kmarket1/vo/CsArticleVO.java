@@ -2,7 +2,7 @@ package kr.co.kmarket1.vo;
 
 public class CsArticleVO {
 	private int no;
-	private int comment;
+	private String comment;
 	private String cate;
 	private String cate2;
 	private String title;
@@ -18,10 +18,10 @@ public class CsArticleVO {
 	public void setNo(int no) {
 		this.no = no;
 	}
-	public int getComment() {
+	public String getComment() {
 		return comment;
 	}
-	public void setComment(int comment) {
+	public void setComment(String comment) {
 		this.comment = comment;
 	}
 	public String getCate() {

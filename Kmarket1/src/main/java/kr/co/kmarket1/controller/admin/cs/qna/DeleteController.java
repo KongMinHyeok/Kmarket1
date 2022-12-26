@@ -1,8 +1,8 @@
-package kr.co.kmarket1.controller.cs.notice;
+package kr.co.kmarket1.controller.admin.cs.qna;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,10 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.co.kmarket1.service.CsService;
-import kr.co.kmarket1.vo.CsArticleVO;
 
-@WebServlet("/cs/notice/view.do")
-public class ViewController extends HttpServlet{
+
+@WebServlet("/admin/cs/qna/delete.do")
+public class DeleteController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	private CsService service = CsService.instance;
 	@Override
@@ -23,21 +23,12 @@ public class ViewController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		String cate  = req.getParameter("cate");
-		String pg 	 = req.getParameter("pg");
-		String no 	 = req.getParameter("no");
+
+		String no = req.getParameter("no");
 		
-		CsArticleVO notice = service.selectArticleNotice(no);
-		service.updateNoticeHit(no);
+		service.deleteFaq(no);
 		
-		req.setAttribute("cate", cate);
-		req.setAttribute("pg", pg);
-		req.setAttribute("no", no);
-		req.setAttribute("notice", notice);
-		
-			
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/notice/view.jsp");
-		dispatcher.forward(req, resp);
+		resp.sendRedirect("/Kmarket1/admin/cs/qna/list.do");
 	}
 	
 	@Override

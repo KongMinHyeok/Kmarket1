@@ -190,7 +190,7 @@ input[type=checkbox]{
 
 p.info{
     border-color: #8497bf;
-    background: #a8b2c5 url(../img/admin_ico_info.png) no-repeat scroll 15px 16px;
+    background: #a8b2c5 url(/kmarket1/img/admin_ico_info.png) no-repeat scroll 15px 16px;
 }
 
 /* admin-register */
@@ -213,7 +213,7 @@ main > section > article section > p{
 
 p.alert{
     border-color: #fdd845;
-    background: #fff6bf url(../img/admin_ico_alert.png) no-repeat scroll 15px 16px;
+    background: #fff6bf url(/kmarket1/img/admin_ico_alert.png) no-repeat scroll 15px 16px;
 }
 
 

@@ -33,7 +33,7 @@
 	               	</tr>
 	               </table>
 	               <div class="btnNotice">
-                      <a href="/Kmarket1/admin/cs/noticeList.do" class="noticecancel">취소하기</a>
+                      <a href="/Kmarket1/admin/cs/notice/list.do" class="noticecancel">취소하기</a>
                       <input name="submit"  class="noticeWrite" type="submit" value="등록하기">      
 					</div>
 	        	</article>

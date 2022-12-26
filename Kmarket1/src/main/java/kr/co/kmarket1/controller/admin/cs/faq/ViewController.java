@@ -28,10 +28,11 @@ public class ViewController extends HttpServlet{
 		String cate = req.getParameter("cate");
 		
 		CsArticleVO article = service.selectFaqArticle(no);
-		
+		service.updateFaqHit(no);
 		
 		req.setAttribute("article", article);
 		req.setAttribute("cate", cate);
+		req.setAttribute("no", no);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/cs/faq/view.jsp");
 		dispatcher.forward(req, resp);

@@ -29,7 +29,7 @@ public class ViewController extends HttpServlet{
 		String no 	 = req.getParameter("no");
 		
 		CsArticleVO notice = service.selectArticleNotice(no);
-		service.updateArticleHit(no);
+		service.updateNoticeHit(no);
 		
 		req.setAttribute("cate", cate);
 		req.setAttribute("pg", pg);

@@ -37,17 +37,23 @@
                   <span>${qna.rdate}</span>
                 </p>
               </nav>
-
               <div class="content">
                 <p>${qna.content}</p>
-                <p>
-                  ※ 피싱 관련 피해신고<br /><br />
-                  ▶ 경찰청 사이버수사국 (국번없이)182 :
-                  <a href="http://cyberbureau.police.go.kr">http://cyberbureau.police.go.kr</a><br />
-                  ▶ KISA 인터넷침해대응센터 (국번없이)118 :
-                  <a href="http://www.krcert.or.kr">http://www.krcert.or.kr</a><br />
-                  감사합니다.<br />
-                </p>
+              </div>
+              <hr/>
+              <div class="content">
+              	<c:if test="${qna.comment ne null}">
+              		<div class="comment">
+              			<h2 class="title">[답변]${qna.title}</h2>
+              			<p class="content">${qna.comment}</p>
+              		</div>
+              	</c:if>
+              	<c:if test="${qna.comment eq null}">
+              		<div class="comment">
+              			<h2 class="title">[답변]${qna.title}</h2>
+              			<p class="content">현재 답변글이 없습니다.</p>
+              		</div>
+              	</c:if>
               </div>
               <a href="/Kmarket1/cs/qna/list.do?cate=${qna.cate}" class="btnList">목록보기</a>
             </article>
