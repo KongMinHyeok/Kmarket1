@@ -25,7 +25,7 @@
     			      if(this.checked){//checked 처리된 항목의 값
 
     			            console.log(this.value); 
-
+							setTotalInfo();
     			      }
 
     			 });
@@ -77,37 +77,78 @@
     		setTotalInfo($(".cart_info_td"));
     	});
     	// 주문하기--------------------------------------------------------------------
-    	
-    	$('input[name=order]').click(function(){
-    		let form_contents ='';
-    		let ordNo = 0;
-    		if($('input[name=chkProduct]').is(':checked')==false){
-    			alert('상품이 선택되지 않았습니다');
-    			return false;
-    		}else{
-    			if(confirm('주문하시겠습니까?')){
-    				$(".cart_info_td").each(function(index, element){
-    		    		if($(element).find("input[name=chkProduct]").is(":checked") === true){ //체크여부
-
-    					let prodNo = $(element).find(".prodNo").val();
-    					let count = $(element).find(".count").val();
-    					
-    					let prodNo_input = "<input name='orders[" + orderNo + "].prodNo' type='hidden' value='" + prodNo + "'>";
-    					form_contents += prodNo_input;
-    					let count_input = "<input name='orders[" + orderNo + "].count' type='hidden' value='" + count + "'>";
-    					form_contents += count_input;
-    					
-    					ordNo += 1;
-    		    		}
-    				});
-    				$("")
-    			}else{
-    				return false;
-    			}
-    		}
-
+    	// km_product_order 테이블은 생각해보니까 주문페이지에서 주문을 해야 만들어지는거 같음
+/*
+    	$('input[name=order]').click(function(e){
+			e.preventDefault();
+    		let chk2 = [];
+    		let chkArr2 = $("input[name=chkProduct]:checked").length;
+    		let checkOrder = confirm('선택한 상품을 주문하시겠습니까?');
+    		
+    		$('input[name=chkProduct]:checked').each(function(){
+    			  chk2.push($(this).val());
+    		});
+    		console.log(chk2);
+    		
+    		 if(chkArr2 == 0) {
+    			 //리스트에 상품이 없으면
+    			 alert('선택한 상품이 존재하지 않습니다');
+    		 }else{
+    			 if(checkOrder){
+    				 $.ajax({
+ 						url : '/Kmarket1/product/Cart.do',
+ 						type : 'POST',
+ 						traditional: true,
+ 						data : {'chk2': chk2},
+ 						dataType : 'json',
+ 						success : function(data){
+ 							if(data.result > 0){
+ 								alert('오더 ㄱㄱ');
+ 							}else{
+ 								return;
+ 							}
+ 						}
+ 						});
+    				 location.href = "/Kmarket1/product/order.do?uid="+uid;
+    			 }else{
+    				 return;
+    			 }
+    		 }
     	});
-    	
+*/
+		$('input[name=order]').click(function(e){
+			e.preventDefault();
+			
+			let arr = [];
+			
+			let checked = $('input[name=chkProduct]:checked').length;
+			
+			$('input[name=chkProduct]:checked').each(function(){
+				arr.push($(this).val());
+				});
+			
+			let jsonData = {"arr" : arr};
+			
+			if(checked == 0){
+				alert('상품은 1개 이상 선택해주세요.');
+				
+			}else{
+				let arrs = arr.toString();
+				console.log(arrs);
+				$.ajax({
+					url : '/Kmarket1/product/cart.do',
+					type : 'POST',
+					data : jsonData,
+					traditional : true,
+					dataType : 'json',
+					success : function(data){
+						if(data.result > 0){
+							location.href='/Kmarket1/product/order.do?uid=${uid}&cartNo='+arrs;
+						}
+					}
+				});
+			}
+		});
     	// 값 계산----------------------------------------------------------------------
     	
     	
@@ -153,7 +194,7 @@
     				confirm("선택한 상품을 삭제하시겠습니까?")){
     				$('input[name=chkProduct]:checked').parents('tr').remove();
     					$.ajax({
-    						url : '/Kmarket1/product/cart.do',
+    						url : '/Kmarket1/product/deleteCart.do',
     						type : 'POST',
     						traditional: true,
     						data : {'chk': chk},

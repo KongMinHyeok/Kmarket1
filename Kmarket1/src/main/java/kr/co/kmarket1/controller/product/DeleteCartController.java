@@ -20,8 +20,8 @@ import kr.co.kmarket1.dao.ProductDAO;
 import kr.co.kmarket1.vo.ProductCartVO;
 import kr.co.kmarket1.vo.ProductVO;
 
-@WebServlet("/product/cart.do")
-public class CartController extends HttpServlet{
+@WebServlet("/product/deleteCart.do")
+public class DeleteCartController extends HttpServlet{
 	/**
 	 * 
 	 */
@@ -31,41 +31,26 @@ public class CartController extends HttpServlet{
 	}
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String uid = req.getParameter("uid");
-		req.setAttribute("uid", uid);
 
-
-		// ProductDAO 객체 생성
-		ProductDAO dao = ProductDAO.getInstance();
-		List<ProductCartVO> carts = null;
-		
-		carts = dao.selectProductCarts2(uid);
-		req.setAttribute("carts", carts);
-		
-		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/product/cart.jsp");
-		dispatcher.forward(req, resp);
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String orderCheck[] = req.getParameterValues("arr");
-		System.out.println(orderCheck);
-		List<ProductCartVO> carts = new ArrayList<>();
+		// ProductDAO 객체 생성
+		ProductDAO dao = ProductDAO.getInstance();
+		// DELETE_PRODUCT_CART 하는거임
+		String chks[] = req.getParameterValues("chk");
 		
-		for(String cartNo : orderCheck) {
-			ProductCartVO vo = ProductDAO.getInstance().selectProductOrders(cartNo);
-			carts.add(vo);
+		for(String cartNo : chks) {
+			int result = dao.deleteProductCart(cartNo);
 		}
 		
-		HttpSession session = req.getSession();
-		session.setAttribute("carts", carts);
 		
 		JsonObject json = new JsonObject();
-		json.addProperty("result", carts.size());
+		json.addProperty("result", 1);
 		
 		PrintWriter writer = resp.getWriter();
 		writer.print(json.toString());
-
+	
 	}
 
 }

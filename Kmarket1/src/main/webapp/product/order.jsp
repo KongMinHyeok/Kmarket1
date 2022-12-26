@@ -12,6 +12,18 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="./css/common.css">
     <link rel="stylesheet" href="./css/product.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    
+    <script>
+	  //onBeforeUnload 이벤트 지정
+	      $(function(){
+	    	  let uid = $('input[name=uid]').val();
+			   let jsonData = {"uid": uid};
+	    	  window.addEventListener('unload', function() {
+	    		  navigator.sendBeacon('/Kmarket1/product/DeleteDirect.do', JSON.stringify({'uid': 'uid'}));
+	    		});
+	      });
+    </script>
 </head>
 <body>
     <div id="wrapper">
@@ -24,10 +36,12 @@
                     <li>
                         <a href="#"><i class="fas fa-tshirt"></i>패션·의류·뷰티</a>
                         <ol>
-                            <li><a href="#">남성의류</a></li>
-                            <li><a href="#">여성의류</a></li>
-                            <li><a href="#">잡화</a></li>
-                            <li><a href="#">뷰티</a></li>
+                            <li><a href="/Kmarket1/product/list.do?pg=1&prodCate1=10&prodCate2=10&type=1">여성의류</a></li>
+                            <li><a href="/Kmarket1/product/list.do?pg=1&prodCate1=10&prodCate2=11&type=1">남성의류</a></li>
+                            <li><a href="/Kmarket1/product/list.do?pg=1&prodCate1=10&prodCate2=12&type=1">진/캐쥬얼</a></li>
+                            <li><a href="/Kmarket1/product/list.do?pg=1&prodCate1=10&prodCate2=13&type=1">신발/가방</a></li>
+                            <li><a href="/Kmarket1/product/list.do?pg=1&prodCate1=10&prodCate2=14&type=1">주얼리/시계</a></li>
+                            <li><a href="/Kmarket1/product/list.do?pg=1&prodCate1=10&prodCate2=15&type=1">아웃도어</a></li>
                         </ol>
                     </li>
                     <li>
@@ -70,11 +84,14 @@
                     <table border="0">
                         <thead>
                             <tr>
+                                <th><input type="checkbox" name="all"></th>
                                 <th>상품명</th>
-                                <th>총수량</th>
+                                <th>수량</th>
                                 <th>판매가</th>
+                                <th>할인</th>
+                                <th>포인트</th>
                                 <th>배송비</th>
-                                <th>소계</th>
+                                <th>총합</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -82,7 +99,7 @@
                             <tr>
                                 <td class="cart_info_td">
                                 	<input type="checkbox" name="chkProduct" value="${cart.cartNo}">
-                                	<input type="hidden" class="prodNo" value="${cart.prodNo}">
+                                	<input type="hidden" class="prodNo" name="prodNo" value="${cart.prodNo}">
                                 	<input type="hidden" class="count" value="${cart.count}">
                                 	<input type="hidden" class="price" value="${cart.price}">
                                 	<input type="hidden" class="discount" value="${cart.price * cart.count * (cart.discount/100)}">
@@ -142,6 +159,7 @@
                                 </tr>
                             </table>
                             <input type="submit" name="" value="결제하기">
+                            <input type="hidden" name="uid" value="${sessMember.uid}">
                         </div>
                         <article class="delivery">
                             <h1>배송정보</h1>
@@ -149,29 +167,29 @@
                                 <tbody>
                                     <tr>
                                         <td>주문자</td>
-                                        <td><input type="text" name="orderer"></td>
+                                        <td><input type="text" name="orderer" value="${sessMember.name}"></td>
                                     </tr>
                                     <tr>
                                         <td>휴대폰</td>
                                         <td>
-                                            <input type="text" name="hp">
+                                            <input type="text" name="hp" value="${sessMember.hp}">
                                             <span> - 포함 입력</span>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>우편번호</td>
                                         <td>
-                                            <input type="text" name="zip">
+                                            <input type="text" name="zip" value="${sessMember.zip}">
                                             <input type="button" value="검색">
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>기본주소</td>
-                                        <td><input type="text" name="addr1"></td>
+                                        <td><input type="text" name="addr1" value="${sessMember.addr1}"></td>
                                     </tr>
                                     <tr>
                                         <td>상세주소</td>
-                                        <td><input type="text" name="addr2"></td>
+                                        <td><input type="text" name="addr2" value="${sessMember.addr2}"></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -179,7 +197,7 @@
                         <article class="discount">
                             <h1>할인정보</h1>
                             <div>
-                                <p>현재 포인트 : <span>7200</span>점</p>
+                                <p>현재 포인트 : <span>${sessMember.point}</span>점</p>
                                 <label>
                                     <input type="text" name="point">점 
                                     <input type="button" value="적용">

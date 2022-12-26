@@ -473,9 +473,9 @@ public class ProductDAO extends DBHelper{
 	}
 	// cart에 상품 넣기
 	public int insertProductCart(ProductCartVO cart) {
-		int result1 = 0;
+		int result = 0;
 		try {
-			logger.info("insertProductCart...");
+			logger.info("insertProductCart start...");
 			conn = getConnection();
 			psmt = conn.prepareStatement(ProductSQL.INSERT_PRODUCT_CART);
 			psmt.setString(1, cart.getUid());
@@ -487,22 +487,24 @@ public class ProductDAO extends DBHelper{
 			psmt.setInt(7, cart.getDelivery());
 			psmt.setInt(8, cart.getTotal());
 			psmt.setString(9, cart.getRdate());
+			psmt.setInt(10, cart.getDirect());
 			
-			result1 = psmt.executeUpdate();
+			result = psmt.executeUpdate();
 			close();
 				
 		}catch(Exception e) {
 			logger.error(e.getMessage());
 		}
-		return result1;
+		return result;
 	}
 	/////////// 여기부터 하자!!!!!!!!!!!!!!!!!!!!!
-	public int insertProductOrder(ProductOrderVO order) {
+	/*
+	public int insertProductCart2(ProductCartVO cart) {
 		int result2 = 0;
 		try {
-			logger.info("insertProductCart2...");
+			logger.info("insertProductCart2 start...");
 			conn = getConnection();
-			psmt = conn.prepareStatement(ProductSQL.INSERT_PRODUCT_ORDER);
+			psmt = conn.prepareStatement(ProductSQL.INSERT_PRODUCT_CART);
 			psmt.setString(1, cart.getUid());
 			psmt.setInt(2, cart.getProdNo());
 			psmt.setInt(3, cart.getCount());
@@ -512,6 +514,7 @@ public class ProductDAO extends DBHelper{
 			psmt.setInt(7, cart.getDelivery());
 			psmt.setInt(8, cart.getTotal());
 			psmt.setString(9, cart.getRdate());
+			psmt.setInt(10, cart.getDirect());
 			
 			result2 = psmt.executeUpdate();
 			close();
@@ -520,34 +523,41 @@ public class ProductDAO extends DBHelper{
 			logger.error(e.getMessage());
 		}
 		return result2;
-	}
-	/*
-	public int insertProductOrderDirect(ProductOrderVO order) {
-		int result2 = 0;
+	}*/
+	public ProductCartVO selectProductOrders(String cartNo) {
+		ProductCartVO cart = null;
 		try {
-			logger.info("insertProductOrderDirect start...");
+			logger.info("selectProductOrders Start...");
 			conn = getConnection();
-			psmt = conn.prepareStatement(ProductSQL.INSERT_PRODUCT_ORDER_DIRECT);
-			psmt.setInt(1, order.getUid());
-			psmt.setInt(2, order.getProdNo());
-			psmt.setInt(3, item.getCount());
-			psmt.setInt(4, item.getPrice());
-			psmt.setInt(5, item.getDiscount());
-			psmt.setInt(6, item.getPoint());
-			psmt.setInt(7, item.getDelivery());
-			psmt.setInt(8, item.getTotal());
-			psmt.setString(9, item.getRdate());
+			psmt = conn.prepareStatement(ProductSQL.SELECT_PRODUCT_ORDERS);
+			psmt.setString(1, cartNo);
+			rs = psmt.executeQuery();
 			
-
-			result2 = psmt.executeUpdate();
-			close();
+			if(rs.next()) {
+				cart = new ProductCartVO();
+				cart.setCartNo(rs.getInt(1));
+				cart.setUid(rs.getString(2));
+				cart.setProdNo(rs.getInt(3));
+				cart.setCount(rs.getInt(4));
+				cart.setPrice(rs.getInt(5));
+				cart.setDiscount(rs.getInt(6));
+				cart.setPoint(rs.getInt(7));
+				cart.setDelivery(rs.getInt(8));
+				cart.setTotal(rs.getInt(9));
+				cart.setRdate(rs.getString(10));
+				cart.setDirect(rs.getInt(11));
+				cart.setProdName(rs.getString(12));
+				cart.setDescript(rs.getString(13));
+				cart.setThumb3(rs.getString(14));
 				
+			}
+			close();	
+			
 		}catch(Exception e) {
 			logger.error(e.getMessage());
 		}
-		return result2;
+		return cart;
 	}
-	*/
 	// 리뷰 총갯수
 	public int selectReviewCountTotal(String prodNo) {
 		int total = 0;
@@ -573,13 +583,14 @@ public class ProductDAO extends DBHelper{
 		return total;
 	}
 	// cart 목록 불러오기
-	public List<ProductCartVO> selectProductCarts(String uid) {
+	public List<ProductCartVO> selectProductCarts(String uid, String cartNo) {
 		List<ProductCartVO> carts = new ArrayList<>();
 		try {
 			logger.info("selectProductCarts start...");
 			conn = getConnection();
 			psmt = conn.prepareStatement(ProductSQL.SELECT_PRODUCT_CARTS);
 			psmt.setString(1, uid);
+			psmt.setString(2, cartNo);
 			
 			rs = psmt.executeQuery();
 			
@@ -595,9 +606,10 @@ public class ProductDAO extends DBHelper{
 				cart.setDelivery(rs.getInt(8));
 				cart.setTotal(rs.getInt(9));
 				cart.setRdate(rs.getString(10));
-				cart.setProdName(rs.getString(11));
-				cart.setDescript(rs.getString(12));
-				cart.setThumb3(rs.getString(13));
+				cart.setDirect(rs.getInt(11));
+				cart.setProdName(rs.getString(12));
+				cart.setDescript(rs.getString(13));
+				cart.setThumb3(rs.getString(14));
 				carts.add(cart);
 			}
 			close();
@@ -607,6 +619,67 @@ public class ProductDAO extends DBHelper{
 		}
 		logger.debug("carts : " + carts);
 		return carts;
+	}
+	// cart 목록 불러오기
+		public List<ProductCartVO> selectProductCarts2(String uid) {
+			List<ProductCartVO> carts = new ArrayList<>();
+			try {
+				logger.info("selectProductCarts2 start...");
+				conn = getConnection();
+				psmt = conn.prepareStatement(ProductSQL.SELECT_PRODUCT_CARTS2);
+				psmt.setString(1, uid);
+				
+				rs = psmt.executeQuery();
+				
+				while(rs.next()) {
+					ProductCartVO cart = new ProductCartVO();
+					cart.setCartNo(rs.getInt(1));
+					cart.setUid(rs.getString(2));
+					cart.setProdNo(rs.getInt(3));
+					cart.setCount(rs.getInt(4));
+					cart.setPrice(rs.getInt(5));
+					cart.setDiscount(rs.getInt(6));
+					cart.setPoint(rs.getInt(7));
+					cart.setDelivery(rs.getInt(8));
+					cart.setTotal(rs.getInt(9));
+					cart.setRdate(rs.getString(10));
+					cart.setDirect(rs.getInt(11));
+					cart.setProdName(rs.getString(12));
+					cart.setDescript(rs.getString(13));
+					cart.setThumb3(rs.getString(14));
+					carts.add(cart);
+				}
+				close();
+				
+			}catch(Exception e) {
+				logger.error(e.getMessage());
+			}
+			logger.debug("carts : " + carts);
+			return carts;
+		}
+	// 다이렉트로 바로 구매하는것이 있으면 1반환
+	public int findDirect(String uid) {
+		
+		int directNum = 0;
+		
+		try {
+			logger.info("findDirect Start..");
+			conn = getConnection();
+			psmt = conn.prepareStatement(ProductSQL.FIND_DIRECT);
+			psmt.setString(1, uid);
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				directNum = rs.getInt(1);
+			}
+			
+			close();
+			
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("directNum : " + directNum);
+		return directNum;
 	}
 	
 	public int deleteProductCart(String cartNo) {
@@ -625,46 +698,30 @@ public class ProductDAO extends DBHelper{
 		logger.debug("result : " + result);
 		return result;
 	}
-	/*
-	public List<ProductOrderVO> selectProductOrders(int ordNo, String uid) {
-		List<ProductOrderVO> orders = new ArrayList<>();
-
+	// 페이지 벗어났을때 바로구매로 생긴 장바구니 삭제
+	public int deleteProductDirect() {
+		int result = 0;
 		try {
-			logger.info("selectProductOrders start...");
+			logger.info("deleteProductCart start...");
 			conn = getConnection();
-			psmt = conn.prepareStatement(ProductSQL.SELECT_PRODUCT_ORDERS);
-			psmt.setInt(1, ordNo);
-			psmt.setString(2, uid);
+			psmt = conn.prepareStatement(ProductSQL.DELETE_PRODUCT_DIRECT);
 			
-			
-			rs = psmt.executeQuery();
-			
-			while(rs.next()) {
-				ProductOrderVO order = new ProductOrderVO();
-				order.setOrdNo(rs.getInt(1));
-				order.setProdNo(rs.getInt(2));
-				order.setCount(rs.getInt(3));
-				order.setPrice(rs.getInt(3));
-				order.setDiscount(rs.getInt(4));
-				order.setPoint(rs.getInt(5));
-				order.setDelivery(rs.getInt(6));
-				order.setTotal(rs.getInt(7));
-			}
-		} catch(Exception e) {
+			result = psmt.executeUpdate();
+			close();
+		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
-		logger.debug("orders : " + orders);
-		return orders;
+		logger.debug("result : " + result);
+		return result;
 	}
-	*/
-	// cart 목록 불러오기
-		public List<ProductCartVO> selectProductCart(String prodNo) {
+	// 바로구매 햇을때 cart 목록 불러오기
+		public List<ProductCartVO> selectProductCart(String uid) {
 			List<ProductCartVO> carts = new ArrayList<>();
 			try {
 				logger.info("selectProductCart start...");
 				conn = getConnection();
 				psmt = conn.prepareStatement(ProductSQL.SELECT_PRODUCT_CART);
-				psmt.setString(1, prodNo);
+				psmt.setString(1, uid);
 				
 				rs = psmt.executeQuery();
 				
@@ -680,9 +737,10 @@ public class ProductDAO extends DBHelper{
 					cart.setDelivery(rs.getInt(8));
 					cart.setTotal(rs.getInt(9));
 					cart.setRdate(rs.getString(10));
-					cart.setProdName(rs.getString(11));
-					cart.setDescript(rs.getString(12));
-					cart.setThumb3(rs.getString(13));
+					cart.setDirect(rs.getInt(11));
+					cart.setProdName(rs.getString(12));
+					cart.setDescript(rs.getString(13));
+					cart.setThumb3(rs.getString(14));
 					carts.add(cart);
 				}
 				close();
@@ -693,6 +751,8 @@ public class ProductDAO extends DBHelper{
 			logger.debug("carts : " + carts);
 			return carts;
 		}
+		//
+	
 
 	
 }

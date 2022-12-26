@@ -150,9 +150,10 @@ public class ViewController extends HttpServlet{
 		String delivery = req.getParameter("delivery");
 		String total = req.getParameter("total");
 		String rdate = req.getParameter("rdate");
-		String ordNo = req.getParameter("ordNo");
+		String direct = req.getParameter("direct");
 		
 		ProductCartVO cart = new ProductCartVO();
+		
 		cart.setUid(uid);
 		cart.setProdNo(prodNo);
 		cart.setCount(count);
@@ -162,20 +163,17 @@ public class ViewController extends HttpServlet{
 		cart.setDelivery(delivery);
 		cart.setTotal(total);
 		cart.setRdate(rdate);
-		
-		int result1 = ProductDAO.getInstance().insertProductCart(cart);
-		/*----------------------------------------------------*/
-		
-		int result2 = ProductDAO.getInstance().insertProductCart2(cart);
+		cart.setDirect(direct);
 		
 		JsonObject json = new JsonObject();
-		json.addProperty("result1", result1);
-		
-		
-		json.addProperty("result2", result2);
-		
 		PrintWriter writer = resp.getWriter();
-		writer.print(json.toString());
+
+			int result = ProductDAO.getInstance().insertProductCart(cart);
+			
+			json.addProperty("result", result);
+			
+			writer.print(json.toString());
+		/*----------------------------------------------------*/
 		
 	}
 }
