@@ -122,31 +122,29 @@
 		$('input[name=order]').click(function(e){
 			e.preventDefault();
 			
-			let arr = [];
+			let chk = [];
 			
-			let checked = $('input[name=chkProduct]:checked').length;
+			let chks = $('input[name=chkProduct]:checked').length;
 			
 			$('input[name=chkProduct]:checked').each(function(){
-				arr.push($(this).val());
+				chk.push($(this).val());
 				});
 			
-			let jsonData = {"arr" : arr};
-			
-			if(checked == 0){
-				alert('상품은 1개 이상 선택해주세요.');
+			console.log(chks);
+			if(chks== 0){
+				alert('상품을 선택해주세요');
 				
 			}else{
-				let arrs = arr.toString();
-				console.log(arrs);
+				
 				$.ajax({
 					url : '/Kmarket1/product/cart.do',
 					type : 'POST',
-					data : jsonData,
+					data : {"chk" : chk},
 					traditional : true,
 					dataType : 'json',
 					success : function(data){
 						if(data.result > 0){
-							location.href='/Kmarket1/product/order.do?uid=${uid}&cartNo='+arr;
+							location.href='/Kmarket1/product/order.do';
 						}
 					}
 				});
@@ -377,11 +375,13 @@
                                 <th>소계</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <!-- 장바구니에 상품이 없을 경우 출력 -->
-                            <tr class="empty">
-                                <td colspan="7">장바구니에 상품이 없습니다.</td>
-                            </tr>
+                        <c:choose>
+                        	<c:when test="${empty carts}">
+                       	 		<tr class="empty">
+                            		<td colspan="7">장바구니에 상품이 없습니다.</td>
+                        		</tr>
+                        	</c:when>
+                        <c:otherwise>
                             <c:forEach var="cart" items="${carts}">
                             <tr>
                                 <td class="cart_info_td">
@@ -416,6 +416,8 @@
                                 <td><fmt:formatNumber value="${cart.total+cart.delivery}" pattern="#,###,###" /></td>
                             </tr>
                             </c:forEach>
+                        	</c:otherwise>
+                        	</c:choose>
                             <tr><td><input type="hidden" name="uid" value= ${sessMember.uid }></td></tr>
                         </tbody>
                     </table>

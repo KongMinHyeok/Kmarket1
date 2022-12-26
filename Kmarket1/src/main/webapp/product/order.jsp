@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="./css/common.css">
     <link rel="stylesheet" href="./css/product.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="http://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="/Kmarket1/product/js/postcode.js"></script>
     
     <script>
 	  //onBeforeUnload 이벤트 지정
@@ -91,6 +93,9 @@
 	    	}
 	    	$("input[name=chkProduct]").on("change", function(){
 	    		setTotalInfo($(".cart_info_td"));
+	    	});
+	    	$("input[name=postcode]").click(function(){
+	    		postcode();
 	    	});
 	  });
     </script>
@@ -336,17 +341,17 @@
                                     <tr>
                                         <td>우편번호</td>
                                         <td>
-                                            <input type="text" name="zip" value="${sessMember.zip}">
-                                            <input type="button" value="검색">
+                                            <input type="text" name="zip" id="zip" value="${sessMember.zip}">
+                                            <input type="button" name="postcode" value="검색">
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>기본주소</td>
-                                        <td><input type="text" name="addr1" value="${sessMember.addr1}"></td>
+                                        <td><input type="text" name="addr1" id="addr1" value="${sessMember.addr1}"></td>
                                     </tr>
                                     <tr>
                                         <td>상세주소</td>
-                                        <td><input type="text" name="addr2" value="${sessMember.addr2}"></td>
+                                        <td><input type="text" name="addr2" id="addr2" value="${sessMember.addr2}"></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -357,7 +362,7 @@
                                 <p>현재 포인트 : <span>${sessMember.point}</span>점</p>
                                 <label>
                                     <input type="text" name="point">점 
-                                    <input type="button" value="적용">
+                                    <input type="button" class="usePoint" value="적용">
                                 </label>
                                 <span>
                                     포인트 5,000점 이상이면 현금처럼 사용 가능합니다.
