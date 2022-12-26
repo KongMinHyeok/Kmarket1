@@ -150,7 +150,7 @@ public class ViewController extends HttpServlet{
 		String delivery = req.getParameter("delivery");
 		String total = req.getParameter("total");
 		String rdate = req.getParameter("rdate");
-		String direct = req.getParameter("direct");
+		/*String direct = req.getParameter("direct");*/
 		
 		ProductCartVO cart = new ProductCartVO();
 		
@@ -163,7 +163,7 @@ public class ViewController extends HttpServlet{
 		cart.setDelivery(delivery);
 		cart.setTotal(total);
 		cart.setRdate(rdate);
-		cart.setDirect(direct);
+		/*cart.setDirect(direct);*/
 		
 		JsonObject json = new JsonObject();
 		PrintWriter writer = resp.getWriter();

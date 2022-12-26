@@ -57,7 +57,7 @@
 			let delivery = $('input[name=delivery]').val();
 			let total = $('input[name=total]').val();
 			let rdate = $('input[name=rdate]').val();
-			let direct = '0';
+			/*let direct = '0';*/
 			
 			if(uid == ''){
 				alert('로그인 후 이용해주세요');
@@ -73,8 +73,8 @@
     				"point": point,
     				"delivery": delivery,
     				"total": total,
-    				"rdate": rdate,
-    				"direct": direct
+    				"rdate": rdate
+    				/*"direct": direct*/
     		};
     		$.ajax({
     			url: '/Kmarket1/product/view.do',
@@ -96,50 +96,18 @@
     	///////////////////////////////////////////////////////////////////////
     	//order버튼 누르면 장바구니랑 다르게 바로 주문으로 넘어가야해서 코드 하나 더 만들어야한다
     	$('.order').click(function(){
-    		let uid = $('input[name=uid]').val();
-			let prodNo = $('input[name=prodNo]').val();
 			let count = $('input[name=num]').val();
-			let price = $('input[name=price]').val();
-			let discount = $('input[name=discount]').val();
-			let point = $('input[name=point]').val();
-			let delivery = $('input[name=delivery]').val();
-			let total = $('input[name=total]').val();
-			let rdate = $('input[name=rdate]').val();
-			let direct = '1';
+    		let uid = $('input[name=uid]').val();
+
 			
 			if(uid == ''){
 				alert('로그인 후 이용해주세요');
 				location.href= '/Kmarket1/member/login.do';
 				}else{
+					location.href= "/Kmarket1/product/order.do?prodNo=${product.prodNo}&count="+count;
+				};
 			
-    		let jsonData2 = {
-    				"uid": uid,
-    				"prodNo": prodNo,
-    				"count": count,
-    				"price": price,
-    				"discount": discount,
-    				"point": point,
-    				"delivery": delivery,
-    				"total": total,
-    				"rdate": rdate,
-    				"direct": direct
-    		};
-    		$.ajax({
-    			url: '/Kmarket1/product/view.do',
-    			type: 'post',
-    			data: jsonData2,
-    			dataType: 'json',
-    			success: function(data){
-	    				if(data.result > 0){
-							location.href = '/Kmarket1/product/order.do?uid='+uid;
-						}else{
-							alert('오류발생! 다시 시도해주세요.')
-						}
-    			}
-    		});
-				}
     	});
-
 	//
     });
     </script>
@@ -193,7 +161,95 @@
                         </ol>
                     </li>
                 </ul>
-            </aside>
+                <!-- 베스트상품 배너 -->
+                    <article class="best">
+                      <h1><i class="fas fa-crown"></i>베스트상품</h1>
+                      <ol>
+                      <li>
+                          <a href="#">
+                          <div class="thumb">
+                              <i>1</i><img src="./img/sample_thumb.jpg" alt="item1" />
+                          </div>
+                          <h2>상품명</h2>
+                          <div class="org_price">
+                              <del>30,000</del><span>10%</span>
+                          </div>
+                          <div class="dis_price">
+                              <ins>27,000</ins>
+                          </div>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="#">
+                          <div class="thumb">
+                              <i>2</i><img src="./img/sample_thumb.jpg" alt="item1" />
+                          </div>
+                          <article>
+                              <h2>상품명</h2>
+                              <div class="org_price">
+                              <del>30,000</del>
+                              <span>10%</span>
+                              </div>
+                              <div class="dis_price">
+                              <ins>27,000</ins>
+                              </div>
+                          </article>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="#">
+                          <div class="thumb">
+                              <i>3</i><img src="./img/sample_thumb.jpg" alt="item1" />
+                          </div>
+                          <article>
+                              <h2>상품명</h2>
+                              <div class="org_price">
+                              <del>30,000</del>
+                              <span>10%</span>
+                              </div>
+                              <div class="dis_price">
+                              <ins>27,000</ins>
+                              </div>
+                          </article>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="#">
+                          <div class="thumb">
+                              <i>4</i><img src="./img/sample_thumb.jpg" alt="item1" />
+                          </div>
+                          <article>
+                              <h2>상품명</h2>
+                              <div class="org_price">
+                              <del>30,000</del>
+                              <span>10%</span>
+                              </div>
+                              <div class="dis_price">
+                              <ins>27,000</ins>
+                              </div>
+                          </article>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="#">
+                          <div class="thumb">
+                              <i>5</i><img src="./img/sample_thumb.jpg" alt="item1" />
+                          </div>
+                          <article>
+                              <h2>상품명</h2>
+                              <div class="org_price">
+                              <del>30,000</del>
+                              <span>10%</span>
+                              </div>
+                              <div class="dis_price">
+                              <ins>27,000</ins>
+                              </div>
+                          </article>
+                          </a>
+                      </li>
+                      </ol>
+                  </article>
+              </aside>
             <section class="view">
                 <!-- 제목, 페이지 네비게이션 -->
 				<jsp:include page="./_${prodCate1}.jsp"/>

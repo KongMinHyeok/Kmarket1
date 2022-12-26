@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kr.co.kmarket1.service.ProductCompleteService;
 import kr.co.kmarket1.service.ProductService;
 import kr.co.kmarket1.vo.ProductOrderVO;
 import kr.co.kmarket1.vo.ProductVO;
@@ -19,7 +18,7 @@ import kr.co.kmarket1.vo.ProductVO;
 @WebServlet("/product/complete.do")
 public class CompleteController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
-	private ProductCompleteService service = ProductCompleteService.INSTANCE;
+	private ProductService service = ProductService.INSTANCE;
 	
 	@Override
 	public void init(ServletConfig config) throws ServletException {

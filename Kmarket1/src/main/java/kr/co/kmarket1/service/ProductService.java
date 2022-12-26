@@ -4,6 +4,7 @@ import java.util.List;
 
 import kr.co.kmarket1.dao.ProductDAO;
 import kr.co.kmarket1.vo.ProductCartVO;
+import kr.co.kmarket1.vo.ProductOrderVO;
 import kr.co.kmarket1.vo.ProductReviewVO;
 import kr.co.kmarket1.vo.ProductVO;
 
@@ -106,6 +107,16 @@ public enum ProductService {
 			return;
 		};
 		 */
+		
+		// 주문 번호로 주문(자) 정보 불러오기
+		public ProductOrderVO selectOrderByOrdNo(int ordNo) {
+			return dao.selectOrderByOrdNo(ordNo);
+		}
+		
+		// 주문 번호로 주문한 물품들 불러오기
+		public List<ProductVO> selectItemsByOrdNo(int ordNo) {
+			return dao.selectItemsByOrdNo(ordNo);
+		}
 	
 
 

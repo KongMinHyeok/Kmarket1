@@ -146,8 +146,7 @@
                       </li>
                       </ol>
                   </article>
-              </aside>
-            </aside>
+             </aside>
             <section class="list">
                 <!-- 제목, 페이지 네비게이션 -->
                 <jsp:include page="./_${prodCate1}.jsp"/>

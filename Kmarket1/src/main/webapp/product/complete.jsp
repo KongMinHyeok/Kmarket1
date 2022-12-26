@@ -43,8 +43,95 @@
                             <li><a href="#">사무용품</a></li>
                         </ol>
                     </li>
-                </ul>
-            </aside>
+                </ul><!-- 베스트상품 배너 -->
+                    <article class="best">
+                      <h1><i class="fas fa-crown"></i>베스트상품</h1>
+                      <ol>
+                      <li>
+                          <a href="#">
+                          <div class="thumb">
+                              <i>1</i><img src="./img/sample_thumb.jpg" alt="item1" />
+                          </div>
+                          <h2>상품명</h2>
+                          <div class="org_price">
+                              <del>30,000</del><span>10%</span>
+                          </div>
+                          <div class="dis_price">
+                              <ins>27,000</ins>
+                          </div>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="#">
+                          <div class="thumb">
+                              <i>2</i><img src="./img/sample_thumb.jpg" alt="item1" />
+                          </div>
+                          <article>
+                              <h2>상품명</h2>
+                              <div class="org_price">
+                              <del>30,000</del>
+                              <span>10%</span>
+                              </div>
+                              <div class="dis_price">
+                              <ins>27,000</ins>
+                              </div>
+                          </article>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="#">
+                          <div class="thumb">
+                              <i>3</i><img src="./img/sample_thumb.jpg" alt="item1" />
+                          </div>
+                          <article>
+                              <h2>상품명</h2>
+                              <div class="org_price">
+                              <del>30,000</del>
+                              <span>10%</span>
+                              </div>
+                              <div class="dis_price">
+                              <ins>27,000</ins>
+                              </div>
+                          </article>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="#">
+                          <div class="thumb">
+                              <i>4</i><img src="./img/sample_thumb.jpg" alt="item1" />
+                          </div>
+                          <article>
+                              <h2>상품명</h2>
+                              <div class="org_price">
+                              <del>30,000</del>
+                              <span>10%</span>
+                              </div>
+                              <div class="dis_price">
+                              <ins>27,000</ins>
+                              </div>
+                          </article>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="#">
+                          <div class="thumb">
+                              <i>5</i><img src="./img/sample_thumb.jpg" alt="item1" />
+                          </div>
+                          <article>
+                              <h2>상품명</h2>
+                              <div class="org_price">
+                              <del>30,000</del>
+                              <span>10%</span>
+                              </div>
+                              <div class="dis_price">
+                              <ins>27,000</ins>
+                              </div>
+                          </article>
+                          </a>
+                      </li>
+                      </ol>
+                  </article>
+              </aside>
             <section class="complete">
                 <!-- 제목, 페이지 네비게이션 -->
                 <nav>

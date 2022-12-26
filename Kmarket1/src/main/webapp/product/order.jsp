@@ -16,13 +16,83 @@
     
     <script>
 	  //onBeforeUnload 이벤트 지정
-	      $(function(){
+	  /*    
+	  $(function(){
 	    	  let uid = $('input[name=uid]').val();
 			   let jsonData = {"uid": uid};
 	    	  window.addEventListener('unload', function() {
 	    		  navigator.sendBeacon('/Kmarket1/product/DeleteDirect.do', JSON.stringify({'uid': 'uid'}));
 	    		});
 	      });
+	  */
+	  // 포인트 적용, order에서 complete 넘기기, 다이렉트 오더 해야함
+	  $(document).ready(function(){
+	    	
+	    	// 전체 선택
+	    	$("input[name=all]").click(function(){
+	    		if ($(this).is(":checked")){
+	    			$('input[name=chkProduct]').each(function() {
+
+	    			      this.checked = true; //checked 처리
+
+	    			      if(this.checked){//checked 처리된 항목의 값
+
+	    			            console.log(this.value); 
+								setTotalInfo();
+	    			      }
+
+
+	    			 });
+	    			
+	    		}else{
+	    			$('input[name=chkProduct]').each(function() {
+
+	  			      this.checked = false; //checked 해제 처리
+						setTotalInfo();
+
+
+	  			 });
+	    		}
+	    	});
+	    	
+	    	/************************************/
+	    	function setTotalInfo(){
+	    		
+	    	
+		    	let totalPrice = 0; // 상품금액 합
+		    	let totalCount = 0; // 상품수 합
+		    	let totalDiscount = 0; // 상품 할인 금액 합(이거는 계산해서 들어가야할듯)
+		    	let totalDelivery = 0; // 배송비 합
+		    	let usePoint = 0;
+		    	let finalTotalPrice = 0;
+		    	
+		    	$(".cart_info_td").each(function(index, element){
+		    		
+		    	
+		    		if($(element).find("input[name=chkProduct]").is(":checked") === true){ //체크여부
+		    		
+		    		totalPrice += parseInt($(element).find(".price").val())*parseInt($(element).find(".count").val());
+		    		totalCount += parseInt($(element).find(".count").val());
+		    		totalDiscount += parseInt($(element).find(".discount").val());
+		    		totalDelivery += parseInt($(element).find(".delivery").val());
+		    		usePoint += parseInt($(element).find(".usePoint").val());
+		    		
+		    		}
+		    	});
+		    	/* 최종 가격 */
+		    	finalTotalPrice = totalPrice - totalDiscount + totalDelivery;
+		    	/* 값 삽입 */
+		    	$('.totalPrice').text(totalPrice);			
+		    	$('.totalCount').text(totalCount);
+				$('.totalDiscount').text(' - '+totalDiscount);			
+				$('.totalDelivery').text(totalDelivery);			
+				$('.finalTotalPrice').text(finalTotalPrice+'원');
+				$('.pointDiscount').text('-'+usePoint)
+	    	}
+	    	$("input[name=chkProduct]").on("change", function(){
+	    		setTotalInfo($(".cart_info_td"));
+	    	});
+	  });
     </script>
 </head>
 <body>
@@ -71,8 +141,95 @@
                             <li><a href="#">사무용품</a></li>
                         </ol>
                     </li>
-                </ul>
-            </aside>
+                </ul><!-- 베스트상품 배너 -->
+                    <article class="best">
+                      <h1><i class="fas fa-crown"></i>베스트상품</h1>
+                      <ol>
+                      <li>
+                          <a href="#">
+                          <div class="thumb">
+                              <i>1</i><img src="./img/sample_thumb.jpg" alt="item1" />
+                          </div>
+                          <h2>상품명</h2>
+                          <div class="org_price">
+                              <del>30,000</del><span>10%</span>
+                          </div>
+                          <div class="dis_price">
+                              <ins>27,000</ins>
+                          </div>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="#">
+                          <div class="thumb">
+                              <i>2</i><img src="./img/sample_thumb.jpg" alt="item1" />
+                          </div>
+                          <article>
+                              <h2>상품명</h2>
+                              <div class="org_price">
+                              <del>30,000</del>
+                              <span>10%</span>
+                              </div>
+                              <div class="dis_price">
+                              <ins>27,000</ins>
+                              </div>
+                          </article>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="#">
+                          <div class="thumb">
+                              <i>3</i><img src="./img/sample_thumb.jpg" alt="item1" />
+                          </div>
+                          <article>
+                              <h2>상품명</h2>
+                              <div class="org_price">
+                              <del>30,000</del>
+                              <span>10%</span>
+                              </div>
+                              <div class="dis_price">
+                              <ins>27,000</ins>
+                              </div>
+                          </article>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="#">
+                          <div class="thumb">
+                              <i>4</i><img src="./img/sample_thumb.jpg" alt="item1" />
+                          </div>
+                          <article>
+                              <h2>상품명</h2>
+                              <div class="org_price">
+                              <del>30,000</del>
+                              <span>10%</span>
+                              </div>
+                              <div class="dis_price">
+                              <ins>27,000</ins>
+                              </div>
+                          </article>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="#">
+                          <div class="thumb">
+                              <i>5</i><img src="./img/sample_thumb.jpg" alt="item1" />
+                          </div>
+                          <article>
+                              <h2>상품명</h2>
+                              <div class="org_price">
+                              <del>30,000</del>
+                              <span>10%</span>
+                              </div>
+                              <div class="dis_price">
+                              <ins>27,000</ins>
+                              </div>
+                          </article>
+                          </a>
+                      </li>
+                      </ol>
+                  </article>
+              </aside>
             <section class="order">
                 <!-- 제목, 페이지 네비게이션 -->
                 <nav>
@@ -135,27 +292,27 @@
                                 <h2>최종결제 정보</h2>
                                 <tr>
                                     <td>총</td>
-                                    <td>2 건</td>
+                                    <td class="totalCount">0</td>
                                 </tr>
                                 <tr>
                                     <td>상품금액</td>
-                                    <td>27,000</td>
+                                    <td class="totalPrice">0</td>
                                 </tr>
                                 <tr>
                                     <td>할인금액</td>
-                                    <td>-1,000</td>
+                                    <td class="totalDiscount">0</td>
                                 </tr>
                                 <tr>
                                     <td>배송비</td>
-                                    <td>0</td>
+                                    <td class="totalDelivery">0</td>
                                 </tr>
                                 <tr>
                                     <td>포인트 할인</td>
-                                    <td>-1000</td>
+                                    <td class="usePoint">0</td>
                                 </tr>
                                 <tr>
                                     <td>전체주문금액</td>
-                                    <td>25,000</td>
+                                    <td class="finalTotalPrice">0</td>
                                 </tr>
                             </table>
                             <input type="submit" name="" value="결제하기">

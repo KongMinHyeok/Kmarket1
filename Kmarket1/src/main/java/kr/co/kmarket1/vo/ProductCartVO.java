@@ -16,8 +16,6 @@ public class ProductCartVO {
 	private String prodName;
 	private String descript;
 	private String thumb3;
-	//
-	private int direct;
 	
 	public String getProdName() {
 		return prodName;
@@ -118,17 +116,6 @@ public class ProductCartVO {
 	public void setRdate(String rdate) {
 		this.rdate = rdate;
 	}
-	
-	public int getDirect() {
-		return direct;
-	}
-	public void setDirect(int direct) {
-		this.direct = direct;
-	}
-	public void setDirect(String direct) {
-		this.direct = Integer.parseInt(direct);
-	}
-	
 	
 
 }
