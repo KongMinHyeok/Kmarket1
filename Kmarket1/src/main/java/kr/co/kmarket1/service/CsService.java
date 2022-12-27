@@ -42,6 +42,14 @@ public enum CsService {
 	public void insertArticleQna(CsArticleVO article) {
 		 dao.insertArticleQna(article);
 	}
+	
+	public void insertCommentQna(String comment, String no) {
+		dao.insertCommentQna(comment, no);
+	}
+	public int deleteqna(String no) {
+		return dao.deleteqna(no);
+	}
+	
 	public int getLastPageNum(int total) {
 		int lastPageNum = 0;
 		
@@ -86,8 +94,8 @@ public enum CsService {
 		dao.insertArticleNotice(article);
 	}
 	
-	public void deleteNotice(String no) {
-		dao.deleteNotice(no);
+	public int deleteNotice(String no) {
+		return dao.deleteNotice(no);
 	}
 	
 	public void updateNotice(String no, String cate, String title, String content) {
@@ -102,8 +110,8 @@ public enum CsService {
 		dao.updateFaq(no, cate, cate2, title, content);
 	}
 	
-	public void deleteFaq(String no) {
-		dao.deleteFaq(no);
+	public int deleteFaq(String no) {
+		return dao.deleteFaq(no);
 	}
 	
 	

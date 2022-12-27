@@ -3,12 +3,47 @@
 <jsp:include page="/admin/_header.jsp"/>
 <script>
 
-$(function(){
-	$('select[name=cate]').click(function(){
+	$(document).ready(function(){
+	    //최상단 체크박스 클릭
+	    $("#AllCheck").click(function(){
+	        //클릭되었으면
+	        if($("#AllCheck").prop("checked")){
+	            $("input[name=RowCheck]").prop("checked",true);
+	        }else{
+	            $("input[name=RowCheck]").prop("checked",false);
+	        }
+	    })
+	})
+	function deleteCheck(){
+		var chkarr = new Array();
+		var cnt = $("input[name='RowCheck']:checked").length;
+		$("input:checkbox[name='RowCheck']:checked").each(function(){
+			chkarr.push($(this).val());
+			console.log(chkarr);
+		});
 		
-	});
-});
-
+		if($("input:checkbox[name='RowCheck']:checked").length === 0) {
+			alert("삭제할 항목을 선택해 주세요.");
+			return;
+		}
+		let chk = confirm("삭제하시겠습니까?");
+		if(chk){
+			$.ajax({
+				url:'/Kmarket1/admin/cs/notice/delete.do',
+				type:'post',
+				traditional: true,
+				data:{'chkarr':chkarr},
+				dataType:'json',
+				success:function(data){
+					if(data.result > 0){
+						location.reload(true);
+					}else{
+						window.alert(data.message);
+					}
+				}
+			});
+		}
+	}
 </script>
      <section id="admin-notice-list">
          <nav>
@@ -27,7 +62,7 @@ $(function(){
          	</select>
                  <table>
                       <tr>
-                       <th><input type="checkbox"></th>
+                       <th><input type="checkbox" id="AllCheck"/></th>
                        <th>번호</th>
                        <th>유형</th>
                        <th>제목</th>
@@ -37,7 +72,7 @@ $(function(){
                       </tr>
                       <c:forEach var="notice" items="${articles}">
         			  <tr>
-         			   <td><input type="checkbox" name="all" value="${notice.no}"></td>
+         			   <td><input type="checkbox" name="RowCheck" value="${notice.no}"></td>
                 	   <td>${notice.no}</td>
                        <td>${notice.cate}</td>
                        <td><a href="/Kmarket1/admin/cs/notice/view.do?cate=${notice.cate}&no=${notice.no}&pg=${pg}">${notice.title}</a></td>
@@ -76,7 +111,7 @@ $(function(){
 		            	<a href="/Kmarket1/admin/cs/notice/list.do?pg=${pageGroupStart+1}" class="next">다음</a>
 		            </c:if>
                  </div>
-                    <a href="/Kmarket1/admin/cs/notice/delete.do?no=${item.no}" class="btnDelete">선택삭제</a>
+                    <a href="#" class="btnDelete" onclick="deleteCheck()">선택삭제</a>
                     <a href="/Kmarket1/admin/cs/notice/write.do" class="btnWrite">작성하기</a>
 		</article>
      </section>

@@ -9,7 +9,7 @@
                     </p>
                 </nav>
 				<form action="/Kmarket1/admin/cs/faq/modify.do" method="post">
-                <input type="text" name="no" value="${faq.no}"/>
+                <input type="hidden" name="no" value="${faq.no}"/>
                 <article class="list">
 	               <table>
 	               	<tr>

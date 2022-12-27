@@ -76,16 +76,16 @@ public class CsSQL {
 	public static final String SELECT_COUNT_QNA = "select count(`no`) from `km_cs_qna` where `cate`=?";
 	public static final String SELECT_COUNT_QNAS = "select count(`no`) from `km_cs_qna`";
 	
-	public static final String SELECT_QNAS_GROUP = "select `no`, `cate2`, `title`, `uid`, `rdate`, `cate` from `km_cs_qna` "
+	public static final String SELECT_QNAS_GROUP = "select `no`, `cate2`, `title`, `uid`, `rdate`, `cate`, `comment` from `km_cs_qna` "
 													+"order by `no` DESC "
 													+"limit ?, 10";
 	
-	public static final String SELECT_QNAS_CATE = "select `no`, `cate2`, `title`, `uid`, `rdate`, `cate` from `km_cs_qna` "
+	public static final String SELECT_QNAS_CATE = "select `no`, `cate2`, `title`, `uid`, `rdate`, `cate`,`comment`  from `km_cs_qna` "
 													+"where `cate`=?"
 													+"order by `no` DESC "
 													+"limit ?, 10";
 	
-	public static final String SELECT_ARTICLE_QNA = "select `cate2`, `title`,`uid`, `rdate`, `content`, `cate`, `comment` from `km_cs_qna` where `no`=?";
+	public static final String SELECT_ARTICLE_QNA = "select `no`, `cate2`, `title`,`uid`, `rdate`, `content`, `cate`, `comment` from `km_cs_qna` where `no`=?";
 	public static final String SELECT_CATE_QNA = "select `cate` from km_cs_qna";
 	
 	public static final String INSERT_ARTICLE_QNA = "insert into `km_cs_qna` set "
@@ -96,6 +96,9 @@ public class CsSQL {
 												+ "`content`=?, "
 												+ "`regip`=?, "
 												+ "`rdate`=now()";
+	
+	public static final String INSERT_COMMENT_QNA = "update `km_cs_qna` SET `comment`=? where `no`=?";
+	public static final String DELETE_QNA = "delete from `km_cs_qna` where `no`=?";
 	
 	
 }

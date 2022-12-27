@@ -39,10 +39,8 @@
                 <tr>
                   <td><a href="/Kmarket1/cs/qna/view.do?no=${qna.no}&cate=${qna.cate}">[${qna.cate2}]${qna.title}</a></td>
                   <td>
-                  	<c:choose>
-                  	 <c:when test="${qna.comment eq 0}"><span style="color:#8C8C8C; font-weight:bold; font-size:13px">검토중</span></c:when>
-                  	 <c:otherwise><span style="color:#3DB7CC; font-weight:bold; font-size:13px">답변완료</span></c:otherwise>
-                  	</c:choose>
+						<c:if test="${qna.comment eq null}"><span style="color:#8C8C8C; font-weight:bold; font-size:13px">검토중</span></c:if>
+	                  	<c:if test="${qna.comment ne null}"><span style="color:#3DB7CC; font-weight:bold; font-size:13px">답변완료</span></c:if>
                   </td>
              		<c:choose>
 					<c:when test="${fn:length(qna.uid) gt 5}">

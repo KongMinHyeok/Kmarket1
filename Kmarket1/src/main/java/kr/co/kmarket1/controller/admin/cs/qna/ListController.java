@@ -27,8 +27,8 @@ public class ListController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	
 		String cate  = req.getParameter("cate");
+		String cate2  = req.getParameter("cate2");
 		String pg 	 = req.getParameter("pg");
-		String group = req.getParameter("group");
 		
 		int start = 0;
 		int currentPage = 1;
@@ -69,8 +69,8 @@ public class ListController extends HttpServlet{
 		}
 
 		req.setAttribute("cate", cate);
+		req.setAttribute("cate2", cate2);
 		req.setAttribute("pg", pg);
-		req.setAttribute("group", group);
 		req.setAttribute("lastPageNum", lastPageNum);
 		req.setAttribute("currentPage", currentPage);
 		req.setAttribute("currentPageGroup", currentPageGroup);

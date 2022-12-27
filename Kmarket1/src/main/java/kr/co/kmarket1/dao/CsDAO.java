@@ -400,6 +400,7 @@ public List<CsArticleVO> selectQnasGroup(int start) {
 				qna.setUid(rs.getString(4));
 				qna.setRdate(rs.getString(5).substring(2,10));
 				qna.setCate(rs.getString(6));
+				qna.setComment(rs.getString(7));
 				
 				qnas.add(qna);
 			}
@@ -431,6 +432,7 @@ public List<CsArticleVO> selectQnasGroup(int start) {
 				qna.setUid(rs.getString(4));
 				qna.setRdate(rs.getString(5).substring(2, 10));
 				qna.setCate(rs.getString(6));
+				qna.setComment(rs.getString(7));
 				
 				qnas.add(qna);
 			}
@@ -503,13 +505,14 @@ public List<CsArticleVO> selectQnasGroup(int start) {
 			rs = psmt.executeQuery();
 			
 			if(rs.next()) {
-				qna.setCate2(rs.getString(1));
-				qna.setTitle(rs.getString(2));
-				qna.setUid(rs.getString(3));
-				qna.setRdate(rs.getString(4).substring(2, 10));
-				qna.setContent(rs.getString(5));
-				qna.setCate(rs.getString(6));
-				qna.setComment(rs.getString(7));
+				qna.setNo(rs.getInt(1));
+				qna.setCate2(rs.getString(2));
+				qna.setTitle(rs.getString(3));
+				qna.setUid(rs.getString(4));
+				qna.setRdate(rs.getString(5).substring(2, 10));
+				qna.setContent(rs.getString(6));
+				qna.setCate(rs.getString(7));
+				qna.setComment(rs.getString(8));
 
 			}
 			close();
@@ -561,6 +564,42 @@ public List<CsArticleVO> selectQnasGroup(int start) {
 		}
 	}
 	
+	public void insertCommentQna(String comment, String no) {
+		
+		try {
+			logger.info("insertCommentQna start...");
+			
+			conn = getConnection();
+			psmt = conn.prepareStatement(CsSQL.INSERT_COMMENT_QNA);
+			psmt.setString(1, comment);
+			psmt.setString(2, no);
+			psmt.executeUpdate();
+			close();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("comment : " + comment);
+		
+	}
+	
+	public int deleteqna(String no) {
+		
+		int result = 0;
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(CsSQL.DELETE_QNA);
+			psmt.setString(1, no);
+			psmt.executeUpdate();
+			close();
+			
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("qna delete : " + no);
+		return result;
+	}
+	
 	public void insertArticleNotice(CsArticleVO article) {
 		
 		try {
@@ -581,7 +620,9 @@ public List<CsArticleVO> selectQnasGroup(int start) {
 		logger.debug("insertArticleNotice : " + article);
 	}
 	
-	public void deleteNotice(String no) {
+	public int deleteNotice(String no) {
+		
+		int result = 0;
 		
 		try {
 			conn = getConnection();
@@ -593,6 +634,7 @@ public List<CsArticleVO> selectQnasGroup(int start) {
 			logger.error(e.getMessage());
 		}
 		logger.debug("notice delete : " + no);
+		return result;
 	}
 	
 	public void updateNotice(String no, String cate, String title, String content) {
@@ -665,7 +707,9 @@ public List<CsArticleVO> selectQnasGroup(int start) {
 		}
 	}
 	
-	public void deleteFaq(String no) {
+	public int deleteFaq(String no) {
+		
+		int result = 0;
 		
 		try {
 			conn = getConnection();
@@ -678,5 +722,6 @@ public List<CsArticleVO> selectQnasGroup(int start) {
 			logger.error(e.getMessage());
 		}
 		logger.debug("Faq delete : " + no);
+		return result;
 	}
 }

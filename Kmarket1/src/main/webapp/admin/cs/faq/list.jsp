@@ -1,14 +1,50 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <jsp:include page="/admin/_header.jsp"/>
 <script>
 
-$(function(){
-	$('select[name=cate]').click(function(){
+	//체크박스 전체선택
+	$(document).ready(function(){
+	    //최상단 체크박스 클릭
+	    $("#AllCheck").click(function(){
+	        //클릭되었으면
+	        if($("#AllCheck").prop("checked")){
+	            $("input[name=RowCheck]").prop("checked",true);
+	        }else{
+	            $("input[name=RowCheck]").prop("checked",false);
+	        }
+	    })
+	})
+	function deleteCheck(){
+		var chkarr = new Array();
+		var cnt = $("input[name='RowCheck']:checked").length;
+		$("input:checkbox[name='RowCheck']:checked").each(function(){
+			chkarr.push($(this).val());
+			console.log(chkarr);
+		});
 		
-	});
-});
-
+		if($("input:checkbox[name='RowCheck']:checked").length == 0) {
+			alert("삭제할 항목을 선택해 주세요.");
+			return;
+		}
+		let chk = confirm("삭제하시겠습니까?");
+		if(chk){
+			$.ajax({
+				url:'/Kmarket1/admin/cs/faq/delete.do',
+				type:"post",
+				traditional: true,
+				data:{"chkarr":chkarr},
+				dataType:"json",
+				success:function(data){
+					if(data.result > 0){
+						location.href = "/Kmarket1/admin/cs/faq/list.do";	
+					}
+				}
+			});
+		}
+	}
+﻿
 </script>
      <section id="admin-notice-list">
          <nav>
@@ -32,7 +68,7 @@ $(function(){
          	</select>
                  <table>
                       <tr>
-                       <th><input type="checkbox"></th>
+                       <th><input type="checkbox"  id="AllCheck"/></th>
                        <th>번호</th>
                        <th>1차유형</th>
                        <th>2차유형</th>
@@ -43,7 +79,7 @@ $(function(){
                       </tr>
                       <c:forEach var="faq" items="${faqs}" begin="0" end="9">
         			  <tr>
-         			   <td><input type="checkbox" name="all" value="${faq.no}"></td>
+         			   <td><input type="checkbox" name="RowCheck" value="${faq.no}"/></td>
                 	   <td>${faq.no}</td>
                        <td>${faq.cate}</td>
                        <td>${faq.cate2}</td>
@@ -57,7 +93,7 @@ $(function(){
         			  </tr>
     			 	  </c:forEach>
                  </table>
-                    <a href="/Kmarket1/admin/cs/faq/delete.do?no=${no}" class="btnDelete">선택삭제</a>
+                    <a href="#" class="btnDelete" onclick="deleteCheck();">선택삭제</a>
                     <a href="/Kmarket1/admin/cs/faq/write.do" class="btnWrite">작성하기</a>
 
 		</article>

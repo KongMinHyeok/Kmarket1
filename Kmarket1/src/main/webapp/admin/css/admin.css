@@ -216,6 +216,17 @@ p.alert{
     background: #fff6bf url(/kmarket1/img/admin_ico_alert.png) no-repeat scroll 15px 16px;
 }
 
+.btnDeleteqna{
+    float: left;
+    padding: 10px 25px;
+    text-align: center;
+    margin-right: 20px;
+    background-color: #bcc3cb;
+    border: 1px solid #aeb0b3;
+    font-size: 20px;
+    color: #fff;
+    box-sizing: border-box;
+}
 
 .btnWrite{
     float: right;
@@ -400,6 +411,17 @@ p.alert{
     background-color: #067dfd;
     border: 1px solid #0063ce;
     border-radius: 5px;
+    font-size: 20px;
+    color: #fff;
+    box-sizing: border-box;
+}
+#admin-notice-view .btnqnaList{
+	float: right;
+    padding: 10px 30px;
+    text-align: center;
+    margin-left: 20px;
+    background-color: #067dfd;
+    border: #0063ce;
     font-size: 20px;
     color: #fff;
     box-sizing: border-box;

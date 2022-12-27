@@ -34,7 +34,7 @@
                     <a href="/Kmarket1/cs/faq/list.do?group=faq&cate=order""><span>주문/결제</span></a>
                 </li>
                 <li>
-                    <a href="/Kmarket1/cs/faq/list.do?group=faq&cate=trip""><span>배송</span></a>
+                    <a href="/Kmarket1/cs/faq/list.do?group=faq&cate=ship""><span>배송</span></a>
                 </li>
                 <li>
                     <a href="/Kmarket1/cs/faq/list.do?group=faq&cate=cancel""><span>취소/반품/교환</span></a>

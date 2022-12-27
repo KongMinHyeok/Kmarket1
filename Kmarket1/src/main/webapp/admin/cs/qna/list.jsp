@@ -4,12 +4,47 @@
 <jsp:include page="/admin/_header.jsp"/>
 <script>
 
-$(function(){
-	$('select[name=cate]').click(function(){
+	$(document).ready(function(){
+	    //최상단 체크박스 클릭
+	    $("#AllCheck").click(function(){
+	        //클릭되었으면
+	        if($("#AllCheck").prop("checked")){
+	            $("input[name=RowCheck]").prop("checked",true);
+	        }else{
+	            $("input[name=RowCheck]").prop("checked",false);
+	        }
+	    })
+	})
+	function deleteCheck(){
+		var chkarr = new Array();
+		var cnt = $("input[name='RowCheck']:checked").length;
+		$("input:checkbox[name='RowCheck']:checked").each(function(){
+			chkarr.push($(this).val());
+			console.log(chkarr);
+		});
 		
-	});
-});
-
+		if($("input:checkbox[name='RowCheck']:checked").length === 0) {
+			alert("삭제할 항목을 선택해 주세요.");
+			return;
+		}
+		let chk = confirm("삭제하시겠습니까?");
+		if(chk){
+			$.ajax({
+				url:'/Kmarket1/admin/cs/qna/delete.do',
+				type:'post',
+				traditional: true,
+				data:{'chkarr':chkarr},
+				dataType:'json',
+				success:function(data){
+					if(data.result > 0){
+						location.reload(true);
+					}else{
+						window.alert(data.message);
+					}
+				}
+			});
+		}
+	}
 </script>
      <section id="admin-notice-list">
          <nav>
@@ -33,7 +68,7 @@ $(function(){
          	</select>
                  <table>
                       <tr>
-                       <th><input type="checkbox"></th>
+                       <th><input type="checkbox" id="AllCheck"/></th>
                        <th>번호</th>
                        <th>1차유형</th>
                        <th>2차유형</th>
@@ -44,11 +79,14 @@ $(function(){
                       </tr>
                       <c:forEach var="qna" items="${articles}" begin="0" end="9">
         			  <tr>
-         			   <td><input type="checkbox" name="all" value="${qna.no}"></td>
+         			   <td><input type="checkbox" name="RowCheck" value="${qna.no}"></td>
                 	   <td>${qna.no}</td>
                        <td>${qna.cate}</td>
                        <td>${qna.cate2}</td>
-                       <td><a href="/Kmarket1/admin/cs/qna/view.do?cate=${qna.cate}&no=${qna.no}&cate2=${qna.cate2}&pg=${pg}">${qna.title}</a></td>
+                       <td>
+                       <c:if test="${qna.comment eq null}"><a href="/Kmarket1/admin/cs/qna/reply.do?cate=${qna.cate}&no=${qna.no}&cate2=${qna.cate2}&pg=${pg}">${qna.title}</a></c:if>
+                       <c:if test="${qna.comment ne null}"><a href="/Kmarket1/admin/cs/qna/view.do?cate=${qna.cate}&no=${qna.no}&cate2=${qna.cate2}&pg=${pg}">${qna.title}</a></c:if>
+                       </td>
 	                   <c:choose>
 						<c:when test="${fn:length(qna.uid) gt 5}">
 							<td>${fn:substring (qna.uid,0,fn:length(qna.uid)-3)}***</td>
@@ -59,8 +97,8 @@ $(function(){
 	                   </c:choose>
                        <td>${qna.rdate}</td>
 				 	   <td>
-						<c:if test="${qna.comment eq 0}"><a href="/kmarket1/cs/qna/reply.do?cate=${qna.cate}&no=${qna.no}&pg=${pg}"><span style="color:#8C8C8C; font-weight:bold; font-size:13px">검토중</span></a></c:if>
-	                  	<c:if test="${qna.comment ne 0}"><span style="color:#3DB7CC; font-weight:bold; font-size:13px">답변완료</span></c:if>
+						<c:if test="${qna.comment eq null}"><span style="color:#8C8C8C; font-weight:bold; font-size:13px">검토중</span></c:if>
+	                  	<c:if test="${qna.comment ne null}"><span style="color:#3DB7CC; font-weight:bold; font-size:13px">답변완료</span></c:if>
                   	   </td>
         			  </tr>
     			 	  </c:forEach>
@@ -91,8 +129,7 @@ $(function(){
 		            	<a href="/Kmarket1/admin/cs/qna/list.do?pg=${pageGroupStart+1}" class="next">다음</a>
 		            </c:if>
                  </div>
-                    <a href="/Kmarket1/admin/cs/qna/delete.do?no=${no}" class="btnDelete">선택삭제</a>
-                    <a href="/Kmarket1/admin/cs/qna/write.do" class="btnWrite">작성하기</a>
+                    <a href="#" class="btnDelete" onclick="deleteCheck();">선택삭제</a>
 
 		</article>
      </section>
