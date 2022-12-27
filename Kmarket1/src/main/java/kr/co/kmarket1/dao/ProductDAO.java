@@ -593,26 +593,12 @@ public class ProductDAO extends DBHelper{
 		logger.debug("carts : " + carts);
 		return carts;
 	}
-	public int deleteProductCart(String cartNo) {
-		int result = 0;
-		try {
-			logger.info("deleteProductCart start...");
-			conn = getConnection();
-			psmt = conn.prepareStatement(ProductSQL.DELETE_PRODUCT_CART);
-			psmt.setString(1, cartNo);
-			
-			result = psmt.executeUpdate();
-			close();
-		} catch (Exception e) {
-			logger.error(e.getMessage());
-		}
-		logger.debug("result : " + result);
-		return result;
-	}
+	
 	// 바로구매 햇을때 상품 불러오기
 	public ProductVO selectOrderProduct(String prodNo, String count) {
 		ProductVO vo = new ProductVO();
 		try {
+			logger.info("selectOrderProduct start...");
 			conn = getConnection();
 			psmt = conn.prepareStatement(ProductSQL.SELECT_PRODUCT);
 			psmt.setString(1, prodNo);

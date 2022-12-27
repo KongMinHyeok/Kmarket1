@@ -29,7 +29,6 @@
 	  */
 	  // 포인트 적용, order에서 complete 넘기기, 다이렉트 오더 해야함
 	  $(document).ready(function(){
-	    	
 	    	// 전체 선택
 	    	$("input[name=all]").click(function(){
 	    		if ($(this).is(":checked")){
@@ -56,7 +55,6 @@
 	  			 });
 	    		}
 	    	});
-	    	
 	    	/************************************/
 	    	function setTotalInfo(){
 	    		
@@ -97,6 +95,7 @@
 	    	$("input[name=postcode]").click(function(){
 	    		postcode();
 	    	});
+	    	$()
 	  });
     </script>
 </head>
@@ -242,7 +241,7 @@
                     <p>HOME > 장바구니 > 주문결제</p>
                 </nav>
                 <!-- 주문 결제 창 -->
-                <form action="#">
+                <form action="#" method="get">
                     <table border="0">
                         <thead>
                             <tr>
@@ -359,7 +358,7 @@
                         <article class="discount">
                             <h1>할인정보</h1>
                             <div>
-                                <p>현재 포인트 : <span>${sessMember.point}</span>점</p>
+                                <p>현재 포인트 : <span class="myPoint">${sessMember.point}</span>점</p>
                                 <label>
                                     <input type="text" name="point">점 
                                     <input type="button" class="usePoint" value="적용">

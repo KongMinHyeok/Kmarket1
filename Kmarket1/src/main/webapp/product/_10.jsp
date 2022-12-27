@@ -24,4 +24,35 @@
         </c:when>
         </c:choose>
 	</p>
-	           </nav>
+	<!-- 
+	</nav>
+	           <c:choose>
+	           <c:when test="${prodCate1 eq '10'}">
+	           <em>브랜드패션</em>
+	           </c:when>
+	           <c:when test="${prodCate1 eq '11'}">
+	           <em>패션의류·잡화·뷰티</em>
+	           </c:when>
+	           <c:when test="${prodCate1 eq '12'}">
+	           <em>유아동</em>
+	           </c:when>
+	           <c:when test="${prodCate1 eq '13'}">
+	           <em>식품·생필품</em>
+	           </c:when>
+	           <c:when test="${prodCate1 eq '14'}">
+	           <em>홈데코·문구·취미·반려</em>
+	           </c:when>
+	           <c:when test="${prodCate1 eq '15'}">
+	           <em>컴퓨터·디지털·가전</em>
+	           </c:when>
+	           <c:when test="${prodCate1 eq '16'}">
+	           <em>스포츠·건강·렌탈</em>
+	           </c:when>
+	           <c:when test="${prodCate1 eq '17'}">
+	           <em>자동차·공구</em>
+	           </c:when>
+	           <c:when test="${prodCate1 eq '18'}">
+	           <em>여행·도서·티켓·e쿠폰</em>
+	           </c:when>
+	           </c:choose>
+	 -->

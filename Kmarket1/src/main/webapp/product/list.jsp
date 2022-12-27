@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -172,14 +174,14 @@
                         <c:forEach var="product" items="${products}">
                         <tr>
                             <!-- img는 예시 사이트에서 받아왔음 -->
-                            <td><a href="#" class="goods"><img src="./img/120x120.png" alt="상품이미지"></a></td>
+                            <td><a href="/Kmarket1/product/view.do?prodNo=${product.prodNo}&prodCate1=${product.prodCate1}&prodCate2=${product.prodCate2}" class="goods"><img src="./img/120x120.png" alt="상품이미지"></a></td>
                             <td>
                                 <h3 class="name">${product.prodName}</h3>
                                 <a href="/Kmarket1/product/view.do?prodNo=${product.prodNo}&prodCate1=${product.prodCate1}&prodCate2=${product.prodCate2}" class="desc">${product.descript}</a>
                             </td>
                             <td>
                                 <ul>
-                                    <li><ins class="discount-price">${product.price * ((100 - product.discount)/100)}</ins></li>
+                                    <li><ins class="discount-price"><fmt:formatNumber value="${product.price * ((100 - product.discount)/100)}" pattern="#,###"/></ins></li>
                                     <li>
                                         <!-- del태그는 텍스트 한가운데 라인을 추가하여 문서에서 삭제된 텍스트 표현-->
                                         <del class="original-price">${product.price}</del>
