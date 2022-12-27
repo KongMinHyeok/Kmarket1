@@ -29,10 +29,12 @@
 	  */
 	  // 포인트 적용, order에서 complete 넘기기, 다이렉트 오더 해야함
 	  $(document).ready(function(){
+		  
 	    	// 전체 선택
 	    	$("input[name=all]").click(function(){
+	    		
 	    		if ($(this).is(":checked")){
-	    			$('input[name=chkProduct]').each(function() {
+	    			$('input[name=cartNo]').each(function() {
 
 	    			      this.checked = true; //checked 처리
 
@@ -40,19 +42,34 @@
 
 	    			            console.log(this.value); 
 								setTotalInfo();
-	    			      }
+	    					}
 
-
-	    			 });
+	    			});
 	    			
 	    		}else{
-	    			$('input[name=chkProduct]').each(function() {
+	    			$('input[name=cartNo]').each(function() {
 
 	  			      this.checked = false; //checked 해제 처리
 						setTotalInfo();
 
 
-	  			 });
+	  			 	});
+	    	}
+	  });
+	    	$('.usePoint').click(function(){
+	    		let myPoint = ${sessMember.point};
+	    		let usePoint = $('input[name=usePoint]').val();
+	    		
+	    		// 5000이하 거부
+	    		if(usePoint < 5000){
+	    			alert('포인트는 5000원부터 사용가능합니다');
+	    			$('.usePoint').prop('disabled', true);
+	    			return false;
+	    		}else if(usePoint > myPoint){
+	    			alert('가지고 있는 포인트 내에서 사용해 주세요');
+	    			return false;
+	    		}else{
+	    			$('.dcPoint').text(usePoint);
 	    		}
 	    	});
 	    	/************************************/
@@ -69,17 +86,17 @@
 		    	$(".cart_info_td").each(function(index, element){
 		    		
 		    	
-		    		if($(element).find("input[name=chkProduct]").is(":checked") === true){ //체크여부
+		    		if($(element).find("input[name=cartNo]").is(":checked") === true){ //체크여부
 		    		
 		    		totalPrice += parseInt($(element).find(".price").val())*parseInt($(element).find(".count").val());
 		    		totalCount += parseInt($(element).find(".count").val());
 		    		totalDiscount += parseInt($(element).find(".discount").val());
 		    		totalDelivery += parseInt($(element).find(".delivery").val());
-		    		usePoint += parseInt($(element).find(".usePoint").val());
 		    		
 		    		}
 		    	});
 		    	/* 최종 가격 */
+		    	
 		    	finalTotalPrice = totalPrice - totalDiscount + totalDelivery;
 		    	/* 값 삽입 */
 		    	$('.totalPrice').text(totalPrice);			
@@ -87,15 +104,33 @@
 				$('.totalDiscount').text(' - '+totalDiscount);			
 				$('.totalDelivery').text(totalDelivery);			
 				$('.finalTotalPrice').text(finalTotalPrice+'원');
-				$('.pointDiscount').text('-'+usePoint)
+				
 	    	}
-	    	$("input[name=chkProduct]").on("change", function(){
+	    	$("input[name=cartNo]").on("change", function(){
 	    		setTotalInfo($(".cart_info_td"));
 	    	});
 	    	$("input[name=postcode]").click(function(){
 	    		postcode();
 	    	});
-	    	$()
+	    	$(".complete").click(function(){
+	    		
+	    		let recipName = $('input[name=orderer]').val();
+	    		let recipHp = $('input[name=hp]').val();
+	    		let recipZip = $('input[name=zip]').val();
+	    		let recipAddr1 = $('input[name=addr1]').val();
+	    		let recipAddr2 = $('input[name=addr2]').val();
+	    		let ordUid = $('input[name=uid]').val();
+	    		let ordCount = parseInt($('.totalCount').text());
+	    		let ordPrice = parseInt($('.totalPrice').text());
+	    		let ordDiscount = parseInt($('.totalDiscount').text());
+	    		let ordDelivery = parseInt($('.totalDelivery').text());
+	    		let savePoint = parseInt($('.savePoint').text());
+	    		let usedPoint = $('input[name=usePoint]').val();
+	    		let ordTotPrice = parseInt($('.finalTotalPrice').text());
+	    		let ordPayment = $('input[name=payment]:checked').val();
+	    	});
+	    	
+	    	
 	  });
     </script>
 </head>
@@ -259,12 +294,12 @@
                         <c:forEach var="cart" items="${carts}">
                             <tr>
                                 <td class="cart_info_td">
-                                	<input type="checkbox" name="chkProduct" value="${cart.cartNo}">
+                                	<input type="checkbox" name="cartNo" value="${cart.cartNo}">
                                 	<input type="hidden" class="prodNo" name="prodNo" value="${cart.prodNo}">
                                 	<input type="hidden" class="count" value="${cart.count}">
                                 	<input type="hidden" class="price" value="${cart.price}">
                                 	<input type="hidden" class="discount" value="${cart.price * cart.count * (cart.discount/100)}">
-                                	<input type="hidden" class="point" value="${cart.point}">
+                                	<input type="hidden" class="point" value="${cart.point * cart.count}">
                                 	<input type="hidden" class="delivery" value="${cart.delivery}">
                                 	<input type="hidden" class="total" value="${cart.total - cart.price * cart.count * (cart.discount/100)}">
                                 </td>
@@ -312,14 +347,24 @@
                                 </tr>
                                 <tr>
                                     <td>포인트 할인</td>
-                                    <td class="usePoint">0</td>
+                                    <td class="dcPoint">0</td>
                                 </tr>
                                 <tr>
                                     <td>전체주문금액</td>
                                     <td class="finalTotalPrice">0</td>
                                 </tr>
+                                <tr>
+                                	<td>적립 포인트</td>
+                                	<td class="savePoint">
+	                                	<c:set var="sum" value="0"/>
+		                        		<c:forEach var="cart" items="${carts}">
+			                        	<c:set var="sum" value="${sum+cart.point}"/>
+			                        	</c:forEach>
+			                        	<c:out  value="${sum}"/>
+                                	</td>
+                                </tr>
                             </table>
-                            <input type="submit" name="" value="결제하기">
+                            <input type="button" name="complete" class="complete" value="결제하기">
                             <input type="hidden" name="uid" value="${sessMember.uid}">
                         </div>
                         <article class="delivery">
@@ -360,8 +405,8 @@
                             <div>
                                 <p>현재 포인트 : <span class="myPoint">${sessMember.point}</span>점</p>
                                 <label>
-                                    <input type="text" name="point">점 
-                                    <input type="button" class="usePoint" value="적용">
+                                    <input type="text" name="usePoint">점 
+                                    <input type="button" class="btn usePoint" value="적용">
                                 </label>
                                 <span>
                                     포인트 5,000점 이상이면 현금처럼 사용 가능합니다.
@@ -373,15 +418,15 @@
                             <div>
                                 <span>신용카드</span>
                                 <p>
-                                    <label><input type="radio" name="payment" value="type1">신용카드 결제</label>
-                                    <label><input type="radio" name="payment" value="type2">체크카드 결제</label>
+                                    <label><input type="radio" name="payment" value="1">신용카드 결제</label>
+                                    <label><input type="radio" name="payment" value="2">체크카드 결제</label>
                                 </p>
                             </div>
                             <div>
                                 <span>계좌이체</span>
                                 <p>
-                                    <label><input type="radio" name="payment" value="type3">실시간 계좌이체</label>
-                                    <label><input type="radio" name="payment" value="type4">무통장 입금</label>
+                                    <label><input type="radio" name="payment" value="3">실시간 계좌이체</label>
+                                    <label><input type="radio" name="payment" value="4">무통장 입금</label>
                                 </p>
                             </div>
                             <div>

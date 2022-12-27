@@ -24,8 +24,9 @@
         </c:when>
         </c:choose>
 	</p>
-	<!-- 
+	
 	</nav>
+	<!-- 
 	           <c:choose>
 	           <c:when test="${prodCate1 eq '10'}">
 	           <em>브랜드패션</em>

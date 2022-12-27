@@ -1,6 +1,7 @@
 package kr.co.kmarket1.controller.product;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,8 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.JsonObject;
+
 import kr.co.kmarket1.dao.ProductDAO;
 import kr.co.kmarket1.vo.ProductCartVO;
+import kr.co.kmarket1.vo.ProductOrderVO;
 import kr.co.kmarket1.vo.ProductVO;
 
 @WebServlet("/product/order.do")
@@ -53,14 +57,37 @@ public class OrderController extends HttpServlet{
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-// 여기부터 해야함		
-		// 주문번호 하나에 count는 중복된거 다
+		String cartNo = req.getParameter("cartNo");
 		String prodNo = req.getParameter("prodNo");
-		String ordUid = req.getParameter("uid");
-		String recipName = req.getParameter("orderer");
-		String recipHp = req.getParameter("hp");
-		String recipZip = req.getParameter("zip");
-		String recipAddr1 = req.getParameter("addr1");
-		String recipAddr2 = req.getParameter("addr2");
+		String recipname = req.getParameter("recipName");
+		String recipHp = req.getParameter("recipHp");
+		String recipZip = req.getParameter("recipZip");
+		String recipAddr1 = req.getParameter("recipAddr1");
+		String recipAddr2 = req.getParameter("recipAddr2");
+		String ordUid = req.getParameter("ordUid");
+		String ordCount = req.getParameter("ordCount");
+		String ordPrice = req.getParameter("ordPrice");
+		String ordDiscount = req.getParameter("ordDiscount");
+		String ordDelivery = req.getParameter("ordDelivery");
+		String savePoint = req.getParameter("savePoint");
+		String usedPoint = req.getParameter("usedPoint");
+		String ordTotPrice = req.getParameter("ordTotPrice");
+		String ordPayment = req.getParameter("ordPayment");
+		
+		ProductOrderVO vo = new ProductOrderVO();
+		vo.setRecipname(recipname);
+		vo.setRecipHp(recipHp);
+		vo.setRecipZip(recipZip);
+		vo.setRecipAddr1(recipAddr1);
+		vo.setRecipAddr2(recipAddr2);
+		vo.setOrdUid(ordUid);
+		vo.setOrdCount(ordCount);
+		vo.setOrdPrice(ordPrice);
+		vo.setOrdDiscount(ordDiscount);
+		vo.setOrdDelivery(ordDelivery);
+		vo.setSavePoint(savePoint);
+		vo.setUsedPoint(usedPoint);
+		vo.setOrdTotPrice(ordTotPrice);
+		vo.setOrdPayment(ordPayment);
 	}
 }
