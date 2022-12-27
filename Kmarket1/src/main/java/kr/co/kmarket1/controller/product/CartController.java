@@ -17,7 +17,9 @@ import javax.servlet.http.HttpSession;
 import com.google.gson.JsonObject;
 
 import kr.co.kmarket1.dao.ProductDAO;
+import kr.co.kmarket1.vo.MemberVO;
 import kr.co.kmarket1.vo.ProductCartVO;
+import kr.co.kmarket1.vo.ProductOrderVO;
 import kr.co.kmarket1.vo.ProductVO;
 
 @WebServlet("/product/cart.do")
@@ -48,11 +50,11 @@ public class CartController extends HttpServlet{
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String orderCheck[] = req.getParameterValues("arr");
-		System.out.println(orderCheck);
+		String chks[] = req.getParameterValues("chk");
+		
 		List<ProductCartVO> carts = new ArrayList<>();
 		
-		for(String cartNo : orderCheck) {
+		for(String cartNo : chks) {
 			ProductCartVO vo = ProductDAO.getInstance().selectProductOrders(cartNo);
 			carts.add(vo);
 		}

@@ -49,12 +49,10 @@ public class ProductSQL {
 
 	// 장바구니 선택 삭제
 	public static final String DELETE_PRODUCT_CART = "DELETE FROM `km_product_cart` WHERE `cartNo` = ? ";
-	/*  ----------------------------- 이거 어캐써야하지?------------------------------*/
-	public static final String SELECT_PRODUCT_ORDERS = "SELECT a.*, b.prodName, b.descript, b.thumb1 FROM `km_product_cart` AS a "
+	
+	
+	public static final String SELECT_PRODUCT_ORDERS = "SELECT a.*, b.prodName, b.descript, b.thumb3 FROM `km_product_cart` AS a "
 															+ "JOIN `km_product` AS b ON a.prodNo = b.prodNo WHERE cartNo = ? ";
-	// 상품 상세 정보에서 바로 구매창
-	public static final String SELECT_PRODUCT_DIRECT_ORDER = "SELECT a.*, b.prodName, b.descript, b.thumb1 FROM `km_product_cart` AS a "
-															+ "JOIN `km_product` AS b ON a.prodNo = b.prodNo WHERE a.prodNo=? AND a.count=?";
 	// complete
 	public static final String SELECT_ORDER_BY_ORDNO = "select a.*, b.name, b.hp from `km_product_order` as a "
 													+ "join `km_member` as b "

@@ -97,14 +97,14 @@
     	//order버튼 누르면 장바구니랑 다르게 바로 주문으로 넘어가야해서 코드 하나 더 만들어야한다
     	$('.order').click(function(){
 			let count = $('input[name=num]').val();
-    		let uid = $('input[name=uid]').val();
+    		let uid = "${sessMember.uid}";
 
 			
 			if(uid == ''){
 				alert('로그인 후 이용해주세요');
 				location.href= '/Kmarket1/member/login.do';
 				}else{
-					location.href= "/Kmarket1/product/order.do?prodNo=${product.prodNo}&count="+count;
+					location.href= "/Kmarket1/product/order.do?prodNo="+${product.prodNo}+"&count="+count;
 				};
 			
     	});

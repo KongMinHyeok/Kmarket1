@@ -1,7 +1,6 @@
 package kr.co.kmarket1.controller.product;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,8 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.google.gson.JsonObject;
+import javax.servlet.http.HttpSession;
 
 import kr.co.kmarket1.dao.ProductDAO;
 import kr.co.kmarket1.vo.ProductCartVO;
@@ -29,34 +27,30 @@ public class OrderController extends HttpServlet{
 	}
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		ProductDAO dao = ProductDAO.getInstance();
-		
 		String prodNo = req.getParameter("prodNo");
 		String count = req.getParameter("count");
-		String uid = req.getParameter("uid");
-		String cartNo = req.getParameter("cartNo");
 		
-
-		req.setAttribute("prodNo", prodNo);
-		req.setAttribute("uid", uid);
-		req.setAttribute("count", count);
+		ProductVO vo = ProductDAO.getInstance().selectOrderProduct(prodNo, count);
+		List<ProductVO> carts = new ArrayList<>();
+		carts.add(vo);
 		
-		if(cartNo == null) {
-			List<ProductVO> carts = null;
-			dao.selectProductDirectOrder(prodNo, count);
-			req.setAttribute("carts", carts);
+		req.setAttribute("carts", carts);
+		HttpSession session = req.getSession();
+		session.setAttribute("carts", carts);
 
-		}else {
-			List<ProductCartVO> carts = null;
-			dao.selectProductOrders(cartNo);
-			req.setAttribute("carts", carts);
-		}
-
+		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/product/order.jsp");
 		dispatcher.forward(req, resp);
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		HttpSession session = req.getSession();
+		@SuppressWarnings("unchecked")
+		List<ProductCartVO> carts = (List<ProductCartVO>) session.getAttribute("carts");
 		
+		req.setAttribute("carts", carts);
+		
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/product/order.jsp");
+		dispatcher.forward(req, resp);
 	}
 }

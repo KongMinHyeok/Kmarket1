@@ -529,6 +529,7 @@ public class ProductDAO extends DBHelper{
 		}catch(Exception e) {
 			logger.error(e.getMessage());
 		}
+		logger.debug("cart : " + cart);
 		return cart;
 	}
 	// 리뷰 총갯수
@@ -608,43 +609,70 @@ public class ProductDAO extends DBHelper{
 		logger.debug("result : " + result);
 		return result;
 	}
-	// 바로구매 햇을때 cart 목록 불러오기
-	public List<ProductVO> selectProductDirectOrder(String prodNo, String count) {
-		List<ProductVO> carts = new ArrayList<>();
+	// 바로구매 햇을때 상품 불러오기
+	public ProductVO selectOrderProduct(String prodNo, String count) {
+		ProductVO vo = new ProductVO();
 		try {
-			logger.info("selectProductDirectOrder start...");
 			conn = getConnection();
-			psmt = conn.prepareStatement(ProductSQL.SELECT_PRODUCT_DIRECT_ORDER);
+			psmt = conn.prepareStatement(ProductSQL.SELECT_PRODUCT);
 			psmt.setString(1, prodNo);
-			psmt.setString(2, count);
-			
 			rs = psmt.executeQuery();
-			
 			if(rs.next()) {
-				ProductVO product = new ProductVO();
-				product.setCartNo(rs.getInt(1));
-				product.setUid(rs.getString(2));
-				product.setProdNo(rs.getInt(3));
-				product.setCount(rs.getInt(4));
-				product.setPrice(rs.getInt(5));
-				product.setDiscount(rs.getInt(6));
-				product.setPoint(rs.getInt(7));
-				product.setDelivery(rs.getInt(8));
-				product.setTotal(rs.getInt(9));
-				product.setRdate(rs.getString(10));
-				product.setProdName(rs.getString(11));
-				product.setDescript(rs.getString(12));
-				product.setThumb3(rs.getString(13));
-				carts.add(product);
+				vo.setProdNo(rs.getString(1));
+				vo.setProdName(rs.getString(4));
+				vo.setDescript(rs.getString(5));
+				vo.setPrice(rs.getInt(8));
+				vo.setDiscount(rs.getInt(9));
+				vo.setPoint(rs.getInt(10));
+				vo.setDelivery(rs.getInt(13));
+				vo.setThumb1(rs.getString(17));
+				vo.setCount(count);
 			}
 			close();
-			
 		}catch(Exception e) {
 			logger.error(e.getMessage());
 		}
-		logger.debug("carts : " + carts);
+		return vo;
+	};
+	// 주문 번호로 오더
+	public List<ProductCartVO> selectOrders(String cartNo) {
+		
+		List<ProductCartVO> carts = new ArrayList<>();
+		
+		try {
+			logger.info("selectOrders start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement("SELECT a.*, b.`prodName`, b.`thumb3`, b.`descript` FROM `km_product_cart` AS a "
+					+"JOIN `km_product` as b ON a.prodNo = b.prodNo where `cartNo` in ?");
+			psmt.setString(1, cartNo);
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				ProductCartVO cart = new ProductCartVO();
+				cart.setCartNo(rs.getInt(1));
+				cart.setUid(rs.getString(2));
+				cart.setProdNo(rs.getInt(3));
+				cart.setCount(rs.getInt(4));
+				cart.setPrice(rs.getInt(5));
+				cart.setDiscount(rs.getInt(6));
+				cart.setPoint(rs.getInt(7));
+				cart.setDelivery(rs.getInt(8));
+				cart.setTotal(rs.getInt(9));
+				cart.setRdate(rs.getString(10));
+				cart.setProdName(rs.getString(11));
+				cart.setThumb3(rs.getString(12));
+				cart.setDescript(rs.getString(13));
+				
+				carts.add(cart);
+			}
+			close();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
 		return carts;
 	}
+		
+		
 	// select order info by ordNo
 	public ProductOrderVO selectOrderByOrdNo(int ordNo) {
 		ProductOrderVO order = null;
