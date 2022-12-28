@@ -167,11 +167,16 @@ public class ViewController extends HttpServlet{
 		
 		JsonObject json = new JsonObject();
 		PrintWriter writer = resp.getWriter();
-
+		int check = ProductDAO.getInstance().selectCountProduct(prodNo);
+			if(check == 0) {
 			int result = ProductDAO.getInstance().insertProductCart(cart);
-			
 			json.addProperty("result", result);
-			
+
+			}else {
+				int result = ProductDAO.getInstance().updateProductCart(cart);
+				json.addProperty("result", result);
+
+			}
 			writer.print(json.toString());
 		/*----------------------------------------------------*/
 		

@@ -80,45 +80,7 @@
     		setTotalInfo($(".cart_info_td"));
     	});
     	// 주문하기--------------------------------------------------------------------
-    	// km_product_order 테이블은 생각해보니까 주문페이지에서 주문을 해야 만들어지는거 같음
-/*
-    	$('input[name=order]').click(function(e){
-			e.preventDefault();
-    		let chk2 = [];
-    		let chkArr2 = $("input[name=chkProduct]:checked").length;
-    		let checkOrder = confirm('선택한 상품을 주문하시겠습니까?');
-    		
-    		$('input[name=chkProduct]:checked').each(function(){
-    			  chk2.push($(this).val());
-    		});
-    		console.log(chk2);
-    		
-    		 if(chkArr2 == 0) {
-    			 //리스트에 상품이 없으면
-    			 alert('선택한 상품이 존재하지 않습니다');
-    		 }else{
-    			 if(checkOrder){
-    				 $.ajax({
- 						url : '/Kmarket1/product/Cart.do',
- 						type : 'POST',
- 						traditional: true,
- 						data : {'chk2': chk2},
- 						dataType : 'json',
- 						success : function(data){
- 							if(data.result > 0){
- 								alert('오더 ㄱㄱ');
- 							}else{
- 								return;
- 							}
- 						}
- 						});
-    				 location.href = "/Kmarket1/product/order.do?uid="+uid;
-    			 }else{
-    				 return;
-    			 }
-    		 }
-    	});
-*/
+    	
 		$('input[name=order]').click(function(e){
 			e.preventDefault();
 			

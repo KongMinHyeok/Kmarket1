@@ -498,6 +498,42 @@ public class ProductDAO extends DBHelper{
 		}
 		return result;
 	}
+	// cart에 중복 상품 확인
+	public int selectCountProduct(String prodNo) {
+		int check = 0;
+		try {
+			logger.info("selectCountProduct start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(ProductSQL.SELECT_COUNT_PRODUCT);
+			psmt.setString(1, prodNo);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				check = rs.getInt(1);
+			}
+			close();		
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("check : " + check);
+		return check;
+	}
+	
+	// cart에 상품 있을 때 수정
+	public int updateProductCart(ProductCartVO cart) {
+		int result = 0;
+		try {
+			logger.info("updateProductCart start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(ProductSQL.UPDATE_PRODUCT_CART);
+			psmt.setInt(1, cart.getCount());
+			psmt.setInt(2, cart.getProdNo());
+			result = psmt.executeUpdate();
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return result;
+	}
 	public ProductCartVO selectProductOrders(String cartNo) {
 		ProductCartVO cart = null;
 		try {
@@ -657,6 +693,37 @@ public class ProductDAO extends DBHelper{
 		}
 		return carts;
 	}
+	//Order 테이블에 상품 추가
+	public int insertCompleteOrder(ProductOrderVO order) {
+		int result = 0;
+		try {
+			logger.info("insertCompleteOrder start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(ProductSQL.INSERT_COMPLETE_ORDER);
+			psmt.setString(1, order.getOrdUid());
+			psmt.setInt(2, order.getOrdCount());
+			psmt.setInt(3, order.getOrdPrice());
+			psmt.setInt(4, order.getOrdDiscount());
+			psmt.setInt(5, order.getOrdDelivery());
+			psmt.setInt(6, order.getSavePoint());
+			psmt.setInt(7, order.getUsedPoint());
+			psmt.setInt(8, order.getOrdTotPrice());
+			psmt.setString(9, order.getRecipName());
+			psmt.setString(10, order.getRecipHp());
+			psmt.setString(11, order.getRecipZip());
+			psmt.setString(12, order.getRecipAddr1());
+			psmt.setString(13, order.getRecipAddr2());
+			psmt.setInt(14, order.getOrdPayment());
+			psmt.setInt(15, order.getOrdComplete());
+			
+			result = psmt.executeUpdate();
+			close();
+			
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return result;
+	}
 		
 		
 	// select order info by ordNo
@@ -681,7 +748,7 @@ public class ProductDAO extends DBHelper{
 				order.setSavePoint(rs.getInt(7));
 				order.setUsedPoint(rs.getInt(8));
 				order.setOrdTotPrice(rs.getInt(9));
-				order.setRecipname(rs.getString(10));
+				order.setRecipName(rs.getString(10));
 				order.setRecipHp(rs.getString(11));
 				order.setRecipZip(rs.getString(12));
 				order.setRecipAddr1(rs.getString(13));
