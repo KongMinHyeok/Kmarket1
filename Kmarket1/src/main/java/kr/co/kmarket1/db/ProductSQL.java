@@ -33,7 +33,9 @@ public class ProductSQL {
 	
 	public static final String INSERT_PRODUCT_CART = "INSERT INTO `km_product_cart` SET "
 													+ "`uid`=?, `prodNo`=?, `count`=?, `price`=?, `discount`=?, `point`=?, `delivery`=?, `total`=?, `rdate`=?";
-													//+ ", `direct`=? ";
+	// cart에 중복된 상품이 있는지 확인
+	public static final String SELECT_COUNT_PRODUCT = "SELECT COUNT(`cartNo`) FROM `km_product_cart` where `prodNo`=?";
+	public static final String UPDATE_PRODUCT_CART = "UPDATE `km_product_cart` SET `count`=COUNT+? where `prodNo`=?";
 	
 	public static final String SELECT_REVIEWS = "SELECT a.*, b.`prodName` FROM `km_product_review` AS a "
 												+"JOIN `km_product` as b ON a.prodNo = b.prodNo "
@@ -62,5 +64,8 @@ public class ProductSQL {
 													+ "join `km_product_order_item` as b "
 													+ "on a.prodNo = b.prodNo "
 													+ "where b.ordNo = ?";
+	public static final String INSERT_COMPLETE_ORDER = "INSERT INTO `km_product_order` SET "
+													+ "`ordUid`=?, `ordCount`=?, `ordPrice`=?, `ordDiscount`=?, `ordDelivery`=?, `savePoint`=?, `usedPoint`=?, `ordTotPrice`=?, "
+													+ "`recipName`=?, `recipHp`=?, `recipZip`=?, `recipAddr1`=?, `recipAddr2`=?, `ordPayment`=?, `ordComplete`=?, `ordDate`=NOW() ";
 }
 

@@ -10,7 +10,7 @@ public class ProductOrderVO {
 	private int savePoint;
 	private int usedPoint;
 	private int ordTotPrice;
-	private String recipname;
+	private String recipName;
 	private String recipHp;
 	private String recipZip;
 	private String recipAddr1;
@@ -138,6 +138,9 @@ public class ProductOrderVO {
 	public void setOrdComplete(int ordComplete) {
 		this.ordComplete = ordComplete;
 	}
+	public void setOrdComplete(String ordComplete) {
+		this.ordComplete = Integer.parseInt(ordComplete);
+	}
 	public String getOrdDate() {
 		return ordDate;
 	}
@@ -165,11 +168,11 @@ public class ProductOrderVO {
 	public void setProdNo(String prodNo) {
 		this.prodNo = Integer.parseInt(prodNo);
 	}
-	public String getRecipname() {
-		return recipname;
+	public String getRecipName() {
+		return recipName;
 	}
-	public void setRecipname(String recipName) {
-		this.recipname = recipName;
+	public void setRecipName(String recipName) {
+		this.recipName = recipName;
 	}
 
 	

@@ -17,6 +17,7 @@ import com.google.gson.JsonObject;
 
 import kr.co.kmarket1.dao.ProductDAO;
 import kr.co.kmarket1.vo.ProductCartVO;
+import kr.co.kmarket1.vo.ProductOrderItemVO;
 import kr.co.kmarket1.vo.ProductOrderVO;
 import kr.co.kmarket1.vo.ProductVO;
 
@@ -40,15 +41,17 @@ public class OrderController extends HttpServlet{
 			carts.add(vo);
 			
 			req.setAttribute("carts", carts);
+			
 			HttpSession session = req.getSession();
 			session.setAttribute("carts", carts);
-
 			
 			RequestDispatcher dispatcher = req.getRequestDispatcher("/product/order.jsp");
 			dispatcher.forward(req, resp);
+			
 		}else {
 			HttpSession session = req.getSession();
 			List<ProductCartVO> carts = (List<ProductCartVO>) session.getAttribute("carts");
+			
 			req.setAttribute("carts", carts);
 			
 			RequestDispatcher dispatcher = req.getRequestDispatcher("/product/order.jsp");
@@ -57,14 +60,6 @@ public class OrderController extends HttpServlet{
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String cartNo = req.getParameter("cartNo");
-		String prodNo = req.getParameter("prodNo");
-		String recipname = req.getParameter("recipName");
-		String recipHp = req.getParameter("recipHp");
-		String recipZip = req.getParameter("recipZip");
-		String recipAddr1 = req.getParameter("recipAddr1");
-		String recipAddr2 = req.getParameter("recipAddr2");
-		String ordUid = req.getParameter("ordUid");
 		String ordCount = req.getParameter("ordCount");
 		String ordPrice = req.getParameter("ordPrice");
 		String ordDiscount = req.getParameter("ordDiscount");
@@ -72,22 +67,47 @@ public class OrderController extends HttpServlet{
 		String savePoint = req.getParameter("savePoint");
 		String usedPoint = req.getParameter("usedPoint");
 		String ordTotPrice = req.getParameter("ordTotPrice");
-		String ordPayment = req.getParameter("ordPayment");
 		
-		ProductOrderVO vo = new ProductOrderVO();
-		vo.setRecipname(recipname);
-		vo.setRecipHp(recipHp);
-		vo.setRecipZip(recipZip);
-		vo.setRecipAddr1(recipAddr1);
-		vo.setRecipAddr2(recipAddr2);
-		vo.setOrdUid(ordUid);
-		vo.setOrdCount(ordCount);
-		vo.setOrdPrice(ordPrice);
-		vo.setOrdDiscount(ordDiscount);
-		vo.setOrdDelivery(ordDelivery);
-		vo.setSavePoint(savePoint);
-		vo.setUsedPoint(usedPoint);
-		vo.setOrdTotPrice(ordTotPrice);
-		vo.setOrdPayment(ordPayment);
+		String recipName = req.getParameter("recipName");
+		String recipHp = req.getParameter("recipHp");
+		String recipZip = req.getParameter("recipZip");
+		String recipAddr1 = req.getParameter("recipAddr1");
+		String recipAddr2 = req.getParameter("recipAddr2");
+		
+		String ordUid = req.getParameter("ordUid");
+		String ordPayment = req.getParameter("ordPayment");
+		String ordComplete = req.getParameter("ordComplete");
+		
+		ProductOrderVO order = new ProductOrderVO();
+		order.setOrdCount(ordCount);
+		order.setOrdPrice(ordPrice);
+		order.setOrdDiscount(ordDiscount);
+		order.setOrdDelivery(ordDelivery);
+		order.setSavePoint(savePoint);
+		order.setUsedPoint(usedPoint);
+		order.setOrdTotPrice(ordTotPrice);
+		
+		order.setRecipName(recipName);
+		order.setRecipHp(recipHp);
+		order.setRecipZip(recipZip);
+		order.setRecipAddr1(recipAddr1);
+		order.setRecipAddr2(recipAddr2);
+		
+		order.setOrdUid(ordUid);
+		order.setOrdPayment(ordPayment);
+		order.setOrdComplete(ordComplete);
+		
+		
+		ProductOrderItemVO item = new ProductOrderItemVO();
+		
+		// order_item 어떻게 만들지 생각해라
+		JsonObject json = new JsonObject();
+		PrintWriter writer = resp.getWriter();
+
+		int result = ProductDAO.getInstance().insertCompleteOrder(order);
+		
+		json.addProperty("result", result);
+		
+		writer.print(json.toString());
 	}
 }
