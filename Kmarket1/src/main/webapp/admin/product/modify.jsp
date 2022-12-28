@@ -128,8 +128,8 @@
                             <td>할인율</td>
                             <td>
                                 <span>0을 입력하면 할인율 없음</span>
-                                <input id="discount" maxlength="2" value="0">
-                                <input type="hidden" name="discount" value="${product.discount}"> %
+                                <input id="discount" maxlength="2" value="${product.discount}">%
+								<span class="step_val">할인가 : <fmt:formatNumber value="${product.price - product.disPrice}" pattern="#,###" />원 (<fmt:formatNumber value="${product.disPrice}" pattern="#,###" />원 할인)</span>
                             </td>
                         </tr>
                         <tr>

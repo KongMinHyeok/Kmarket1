@@ -34,6 +34,9 @@ public class AdminProductRegisterController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		//등록 성공 여부를 위해 success 수신
+		String success = req.getParameter("success");
+		req.setAttribute("success", success);
 		
 		// cate1 리스트 불러오기
 		List<Cate1VO> cate1_1 = CateDAO.getInstance().selectCates1();
@@ -124,10 +127,16 @@ public class AdminProductRegisterController extends HttpServlet {
 		vo.setOrigin(origin);
 		vo.setIp(ip);
 		
-		AdminProductRegisterDAO.getInstance().insertAdminRegister(vo);
+		int result = AdminProductRegisterDAO.getInstance().insertAdminRegister(vo);
 		
 		//list로 리다이렉트
-		resp.sendRedirect("/Kmarket1/admin/product/list.do");
+		if(result > 0) {
+			//성공
+			resp.sendRedirect("/Kmarket1/admin/product/register.do?success=101");
+		}else {
+			//실패
+			resp.sendRedirect("/Kmarket1/admin/product/register.do?success=201");
+		}
 	}
 	
 }
