@@ -1,4 +1,4 @@
-package kr.co.kmarket1.controller.admin.product;
+package kr.co.kmarket1.controller.admin;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,12 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.JsonObject;
 
 import kr.co.kmarket1.dao.AdminProductListDAO;
-import kr.co.kmarket1.dao.AdminProductListDao;
 
 
 
 @WebServlet("/admin/product/delete.do")
-public class AdminProductDeleteController extends HttpServlet{
+public class AdminDeleteController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	
 	@Override
@@ -42,9 +41,11 @@ public class AdminProductDeleteController extends HttpServlet{
 		
 		String prodNo[] = req.getParameterValues("prodNo[]");
 		AdminProductListDAO dao = AdminProductListDAO.getInstance();
+		
 		int result = 0;
+		
 		for(int i = 0; i<prodNo.length; i++) {
-			result = dao.selectdelete(prodNo[i]);
+			result = dao.selectDelete(prodNo[i]);
 		}
 		
 		JsonObject json = new JsonObject();

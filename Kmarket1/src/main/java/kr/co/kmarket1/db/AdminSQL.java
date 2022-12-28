@@ -4,13 +4,14 @@ public class AdminSQL {
 	
 	//Admin List DAO\\
 	public static final String SELECT_ADMIN_LIST = "SELECT * FROM `km_product` ORDER BY `prodNo` DESC LIMIT ?,10";
-	//Admin 상품 갯수 출력
+	//상품 갯수 출력
 	public static final String SELECT_COUNT_TOTAL_LIST = "SELECT COUNT(*) FROM `km_product`";
-	//Admin List 삭제
+	//List 삭제
 	public static final String DELETE_ADMIN_LIST = "DELETE FROM `km_product` WHERE `prodNo`=?";
-	
-	
-	
+	//List 선택 삭제
+	public static final String SELECT_DELETE = "DELETE FROM `km_product` WHERE `prodNo`=?";
+	//List 페이지
+	public static final String COUNT_LIST_TOTAL_SELLER = "SELECT COUNT(*) FROM `km_product` WHERE `seller`=?";
 	
 	//Admin Register DAO\\
 	public static final String SELECT_PRODUCTS = "SELECT * FROM `km_product` WHERE `prodCate1`=? AND `prodCate2`=? "
@@ -50,6 +51,6 @@ public class AdminSQL {
 													 + "`detail`=?, `rdate`=now() "
 													 + "WHERE `prodNo` = ?";
 	
-	//Admin List 수정
+	//List 수정
 	public static final String MODIFY_ADMIN_LIST = "SELECT * FROM `km_product` WHERE `prodNo` = ?";
 }
