@@ -1141,7 +1141,7 @@ footer p > strong {
   #product > .order > form > .final > table tr:last-child > td:first-child {
       font-size: 20px;
   }
-  #product > .order > form > .final > table tr:last-child > td:last-child {
+  #product > .order > form > .final > table tr:last-child > td:last-child > span {
       font-size: 20px;
       color: #ff006c;
       font-weight: bold;

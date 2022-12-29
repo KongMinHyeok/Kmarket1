@@ -53,8 +53,9 @@
 	    		}else if(5000 < usePoint < myPoint){
 	    			$('.usedPoint').text(usePoint);
 	    			finalTotalPrice = finalTotalPrice - usePoint;
-	    			$('.finalTotalPrice').text(finalTotalPrice.toLocaleString());
 	    			
+	    			$('.finalTotalPrice > span').text(finalTotalPrice.toLocaleString());
+	    			$('input[name=finalTotalPrice]').val(finalTotalPrice);
 	    		}
 	    	});
 	    	/************************************/
@@ -65,12 +66,12 @@
 	    	$(".complete").click(function(){
 	    		
 	    		let ordCount = parseInt($('.finalCount').text());
-	    		let ordPrice = parseInt($('.finalPrice').text());
-	    		let ordDiscount = parseInt($('.finalDiscount').text());
-	    		let ordDelivery = parseInt($('.finalDelivery').text());
+	    		let ordPrice = $('input[name=finalPrice]').val();
+	    		let ordDiscount = parseInt($('input[name=finalDiscount]').val());
+	    		let ordDelivery = parseInt($('input[name=finalDelivery]').val());
 	    		let savePoint = parseInt($('.savePoint').text());
-	    		let usedPoint = parseInt($('.usedPoint').text());
-	    		let ordTotPrice = parseInt($('.finalTotalPrice').text());
+	    		let usedPoint = $('input[name=usePoint]').val();
+	    		let ordTotPrice = parseInt($('input[name=finalTotalPrice]').val());
 
 	    		let recipName = $('input[name=orderer]').val();
 	    		let recipHp = $('input[name=hp]').val();
@@ -100,6 +101,8 @@
 	    				"ordComplete" : ordComplete
 	    		}
 	    		
+	    		console.log(jsonData);
+	    		
 	    		$.ajax({
 	    			url : '/Kmarket1/product/order.do',
 	    			type : 'POST',
@@ -108,7 +111,7 @@
 					dataType : 'json',
 					success : function(data){
 						if(data.result > 0){
-							location.href='/Kmarket1/product/complete.do?ordNo=2'
+							location.href='/Kmarket1/product/complete.do?ordNo='+data.result
 							}
 						}
 					});
@@ -122,137 +125,7 @@
     <div id="wrapper">
                         <jsp:include page="/product/_header.jsp" />
         <main id="product">
-            <aside>
-                <ul class="category">
-                    <!-- 아이콘들 Font Awesome에서 들고온거라 복붙했음 -->     
-                    <li><i class="fa fa-bars" aria-hidden="true"></i>카테고리</li>
-                    <li>
-                        <a href="#"><i class="fas fa-tshirt"></i>패션·의류·뷰티</a>
-                        <ol>
-                            <li><a href="/Kmarket1/product/list.do?pg=1&prodCate1=10&prodCate2=10&type=1">여성의류</a></li>
-                            <li><a href="/Kmarket1/product/list.do?pg=1&prodCate1=10&prodCate2=11&type=1">남성의류</a></li>
-                            <li><a href="/Kmarket1/product/list.do?pg=1&prodCate1=10&prodCate2=12&type=1">진/캐쥬얼</a></li>
-                            <li><a href="/Kmarket1/product/list.do?pg=1&prodCate1=10&prodCate2=13&type=1">신발/가방</a></li>
-                            <li><a href="/Kmarket1/product/list.do?pg=1&prodCate1=10&prodCate2=14&type=1">주얼리/시계</a></li>
-                            <li><a href="/Kmarket1/product/list.do?pg=1&prodCate1=10&prodCate2=15&type=1">아웃도어</a></li>
-                        </ol>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fas fa-laptop"></i>가전·디지털</a>
-                        <ol>
-                            <li><a href="#">노트북/PC</a></li>
-                            <li><a href="#">가전</a></li>
-                            <li><a href="#">휴대폰</a></li>
-                            <li><a href="#">기타</a></li>
-                        </ol>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fas fa-utensils"></i>식품·생필품</a>
-                        <ol>
-                            <li><a href="#">신선식품</a></li>
-                            <li><a href="#">가공식품</a></li>
-                            <li><a href="#">건강식품</a></li>
-                            <li><a href="#">생필품</a></li>
-                        </ol>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fas fa-home"></i>홈·문구·취미</a>
-                        <ol>
-                            <li><a href="#">가구/DIY</a></li>
-                            <li><a href="#">침구·커튼</a></li>
-                            <li><a href="#">생활용품</a></li>
-                            <li><a href="#">사무용품</a></li>
-                        </ol>
-                    </li>
-                </ul><!-- 베스트상품 배너 -->
-                    <article class="best">
-                      <h1><i class="fas fa-crown"></i>베스트상품</h1>
-                      <ol>
-                      <li>
-                          <a href="#">
-                          <div class="thumb">
-                              <i>1</i><img src="./img/sample_thumb.jpg" alt="item1" />
-                          </div>
-                          <h2>상품명</h2>
-                          <div class="org_price">
-                              <del>30,000</del><span>10%</span>
-                          </div>
-                          <div class="dis_price">
-                              <ins>27,000</ins>
-                          </div>
-                          </a>
-                      </li>
-                      <li>
-                          <a href="#">
-                          <div class="thumb">
-                              <i>2</i><img src="./img/sample_thumb.jpg" alt="item1" />
-                          </div>
-                          <article>
-                              <h2>상품명</h2>
-                              <div class="org_price">
-                              <del>30,000</del>
-                              <span>10%</span>
-                              </div>
-                              <div class="dis_price">
-                              <ins>27,000</ins>
-                              </div>
-                          </article>
-                          </a>
-                      </li>
-                      <li>
-                          <a href="#">
-                          <div class="thumb">
-                              <i>3</i><img src="./img/sample_thumb.jpg" alt="item1" />
-                          </div>
-                          <article>
-                              <h2>상품명</h2>
-                              <div class="org_price">
-                              <del>30,000</del>
-                              <span>10%</span>
-                              </div>
-                              <div class="dis_price">
-                              <ins>27,000</ins>
-                              </div>
-                          </article>
-                          </a>
-                      </li>
-                      <li>
-                          <a href="#">
-                          <div class="thumb">
-                              <i>4</i><img src="./img/sample_thumb.jpg" alt="item1" />
-                          </div>
-                          <article>
-                              <h2>상품명</h2>
-                              <div class="org_price">
-                              <del>30,000</del>
-                              <span>10%</span>
-                              </div>
-                              <div class="dis_price">
-                              <ins>27,000</ins>
-                              </div>
-                          </article>
-                          </a>
-                      </li>
-                      <li>
-                          <a href="#">
-                          <div class="thumb">
-                              <i>5</i><img src="./img/sample_thumb.jpg" alt="item1" />
-                          </div>
-                          <article>
-                              <h2>상품명</h2>
-                              <div class="org_price">
-                              <del>30,000</del>
-                              <span>10%</span>
-                              </div>
-                              <div class="dis_price">
-                              <ins>27,000</ins>
-                              </div>
-                          </article>
-                          </a>
-                      </li>
-                      </ol>
-                  </article>
-              </aside>
+                            <jsp:include page="/product/_aside.jsp" />
             <section class="order">
                 <!-- 제목, 페이지 네비게이션 -->
                 <nav>
@@ -333,6 +206,7 @@
 			                        	<c:set var="finalPrice" value="${finalPrice+cart.price*cart.count}"/>
 			                        	</c:forEach>
                                     	<fmt:formatNumber value="${finalPrice}" pattern="#,###,###" />
+                                    	<input type="hidden" name="finalPrice" value="${finalPrice}"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -343,6 +217,7 @@
 			                        	<c:set var="finalDiscount" value="${finalDiscount + cart.discount/100 * cart.price * cart.count}"/>
 			                        	</c:forEach>
                                     	<fmt:formatNumber value="${finalDiscount}" pattern="#,###,###" />
+                                    	<input type="hidden" name="finalDiscount" value="${finalDiscount}"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -353,6 +228,8 @@
 			                        	<c:set var="finalDelivery" value="${finalDelivery+cart.delivery}"/>
 			                        	</c:forEach>
                                     	<fmt:formatNumber value="${finalDelivery}" pattern="#,###,###" />
+                                    	<input type="hidden" name="finalDelivery" value="${finalDelivery}"/>
+
                                     </td>
                                 </tr>
                                 <tr>
@@ -367,6 +244,7 @@
 			                        	<c:set var="savePoint" value="${savePoint+cart.point * cart.count}"/>
 			                        	</c:forEach>
                                     	<fmt:formatNumber value="${savePoint}" pattern="#,###,###" />
+                                    	<input type="hidden" name="savePoint" value="${savePoint}"/>
 	                               	</td>
                                 </tr>
                                 <tr>
@@ -375,8 +253,8 @@
                                     	<c:forEach var="cart" items="${carts}">
 			                        		<c:set var="finalTotalPrice" value="${finalTotalPrice + cart.total + cart.delivery}"/>
 			                        	</c:forEach>
-                                    	<fmt:formatNumber value="${finalTotalPrice}" pattern="#,###,###" />
-                                    	<input type="hidden" name="finalTotalPrice" value="${finalTotalPrice}"/>                                    	
+                                    	<span><fmt:formatNumber value="${finalTotalPrice}" pattern="#,###,###" /></span>
+                                    	<input type="hidden" name="finalTotalPrice" value="${finalTotalPrice}"/>
                                     </td>
                                 </tr>
                                
