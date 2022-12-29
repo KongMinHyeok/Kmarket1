@@ -53,8 +53,9 @@
 	    		}else if(5000 < usePoint < myPoint){
 	    			$('.usedPoint').text(usePoint);
 	    			finalTotalPrice = finalTotalPrice - usePoint;
-	    			$('.finalTotalPrice').text(finalTotalPrice.toLocaleString());
 	    			
+	    			$('.finalTotalPrice > span').text(finalTotalPrice.toLocaleString());
+	    			$('input[name=finalTotalPrice]').val(finalTotalPrice);
 	    		}
 	    	});
 	    	/************************************/
@@ -65,12 +66,12 @@
 	    	$(".complete").click(function(){
 	    		
 	    		let ordCount = parseInt($('.finalCount').text());
-	    		let ordPrice = parseInt($('.finalPrice').text());
-	    		let ordDiscount = parseInt($('.finalDiscount').text());
-	    		let ordDelivery = parseInt($('.finalDelivery').text());
+	    		let ordPrice = $('input[name=finalPrice]').val();
+	    		let ordDiscount = parseInt($('input[name=finalDiscount]').val());
+	    		let ordDelivery = parseInt($('input[name=finalDelivery]').val());
 	    		let savePoint = parseInt($('.savePoint').text());
-	    		let usedPoint = parseInt($('.usedPoint').text());
-	    		let ordTotPrice = parseInt($('.finalTotalPrice').text());
+	    		let usedPoint = $('input[name=usePoint]').val();
+	    		let ordTotPrice = parseInt($('input[name=finalTotalPrice]').val());
 
 	    		let recipName = $('input[name=orderer]').val();
 	    		let recipHp = $('input[name=hp]').val();
@@ -100,6 +101,8 @@
 	    				"ordComplete" : ordComplete
 	    		}
 	    		
+	    		console.log(jsonData);
+	    		
 	    		$.ajax({
 	    			url : '/Kmarket1/product/order.do',
 	    			type : 'POST',
@@ -108,7 +111,7 @@
 					dataType : 'json',
 					success : function(data){
 						if(data.result > 0){
-							location.href='/Kmarket1/product/complete.do?ordNo=2'
+							location.href='/Kmarket1/product/complete.do?ordNo='+data.result
 							}
 						}
 					});
@@ -333,6 +336,7 @@
 			                        	<c:set var="finalPrice" value="${finalPrice+cart.price*cart.count}"/>
 			                        	</c:forEach>
                                     	<fmt:formatNumber value="${finalPrice}" pattern="#,###,###" />
+                                    	<input type="hidden" name="finalPrice" value="${finalPrice}"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -343,6 +347,7 @@
 			                        	<c:set var="finalDiscount" value="${finalDiscount + cart.discount/100 * cart.price * cart.count}"/>
 			                        	</c:forEach>
                                     	<fmt:formatNumber value="${finalDiscount}" pattern="#,###,###" />
+                                    	<input type="hidden" name="finalDiscount" value="${finalDiscount}"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -353,6 +358,8 @@
 			                        	<c:set var="finalDelivery" value="${finalDelivery+cart.delivery}"/>
 			                        	</c:forEach>
                                     	<fmt:formatNumber value="${finalDelivery}" pattern="#,###,###" />
+                                    	<input type="hidden" name="finalDelivery" value="${finalDelivery}"/>
+
                                     </td>
                                 </tr>
                                 <tr>
@@ -367,6 +374,7 @@
 			                        	<c:set var="savePoint" value="${savePoint+cart.point * cart.count}"/>
 			                        	</c:forEach>
                                     	<fmt:formatNumber value="${savePoint}" pattern="#,###,###" />
+                                    	<input type="hidden" name="savePoint" value="${savePoint}"/>
 	                               	</td>
                                 </tr>
                                 <tr>
@@ -375,8 +383,8 @@
                                     	<c:forEach var="cart" items="${carts}">
 			                        		<c:set var="finalTotalPrice" value="${finalTotalPrice + cart.total + cart.delivery}"/>
 			                        	</c:forEach>
-                                    	<fmt:formatNumber value="${finalTotalPrice}" pattern="#,###,###" />
-                                    	<input type="hidden" name="finalTotalPrice" value="${finalTotalPrice}"/>                                    	
+                                    	<span><fmt:formatNumber value="${finalTotalPrice}" pattern="#,###,###" /></span>
+                                    	<input type="hidden" name="finalTotalPrice" value="${finalTotalPrice}"/>
                                     </td>
                                 </tr>
                                

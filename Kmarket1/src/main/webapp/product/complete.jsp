@@ -149,7 +149,7 @@
                       <tr>
                         <th>상품명</th>
                         <th>상품금액</th>
-                        <th>할인금액</th>
+                        <th>할인율</th>
                         <th>수량</th>
                         <th>주문금액</th>
                       </tr>
@@ -166,7 +166,7 @@
                           </article>
                         </td>
                         <td>${item.price}원</td>
-                        <td>${item.discount}원</td>
+                        <td>${item.discount}%</td>
                         <td>${item.count}</td>
                         <td>${item.total}원</td>
                       </tr>
@@ -249,7 +249,7 @@
                 <table border="0">
                   <tr>
                     <td>수취인</td>
-                    <td>${order.recipname}</td>                    
+                    <td>${order.recipName}</td>                    
                     <td>주문자 정보</td>
                   </tr>
                   <tr>
