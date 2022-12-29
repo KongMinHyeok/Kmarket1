@@ -50,6 +50,15 @@
 			let dis = $('#discount').val();
 			$('.step_val').text("할인가 : "+(price-(price/100*dis)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') +"원 ("+(price/100*dis).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+"원 할인)");
 		}
+		
+		//상품 등록 개발이 끝나면 list.do에서 성공여부 알람 실행
+		let success = $('.success').val();
+		
+		if(success == "101"){
+			alert('상품 등록 성공');
+		}else if(success = "201"){
+			alert('상품 등록 실패');
+		}
 	});
 </script>
     <section id="admin-product-register">
@@ -127,8 +136,8 @@
                             <td>할인율</td>
                             <td>
                                 <span>0을 입력하면 할인율 없음</span>
-                                <input id="discount" maxlength="2" value="0">
-                                <input type="hidden" name="discount" value="0"> %
+                                <input id="discount" maxlength="2" value="${product.discount}">%
+								<span class="step_val">할인가 : <fmt:formatNumber value="${product.price - product.disPrice}" pattern="#,###" />원 (<fmt:formatNumber value="${product.disPrice}" pattern="#,###" />원 할인)</span>
                             </td>
                         </tr>
                         <tr>
@@ -167,7 +176,7 @@
                             <td>
                                 <span>크기 가로 940px 높이 제약없음, 크기 최대 1MB, 상세페이지 상품정보에 출력될 이미지 입니다.</span>
                                 <input type="file" name="detail" accept="image/gif,image/jpeg,image/png">
-                                <input type="hidden" class="suc" value="${success}">
+                                <input type="hidden" class="success" value="${success}">
                             </td>
                         </tr>
                     </table>

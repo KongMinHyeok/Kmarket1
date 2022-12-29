@@ -10,23 +10,26 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import kr.co.kmarket1.dao.AdminProductListDAO;
+import kr.co.kmarket1.vo.MemberVO;
 import kr.co.kmarket1.vo.ProductVO;
 
 @WebServlet("/admin/product/list.do")
 public class AdminProductListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
 	AdminProductListDAO dao = AdminProductListDAO.getInstance();
-
-	@Override
-	public void init() throws ServletException {
-	}
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		//세션에서 유저정보 가져오기
+		HttpSession session = req.getSession();
+		MemberVO vo = (MemberVO)session.getAttribute("sessUser");
+		
+		int level     = vo.getLevel();
+		String seller = vo.getCeo();
 		String pg     = req.getParameter("pg");
 		String cate   = req.getParameter("cate");
 		String search = req.getParameter("search");
@@ -49,7 +52,12 @@ public class AdminProductListController extends HttpServlet {
 		pageGroupStart = (currentPageGroup -1) * 10 + 1; //시작번호
 		pageGroupEnd= currentPageGroup * 10; //끝번호
 		
-		total = dao.selectCountTotal();
+		//전체 게시물 갯수
+		if(level == 7) {
+			total = dao.selectCountTotal();
+		}else {
+			total = dao.selectCountTotalSeller(seller);
+		}
 		
 		if(total % 10 == 0){
 			lastPageNum = total / 10;
@@ -71,20 +79,26 @@ public class AdminProductListController extends HttpServlet {
 		
 		List<ProductVO> products = new ArrayList<>();
 		
-		if(search != null && cate != null) {
-			products = dao.searchAdminList(cate, search);
+		if(level == 7) {
+			//search 검색, cate 카테고리
+			if(search != null && cate != null) {
+				products = dao.searchAdminList(cate, search);
+			}else {
+				products = dao.selectAdminList(start);
+			}
 		}else {
-			products = dao.selectAdminList(start);
+			//search 검색, cate 카테고리
+			if(search != null && cate != null) {
+				products = dao.searchAdminList(seller, cate, search);
+			}else {
+				products = dao.selectAdminList(seller, start);
+			}
 		}
 		
 		req.setAttribute("products", products);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/product/list.jsp");
 		dispatcher.forward(req, resp);
-	}
-	
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	}
 	
 }
