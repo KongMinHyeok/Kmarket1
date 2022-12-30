@@ -684,8 +684,7 @@ public class ProductDAO extends DBHelper{
 		try {
 			logger.info("selectOrders start...");
 			conn = getConnection();
-			psmt = conn.prepareStatement("SELECT a.*, b.`prodName`, b.`thumb3`, b.`descript` FROM `km_product_cart` AS a "
-					+"JOIN `km_product` as b ON a.prodNo = b.prodNo where `cartNo` in ?");
+			psmt = conn.prepareStatement(ProductSQL.SELECT_ORDERS);
 			psmt.setString(1, cartNo);
 			rs = psmt.executeQuery();
 			
@@ -715,11 +714,14 @@ public class ProductDAO extends DBHelper{
 	}
 	//Order 테이블에 상품 추가
 	public int insertCompleteOrder(ProductOrderVO order) {
-		int result = 0;
+		int ordNo = 0;
 		try {
 			logger.info("insertCompleteOrder start...");
 			conn = getConnection();
 			psmt = conn.prepareStatement(ProductSQL.INSERT_COMPLETE_ORDER);
+			
+			logger.debug("psmt : " + psmt);
+			
 			psmt.setString(1, order.getOrdUid());
 			psmt.setInt(2, order.getOrdCount());
 			psmt.setInt(3, order.getOrdPrice());
@@ -735,14 +737,42 @@ public class ProductDAO extends DBHelper{
 			psmt.setString(13, order.getRecipAddr2());
 			psmt.setInt(14, order.getOrdPayment());
 			psmt.setInt(15, order.getOrdComplete());
+			psmt.executeUpdate();
 			
-			result = psmt.executeUpdate();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(ProductSQL.SELECT_LATEST_ORDER);
+			if(rs.next()) {
+				ordNo = rs.getInt(1);
+			}
+			
 			close();
 			
 		}catch(Exception e) {
 			logger.error(e.getMessage());
 		}
-		return result;
+		logger.debug("ordNo : " + ordNo);
+		return ordNo;
+	}
+	
+	public void insertOrderItem(int ordNo, ProductCartVO cart) {
+		try {
+			logger.info("insertOrderItem start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(ProductSQL.INSERT_ORDER_ITEM);
+			psmt.setInt(1, ordNo);
+			psmt.setInt(2, cart.getProdNo());
+			psmt.setInt(3, cart.getCount());
+			psmt.setInt(4, cart.getPrice());
+			psmt.setInt(5, cart.getDiscount());
+			psmt.setInt(6, cart.getPoint());
+			psmt.setInt(7, cart.getDelivery());
+			psmt.setInt(8, cart.getTotal());
+			psmt.executeUpdate();
+			
+			
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
 	}
 		
 		

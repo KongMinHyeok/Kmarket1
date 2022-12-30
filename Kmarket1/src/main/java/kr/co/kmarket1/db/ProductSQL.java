@@ -52,9 +52,12 @@ public class ProductSQL {
 	// 장바구니 선택 삭제
 	public static final String DELETE_PRODUCT_CART = "DELETE FROM `km_product_cart` WHERE `cartNo` = ? ";
 	
-	
+	public static final String SELECT_ORDERS = "SELECT a.*, b.`prodName`, b.`thumb3`, b.`descript` FROM `km_product_cart` AS a "
+												+ "JOIN `km_product` as b ON a.prodNo = b.prodNo where `cartNo` in ?";
 	public static final String SELECT_PRODUCT_ORDERS = "SELECT a.*, b.prodName, b.descript, b.thumb3 FROM `km_product_cart` AS a "
 															+ "JOIN `km_product` AS b ON a.prodNo = b.prodNo WHERE cartNo = ? ";
+	public static final String SELECT_LATEST_ORDER = "SELECT MAX(`ordNo`) FROM `km_product_order`";
+	
 	// complete
 	public static final String SELECT_ORDER_BY_ORDNO = "select a.*, b.name, b.hp from `km_product_order` as a "
 													+ "join `km_member` as b "
@@ -67,8 +70,13 @@ public class ProductSQL {
 	public static final String INSERT_COMPLETE_ORDER = "INSERT INTO `km_product_order` SET "
 													+ "`ordUid`=?, `ordCount`=?, `ordPrice`=?, `ordDiscount`=?, `ordDelivery`=?, `savePoint`=?, `usedPoint`=?, `ordTotPrice`=?, "
 													+ "`recipName`=?, `recipHp`=?, `recipZip`=?, `recipAddr1`=?, `recipAddr2`=?, `ordPayment`=?, `ordComplete`=?, `ordDate`=NOW() ";
+<<<<<<< HEAD
 	
 	public static final String INSERT_ORDER_ITEM = "INSERT INTO `km_product_order_item` SET `ordNo`=?, `prodNo`=?, `count`=?, `price`=?, `discount`=?, "
 			+ "`point`=?, `delivery`=?, `total`=?";
+=======
+	public static final String INSERT_ORDER_ITEM = "INSERT INTO `km_product_order_item` SET `ordNo`=?, `prodNo`=?, `count`=?, `price`=?, `discount`=?, "
+													+ "`point`=?, `delivery`=?, `total`=?";
+>>>>>>> 0b95a41be13698fdfc68f59227481ee3bcc2c8f4
 }
 
