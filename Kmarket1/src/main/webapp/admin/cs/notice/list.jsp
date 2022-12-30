@@ -36,9 +36,10 @@
 				dataType:'json',
 				success:function(data){
 					if(data.result > 0){
-						location.reload(true);
+						alert("삭제완료");
+						location.reload();
 					}else{
-						window.alert(data.message);
+						alert('삭제실패');
 					}
 				}
 			});
@@ -105,10 +106,10 @@
 		           	</c:choose>
 		            </c:forEach>
 		            <c:if test="${pageGroupEnd lt lastPageNum && cate ne null}">
-		            	<a href="/Kmarket1/admin/cs/notice/list.do?pg=${pageGroupStart+1}&cate=${cate}" class="next">다음</a>
+		            	<a href="/Kmarket1/admin/cs/notice/list.do?pg=${pageGroupEnd+1}&cate=${cate}" class="next">다음</a>
 		            </c:if>
 		            <c:if test="${pageGroupEnd lt lastPageNum && cate eq null}">
-		            	<a href="/Kmarket1/admin/cs/notice/list.do?pg=${pageGroupStart+1}" class="next">다음</a>
+		            	<a href="/Kmarket1/admin/cs/notice/list.do?pg=${pageGroupEnd+1}" class="next">다음</a>
 		            </c:if>
                  </div>
                     <a href="#" class="btnDelete" onclick="deleteCheck()">선택삭제</a>

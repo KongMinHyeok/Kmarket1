@@ -47,7 +47,6 @@
     	// view에서 장바구니로 데이터 넘기기
     	$('.cart').click(function(){
     		
-    		
     		let uid = $('input[name=uid]').val();
 			let prodNo = $('input[name=prodNo]').val();
 			let count = $('input[name=num]').val();

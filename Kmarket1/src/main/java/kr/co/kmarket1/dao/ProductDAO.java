@@ -56,6 +56,26 @@ public class ProductDAO extends DBHelper{
 		logger.debug("cate1 : " + cate1s);
 		return cate1s;
 	}
+	public void insertOrderItem(int ordNo, ProductCartVO cart) {
+		try {
+			logger.info("insertOrderItem start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(ProductSQL.INSERT_ORDER_ITEM);
+			psmt.setInt(1, ordNo);
+			psmt.setInt(2, cart.getProdNo());
+			psmt.setInt(3, cart.getCount());
+			psmt.setInt(4, cart.getPrice());
+			psmt.setInt(5, cart.getDiscount());
+			psmt.setInt(6, cart.getPoint());
+			psmt.setInt(7, cart.getDelivery());
+			psmt.setInt(8, cart.getTotal());
+			psmt.executeUpdate();
+			
+			
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
 	
 	// 상품 상세 정보 불러오기
 	public ProductVO selectProduct(String prodNo) {

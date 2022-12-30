@@ -3,13 +3,14 @@
   <display-name>Kmarket1</display-name>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>index.do</welcome-file>
     <welcome-file>index.htm</welcome-file>
     <welcome-file>default.html</welcome-file>
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
   
+  <!-- 인코딩 필터 -->
   <filter>
   	<filter-name>setCharacterEncodingFilter</filter-name>
   	<filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
@@ -23,5 +24,18 @@
   	<filter-name>setCharacterEncodingFilter</filter-name>
   	<url-pattern>/*</url-pattern>
   </filter-mapping>
-
+  
+  <!-- 모델2 보안설정 -->
+  <security-constraint>
+  	<display-name>Prohibit Model1</display-name>
+  	<web-resource-collection>
+  		<web-resource-name>secure page</web-resource-name>
+  		<url-pattern>*.jsp</url-pattern>
+  	</web-resource-collection>
+  	<auth-constraint>
+  		<role-name>nobody</role-name>
+  	</auth-constraint>
+  </security-constraint>
+  
+  
 </web-app>

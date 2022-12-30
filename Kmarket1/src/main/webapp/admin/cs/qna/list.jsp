@@ -37,9 +37,10 @@
 				dataType:'json',
 				success:function(data){
 					if(data.result > 0){
-						location.reload(true);
+						alert("삭제완료");
+						location.reload();
 					}else{
-						window.alert(data.message);
+						alert('삭제실패');
 					}
 				}
 			});
@@ -130,7 +131,6 @@
 		            </c:if>
                  </div>
                     <a href="#" class="btnDelete" onclick="deleteCheck();">선택삭제</a>
-
 		</article>
      </section>
     </main>

@@ -17,7 +17,7 @@
     <div id="admin-wrapper">
         <header>
             <div>
-                <a href="/Kmarket1/admin/index.jsp" class="logo">
+                <a href="/Kmarket1/admin/index.do" class="logo">
                     <img src="/Kmarket1/admin/img/admin_logo.png" alt="admin_logo">
                 </a>
                 <p>

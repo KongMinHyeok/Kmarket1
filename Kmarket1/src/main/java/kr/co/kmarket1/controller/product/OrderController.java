@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.google.gson.JsonObject;
 
 import kr.co.kmarket1.dao.ProductDAO;
@@ -27,6 +30,8 @@ public class OrderController extends HttpServlet{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Override
 	public void init() throws ServletException {
 	}
@@ -78,6 +83,15 @@ public class OrderController extends HttpServlet{
 		String ordPayment = req.getParameter("ordPayment");
 		String ordComplete = req.getParameter("ordComplete");
 		
+		logger.debug("ordCount : " + ordCount);
+		logger.debug("ordPrice : " + ordPrice);
+		logger.debug("ordDiscount : " + ordDiscount);
+		logger.debug("ordDelivery : " + ordDelivery);
+		logger.debug("savePoint : " + savePoint);
+		logger.debug("usedPoint : " + usedPoint);
+		logger.debug("ordTotPrice : " + ordTotPrice);
+		 
+		
 		ProductOrderVO order = new ProductOrderVO();
 		order.setOrdCount(ordCount);
 		order.setOrdPrice(ordPrice);
@@ -97,16 +111,31 @@ public class OrderController extends HttpServlet{
 		order.setOrdPayment(ordPayment);
 		order.setOrdComplete(ordComplete);
 		
-		
-		ProductOrderItemVO item = new ProductOrderItemVO();
-		
 		// order_item 어떻게 만들지 생각해라
 		JsonObject json = new JsonObject();
 		PrintWriter writer = resp.getWriter();
 
-		int result = ProductDAO.getInstance().insertCompleteOrder(order);
-		
-		json.addProperty("result", result);
+		int ordNo = ProductDAO.getInstance().insertCompleteOrder(order);
+		///
+		if(ordCount != null) {
+				ProductOrderItemVO item = new ProductOrderItemVO();
+				HttpSession session = req.getSession();
+				List<ProductCartVO> carts = (List<ProductCartVO>) session.getAttribute("carts");
+				
+				req.setAttribute("carts", carts);
+				
+				
+				for(ProductCartVO cart : carts) {
+					ProductDAO.getInstance().insertOrderItem(ordNo, cart);
+				}
+				}
+				///
+		/*
+		if(ordCount != null) {
+			ProductDAO.getInstance().insertOrderItem(ordNo, cart);
+		}
+		*/
+		json.addProperty("result", ordNo);
 		
 		writer.print(json.toString());
 	}

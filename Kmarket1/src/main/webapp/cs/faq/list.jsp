@@ -5,12 +5,18 @@
 $(function() {	
 	
 	$('.more').click(function(e) {
-			e.preventDefault();
-			$('li').show();
-			$('.more').click(function(e){
-				$('.list:nth-child(n+4)').hide();
-			});
-		});
+		e.preventDefault();
+		
+		let sub = $(this).prev().css('display') === 'none';
+		
+		if (sub) {
+	        $(this).siblings('li:nth-child(n+4)').css('display','block');
+	        $(this).children('a').text('간단히 보기');
+		}else{
+	        $(this).siblings('li:nth-child(n+4)').css('display','none');
+	        $(this).children('a').text('더보기');
+		}
+	});
 	
 });
 </script>
@@ -50,7 +56,7 @@ $(function() {
               <div>
               <c:forEach var="cate" items="${cate2}">
                 <h3>${cate.cate2}</h3>
-				<ul>
+				<ul class="sub">
                  <c:forEach var="faq" items="${faqs}">
 					<c:if test="${faq.cate2 eq cate.cate2}">
 	                  <li class="list"><a href="/Kmarket1/cs/faq/view.do?no=${faq.no}&cate=${faq.cate}"><span>Q.</span>${faq.title}</a></li>

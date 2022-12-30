@@ -39,11 +39,8 @@
                </c:forEach>
                </table>
               <div class="page">
-              	<c:if test="${pageGroupStart gt 1 && cate ne null}">
+              	<c:if test="${pageGroupStart > 1}">
                 	<a href="/Kmarket1/cs/notice/list.do?pg=${pageGroupStart-1}&cate=${cate}" class="prev">이전</a>
-              	</c:if>
-              	<c:if test="${pageGroupStart gt 1 && cate eq null}">
-                	<a href="/Kmarket1/cs/notice/list.do?pg=${pageGroupStart-1}" class="prev">이전</a>
               	</c:if>
                 <c:forEach var="num" begin="${pageGroupStart}" end="${pageGroupEnd}" step="1">
                 <c:choose>
@@ -57,11 +54,8 @@
 	               	</c:when>
                	</c:choose>
                 </c:forEach>
-                <c:if test="${pageGroupEnd lt lastPageNum && cate ne null}">
-                	<a href="/Kmarket1/cs/notice/list.do?pg=${pageGroupStart+1}&cate=${cate}" class="next">다음</a>
-                </c:if>
-                <c:if test="${pageGroupEnd lt lastPageNum && cate eq null}">
-                	<a href="/Kmarket1/cs/notice/list.do?pg=${pageGroupStart+1}" class="next">다음</a>
+                <c:if test="${pageGroupEnd < lastPageNum}">
+                	<a href="/Kmarket1/cs/notice/list.do?pg=${pageGroupEnd+1}&cate=${cate}" class="next">다음</a>
                 </c:if>
               </div>
             </article>

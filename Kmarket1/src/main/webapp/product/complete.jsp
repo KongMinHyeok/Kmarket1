@@ -144,12 +144,12 @@
                     <p>즐거운 쇼핑이 되셨습니까? 항상 고객님을 최우선으로 생각하는 케이마켓이 되겠습니다.</p>
                 </article>
                 <article class="info">
-                    <h1>상품정보</h1>
+				<h1>상품정보</h1>
                     <table border="0">
                       <tr>
                         <th>상품명</th>
                         <th>상품금액</th>
-                        <th>할인금액</th>
+                        <th>할인율</th>
                         <th>수량</th>
                         <th>주문금액</th>
                       </tr>
@@ -157,7 +157,7 @@
                       <tr>
                         <td>
                           <article>
-                            <img src="/Kmarket1_images/${item.thumb1}" alt=""> <!-- server.xml > host > context에 이미지 로드 설정해놓음 -->
+                            <img src="${item.thumb1}" alt=""> <!-- server.xml > host > context에 이미지 로드 설정해놓음 -->
                             												   <!-- 예시: <Context docBase="C:\Users\java1\Desktop\kmarket_images" path="/Kmarket1_images/"></Context> -->
                             <div>
                               <h2><a href="/Kmarket1/product/view.do?prodCate1=${item.prodCate1}&prodCate2=${item.prodCate2}&prodNo=${item.prodNo}&pg=1">${item.prodName}</a></h2>
@@ -166,7 +166,7 @@
                           </article>
                         </td>
                         <td>${item.price}원</td>
-                        <td>${item.discount}원</td>
+                        <td>${item.discount}%</td>
                         <td>${item.count}</td>
                         <td>${item.total}원</td>
                       </tr>
@@ -180,7 +180,7 @@
                               <td>총 상품금액</td>
                               <td><span>${order.ordPrice}</span>원</td>
                             </tr>
-                            <tr>
+                            <tr>		
                               <td>총 할인금액</td>
                               <c:choose>
                               	<c:when test="${order.ordDiscount eq 0 }">
@@ -249,7 +249,7 @@
                 <table border="0">
                   <tr>
                     <td>수취인</td>
-                    <td>${order.recipname}</td>                    
+                    <td>${order.recipName}</td>                    
                     <td>주문자 정보</td>
                   </tr>
                   <tr>

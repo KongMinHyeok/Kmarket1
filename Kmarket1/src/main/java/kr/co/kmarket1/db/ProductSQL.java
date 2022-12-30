@@ -67,5 +67,8 @@ public class ProductSQL {
 	public static final String INSERT_COMPLETE_ORDER = "INSERT INTO `km_product_order` SET "
 													+ "`ordUid`=?, `ordCount`=?, `ordPrice`=?, `ordDiscount`=?, `ordDelivery`=?, `savePoint`=?, `usedPoint`=?, `ordTotPrice`=?, "
 													+ "`recipName`=?, `recipHp`=?, `recipZip`=?, `recipAddr1`=?, `recipAddr2`=?, `ordPayment`=?, `ordComplete`=?, `ordDate`=NOW() ";
+	
+	public static final String INSERT_ORDER_ITEM = "INSERT INTO `km_product_order_item` SET `ordNo`=?, `prodNo`=?, `count`=?, `price`=?, `discount`=?, "
+			+ "`point`=?, `delivery`=?, `total`=?";
 }
 

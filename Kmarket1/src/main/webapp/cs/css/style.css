@@ -174,7 +174,7 @@ header>.menu > div > ul > li > a {
     height: 90px;
     box-sizing: border-box;
     text-align: center;
-    background-image: url('../img/cs_sprites.png');
+    background-image: url('/Kmarket1/cs/img/cs_sprites.png');
     background-repeat: no-repeat;
     background-size: 750px auto;
 }
@@ -382,7 +382,7 @@ header>.menu > div > ul > li > a {
 }
 #cs > .notice > .list > article > .page > .prev {
     font-size: 0;
-    background-image: url('../img/cs_sprites.png');
+    background-image: url('/Kmarket1/cs/img/img/cs_sprites.png');
     background-position: -706px -652px;
 }
 #cs > .notice > .list > article > .page > a {
@@ -402,7 +402,7 @@ header>.menu > div > ul > li > a {
 }
 #cs > .notice > .list > article > .page > .next {
     font-size: 0;
-    background-image: url('../img/cs_sprites.png');
+    background-image: url('/Kmarket1/cs/img/img/cs_sprites.png');
     background-position: -628px -652px;
 }
 /*#cs고객센터 .notice공지사항 .view글내용*/
@@ -680,7 +680,7 @@ header>.menu > div > ul > li > a {
 }
 #cs > .qna > .list > article > .page > .prev {
     font-size: 0;
-    background-image: url('./img/cs_sprites.png');
+    background-image: url('/Kmarket1/cs/img/img/cs_sprites.png');
     background-position: -706px -652px;
 }
 #cs > .qna > .list > article > .page > a {
@@ -700,7 +700,7 @@ header>.menu > div > ul > li > a {
 }
 #cs > .qna > .list > article > .page > .next {
     font-size: 0;
-    background-image: url('./img/cs_sprites.png');
+    background-image: url('/Kmarket1/cs/img/img/cs_sprites.png');
     background-position: -628px -652px;
 }
 /*#cs고객센터 .qna문의하기 .view글내용*/

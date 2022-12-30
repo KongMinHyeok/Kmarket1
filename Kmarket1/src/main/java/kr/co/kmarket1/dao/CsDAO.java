@@ -590,13 +590,13 @@ public List<CsArticleVO> selectQnasGroup(int start) {
 			conn = getConnection();
 			psmt = conn.prepareStatement(CsSQL.DELETE_QNA);
 			psmt.setString(1, no);
-			psmt.executeUpdate();
+			result += psmt.executeUpdate();
 			close();
 			
 		}catch (Exception e) {
 			logger.error(e.getMessage());
 		}
-		logger.debug("qna delete : " + no);
+		logger.debug("qna delete : " + no + "result : " + result);
 		return result;
 	}
 	
@@ -628,12 +628,12 @@ public List<CsArticleVO> selectQnasGroup(int start) {
 			conn = getConnection();
 			psmt = conn.prepareStatement(CsSQL.DELETE_NOTICE);
 			psmt.setString(1, no);
-			psmt.executeUpdate();
+			result += psmt.executeUpdate();
 			close();
 		}catch (Exception e) {
 			logger.error(e.getMessage());
 		}
-		logger.debug("notice delete : " + no);
+		logger.debug("notice delete : " + no + "result : " + result);
 		return result;
 	}
 	
@@ -715,13 +715,13 @@ public List<CsArticleVO> selectQnasGroup(int start) {
 			conn = getConnection();
 			psmt = conn.prepareStatement(CsSQL.DELETE_FAQ);
 			psmt.setString(1, no);
-			psmt.executeUpdate();
+			result += psmt.executeUpdate();
 			close();
 			
 		}catch (Exception e) {
 			logger.error(e.getMessage());
 		}
-		logger.debug("Faq delete : " + no);
+		logger.debug("Faq delete : " + no + "result : " + result);
 		return result;
 	}
 }

@@ -32,7 +32,6 @@ public class ListController extends HttpServlet{
 		
 		int start = 0;
 		int currentPage = 1;
-		int currentPageGroup = 1;
 		int total = 0;
 		int pageStartNum = 0;
 		int lastPageNum = 0;
@@ -75,7 +74,6 @@ public class ListController extends HttpServlet{
 		req.setAttribute("pg", pg);
 		req.setAttribute("lastPageNum", lastPageNum);
 		req.setAttribute("currentPage", currentPage);
-		req.setAttribute("currentPageGroup", currentPageGroup);
 		req.setAttribute("pageGroupStart", result[0]);
 		req.setAttribute("pageGroupEnd", result[1]);
 		req.setAttribute("pageStartNum", pageStartNum);

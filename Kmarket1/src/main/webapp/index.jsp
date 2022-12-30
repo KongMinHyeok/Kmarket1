@@ -43,21 +43,20 @@
                <ol>
                <c:forEach var="Cate2" items="${cates2}">
                	<c:if test="${Cate1.cate1 eq Cate2.cate1}">
-                <li><a href="#">${Cate2.c2Name}</a></li>
+                <li><a href="/Kmarket1/product/list.do?pg=1&prodCate1=${Cate2.cate1}&prodCate2=${Cate2.cate2}&type=1">${Cate2.c2Name}</a></li>
                 </c:if>
                 </c:forEach>
               </ol>
             </li>
             </c:forEach>
           </ul>
-
           <!-- 베스트상품 배너 -->
           <article class="best">
             <h1><i class="fas fa-crown"></i>베스트상품</h1>
             <ol>
               <li>
 				<c:forEach var="sold" items="${bestsold}">
-	                <a href="#">
+	                <a href="/Kmarket1/product/view.do">
 	                  <div class="thumb">
 	                    <i>1</i>
 	                    <img src="${sold.thumb1}" alt="sold1" />

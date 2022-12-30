@@ -37,6 +37,8 @@ public class DeleteController extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		String no = req.getParameter("no");
+		String cate = req.getParameter("cate");
+		String cate2 = req.getParameter("cate2");
 		String [] chkarr = req.getParameterValues("chkarr");
 		int result = 0;
 		

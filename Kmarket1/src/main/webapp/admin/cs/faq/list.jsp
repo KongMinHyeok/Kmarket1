@@ -32,13 +32,16 @@
 		if(chk){
 			$.ajax({
 				url:'/Kmarket1/admin/cs/faq/delete.do',
-				type:"post",
+				type:"post",	
 				traditional: true,
 				data:{"chkarr":chkarr},
 				dataType:"json",
 				success:function(data){
 					if(data.result > 0){
-						location.href = "/Kmarket1/admin/cs/faq/list.do";	
+						alert("삭제완료");
+						location.reload();
+					}else{
+						alert('삭제실패');
 					}
 				}
 			});

@@ -108,7 +108,7 @@
 					dataType : 'json',
 					success : function(data){
 						if(data.result > 0){
-							location.href='/Kmarket1/product/complete.do?ordNo=2'
+							location.href='/Kmarket1/product/complete.do?ordNo='+data.result;
 							}
 						}
 					});
